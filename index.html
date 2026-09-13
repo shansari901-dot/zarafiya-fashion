@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zarafiya Fashion — बनारसी सिल्क साड़ी</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Yatra+One&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon:#5C1A1B;
+    --maroon-dark:#330F10;
+    --gold:#C9A227;
+    --gold-light:#E8C766;
+    --cream:#FBF6EE;
+    --teal:#0B3D3D;
+    --ink:#2B1810;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Poppins', sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{ font-family:'Cormorant Garamond', serif; font-weight:700; color:var(--maroon-dark); }
+  a{ text-decoration:none; color:inherit; }
+  img{max-width:100%; display:block;}
+  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    background:rgba(251,246,238,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(92,26,27,0.12);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1180px; margin:0 auto; }
+  .logo{ font-family:'Cormorant Garamond', serif; font-size:1.6rem; font-weight:700; color:var(--maroon); letter-spacing:0.5px; }
+  .logo span{ color:var(--gold); }
+  .nav-links{ display:flex; gap:32px; font-size:0.95rem; }
+  .nav-links a{ position:relative; transition:color .2s; }
+  .nav-links a:hover{ color:var(--maroon); }
+  .nav-cta{
+    background:var(--maroon); color:var(--cream); padding:10px 20px; border-radius:2px;
+    font-size:0.9rem; transition:background .2s; cursor:pointer;
+  }
+  .nav-cta:hover{ background:var(--maroon-dark); }
+  .menu-btn{ display:none; background:none; border:none; font-size:1.6rem; color:var(--maroon); cursor:pointer; }
+
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    background:linear-gradient(120deg, var(--maroon) 0%, var(--maroon-dark) 55%, #230a0b 100%);
+    color:var(--cream);
+    overflow:hidden;
+    padding-top:80px;
+  }
+  .hero::before{
+    content:"बनारस";
+    position:absolute; right:-40px; top:50%; transform:translateY(-50%);
+    font-family:'Yatra One', cursive;
+    font-size:22rem; color:rgba(232,199,102,0.06);
+    line-height:1; pointer-events:none; white-space:nowrap;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
+    width:100%; position:relative; z-index:2;
+  }
+  .hero-eyebrow-swatch{
+    display:inline-flex; align-items:center; gap:10px;
+    border:1px solid var(--gold); color:var(--gold-light);
+    padding:6px 16px; border-radius:2px; font-size:0.85rem;
+    opacity:0; transform:translateY(14px); animation:riseIn .8s ease forwards; animation-delay:.1s;
+  }
+  .hero h1{
+    color:var(--cream); font-size:3.4rem; line-height:1.15; margin:22px 0 18px;
+    opacity:0; transform:translateY(14px); animation:riseIn .8s ease forwards; animation-delay:.3s;
+  }
+  .hero h1 em{ font-style:normal; color:var(--gold-light); }
+  .hero p{
+    font-size:1.05rem; color:#EADFCB; max-width:480px; margin-bottom:32px;
+    opacity:0; transform:translateY(14px); animation:riseIn .8s ease forwards; animation-delay:.5s;
+  }
+  .hero-actions{
+    display:flex; gap:16px; flex-wrap:wrap;
+    opacity:0; transform:translateY(14px); animation:riseIn .8s ease forwards; animation-delay:.7s;
+  }
+  .btn-gold{
+    background:var(--gold); color:var(--maroon-dark); padding:15px 30px; border-radius:2px;
+    font-weight:600; font-size:0.95rem; transition:transform .2s, background .2s; display:inline-block; cursor:pointer; border:none;
+  }
+  .btn-gold:hover{ background:var(--gold-light); transform:translateY(-2px); }
+  .btn-outline{
+    border:1px solid var(--gold-light); color:var(--gold-light); padding:14px 28px; border-radius:2px;
+    font-size:0.95rem; transition:background .2s; cursor:pointer; background:none;
+  }
+  .btn-outline:hover{ background:rgba(232,199,102,0.1); }
+  @keyframes riseIn{ to{ opacity:1; transform:translateY(0); } }
+
+  .hero-visual{
+    position:relative; height:460px; display:flex; align-items:center; justify-content:center;
+  }
+  .saree-drape{
+    width:280px; height:400px; border-radius:4px;
+    background:
+      repeating-linear-gradient(90deg, var(--gold) 0 4px, transparent 4px 34px),
+      linear-gradient(180deg, var(--maroon) 0%, #7a2224 50%, var(--maroon) 100%);
+    position:relative; box-shadow:0 30px 60px rgba(0,0,0,0.4);
+    transform:rotate(-4deg);
+  }
+  .saree-drape::before{
+    content:""; position:absolute; top:0; bottom:0; left:0; width:26px;
+    background:repeating-radial-gradient(circle at 13px 20px, var(--gold-light) 0 3px, transparent 3px 20px);
+    background-color:var(--maroon-dark);
+  }
+  .saree-drape::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:60px;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,0.35));
+  }
+  .saree-badge{
+    position:absolute; bottom:20px; left:-30px; background:var(--cream); color:var(--maroon-dark);
+    padding:16px 22px; border-radius:2px; box-shadow:0 12px 30px rgba(0,0,0,0.25);
+    font-size:0.85rem; max-width:200px;
+  }
+  .saree-badge strong{ display:block; font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--maroon); }
+
+  section{ padding:100px 0; }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .section-head h2{ font-size:2.4rem; margin-bottom:14px; }
+  .section-head p{ color:#5a4a42; font-size:1rem; }
+
+  .collection{ background:var(--cream); }
+  .grid-6{ display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; }
+  .card{
+    background:#fff; border:1px solid rgba(92,26,27,0.1); border-radius:3px; overflow:hidden;
+    transition:box-shadow .25s, transform .25s;
+  }
+  .card:hover{ box-shadow:0 20px 40px rgba(43,24,16,0.12); transform:translateY(-4px); }
+  .swatch{ height:220px; position:relative; overflow:hidden; background:#eee; }
+  .swatch-color{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:3rem; }
+  .card-body .colors{ font-size:0.78rem; color:#8a7060; display:block; margin-top:2px; }
+  .swatch::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:16px;
+    background:repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 16px);
+  }
+  .card-body{ padding:20px 22px 24px; }
+  .card-body h3{ font-size:1.3rem; margin-bottom:4px; }
+  .card-body .tag{ font-size:0.8rem; color:#8a7060; margin-bottom:10px; display:block; }
+  .price-row{ display:flex; align-items:center; justify-content:space-between; margin-top:14px; }
+  .price{ font-size:1.15rem; color:var(--maroon); font-weight:600; }
+  .order-link{ font-size:0.85rem; border-bottom:1px solid var(--maroon); color:var(--maroon); padding-bottom:2px; cursor:pointer; }
+
+  .process{ background:var(--maroon-dark); color:var(--cream); }
+  .process .section-head h2{ color:var(--cream); }
+  .process .section-head p{ color:#d9c8b8; }
+  .loom-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
+  .loom-card{ border-top:2px solid var(--gold); padding-top:20px; }
+  .loom-card .badge-tag{ display:inline-block; font-size:0.78rem; color:var(--gold-light); border:1px solid var(--gold); padding:3px 12px; border-radius:2px; margin-bottom:14px; }
+  .loom-card h3{ color:var(--cream); font-size:1.3rem; margin-bottom:10px; }
+  .loom-card p{ color:#cbb9a8; font-size:0.95rem; }
+  .loom-note{ margin-top:32px; font-size:0.88rem; color:#cbb9a8; border-left:2px solid var(--gold); padding-left:16px; }
+  .loom-note strong{ color:var(--gold-light); }
+
+  .testimonials{ background:var(--cream); }
+  .quote-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .quote{ background:#fff; border-left:3px solid var(--gold); padding:28px 26px; border-radius:2px; }
+  .quote p{ font-size:1rem; color:#4a3a32; margin-bottom:16px; }
+  .quote .who{ font-size:0.88rem; color:var(--maroon); font-weight:600; }
+
+  .cta-band{ background:var(--teal); color:var(--cream); text-align:center; padding:80px 24px; }
+  .cta-band h2{ color:var(--cream); font-size:2.2rem; margin-bottom:16px; }
+  .cta-band p{ color:#cfe4e0; margin-bottom:30px; }
+
+  footer{ background:var(--maroon-dark); color:#d9c8b8; padding:50px 24px 26px; }
+  .footer-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:36px; margin-bottom:36px; }
+  .footer-grid h4{ font-family:'Cormorant Garamond', serif; color:var(--cream); font-size:1.2rem; margin-bottom:14px; }
+  .footer-grid a{ display:block; color:#cbb9a8; font-size:0.92rem; margin-bottom:8px; transition:color .2s; cursor:pointer; }
+  .footer-grid a:hover{ color:var(--gold-light); }
+  .footer-bottom{ border-top:1px solid rgba(232,199,102,0.15); padding-top:20px; font-size:0.82rem; color:#a98f7c; text-align:center; }
+
+  .wa-float{
+    position:fixed; bottom:24px; right:24px; z-index:60;
+    background:#25D366; color:#fff; width:58px; height:58px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
+    box-shadow:0 10px 24px rgba(0,0,0,0.25); transition:transform .2s; cursor:pointer;
+  }
+  .wa-float:hover{ transform:scale(1.08); }
+
+  @media (max-width:900px){
+    .nav-links, .nav-cta{ display:none; }
+    .menu-btn{ display:block; }
+    .hero-grid{ grid-template-columns:1fr; text-align:center; }
+    .hero p{ margin-left:auto; margin-right:auto; }
+    .hero-actions{ justify-content:center; }
+    .hero-visual{ margin-top:20px; height:360px; }
+    .saree-badge{ left:50%; transform:translateX(-50%); }
+    .grid-6, .quote-grid, .footer-grid{ grid-template-columns:1fr 1fr; }
+    .hero h1{ font-size:2.4rem; }
+    .hero::before{ font-size:12rem; }
+  }
+  @media (max-width:560px){
+    .grid-6, .quote-grid, .footer-grid, .loom-grid{ grid-template-columns:1fr; }
+    section{ padding:70px 0; }
+    .hero h1{ font-size:2rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">Zarafiya <span>Fashion</span></div>
+    <nav class="nav-links">
+      <a href="#collection">कलेक्शन</a>
+      <a href="#process">बुनाई</a>
+      <a href="#testimonials">ग्राहक</a>
+      <a href="#contact">संपर्क</a>
+    </nav>
+    <button class="nav-cta" id="waNav">WhatsApp पर बात करें</button>
+    <button class="menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="hero-eyebrow-swatch">हैंडलूम और पावर लूम बनारसी साड़ियाँ</span>
+      <h1>हर धागे में <em>बनारस</em> की विरासत</h1>
+      <p>बनारस की बुनाई परंपरा से जुड़ी साड़ियाँ — हैंडलूम और पावर लूम, हर बजट में। शादी, त्योहार और रोज़ के पहनावे के लिए सही साड़ी यहाँ मिलेगी।</p>
+      <div class="hero-actions">
+        <a class="btn-gold" href="#collection">कलेक्शन देखें</a>
+        <button class="btn-outline" id="waHero">WhatsApp पर ऑर्डर करें</button>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="saree-drape"></div>
+      <div class="saree-badge"><strong>बनारस से डायरेक्ट</strong>हैंडलूम और पावर लूम, दोनों तरह की साड़ियाँ</div>
+    </div>
+  </div>
+</section>
+
+<section class="collection" id="collection">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>हमारा कलेक्शन</h2>
+      <p>हर साड़ी हाथ से चुनी गई है — असली जरी, शुद्ध सिल्क और बनारस की पारंपरिक बुनाई के साथ।</p>
+    </div>
+    <div class="grid-6" id="collectionGrid">
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>हमारे यहाँ क्या मिलता है</h2>
+      <p>हम हैंडलूम और पावर लूम — दोनों तरह की बनारसी साड़ियाँ रखते हैं, ताकि हर बजट में असली बनारसी डिज़ाइन मिल सके।</p>
+    </div>
+    <div class="loom-grid">
+      <div class="loom-card">
+        <span class="badge-tag">हैंडलूम</span>
+        <h3>हैंडलूम बनारसी साड़ी</h3>
+        <p>कारीगर हाथ से करघे पर बुनते हैं — एक साड़ी बनने में कई दिन लगते हैं, इसलिए कीमत भी अधिक होती है।</p>
+      </div>
+      <div class="loom-card">
+        <span class="badge-tag">पावर लूम</span>
+        <h3>पावर लूम बनारसी साड़ी</h3>
+        <p>मशीन करघे पर बुनी जाती है — वही बनारसी डिज़ाइन, कम समय में, इसलिए किफ़ायती कीमत पर मिलती है।</p>
+      </div>
+    </div>
+    <p class="loom-note">नोट: हमारे कलेक्शन में अभी दिख रही सभी साड़ियाँ <strong>पावर लूम</strong> हैं। यह साफ़ तौर पर हर साड़ी के साथ लिखा गया है।</p>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>ग्राहकों की बातें</h2>
+      <p>हमारी साड़ियाँ देश-विदेश में शादी और त्योहारों की शान बनी हैं।</p>
+    </div>
+    <div class="quote-grid">
+      <div class="quote">
+        <p>साड़ी की क्वालिटी बिल्कुल वैसी ही थी जैसी फोटो में दिखी थी। जरी का काम बहुत सुंदर है।</p>
+        <div class="who">— प्रिया, लखनऊ</div>
+      </div>
+      <div class="quote">
+        <p>शादी के लिए साड़ी ली थी, हर किसी ने तारीफ़ की। डिलीवरी भी समय पर आई।</p>
+        <div class="who">— अंजलि, दिल्ली</div>
+      </div>
+      <div class="quote">
+        <p>असली बनारसी सिल्क है, यह देखते ही पता चल जाता है। दोबारा ज़रूर खरीदूंगी।</p>
+        <div class="who">— सुनीता, मुंबई</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap">
+    <h2>अपनी पसंद की साड़ी के लिए आज ही बात करें</h2>
+    <p>फोटो, रंग और कीमत की पूरी जानकारी के लिए सीधे WhatsApp पर मैसेज करें।</p>
+    <button class="btn-gold" id="waCta">WhatsApp पर ऑर्डर करें</button>
+  </div>
+</div>
+
+<footer id="contact">
+  <div class="wrap footer-grid">
+    <div>
+      <h4>Zarafiya Fashion</h4>
+      <p style="font-size:0.9rem; color:#cbb9a8;">वाराणसी से, हैंडलूम और पावर लूम बनारसी साड़ियाँ — सीधे आपके घर तक।</p>
+    </div>
+    <div>
+      <h4>क्विक लिंक</h4>
+      <a href="#collection">कलेक्शन</a>
+      <a href="#process">बुनाई प्रक्रिया</a>
+      <a href="#testimonials">ग्राहक</a>
+    </div>
+    <div>
+      <h4>संपर्क करें</h4>
+      <a id="waFooter">WhatsApp: +91 72182 59001</a>
+      <a id="emailFooter">hello@zarafiyafashion.in</a>
+      <a href="#">वाराणसी, उत्तर प्रदेश</a>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Zarafiya Fashion. सर्वाधिकार सुरक्षित।</div>
+</footer>
+
+<button class="wa-float" id="waFloat" aria-label="WhatsApp पर मैसेज करें">💬</button>
+
+<script>
+const SITE_CONFIG = {
+  whatsapp: "917218259001",
+  email: "sareefulh6@gmail.com"
+};
+
+const PRODUCTS = [
+  {
+    name: "काशी घाट बूटा",
+    type: "पावर लूम",
+    description: "टेम्पल बॉर्डर साड़ी",
+    colors: "बॉटल ग्रीन, वाइन, ऑरेंज, रॉयल ब्लू, ब्लैक",
+    price: "₹2,299",
+    priceNum: 2299,
+    colorCode: "#1a472a"
+  },
+  {
+    name: "नेवी बूटी साड़ी",
+    type: "पावर लूम",
+    description: "बूटी डिज़ाइन साड़ी",
+    colors: "नेवी ब्लू",
+    price: "₹2,399",
+    priceNum: 2399,
+    colorCode: "#001f3f"
+  },
+  {
+    name: "रानी पिंक बूटी",
+    type: "पावर लूम",
+    description: "बूटी डिज़ाइन साड़ी",
+    colors: "रानी पिंक",
+    price: "₹2,399",
+    priceNum: 2399,
+    colorCode: "#c71585"
+  },
+  {
+    name: "मरून चेक ब्राइडल",
+    type: "पावर लूम",
+    description: "चेक ज़री ब्राइडल साड़ी",
+    colors: "मरून",
+    price: "₹2,499",
+    priceNum: 2499,
+    colorCode: "#800000"
+  }
+];
+
+function generateWhatsAppLink(message = "") {
+  const text = message || "नमस्ते! मुझे बनारसी साड़ी के बारे में जानकारी चाहिए।";
+  return `https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+}
+
+function renderProducts() {
+  const grid = document.getElementById('collectionGrid');
+  grid.innerHTML = PRODUCTS.map((product, idx) => `
+    <div class="card">
+      <div class="swatch">
+        <div class="swatch-color" style="background:${product.colorCode}; color:white;">🧵</div>
+      </div>
+      <div class="card-body">
+        <h3>${product.name}</h3>
+        <span class="tag">${product.type}</span>
+        <p style="font-size:0.9rem; color:#5a4a42; margin-bottom:8px;">${product.description}</p>
+        <span class="colors">${product.colors}</span>
+        <div class="price-row">
+          <span class="price">${product.price}</span>
+          <a class="order-link" onclick="openWhatsApp('${product.name}')">ऑर्डर करें</a>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openWhatsApp(productName = "") {
+  const msg = productName 
+    ? `मुझे "${productName}" साड़ी के बारे में जानकारी चाहिए।`
+    : "नमस्ते! मुझे बनारसी साड़ी के बारे में जानकारी चाहिए।";
+  window.open(generateWhatsAppLink(msg), '_blank');
+}
+
+document.getElementById('waNav').onclick = () => openWhatsApp();
+document.getElementById('waHero').onclick = () => openWhatsApp();
+document.getElementById('waCta').onclick = () => openWhatsApp();
+document.getElementById('waFooter').onclick = () => openWhatsApp();
+document.getElementById('waFloat').onclick = () => openWhatsApp();
+
+renderProducts();
+</script>
+
+</body>
+</html>
