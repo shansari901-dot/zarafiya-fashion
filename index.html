@@ -264,7 +264,7 @@
       <div class="loom-card">
         <span class="badge-tag">हैंडलूम</span>
         <h3>हैंडलूम बनारसी साड़ी</h3>
-        <p>कारीगर हाथ से करघे पर बुनते हैं — एक साड़ी बनने में कई दिन लगते हैं, इसलिए कीमत भी अधिक होती है।</p>
+        <p>कारीगर हाथ से करघे पर बुनते हैं — एक साड़ी ब���ने में कई दिन लगते हैं, इसलिए कीमत भी अधिक होती है।</p>
       </div>
       <div class="loom-card">
         <span class="badge-tag">पावर लूम</span>
@@ -322,7 +322,7 @@
     <div>
       <h4>संपर्क करें</h4>
       <a id="waFooter">WhatsApp: +91 72182 59001</a>
-      <a id="emailFooter">hello@zarafiyafashion.in</a>
+      <a id="emailFooter" href="mailto:sareefulh6@gmail.com">Email: sareefulh6@gmail.com</a>
       <a href="#">वाराणसी, उत्तर प्रदेश</a>
     </div>
   </div>
@@ -337,9 +337,7 @@ const SITE_CONFIG = {
   email: "sareefulh6@gmail.com"
 };
 
-// Google Drive को image URL में convert करने का function
 function getDriveImageUrl(driveLink) {
-  // Link से file ID extract करो
   const match = driveLink.match(/\/d\/([a-zA-Z0-9-_]+)/);
   if (match) {
     const fileId = match[1];
@@ -394,7 +392,12 @@ function generateWhatsAppLink(message = "") {
 
 function renderProducts() {
   const grid = document.getElementById('collectionGrid');
-  grid.innerHTML = PRODUCTS.map((product, idx) => `
+  
+  // Load from localStorage if available
+  const saved = localStorage.getItem('zarafiya_products');
+  const products = saved ? JSON.parse(saved) : PRODUCTS;
+  
+  grid.innerHTML = products.map((product, idx) => `
     <div class="card">
       <div class="swatch">
         <img src="${product.img}" alt="${product.name}" onerror="this.style.display='none'">
