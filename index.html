@@ -45,7 +45,7 @@
   .nav-links a:hover{ color:var(--maroon); }
   .nav-cta{
     background:var(--maroon); color:var(--cream); padding:10px 20px; border-radius:2px;
-    font-size:0.9rem; transition:background .2s; cursor:pointer;
+    font-size:0.9rem; transition:background .2s; cursor:pointer; border:none;
   }
   .nav-cta:hover{ background:var(--maroon-dark); }
   .menu-btn{ display:none; background:none; border:none; font-size:1.6rem; color:var(--maroon); cursor:pointer; }
@@ -141,7 +141,7 @@
   }
   .card:hover{ box-shadow:0 20px 40px rgba(43,24,16,0.12); transform:translateY(-4px); }
   .swatch{ height:220px; position:relative; overflow:hidden; background:#eee; }
-  .swatch-color{ width:100%; height:100%; display:flex; align-items:center; justify-content:center; font-size:3rem; }
+  .swatch img{ width:100%; height:100%; object-fit:cover; display:block; }
   .card-body .colors{ font-size:0.78rem; color:#8a7060; display:block; margin-top:2px; }
   .swatch::after{
     content:""; position:absolute; left:0; right:0; bottom:0; height:16px;
@@ -337,6 +337,17 @@ const SITE_CONFIG = {
   email: "sareefulh6@gmail.com"
 };
 
+// Google Drive को image URL में convert करने का function
+function getDriveImageUrl(driveLink) {
+  // Link से file ID extract करो
+  const match = driveLink.match(/\/d\/([a-zA-Z0-9-_]+)/);
+  if (match) {
+    const fileId = match[1];
+    return `https://drive.google.com/uc?export=view&id=${fileId}`;
+  }
+  return driveLink;
+}
+
 const PRODUCTS = [
   {
     name: "काशी घाट बूटा",
@@ -345,7 +356,7 @@ const PRODUCTS = [
     colors: "बॉटल ग्रीन, वाइन, ऑरेंज, रॉयल ब्लू, ब्लैक",
     price: "₹2,299",
     priceNum: 2299,
-    colorCode: "#1a472a"
+    img: getDriveImageUrl("https://drive.google.com/file/d/1rng91G3ep1nDB82l48Bi0BoF-CmQ7e9n/view?usp=drivesdk")
   },
   {
     name: "नेवी बूटी साड़ी",
@@ -354,7 +365,7 @@ const PRODUCTS = [
     colors: "नेवी ब्लू",
     price: "₹2,399",
     priceNum: 2399,
-    colorCode: "#001f3f"
+    img: getDriveImageUrl("https://drive.google.com/file/d/15dyws9yF_nPSAYc36fIx5msJOzj0ZQqO/view?usp=drivesdk")
   },
   {
     name: "रानी पिंक बूटी",
@@ -363,7 +374,7 @@ const PRODUCTS = [
     colors: "रानी पिंक",
     price: "₹2,399",
     priceNum: 2399,
-    colorCode: "#c71585"
+    img: getDriveImageUrl("https://drive.google.com/file/d/1rYhDWqT0qoFlKWi_FDPgYMJnZbcLyVJE/view?usp=drivesdk")
   },
   {
     name: "मरून चेक ब्राइडल",
@@ -372,7 +383,7 @@ const PRODUCTS = [
     colors: "मरून",
     price: "₹2,499",
     priceNum: 2499,
-    colorCode: "#800000"
+    img: getDriveImageUrl("https://drive.google.com/file/d/1fPizumjc0OWFnO4S7-YGjfKf9VXVTiIe/view?usp=drivesdk")
   }
 ];
 
@@ -386,7 +397,7 @@ function renderProducts() {
   grid.innerHTML = PRODUCTS.map((product, idx) => `
     <div class="card">
       <div class="swatch">
-        <div class="swatch-color" style="background:${product.colorCode}; color:white;">🧵</div>
+        <img src="${product.img}" alt="${product.name}" onerror="this.style.display='none'">
       </div>
       <div class="card-body">
         <h3>${product.name}</h3>
