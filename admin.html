@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zarafiya Fashion - Admin Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon:#5C1A1B;
+    --maroon-dark:#330F10;
+    --gold:#C9A227;
+    --gold-light:#E8C766;
+    --cream:#FBF6EE;
+    --teal:#0B3D3D;
+    --ink:#2B1810;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Poppins', sans-serif;
+    font-weight:300;
+    line-height:1.6;
+  }
+  h1,h2,h3{ font-family:'Cormorant Garamond', serif; font-weight:700; color:var(--maroon-dark); }
+  .container{ max-width:1200px; margin:0 auto; padding:20px; }
+  
+  /* Login Screen */
+  .login-screen{
+    display:flex; align-items:center; justify-content:center;
+    min-height:100vh; background:linear-gradient(120deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+  }
+  .login-box{
+    background:var(--cream); padding:40px; border-radius:8px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3); width:100%; max-width:400px;
+  }
+  .login-box h2{ text-align:center; margin-bottom:30px; color:var(--maroon); }
+  .form-group{ margin-bottom:20px; }
+  .form-group label{ display:block; margin-bottom:8px; color:var(--maroon); font-weight:600; }
+  .form-group input{ width:100%; padding:12px; border:1px solid var(--gold); border-radius:4px;
+    font-size:1rem; font-family:'Poppins', sans-serif;
+  }
+  .form-group input:focus{ outline:none; border-color:var(--maroon); box-shadow:0 0 0 3px rgba(92,26,27,0.1); }
+  .btn-login{ width:100%; background:var(--maroon); color:var(--cream); padding:12px; border:none;
+    border-radius:4px; font-size:1rem; font-weight:600; cursor:pointer; transition:background .2s;
+  }
+  .btn-login:hover{ background:var(--maroon-dark); }
+  .login-error{ color:#c71585; text-align:center; margin-top:15px; font-size:0.9rem; }
+
+  /* Admin Dashboard */
+  .admin-dashboard{ display:none; }
+  .admin-header{ background:var(--maroon-dark); color:var(--cream); padding:20px;
+    display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; border-radius:4px;
+  }
+  .admin-header h1{ color:var(--cream); margin:0; }
+  .btn-logout{ background:var(--gold); color:var(--maroon-dark); padding:10px 20px; border:none;
+    border-radius:4px; font-weight:600; cursor:pointer; transition:background .2s;
+  }
+  .btn-logout:hover{ background:var(--gold-light); }
+
+  .tabs{ display:flex; gap:10px; margin-bottom:20px; border-bottom:2px solid var(--gold); }
+  .tab-btn{ background:none; border:none; padding:12px 20px; font-size:1rem; color:var(--ink);
+    cursor:pointer; border-bottom:3px solid transparent; transition:all .2s;
+  }
+  .tab-btn.active{ color:var(--maroon); border-bottom-color:var(--maroon); font-weight:600; }
+  .tab-btn:hover{ color:var(--maroon); }
+
+  .tab-content{ display:none; }
+  .tab-content.active{ display:block; }
+
+  /* Products Table */
+  .products-table{ width:100%; border-collapse:collapse; margin-bottom:20px; }
+  .products-table th{ background:var(--maroon); color:var(--cream); padding:12px; text-align:left; }
+  .products-table td{ padding:12px; border-bottom:1px solid var(--gold); }
+  .products-table tr:hover{ background:rgba(201,162,39,0.1); }
+  .btn-edit, .btn-delete{ padding:6px 12px; border:none; border-radius:3px; cursor:pointer;
+    font-size:0.85rem; margin-right:5px; transition:background .2s;
+  }
+  .btn-edit{ background:var(--gold); color:var(--maroon-dark); }
+  .btn-edit:hover{ background:var(--gold-light); }
+  .btn-delete{ background:#c71585; color:var(--cream); }
+  .btn-delete:hover{ background:#a01366; }
+
+  /* Add/Edit Form */
+  .form-section{ background:#fff; padding:20px; border-radius:4px;
+    border:1px solid var(--gold); margin-bottom:20px;
+  }
+  .form-section h3{ margin-top:0; margin-bottom:20px; color:var(--maroon); }
+  .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .form-grid-full{ grid-column:1/-1; }
+  .form-group{ margin-bottom:0; }
+  .btn-group{ display:flex; gap:10px; margin-top:20px; }
+  .btn-primary, .btn-secondary{ padding:12px 24px; border:none; border-radius:4px;
+    font-weight:600; cursor:pointer; transition:background .2s; font-size:1rem;
+  }
+  .btn-primary{ background:var(--maroon); color:var(--cream); }
+  .btn-primary:hover{ background:var(--maroon-dark); }
+  .btn-secondary{ background:var(--gold); color:var(--maroon-dark); }
+  .btn-secondary:hover{ background:var(--gold-light); }
+
+  /* Image Upload */
+  .upload-section{ border:2px dashed var(--gold); padding:20px; border-radius:4px;
+    text-align:center; margin-bottom:15px; cursor:pointer; transition:background .2s;
+  }
+  .upload-section:hover{ background:rgba(201,162,39,0.1); }
+  .upload-section.dragover{ background:rgba(201,162,39,0.2); }
+  .preview-image{ max-width:200px; margin-top:10px; border-radius:4px; }
+
+  /* Success/Error Messages */
+  .message{ padding:12px; border-radius:4px; margin-bottom:15px; display:none; }
+  .message.success{ background:#90EE90; color:#155724; border:1px solid #28a745; }
+  .message.error{ background:#FFB6C6; color:#721c24; border:1px solid #f5c6cb; }
+  .message.show{ display:block; }
+
+  @media (max-width:768px){
+    .form-grid{ grid-template-columns:1fr; }
+    .admin-header{ flex-direction:column; gap:15px; }
+    .products-table{ font-size:0.85rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h2>Zarafiya Fashion</h2>
+    <h3 style="text-align:center; font-size:1rem; color:var(--gold); margin-bottom:30px;">Admin Panel</h3>
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="loginEmail" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" required>
+      </div>
+      <button type="submit" class="btn-login">लॉगिन करें</button>
+      <div class="login-error" id="loginError"></div>
+    </form>
+  </div>
+</div>
+
+<!-- Admin Dashboard -->
+<div class="admin-dashboard" id="adminDashboard">
+  <div class="admin-header">
+    <div>
+      <h1>Zarafiya Fashion Admin</h1>
+      <p style="margin:5px 0 0; opacity:0.9;">साड़ियों को manage करें</p>
+    </div>
+    <button class="btn-logout" onclick="handleLogout()">लॉगआउट</button>
+  </div>
+
+  <div class="container">
+    <div class="message" id="message"></div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('products')">📦 सभी Products</button>
+      <button class="tab-btn" onclick="switchTab('add')">➕ नई Saree जोड़ें</button>
+    </div>
+
+    <!-- All Products Tab -->
+    <div class="tab-content active" id="productsTab">
+      <div class="form-section">
+        <h3>सभी Sarees (कुल: <span id="productCount">0</span>)</h3>
+        <div style="overflow-x:auto;">
+          <table class="products-table" id="productsTable">
+            <thead>
+              <tr>
+                <th>फोटो</th>
+                <th>नाम</th>
+                <th>कीमत</th>
+                <th>Type</th>
+                <th>रंग</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="productsBody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Product Tab -->
+    <div class="tab-content" id="addTab">
+      <div class="form-section">
+        <h3 id="formTitle">नई Saree जोड़ें</h3>
+        <form id="productForm" onsubmit="handleSaveProduct(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Saree का नाम *</label>
+              <input type="text" id="productName" required>
+            </div>
+            <div class="form-group">
+              <label>कीमत *</label>
+              <input type="text" id="productPrice" placeholder="जैसे: ₹2,299" required>
+            </div>
+            <div class="form-group">
+              <label>Type *</label>
+              <input type="text" id="productType" placeholder="जैसे: पावर लूम" required>
+            </div>
+            <div class="form-group">
+              <label>रंग *</label>
+              <input type="text" id="productColors" placeholder="जैसे: नेवी ब्लू, रेड" required>
+            </div>
+            <div class="form-group form-grid-full">
+              <label>Description *</label>
+              <input type="text" id="productDescription" placeholder="जैसे: टेम्पल बॉर्डर साड़ी" required>
+            </div>
+            
+            <!-- Google Drive Link Upload -->
+            <div class="form-group form-grid-full">
+              <label>Google Drive Link</label>
+              <input type="text" id="productDriveLink" placeholder="https://drive.google.com/file/d/...">
+              <small style="display:block; margin-top:5px; color:#666;">Drive link paste करो, photo automatically दिखेगी</small>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-group form-grid-full">
+              <label>या Photo Upload करें</label>
+              <div class="upload-section" id="uploadSection" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                <p>📸 Photo यहाँ drag करो या click करके select करो</p>
+                <input type="file" id="productImage" accept="image/*" style="display:none;">
+              </div>
+              <img id="imagePreview" class="preview-image" style="display:none;">
+              <input type="hidden" id="productImageBase64">
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button type="submit" class="btn-primary">💾 Save करें</button>
+            <button type="button" class="btn-secondary" onclick="resetForm()">❌ Clear करें</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Admin Credentials
+const ADMIN_CREDENTIALS = {
+  email: "sareefulh6@gmail.com",
+  password: "ma$hraba"
+};
+
+let currentEditId = null;
+let allProducts = [];
+
+// Load products from localStorage
+function loadProducts() {
+  const saved = localStorage.getItem('zarafiya_products');
+  allProducts = saved ? JSON.parse(saved) : getDefaultProducts();
+  renderProducts();
+}
+
+function getDefaultProducts() {
+  return [
+    {
+      id: 1,
+      name: "काशी घाट बूटा",
+      type: "पावर लूम",
+      description: "टेम्पल बॉर्डर साड़ी",
+      colors: "बॉटल ग्रीन, वाइन, ऑरेंज, रॉयल ब्लू, ब्लैक",
+      price: "₹2,299",
+      img: "https://drive.google.com/uc?export=view&id=1rng91G3ep1nDB82l48Bi0BoF-CmQ7e9n"
+    },
+    {
+      id: 2,
+      name: "नेवी बूटी साड़ी",
+      type: "पावर लूम",
+      description: "बूटी डिज़ाइन साड़ी",
+      colors: "नेवी ब्लू",
+      price: "₹2,399",
+      img: "https://drive.google.com/uc?export=view&id=15dyws9yF_nPSAYc36fIx5msJOzj0ZQqO"
+    },
+    {
+      id: 3,
+      name: "रानी पिंक बूटी",
+      type: "पावर लूम",
+      description: "बूटी डिज़ाइन साड़ी",
+      colors: "रानी पिंक",
+      price: "₹2,399",
+      img: "https://drive.google.com/uc?export=view&id=1rYhDWqT0qoFlKWi_FDPgYMJnZbcLyVJE"
+    },
+    {
+      id: 4,
+      name: "मरून चेक ब्राइडल",
+      type: "पावर लूम",
+      description: "चेक ज़री ब्राइडल साड़ी",
+      colors: "मरून",
+      price: "₹2,499",
+      img: "https://drive.google.com/uc?export=view&id=1fPizumjc0OWFnO4S7-YGjfKf9VXVTiIe"
+    }
+  ];
+}
+
+// Login Handler
+function handleLogin(event) {
+  event.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  const errorEl = document.getElementById('loginError');
+
+  if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {
+    localStorage.setItem('zarafiya_admin_logged_in', 'true');
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminDashboard').style.display = 'block';
+    loadProducts();
+  } else {
+    errorEl.textContent = '❌ Email या Password गलत है!';
+  }
+}
+
+// Logout Handler
+function handleLogout() {
+  if (confirm('क्या आप logout करना चाहते हैं?')) {
+    localStorage.removeItem('zarafiya_admin_logged_in');
+    document.getElementById('loginForm').reset();
+    document.getElementById('adminDashboard').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('loginError').textContent = '';
+  }
+}
+
+// Tab Switching
+function switchTab(tabName) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabName + 'Tab').classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Render Products
+function renderProducts() {
+  const tbody = document.getElementById('productsBody');
+  const count = document.getElementById('productCount');
+  
+  tbody.innerHTML = allProducts.map(product => `
+    <tr>
+      <td><img src="${product.img}" style="width:50px; height:50px; object-fit:cover; border-radius:3px;" onerror="this.src='📷'"></td>
+      <td><strong>${product.name}</strong></td>
+      <td>${product.price}</td>
+      <td>${product.type}</td>
+      <td>${product.colors.substring(0, 20)}...</td>
+      <td>
+        <button class="btn-edit" onclick="editProduct(${product.id})">✏️ Edit</button>
+        <button class="btn-delete" onclick="deleteProduct(${product.id})">🗑️ Delete</button>
+      </td>
+    </tr>
+  `).join('');
+  
+  count.textContent = allProducts.length;
+}
+
+// Edit Product
+function editProduct(id) {
+  const product = allProducts.find(p => p.id === id);
+  if (!product) return;
+
+  currentEditId = id;
+  document.getElementById('formTitle').textContent = '✏️ Saree Edit करें';
+  document.getElementById('productName').value = product.name;
+  document.getElementById('productPrice').value = product.price;
+  document.getElementById('productType').value = product.type;
+  document.getElementById('productColors').value = product.colors;
+  document.getElementById('productDescription').value = product.description;
+  document.getElementById('productDriveLink').value = product.driveLink || '';
+  
+  if (product.img) {
+    document.getElementById('imagePreview').src = product.img;
+    document.getElementById('imagePreview').style.display = 'block';
+  }
+
+  switchTab('add');
+}
+
+// Delete Product
+function deleteProduct(id) {
+  if (confirm('क्या आप इस saree को delete करना चाहते हैं?')) {
+    allProducts = allProducts.filter(p => p.id !== id);
+    saveProducts();
+    showMessage('✅ Saree delete हो गई!', 'success');
+  }
+}
+
+// Save Product
+function handleSaveProduct(event) {
+  event.preventDefault();
+
+  const name = document.getElementById('productName').value;
+  const price = document.getElementById('productPrice').value;
+  const type = document.getElementById('productType').value;
+  const colors = document.getElementById('productColors').value;
+  const description = document.getElementById('productDescription').value;
+  const driveLink = document.getElementById('productDriveLink').value;
+  const imageBase64 = document.getElementById('productImageBase64').value;
+
+  let imageUrl = imageBase64;
+  
+  // Convert Google Drive link to image URL
+  if (driveLink && !imageUrl) {
+    const match = driveLink.match(/\/d\/([a-zA-Z0-9-_]+)/);
+    if (match) {
+      imageUrl = `https://drive.google.com/uc?export=view&id=${match[1]}`;
+    }
+  }
+
+  if (!imageUrl) {
+    showMessage('❌ Photo upload करें (Drive link या file)', 'error');
+    return;
+  }
+
+  if (currentEditId) {
+    // Update existing
+    const product = allProducts.find(p => p.id === currentEditId);
+    if (product) {
+      product.name = name;
+      product.price = price;
+      product.type = type;
+      product.colors = colors;
+      product.description = description;
+      product.img = imageUrl;
+      product.driveLink = driveLink;
+    }
+    showMessage('✅ Saree update हो गई!', 'success');
+  } else {
+    // Add new
+    const newProduct = {
+      id: Date.now(),
+      name, price, type, colors, description,
+      img: imageUrl,
+      driveLink
+    };
+    allProducts.push(newProduct);
+    showMessage('✅ नई saree add हो गई!', 'success');
+  }
+
+  saveProducts();
+  resetForm();
+  switchTab('products');
+}
+
+// Image Upload Handlers
+document.getElementById('uploadSection').onclick = () => document.getElementById('productImage').click();
+document.getElementById('productImage').onchange = handleImageUpload;
+
+function handleImageUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    document.getElementById('productImageBase64').value = e.target.result;
+    document.getElementById('imagePreview').src = e.target.result;
+    document.getElementById('imagePreview').style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function handleDragOver(event) {
+  event.preventDefault();
+  document.getElementById('uploadSection').classList.add('dragover');
+}
+
+function handleDragLeave(event) {
+  document.getElementById('uploadSection').classList.remove('dragover');
+}
+
+function handleDrop(event) {
+  event.preventDefault();
+  document.getElementById('uploadSection').classList.remove('dragover');
+  
+  const file = event.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    document.getElementById('productImage').files = event.dataTransfer.files;
+    handleImageUpload({ target: { files: event.dataTransfer.files } });
+  }
+}
+
+// Save to localStorage
+function saveProducts() {
+  localStorage.setItem('zarafiya_products', JSON.stringify(allProducts));
+  renderProducts();
+}
+
+// Reset Form
+function resetForm() {
+  document.getElementById('productForm').reset();
+  document.getElementById('imagePreview').style.display = 'none';
+  document.getElementById('productImageBase64').value = '';
+  document.getElementById('formTitle').textContent = 'नई Saree जोड़ें';
+  currentEditId = null;
+}
+
+// Show Message
+function showMessage(text, type) {
+  const msg = document.getElementById('message');
+  msg.textContent = text;
+  msg.className = `message ${type} show`;
+  setTimeout(() => msg.classList.remove('show'), 3000);
+}
+
+// Check if logged in
+if (localStorage.getItem('zarafiya_admin_logged_in')) {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminDashboard').style.display = 'block';
+  loadProducts();
+}
+</script>
+
+</body>
+</html>
