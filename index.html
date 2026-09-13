@@ -37,18 +37,34 @@
     backdrop-filter:blur(6px);
     border-bottom:1px solid rgba(92,26,27,0.12);
   }
-  .nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1180px; margin:0 auto; }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1180px; margin:0 auto; width:100%; }
   .logo{ font-family:'Cormorant Garamond', serif; font-size:1.6rem; font-weight:700; color:var(--maroon); letter-spacing:0.5px; }
   .logo span{ color:var(--gold); }
-  .nav-links{ display:flex; gap:32px; font-size:0.95rem; }
-  .nav-links a{ position:relative; transition:color .2s; }
-  .nav-links a:hover{ color:var(--maroon); }
-  .nav-cta{
-    background:var(--maroon); color:var(--cream); padding:10px 20px; border-radius:2px;
-    font-size:0.9rem; transition:background .2s; cursor:pointer; border:none;
+  
+  .nav-center{ display:flex; gap:32px; font-size:0.95rem; flex:1; justify-content:center; }
+  .nav-center a{ position:relative; transition:color .2s; color:var(--ink); }
+  .nav-center a:hover{ color:var(--maroon); }
+  
+  .nav-right{ display:flex; gap:12px; align-items:center; }
+  .nav-cta, .admin-btn{
+    background:var(--maroon); color:var(--cream); padding:10px 16px; border-radius:2px;
+    font-size:0.9rem; transition:background .2s; cursor:pointer; border:none; font-family:'Poppins', sans-serif; font-weight:500;
   }
-  .nav-cta:hover{ background:var(--maroon-dark); }
+  .nav-cta:hover, .admin-btn:hover{ background:var(--maroon-dark); }
+  .admin-btn{ background:var(--gold); color:var(--maroon-dark); font-weight:600; }
+  .admin-btn:hover{ background:var(--gold-light); }
+  
   .menu-btn{ display:none; background:none; border:none; font-size:1.6rem; color:var(--maroon); cursor:pointer; }
+  
+  .mobile-menu{ display:none; position:absolute; top:60px; right:0; background:var(--cream); 
+    border:1px solid var(--gold); border-radius:4px; min-width:200px; box-shadow:0 10px 25px rgba(0,0,0,0.1); z-index:100;
+  }
+  .mobile-menu.show{ display:block; }
+  .mobile-menu a, .mobile-menu button{ display:block; width:100%; padding:12px 20px; text-align:left; 
+    border:none; background:none; color:var(--ink); font-size:0.95rem; cursor:pointer; transition:background .2s;
+  }
+  .mobile-menu a:hover, .mobile-menu button:hover{ background:rgba(92,26,27,0.05); }
+  .mobile-menu .divider{ height:1px; background:var(--gold); margin:8px 0; }
 
   .hero{
     position:relative;
@@ -191,7 +207,7 @@
   .wa-float:hover{ transform:scale(1.08); }
 
   @media (max-width:900px){
-    .nav-links, .nav-cta{ display:none; }
+    .nav-center{ display:none; }
     .menu-btn{ display:block; }
     .hero-grid{ grid-template-columns:1fr; text-align:center; }
     .hero p{ margin-left:auto; margin-right:auto; }
@@ -206,6 +222,7 @@
     .grid-6, .quote-grid, .footer-grid, .loom-grid{ grid-template-columns:1fr; }
     section{ padding:70px 0; }
     .hero h1{ font-size:2rem; }
+    .nav-cta{ padding:8px 12px; font-size:0.85rem; }
   }
 </style>
 </head>
@@ -214,14 +231,29 @@
 <header>
   <div class="nav">
     <div class="logo">Zarafiya <span>Fashion</span></div>
-    <nav class="nav-links">
-      <a href="#collection">कलेक्शन</a>
-      <a href="#process">बुनाई</a>
-      <a href="#testimonials">ग्राहक</a>
-      <a href="#contact">संपर्क</a>
+    
+    <nav class="nav-center">
+      <a href="#collection">🛍️ कले���्शन</a>
+      <a href="#process">🧵 बुनाई</a>
+      <a href="#testimonials">⭐ ग्राहक</a>
+      <a href="#contact">📞 संपर्क</a>
     </nav>
-    <button class="nav-cta" id="waNav">WhatsApp पर बात करें</button>
-    <button class="menu-btn" onclick="document.querySelector('.nav-links').classList.toggle('mobile-open')">☰</button>
+    
+    <div class="nav-right">
+      <button class="nav-cta" id="waNav">WhatsApp</button>
+      <a class="admin-btn" href="admin.html">🔐 Admin</a>
+      <button class="menu-btn" id="menuBtn">☰</button>
+    </div>
+  </div>
+  
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#collection">🛍️ कलेक्शन</a>
+    <a href="#process">🧵 बुनाई</a>
+    <a href="#testimonials">⭐ ग्राहक</a>
+    <a href="#contact">📞 संपर्क</a>
+    <div class="divider"></div>
+    <button id="waMenu">💬 WhatsApp पर संपर्क करें</button>
+    <a href="admin.html" style="color:var(--gold); font-weight:600;">🔐 Admin Login</a>
   </div>
 </header>
 
@@ -264,7 +296,7 @@
       <div class="loom-card">
         <span class="badge-tag">हैंडलूम</span>
         <h3>हैंडलूम बनारसी साड़ी</h3>
-        <p>कारीगर हाथ से करघे पर बुनते हैं — एक साड़ी ब���ने में कई दिन लगते हैं, इसलिए कीमत भी अधिक होती है।</p>
+        <p>कारीगर हाथ से करघे पर बुनते हैं — एक साड़ी बनने में कई दिन लगते हैं, इसलिए कीमत भी अधिक होती है।</p>
       </div>
       <div class="loom-card">
         <span class="badge-tag">पावर लूम</span>
@@ -336,6 +368,21 @@ const SITE_CONFIG = {
   whatsapp: "917218259001",
   email: "sareefulh6@gmail.com"
 };
+
+// Mobile Menu Toggle
+const menuBtn = document.getElementById('menuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+menuBtn.addEventListener('click', () => {
+  mobileMenu.classList.toggle('show');
+});
+
+// Close menu when clicking on a link
+document.querySelectorAll('.mobile-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('show');
+  });
+});
 
 function getDriveImageUrl(driveLink) {
   const match = driveLink.match(/\/d\/([a-zA-Z0-9-_]+)/);
@@ -428,6 +475,7 @@ document.getElementById('waHero').onclick = () => openWhatsApp();
 document.getElementById('waCta').onclick = () => openWhatsApp();
 document.getElementById('waFooter').onclick = () => openWhatsApp();
 document.getElementById('waFloat').onclick = () => openWhatsApp();
+document.getElementById('waMenu').onclick = () => openWhatsApp();
 
 renderProducts();
 </script>
