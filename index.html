@@ -286,6 +286,9 @@
         .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 8px 0; font-size: 12px; }
         .cart-item img { width: 45px; height: 45px; object-fit: cover; border-radius: 4px; }
 
+        .thumb-gallery { display: flex; gap: 6px; margin-top: 8px; overflow-x: auto; }
+        .thumb-gallery img { width: 55px; height: 55px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; cursor: pointer; }
+
         .admin-header { background: var(--primary); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 20px; }
         .admin-item { display: flex; flex-direction: column; background: white; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; gap: 8px; }
         .admin-item-actions { display: flex; gap: 8px; }
@@ -430,7 +433,8 @@
             <h3 id="formTitle" style="margin-top:0; color: var(--primary); font-size: 15px;">Add New Product</h3>
             <form id="addProductForm">
                 <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
-                <input type="text" id="pImage" class="form-control" placeholder="Image URL (ImgBB Direct Link)" required>
+                <input type="text" id="pImage" class="form-control" placeholder="Main Image URL (ImgBB Direct Link)" required>
+                <input type="text" id="pExtraImages" class="form-control" placeholder="Extra Image URLs (Comma separated links)">
                 <input type="number" id="pPrice" class="form-control" placeholder="Regular Price" required>
                 <input type="number" id="pDiscount" class="form-control" placeholder="Discount Price" required>
                 
@@ -691,6 +695,7 @@
             const productData = {
                 name: document.getElementById('pName').value,
                 image: document.getElementById('pImage').value,
+                extraImages: document.getElementById('pExtraImages').value,
                 price: Number(document.getElementById('pPrice').value),
                 discountPrice: Number(document.getElementById('pDiscount').value),
                 category: document.getElementById('pCategory').value,
@@ -724,6 +729,7 @@
                     const p = docSnap.data();
                     document.getElementById('pName').value = p.name;
                     document.getElementById('pImage').value = p.image;
+                    document.getElementById('pExtraImages').value = p.extraImages || '';
                     document.getElementById('pPrice').value = p.price;
                     document.getElementById('pDiscount').value = p.discountPrice;
                     document.getElementById('pCategory').value = p.category;
@@ -773,9 +779,23 @@
                     const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category}%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
                     const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
 
+                    let galleryHtml = '';
+                    if (p.extraImages) {
+                        let links = p.extraImages.split(',').map(l => l.trim()).filter(l => l);
+                        if(links.length > 0) {
+                            galleryHtml = `<div class="thumb-gallery">`;
+                            galleryHtml += `<img src="${p.image}" onclick="document.getElementById('mainProductImg').src='${p.image}'">`;
+                            links.forEach(link => {
+                                galleryHtml += `<img src="${link}" onclick="document.getElementById('mainProductImg').src='${link}'" onerror="this.style.display='none'">`;
+                            });
+                            galleryHtml += `</div>`;
+                        }
+                    }
+
                     document.getElementById('productDetailContent').innerHTML = `
-                        <img src="${p.image}" style="width:100%; max-height:300px; object-fit:cover; border-radius:8px; margin-bottom:10px;" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-                        <h2 style="margin: 0 0 4px 0; font-size:16px; color:var(--primary); font-family:'Playfair Display',serif;">${p.name}</h2>
+                        <img id="mainProductImg" src="${p.image}" style="width:100%; max-height:280px; object-fit:cover; border-radius:8px; margin-bottom:5px;" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                        ${galleryHtml}
+                        <h2 style="margin: 10px 0 4px 0; font-size:16px; color:var(--primary); font-family:'Playfair Display',serif;">${p.name}</h2>
                         <p style="margin: 0 0 6px 0; color: #666; font-size: 11px;"><strong>Category:</strong> ${p.category} | <strong>SKU:</strong> ${p.sku}</p>
                         <div class="price-box" style="justify-content: flex-start; font-size: 18px; margin-bottom: 10px;">
                             <span class="discount" style="color: #5c1824; font-weight: 600;">₹${p.discountPrice}</span>
