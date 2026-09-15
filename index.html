@@ -18,7 +18,7 @@
         .section-title { text-align: center; margin-bottom: 30px; color: var(--primary); font-family: 'Playfair Display', serif; }
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
         .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; padding-bottom: 15px; }
-        .card img { width: 100%; height: 220px; object-fit: cover; }
+        .card img { width: 100%; height: 220px; object-fit: cover; background: #eee; }
         .card h3 { font-size: 14px; margin: 10px 5px; color: #333;}
         .price-box { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px;}
         .price-box .discount { color: var(--primary); font-weight: bold; }
@@ -113,7 +113,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, browserLocalPersistence, setPersistence } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyBL8tiQZOGPNsOxVGMB5Hbs_YhpSmqwFJQ",
@@ -129,6 +129,11 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
+
+        // Keep user logged in across page clicks
+        setPersistence(auth, browserLocalPersistence).catch((error) => {
+            console.log("Persistence error: ", error);
+        });
 
         const customerView = document.getElementById('customerView');
         const adminView = document.getElementById('adminView');
@@ -159,7 +164,7 @@
                 const card = document.createElement('div');
                 card.className = "card";
                 card.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}">
+                    <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
                     <h3>${product.name}</h3>
                     <div class="price-box">
                         <span class="discount">₹${product.discountPrice}</span>
@@ -282,7 +287,7 @@
                         <h2 style="margin: 0 0 10px 0;">${p.name}</h2>
                         <p style="margin: 0 0 10px 0; color: #666; font-size: 14px;"><strong>SKU:</strong> ${p.sku} | <strong>Category:</strong> ${p.category}</p>
                         <div class="price-box" style="justify-content: flex-start; font-size: 22px; margin-bottom: 15px;">
-                            <span class="discount" style="color: #d81b60; font-weight: bold;">₹${p.discountPrice}</span>
+                            <span class="discount" style="color: #d81b60; font-weight: bold;">₹${p.discountProfile || p.discountPrice}</span>
                             <span class="regular" style="text-decoration: line-through; color: gray; margin-left: 10px; font-size:16px;">₹${p.price}</span>
                         </div>
                         <p style="margin-bottom: 20px; line-height: 1.6;">${p.description}</p>
@@ -299,7 +304,16 @@
         document.getElementById('adminLoginBtn').onclick = () => loginModal.style.display = 'flex';
         document.getElementById('closeLoginModal').onclick = () => loginModal.style.display = 'none';
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
-        document.getElementById('homeBtn').onclick = () => { customerView.style.display = 'block'; adminView.style.display = 'none'; };
+        
+        document.getElementById('homeBtn').onclick = () => { 
+            if(auth.currentUser) {
+                adminView.style.display = 'block';
+                customerView.style.display = 'none';
+            } else {
+                customerView.style.display = 'block'; 
+                adminView.style.display = 'none'; 
+            }
+        };
 
         document.getElementById('loginBtn').onclick = async () => {
             const email = document.getElementById('adminEmail').value;
@@ -307,6 +321,8 @@
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
                 loginModal.style.display = 'none';
+                document.getElementById('adminEmail').value = "";
+                document.getElementById('adminPassword').value = "";
             } catch(e) { alert("Login Failed: " + e.message); }
         };
 
