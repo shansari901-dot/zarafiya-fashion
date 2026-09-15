@@ -28,7 +28,6 @@
         .cat-btn.active, .cat-btn:hover { background: var(--primary); color: white; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .section-title { text-align: center; margin: 20px 0; color: var(--primary); font-family: 'Playfair Display', serif; font-size: 22px; }
 
         /* Product Grid */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
@@ -80,22 +79,17 @@
         </div>
     </header>
 
-    <!-- OTP Login Modal (For First Time Users) -->
-    <div id="otpModal" class="modal" style="display: flex;">
+    <!-- Welcome / WhatsApp Login Modal (First Time Open) -->
+    <div id="welcomeModal" class="modal" style="display: flex;">
         <div class="modal-content" style="text-align: center;">
-            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Welcome to Zarafiya</h2>
-            <p style="font-size: 13px; color: #666;">Please login with your mobile number to continue shopping.</p>
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Zarafiya Fashion</h2>
+            <p style="font-size: 13px; color: #666; line-height: 1.5;">Welcome! Explore exclusive Banarasi Sarees, Ghararas, Suits & Dupattas directly from weavers.</p>
             
-            <div id="phoneStep">
-                <input type="tel" id="userPhone" class="form-control" placeholder="Enter Phone Number (e.g. +919876543210)" required>
-                <button id="sendOtpBtn" class="btn" style="width: 100%;">Send OTP</button>
-            </div>
-
-            <div id="otpStep" style="display: none; margin-top: 15px;">
-                <input type="text" id="userOtp" class="form-control" placeholder="Enter 6-digit OTP" required>
-                <button id="verifyOtpBtn" class="btn success" style="width: 100%;">Verify & Login</button>
-            </div>
-            <div id="recaptcha-container" style="margin: 10px auto; display: flex; justify-content: center;"></div>
+            <a href="https://wa.me/918887802046?text=Hello%20Zarafiya%20Fashion,%20I%20am%20opening%20your%20app%20and%20want%20to%20explore%20collection." target="_blank" class="btn success" style="display: block; width: 100%; padding: 12px; font-size: 15px; margin: 15px 0; text-decoration: none; box-sizing: border-box;" onclick="closeWelcome()">
+                <i class="fab fa-whatsapp"></i> Continue with WhatsApp
+            </a>
+            
+            <button onclick="closeWelcome()" style="background: none; border: none; color: #888; text-decoration: underline; cursor: pointer; font-size: 13px;">Skip & View Catalog</button>
         </div>
     </div>
 
@@ -178,7 +172,7 @@
 
     <footer>
         <h3>Zarafiya Fashion</h3>
-        <p>वाराणसी से, प्रीमियम एथनिक Wear — सीधे आपके घर तक।<br>WhatsApp: +91 88878 02046</p>
+        <p>वाराणसी से, प्रीमियम एथनिक Wear — सीधे आपके घर तक。<br>WhatsApp: +91 88878 02046</p>
         <p style="margin-bottom: 0; font-size: 11px;">&copy; 2026 Zarafiya Fashion. All rights reserved.</p>
     </footer>
 
@@ -186,7 +180,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, RecaptchaVerifier, signInWithPhoneNumber, browserLocalPersistence, setPersistence } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, browserLocalPersistence, setPersistence } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyBL8tiQZOGPNsOxVGMB5Hbs_YhpSmqwFJQ",
@@ -211,61 +205,27 @@
         const adminProductList = document.getElementById('adminProductList');
         const loginModal = document.getElementById('loginModal');
         const productModal = document.getElementById('productModal');
-        const otpModal = document.getElementById('otpModal');
+        const welcomeModal = document.getElementById('welcomeModal');
+
+        window.closeWelcome = () => {
+            welcomeModal.style.display = 'none';
+        }
 
         let allProducts = [];
         let currentCategory = 'All';
 
-        // Check if user already logged in via OTP or Admin
+        // Check if admin is logged in
         onAuthStateChanged(auth, (user) => {
-            if(user) {
-                // If user logged in, hide OTP modal
-                otpModal.style.display = 'none';
-                if(user.email) {
-                    // Admin logged in
-                    customerView.style.display = 'none';
-                    adminView.style.display = 'block';
-                    document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-user-check"></i> Admin`;
-                    loginModal.style.display = 'none';
-                }
-            } else {
-                // Show OTP modal for first-time visitors if not logged in
-                otpModal.style.display = 'flex';
+            if(user && user.email) {
+                customerView.style.display = 'none';
+                adminView.style.display = 'block';
+                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-user-check"></i> Admin`;
+                loginModal.style.display = 'none';
+                welcomeModal.style.display = 'none';
             }
         });
 
-        // Setup Phone OTP Auth
-        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-            'size': 'normal'
-        });
-        recaptchaVerifier.render();
-
-        document.getElementById('sendOtpBtn').onclick = () => {
-            const phoneNumber = document.getElementById('userPhone').value;
-            if(!phoneNumber) return alert("Please enter phone number with country code (e.g. +91...)");
-            
-            signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
-                .then((confirmationResult) => {
-                    window.confirmationResult = confirmationResult;
-                    document.getElementById('phoneStep').style.display = 'none';
-                    document.getElementById('otpStep').style.display = 'block';
-                    alert("OTP sent successfully!");
-                }).catch((error) => {
-                    alert("SMS not sent: " + error.message);
-                });
-        };
-
-        document.getElementById('verifyOtpBtn').onclick = () => {
-            const code = document.getElementById('userOtp').value;
-            confirmationResult.confirm(code).then((result) => {
-                alert("Login Successful!");
-                otpModal.style.display = 'none';
-            }).catch((error) => {
-                alert("Incorrect OTP! Please try again.");
-            });
-        };
-
-        // Real-time Products Sync & Rendering with Categories
+        // Real-time Products Sync & Categories
         onSnapshot(collection(db, "products"), (snapshot) => {
             allProducts = [];
             snapshot.forEach((docSnap) => {
@@ -429,7 +389,7 @@
                     const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
 
                     document.getElementById('productDetailContent').innerHTML = `
-                        <img src="${p.image}" style="width:100%; max-height:350px; object-type:cover; border-radius:8px; margin-bottom:12px;">
+                        <img src="${p.image}" style="width:100%; max-height:350px; object-fit:cover; border-radius:8px; margin-bottom:12px;" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
                         <h2 style="margin: 0 0 5px 0; font-size:18px;">${p.name}</h2>
                         <p style="margin: 0 0 8px 0; color: #666; font-size: 13px;"><strong>Category:</strong> ${p.category} | <strong>SKU:</strong> ${p.sku}</p>
                         <div class="price-box" style="justify-content: flex-start; font-size: 20px; margin-bottom: 12px;">
@@ -437,7 +397,7 @@
                             <span class="regular" style="text-decoration: line-through; color: gray; margin-left: 10px; font-size:15px;">₹${p.price}</span>
                         </div>
                         <p style="margin-bottom: 15px; line-height: 1.5; font-size: 13px;">${p.description}</p>
-                        <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:10px; font-size: 15px;">
+                        <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:10px; font-size: 15px; text-decoration:none;">
                             <i class="fab fa-whatsapp"></i> Order on WhatsApp
                         </a>
                     `;
