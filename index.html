@@ -63,6 +63,18 @@
             cursor: pointer;
         }
 
+        /* Admin Quick Bar (Only for Admin) */
+        #adminBar {
+            display: none;
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            font-size: 12px;
+            display: none; /* Controlled by JS */
+            justify-content: space-between;
+            align-items: center;
+        }
+
         /* Search Bar */
         .search-container {
             display: none;
@@ -219,11 +231,13 @@
             text-align: center;
             padding-bottom: 12px;
             border: 1px solid #eee;
-            cursor: pointer;
+            position: relative;
         }
-        .card img { width: 100%; height: 180px; object-fit: cover; background: #f9f9f9; }
-        .card h3 { font-size: 13px; margin: 8px 5px 4px 5px; color: #333; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .price-box { display: flex; justify-content: center; gap: 8px; margin-bottom: 8px; align-items: baseline; }
+        .card img { width: 100%; height: 180px; object-fit: cover; background: #f9f9f9; cursor: pointer; }
+        .card h3 { font-size: 13px; margin: 8px 5px 4px 5px; color: #333; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+        .badge-type { position: absolute; top: 8px; left: 8px; background: rgba(92, 24, 36, 0.85); color: #fff; font-size: 9px; padding: 3px 7px; border-radius: 4px; font-weight: 500; }
+        
+        .price-box { display: flex; justify-content: center; gap: 8px; margin-bottom: 8px; align-items: baseline; cursor: pointer; }
         .price-box .discount { color: var(--primary); font-weight: 600; font-size: 14px; }
         .price-box .regular { text-decoration: line-through; color: #888; font-size: 11px; }
 
@@ -233,6 +247,8 @@
         .btn.success { background: #25D366; }
         .btn.danger { background: #ff4444; width: auto; }
         .btn.info { background: #007bff; width: auto; }
+        
+        .admin-action-bar { display: none; gap: 5px; margin-top: 6px; justify-content: center; }
 
         /* Trust Badges Bar */
         .trust-bar {
@@ -289,10 +305,6 @@
         .thumb-gallery { display: flex; gap: 6px; margin-top: 8px; overflow-x: auto; }
         .thumb-gallery img { width: 55px; height: 55px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd; cursor: pointer; }
 
-        .admin-header { background: var(--primary); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 20px; }
-        .admin-item { display: flex; flex-direction: column; background: white; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; gap: 8px; }
-        .admin-item-actions { display: flex; gap: 8px; }
-
         footer { background: var(--primary); color: white; padding: 25px 15px; text-align: center; font-size: 12px; margin-top: 30px; }
         footer p { color: #f0f0f0; line-height: 1.5; margin: 5px 0; }
     </style>
@@ -314,6 +326,15 @@
             <i class="fas fa-bars" onclick="openLoginModal()" style="font-size: 16px;"></i>
         </div>
     </header>
+
+    <!-- Admin Quick Notification Bar -->
+    <div id="adminBar">
+        <span id="adminStatusText"><i class="fas fa-user-shield"></i> Admin Mode Active</span>
+        <div>
+            <button onclick="openAddProductModal()" style="background:var(--accent); border:none; padding:4px 10px; border-radius:4px; font-weight:600; cursor:pointer; font-size:11px; margin-right:5px;"><i class="fas fa-plus"></i> Add Product</button>
+            <button onclick="logoutAdmin()" style="background:#ff4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:11px;">Logout</button>
+        </div>
+    </div>
 
     <!-- Search Box Bar -->
     <div id="searchBox" class="search-container">
@@ -392,6 +413,41 @@
         </div>
     </div>
 
+    <!-- Add/Edit Product Modal (For Admin) -->
+    <div id="productFormModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('productFormModal').style.display='none'">&times;</span>
+            <h3 id="formTitle" style="margin-top:0; color: var(--primary); font-size: 16px; font-family:'Playfair Display',serif;">Add New Product</h3>
+            <form id="addProductForm">
+                <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
+                <input type="text" id="pImage" class="form-control" placeholder="Main Image URL (ImgBB Direct Link)" required>
+                <input type="text" id="pExtraImages" class="form-control" placeholder="Extra Image URLs (Comma separated links)">
+                <input type="number" id="pPrice" class="form-control" placeholder="Regular Price" required>
+                <input type="number" id="pDiscount" class="form-control" placeholder="Discount Price" required>
+                
+                <select id="pCategory" class="form-control" required>
+                    <option value="">Select Category</option>
+                    <option value="Sarees">Sarees</option>
+                    <option value="Suit">Suit</option>
+                    <option value="Dupatta">Dupatta</option>
+                    <option value="Gharara">Gharara</option>
+                </select>
+
+                <select id="pMakeType" class="form-control" required>
+                    <option value="">Select Weaving Type</option>
+                    <option value="Handloom">Handloom</option>
+                    <option value="Power Loom">Power Loom</option>
+                    <option value="Repair Machine">Repair Machine</option>
+                </select>
+
+                <input type="text" id="pSku" class="form-control" placeholder="Product Code / SKU" required>
+                <textarea id="pDesc" class="form-control" placeholder="Description & Fabric Details" rows="3" required></textarea>
+                
+                <button type="submit" id="submitProductBtn" class="btn success" style="width: 100%; padding: 10px;">Add Product to Database</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Cart Modal -->
     <div id="cartModal" class="modal">
         <div class="modal-content">
@@ -415,48 +471,12 @@
         <div class="modal-content">
             <span class="close-btn" id="closeLoginModal">&times;</span>
             <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Admin Access</h2>
-            <p style="font-size: 12px; color: #666;">Enter admin credentials to manage products.</p>
+            <p style="font-size: 12px; color: #666;">Enter admin credentials to unlock management controls.</p>
             <input type="email" id="adminEmail" class="form-control" placeholder="Admin Email">
             <input type="password" id="adminPassword" class="form-control" placeholder="Password">
-            <button id="loginBtn" class="btn" style="width: 100%; padding: 10px;">Login to Dashboard</button>
+            <button id="loginBtn" class="btn" style="width: 100%; padding: 10px;">Login as Admin</button>
         </div>
     </div>
-
-    <!-- Admin Dashboard View -->
-    <main id="adminView" style="display: none;" class="container">
-        <div class="admin-header" style="margin-top: 15px;">
-            <h2 style="margin: 0; font-size: 18px;">Admin Dashboard</h2>
-            <button id="logoutBtn" class="btn danger" style="padding: 5px 10px; font-size: 11px;">Logout</button>
-        </div>
-        
-        <div class="admin-panel" style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 25px;">
-            <h3 id="formTitle" style="margin-top:0; color: var(--primary); font-size: 15px;">Add New Product</h3>
-            <form id="addProductForm">
-                <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
-                <input type="text" id="pImage" class="form-control" placeholder="Main Image URL (ImgBB Direct Link)" required>
-                <input type="text" id="pExtraImages" class="form-control" placeholder="Extra Image URLs (Comma separated links)">
-                <input type="number" id="pPrice" class="form-control" placeholder="Regular Price" required>
-                <input type="number" id="pDiscount" class="form-control" placeholder="Discount Price" required>
-                
-                <select id="pCategory" class="form-control" required>
-                    <option value="">Select Category</option>
-                    <option value="Sarees">Sarees</option>
-                    <option value="Suit">Suit</option>
-                    <option value="Dupatta">Dupatta</option>
-                    <option value="Gharara">Gharara</option>
-                </select>
-
-                <input type="text" id="pSku" class="form-control" placeholder="Product Code / SKU" required>
-                <textarea id="pDesc" class="form-control" placeholder="Description & Fabric Details" rows="3" required></textarea>
-                
-                <button type="submit" id="submitProductBtn" class="btn success" style="width: 100%; padding: 10px;">Add Product to Database</button>
-                <button type="button" id="cancelEditBtn" class="btn danger" style="display: none; width: 100%; margin-top: 8px; padding: 8px;">Cancel Edit</button>
-            </form>
-        </div>
-        
-        <h3 style="font-size: 16px; color: var(--primary);">Manage Products</h3>
-        <div id="adminProductList"></div>
-    </main>
 
     <!-- Bottom Navigation Bar -->
     <nav class="bottom-nav">
@@ -469,7 +489,7 @@
         <button class="nav-item" onclick="openCartModal()">
             <i class="fas fa-shopping-bag"></i> Cart
         </button>
-        <button class="nav-item" onclick="handleAccountClick()">
+        <button class="nav-item" onclick="openLoginModal()">
             <i class="fas fa-user-shield"></i> Account
         </button>
     </nav>
@@ -504,43 +524,35 @@
         setPersistence(auth, browserLocalPersistence).catch((error) => console.log(error));
 
         const customerView = document.getElementById('customerView');
-        const adminView = document.getElementById('adminView');
         const productGrid = document.getElementById('productGrid');
-        const adminProductList = document.getElementById('adminProductList');
         const loginModal = document.getElementById('loginModal');
         const productModal = document.getElementById('productModal');
         const cartModal = document.getElementById('cartModal');
+        const productFormModal = document.getElementById('productFormModal');
+        const adminBar = document.getElementById('adminBar');
 
         let cart = [];
+        let isAdminLoggedIn = false;
 
         window.goHome = () => {
-            adminView.style.display = 'none';
-            customerView.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         window.scrollToCollection = () => {
-            customerView.style.display = 'block';
-            adminView.style.display = 'none';
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
         window.openLoginModal = () => {
-            if(auth.currentUser) {
-                customerView.style.display = 'none';
-                adminView.style.display = 'block';
+            if(isAdminLoggedIn) {
+                alert("You are already logged in as Admin!");
             } else {
                 loginModal.style.display = 'flex';
             }
         }
 
-        window.handleAccountClick = () => {
-            if(auth.currentUser) {
-                customerView.style.display = 'none';
-                adminView.style.display = 'block';
-            } else {
-                loginModal.style.display = 'flex';
-            }
+        window.openAddProductModal = () => {
+            resetForm();
+            productFormModal.style.display = 'flex';
         }
 
         window.toggleSearchBox = () => {
@@ -608,13 +620,23 @@
         let allProducts = [];
         let currentCategory = 'All';
 
+        onAuthStateChanged(auth, (user) => {
+            if(user && user.email) {
+                isAdminLoggedIn = true;
+                adminBar.style.display = 'flex';
+            } else {
+                isAdminLoggedIn = false;
+                adminBar.style.display = 'none';
+            }
+            renderProducts(allProducts);
+        });
+
         onSnapshot(collection(db, "products"), (snapshot) => {
             allProducts = [];
             snapshot.forEach((docSnap) => {
                 allProducts.push({ id: docSnap.id, ...docSnap.data() });
             });
             renderProducts(allProducts);
-            renderAdminList();
         });
 
         window.filterCategory = (cat) => {
@@ -641,7 +663,19 @@
             productsArray.forEach((product) => {
                 const card = document.createElement('div');
                 card.className = "card";
+                
+                let adminActionHtml = '';
+                if(isAdminLoggedIn) {
+                    adminActionHtml = `
+                        <div class="admin-action-bar" style="display: flex;">
+                            <button class="btn info" onclick="editProduct('${product.id}')" style="padding: 4px 8px; font-size: 10px;"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="btn danger" onclick="deleteProduct('${product.id}')" style="padding: 4px 8px; font-size: 10px;"><i class="fas fa-trash"></i> Del</button>
+                        </div>
+                    `;
+                }
+
                 card.innerHTML = `
+                    <span class="badge-type">${product.makeType || 'Handloom'}</span>
                     <img src="${product.image}" alt="${product.name}" onclick="openProduct('${product.id}')" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
                     <h3 onclick="openProduct('${product.id}')">${product.name}</h3>
                     <div class="price-box" onclick="openProduct('${product.id}')">
@@ -651,38 +685,15 @@
                     <div class="btn-group">
                         <button class="btn" onclick="openProduct('${product.id}')">View Details</button>
                         <button class="btn cart-btn" onclick="addToCart('${product.id}', '${product.name}', ${product.discountPrice}, '${product.image}')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        ${adminActionHtml}
                     </div>
                 `;
                 productGrid.appendChild(card);
             });
         }
 
-        function renderAdminList() {
-            adminProductList.innerHTML = "";
-            if(allProducts.length === 0) {
-                adminProductList.innerHTML = "<p style='font-size:12px; color:#777;'>No products in database.</p>";
-                return;
-            }
-            allProducts.forEach((product) => {
-                const adminItem = document.createElement('div');
-                adminItem.className = "admin-item";
-                adminItem.innerHTML = `
-                    <div>
-                        <strong>${product.name}</strong><br>
-                        <small style="color:#666;">[${product.category}] SKU: ${product.sku} | ₹${product.discountPrice}</small>
-                    </div>
-                    <div class="admin-item-actions">
-                        <button class="btn info" onclick="editProduct('${product.id}')" style="padding: 4px 8px; font-size: 11px;"><i class="fas fa-edit"></i> Edit</button>
-                        <button class="btn danger" onclick="deleteProduct('${product.id}')" style="padding: 4px 8px; font-size: 11px;"><i class="fas fa-trash"></i> Delete</button>
-                    </div>
-                `;
-                adminProductList.appendChild(adminItem);
-            });
-        }
-
         let editingProductId = null;
         const submitProductBtn = document.getElementById('submitProductBtn');
-        const cancelEditBtn = document.getElementById('cancelEditBtn');
         const formTitle = document.getElementById('formTitle');
 
         document.getElementById('addProductForm').addEventListener('submit', async (e) => {
@@ -699,6 +710,7 @@
                 price: Number(document.getElementById('pPrice').value),
                 discountPrice: Number(document.getElementById('pDiscount').value),
                 category: document.getElementById('pCategory').value,
+                makeType: document.getElementById('pMakeType').value,
                 sku: document.getElementById('pSku').value,
                 description: document.getElementById('pDesc').value
             };
@@ -714,6 +726,7 @@
                     alert("Product Added Successfully!");
                     document.getElementById('addProductForm').reset();
                 }
+                productFormModal.style.display = 'none';
             } catch (error) {
                 alert("Error saving: " + error.message);
             } finally {
@@ -733,6 +746,7 @@
                     document.getElementById('pPrice').value = p.price;
                     document.getElementById('pDiscount').value = p.discountPrice;
                     document.getElementById('pCategory').value = p.category;
+                    document.getElementById('pMakeType').value = p.makeType || 'Handloom';
                     document.getElementById('pSku').value = p.sku;
                     document.getElementById('pDesc').value = p.description;
                     
@@ -740,15 +754,12 @@
                     formTitle.innerText = "Edit Product";
                     submitProductBtn.innerText = "Update Product";
                     submitProductBtn.className = "btn info";
-                    cancelEditBtn.style.display = "block";
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    productFormModal.style.display = 'flex';
                 }
             } catch(error) {
                 alert("Error loading product: " + error.message);
             }
         };
-
-        cancelEditBtn.onclick = resetForm;
 
         function resetForm() {
             editingProductId = null;
@@ -756,7 +767,6 @@
             formTitle.innerText = "Add New Product";
             submitProductBtn.innerText = "Add Product to Database";
             submitProductBtn.className = "btn success";
-            cancelEditBtn.style.display = "none";
         }
 
         window.deleteProduct = async (id) => {
@@ -776,7 +786,7 @@
                 const docSnap = await getDoc(doc(db, "products", id));
                 if (docSnap.exists()) {
                     const p = docSnap.data();
-                    const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category}%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
+                    const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category} (${p.makeType || 'Handloom'})%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
                     const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
 
                     let galleryHtml = '';
@@ -796,7 +806,7 @@
                         <img id="mainProductImg" src="${p.image}" style="width:100%; max-height:280px; object-fit:cover; border-radius:8px; margin-bottom:5px;" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
                         ${galleryHtml}
                         <h2 style="margin: 10px 0 4px 0; font-size:16px; color:var(--primary); font-family:'Playfair Display',serif;">${p.name}</h2>
-                        <p style="margin: 0 0 6px 0; color: #666; font-size: 11px;"><strong>Category:</strong> ${p.category} | <strong>SKU:</strong> ${p.sku}</p>
+                        <p style="margin: 0 0 6px 0; color: #666; font-size: 11px;"><strong>Category:</strong> ${p.category} | <strong>Type:</strong> ${p.makeType || 'Handloom'} | <strong>SKU:</strong> ${p.sku}</p>
                         <div class="price-box" style="justify-content: flex-start; font-size: 18px; margin-bottom: 10px;">
                             <span class="discount" style="color: #5c1824; font-weight: 600;">₹${p.discountPrice}</span>
                             <span class="regular" style="text-decoration: line-through; color: #888; margin-left: 8px; font-size:13px;">₹${p.price}</span>
@@ -824,15 +834,13 @@
                 loginModal.style.display = 'none';
                 document.getElementById('adminEmail').value = "";
                 document.getElementById('adminPassword').value = "";
-                customerView.style.display = 'none';
-                adminView.style.display = 'block';
+                alert("Admin Login Successful! Now you can view products like a customer and see Edit/Delete buttons.");
             } catch(e) { alert("Login Failed: " + e.message); }
         };
 
-        document.getElementById('logoutBtn').onclick = async () => {
+        window.logoutAdmin = async () => {
             await signOut(auth);
-            adminView.style.display = 'none';
-            customerView.style.display = 'block';
+            alert("Logged out successfully.");
         };
     </script>
 </body>
