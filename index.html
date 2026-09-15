@@ -1,484 +1,395 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zarafiya Fashion — बनारसी सिल्क साड़ी</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=Yatra+One&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --maroon:#5C1A1B;
-    --maroon-dark:#330F10;
-    --gold:#C9A227;
-    --gold-light:#E8C766;
-    --cream:#FBF6EE;
-    --teal:#0B3D3D;
-    --ink:#2B1810;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    background:var(--cream);
-    color:var(--ink);
-    font-family:'Poppins', sans-serif;
-    font-weight:300;
-    line-height:1.6;
-    overflow-x:hidden;
-  }
-  h1,h2,h3{ font-family:'Cormorant Garamond', serif; font-weight:700; color:var(--maroon-dark); }
-  a{ text-decoration:none; color:inherit; }
-  img{max-width:100%; display:block;}
-  .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zarafiya Fashion | Premium Banarasi Sarees</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- YAHAN SE CSS (DESIGN) SHURU -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap');
 
-  header{
-    position:fixed; top:0; left:0; right:0; z-index:50;
-    background:rgba(251,246,238,0.92);
-    backdrop-filter:blur(6px);
-    border-bottom:1px solid rgba(92,26,27,0.12);
-  }
-  .nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1180px; margin:0 auto; width:100%; }
-  .logo{ font-family:'Cormorant Garamond', serif; font-size:1.6rem; font-weight:700; color:var(--maroon); letter-spacing:0.5px; }
-  .logo span{ color:var(--gold); }
-  
-  .nav-center{ display:flex; gap:32px; font-size:0.95rem; flex:1; justify-content:center; }
-  .nav-center a{ position:relative; transition:color .2s; color:var(--ink); }
-  .nav-center a:hover{ color:var(--maroon); }
-  
-  .nav-right{ display:flex; gap:12px; align-items:center; }
-  .nav-cta, .admin-btn{
-    background:var(--maroon); color:var(--cream); padding:10px 16px; border-radius:2px;
-    font-size:0.9rem; transition:background .2s; cursor:pointer; border:none; font-family:'Poppins', sans-serif; font-weight:500;
-  }
-  .nav-cta:hover, .admin-btn:hover{ background:var(--maroon-dark); }
-  .admin-btn{ background:var(--gold); color:var(--maroon-dark); font-weight:600; }
-  .admin-btn:hover{ background:var(--gold-light); }
-  
-  .menu-btn{ display:none; background:none; border:none; font-size:1.6rem; color:var(--maroon); cursor:pointer; }
-  
-  .mobile-menu{ display:none; position:absolute; top:60px; right:0; background:var(--cream); 
-    border:1px solid var(--gold); border-radius:4px; min-width:200px; box-shadow:0 10px 25px rgba(0,0,0,0.1); z-index:100;
-  }
-  .mobile-menu.show{ display:block; }
-  .mobile-menu a, .mobile-menu button{ display:block; width:100%; padding:12px 20px; text-align:left; 
-    border:none; background:none; color:var(--ink); font-size:0.95rem; cursor:pointer; transition:background .2s;
-  }
-  .mobile-menu a:hover, .mobile-menu button:hover{ background:rgba(92,26,27,0.05); }
-  .mobile-menu .divider{ height:1px; background:var(--gold); margin:8px 0; }
+        :root {
+            --primary: #d81b60; /* Rose Pink */
+            --gold: #d4af37;
+            --dark: #222;
+            --light: #f8f9fa;
+        }
 
-  .hero{
-    position:relative;
-    min-height:100vh;
-    display:flex; align-items:center;
-    background:linear-gradient(120deg, var(--maroon) 0%, var(--maroon-dark) 55%, #230a0b 100%);
-    color:var(--cream);
-    overflow:hidden;
-    padding-top:80px;
-  }
-  .hero::before{
-    content:"बनारस";
-    position:absolute; right:-40px; top:50%; transform:translateY(-50%);
-    font-family:'Yatra One', cursive;
-    font-size:22rem; color:rgba(232,199,102,0.06);
-    line-height:1; pointer-events:none; white-space:nowrap;
-  }
-  .hero-grid{
-    display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;
-    width:100%; position:relative; z-index:2;
-  }
-  .hero-eyebrow-swatch{
-    display:inline-flex; align-items:center; gap:10px;
-    border:1px solid var(--gold); color:var(--gold-light);
-    padding:6px 16px; border-radius:2px; font-size:0.85rem;
-    opacity:0; transform:translateY(14px); animation:riseIn .8s ease forwards; animation-delay:.1s;
-  }
-  .hero h1{
-    color:var(--cream); font-size:3.4rem; line-height:1.15; margin:22px 0 18px;
-    opacity:0; transform:translateY(14px); animation:riseIn .8s ease forwards; animation-delay:.3s;
-  }
-  .hero h1 em{ font-style:normal; color:var(--gold-light); }
-  .hero p{
-    font-size:1.05rem; color:#EADFCB; max-width:480px; margin-bottom:32px;
-    opacity:0; transform:translateY(14px); animation:riseIn .8s ease forwards; animation-delay:.5s;
-  }
-  .hero-actions{
-    display:flex; gap:16px; flex-wrap:wrap;
-    opacity:0; transform:translateY(14px); animation:riseIn .8s ease forwards; animation-delay:.7s;
-  }
-  .btn-gold{
-    background:var(--gold); color:var(--maroon-dark); padding:15px 30px; border-radius:2px;
-    font-weight:600; font-size:0.95rem; transition:transform .2s, background .2s; display:inline-block; cursor:pointer; border:none;
-  }
-  .btn-gold:hover{ background:var(--gold-light); transform:translateY(-2px); }
-  .btn-outline{
-    border:1px solid var(--gold-light); color:var(--gold-light); padding:14px 28px; border-radius:2px;
-    font-size:0.95rem; transition:background .2s; cursor:pointer; background:none;
-  }
-  .btn-outline:hover{ background:rgba(232,199,102,0.1); }
-  @keyframes riseIn{ to{ opacity:1; transform:translateY(0); } }
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+        }
 
-  .hero-visual{
-    position:relative; height:460px; display:flex; align-items:center; justify-content:center;
-  }
-  .saree-drape{
-    width:280px; height:400px; border-radius:4px;
-    background:
-      repeating-linear-gradient(90deg, var(--gold) 0 4px, transparent 4px 34px),
-      linear-gradient(180deg, var(--maroon) 0%, #7a2224 50%, var(--maroon) 100%);
-    position:relative; box-shadow:0 30px 60px rgba(0,0,0,0.4);
-    transform:rotate(-4deg);
-  }
-  .saree-drape::before{
-    content:""; position:absolute; top:0; bottom:0; left:0; width:26px;
-    background:repeating-radial-gradient(circle at 13px 20px, var(--gold-light) 0 3px, transparent 3px 20px);
-    background-color:var(--maroon-dark);
-  }
-  .saree-drape::after{
-    content:""; position:absolute; left:0; right:0; bottom:0; height:60px;
-    background:linear-gradient(180deg, transparent, rgba(0,0,0,0.35));
-  }
-  .saree-badge{
-    position:absolute; bottom:20px; left:-30px; background:var(--cream); color:var(--maroon-dark);
-    padding:16px 22px; border-radius:2px; box-shadow:0 12px 30px rgba(0,0,0,0.25);
-    font-size:0.85rem; max-width:200px;
-  }
-  .saree-badge strong{ display:block; font-family:'Cormorant Garamond',serif; font-size:1.3rem; color:var(--maroon); }
+        header {
+            background-color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-  section{ padding:100px 0; }
-  .section-head{ max-width:640px; margin-bottom:56px; }
-  .section-head h2{ font-size:2.4rem; margin-bottom:14px; }
-  .section-head p{ color:#5a4a42; font-size:1rem; }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--primary);
+            font-weight: 600;
+        }
 
-  .collection{ background:var(--cream); }
-  .grid-6{ display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; }
-  .card{
-    background:#fff; border:1px solid rgba(92,26,27,0.1); border-radius:3px; overflow:hidden;
-    transition:box-shadow .25s, transform .25s;
-  }
-  .card:hover{ box-shadow:0 20px 40px rgba(43,24,16,0.12); transform:translateY(-4px); }
-  .swatch{ height:220px; position:relative; overflow:hidden; background:#eee; }
-  .swatch img{ width:100%; height:100%; object-fit:cover; display:block; }
-  .card-body .colors{ font-size:0.78rem; color:#8a7060; display:block; margin-top:2px; }
-  .swatch::after{
-    content:""; position:absolute; left:0; right:0; bottom:0; height:16px;
-    background:repeating-linear-gradient(90deg, var(--gold) 0 6px, transparent 6px 16px);
-  }
-  .card-body{ padding:20px 22px 24px; }
-  .card-body h3{ font-size:1.3rem; margin-bottom:4px; }
-  .card-body .tag{ font-size:0.8rem; color:#8a7060; margin-bottom:10px; display:block; }
-  .price-row{ display:flex; align-items:center; justify-content:space-between; margin-top:14px; }
-  .price{ font-size:1.15rem; color:var(--maroon); font-weight:600; }
-  .order-link{ font-size:0.85rem; border-bottom:1px solid var(--maroon); color:var(--maroon); padding-bottom:2px; cursor:pointer; }
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            margin-left: 15px;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
-  .process{ background:var(--maroon-dark); color:var(--cream); }
-  .process .section-head h2{ color:var(--cream); }
-  .process .section-head p{ color:#d9c8b8; }
-  .loom-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:28px; }
-  .loom-card{ border-top:2px solid var(--gold); padding-top:20px; }
-  .loom-card .badge-tag{ display:inline-block; font-size:0.78rem; color:var(--gold-light); border:1px solid var(--gold); padding:3px 12px; border-radius:2px; margin-bottom:14px; }
-  .loom-card h3{ color:var(--cream); font-size:1.3rem; margin-bottom:10px; }
-  .loom-card p{ color:#cbb9a8; font-size:0.95rem; }
-  .loom-note{ margin-top:32px; font-size:0.88rem; color:#cbb9a8; border-left:2px solid var(--gold); padding-left:16px; }
-  .loom-note strong{ color:var(--gold-light); }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1610189012351-14022a94f6f7?auto=format&fit=crop&w=1200&q=80') center/cover;
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
 
-  .testimonials{ background:var(--cream); }
-  .quote-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
-  .quote{ background:#fff; border-left:3px solid var(--gold); padding:28px 26px; border-radius:2px; }
-  .quote p{ font-size:1rem; color:#4a3a32; margin-bottom:16px; }
-  .quote .who{ font-size:0.88rem; color:var(--maroon); font-weight:600; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); margin-bottom: 10px;}
 
-  .cta-band{ background:var(--teal); color:var(--cream); text-align:center; padding:80px 24px; }
-  .cta-band h2{ color:var(--cream); font-size:2.2rem; margin-bottom:16px; }
-  .cta-band p{ color:#cfe4e0; margin-bottom:30px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .section-title { text-align: center; margin-bottom: 30px; color: var(--primary); font-family: 'Playfair Display', serif; }
 
-  footer{ background:var(--maroon-dark); color:#d9c8b8; padding:50px 24px 26px; }
-  .footer-grid{ display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:36px; margin-bottom:36px; }
-  .footer-grid h4{ font-family:'Cormorant Garamond', serif; color:var(--cream); font-size:1.2rem; margin-bottom:14px; }
-  .footer-grid a{ display:block; color:#cbb9a8; font-size:0.92rem; margin-bottom:8px; transition:color .2s; cursor:pointer; }
-  .footer-grid a:hover{ color:var(--gold-light); }
-  .footer-bottom{ border-top:1px solid rgba(232,199,102,0.15); padding-top:20px; font-size:0.82rem; color:#a98f7c; text-align:center; }
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
 
-  .wa-float{
-    position:fixed; bottom:24px; right:24px; z-index:60;
-    background:#25D366; color:#fff; width:58px; height:58px; border-radius:50%;
-    display:flex; align-items:center; justify-content:center; font-size:1.6rem;
-    box-shadow:0 10px 24px rgba(0,0,0,0.25); transition:transform .2s; cursor:pointer;
-  }
-  .wa-float:hover{ transform:scale(1.08); }
+        .card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: center;
+            padding-bottom: 15px;
+        }
+        .card img { width: 100%; height: 220px; object-fit: cover; }
+        .card h3 { font-size: 14px; margin: 10px 5px; color: #333;}
+        .price-box { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px;}
+        .price-box .discount { color: var(--primary); font-weight: bold; }
+        .price-box .regular { text-decoration: line-through; color: gray; font-size: 12px; }
 
-  @media (max-width:900px){
-    .nav-center{ display:none; }
-    .menu-btn{ display:block; }
-    .hero-grid{ grid-template-columns:1fr; text-align:center; }
-    .hero p{ margin-left:auto; margin-right:auto; }
-    .hero-actions{ justify-content:center; }
-    .hero-visual{ margin-top:20px; height:360px; }
-    .saree-badge{ left:50%; transform:translateX(-50%); }
-    .grid-6, .quote-grid, .footer-grid{ grid-template-columns:1fr 1fr; }
-    .hero h1{ font-size:2.4rem; }
-    .hero::before{ font-size:12rem; }
-  }
-  @media (max-width:560px){
-    .grid-6, .quote-grid, .footer-grid, .loom-grid{ grid-template-columns:1fr; }
-    section{ padding:70px 0; }
-    .hero h1{ font-size:2rem; }
-    .nav-cta{ padding:8px 12px; font-size:0.85rem; }
-  }
-</style>
+        .btn {
+            padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer;
+            background: var(--primary); color: white; font-weight: bold; width: 90%;
+            display: inline-block; box-sizing: border-box; text-decoration: none;
+        }
+        .btn.success { background: #25D366; } /* WhatsApp Green */
+        .btn.danger { background: #ff4444; width: auto;}
+
+        /* Modals */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; }
+        .modal-content { background: white; width: 90%; max-width: 500px; padding: 20px; border-radius: 8px; position: relative; max-height: 90vh; overflow-y: auto; }
+        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #333;}
+        
+        .login-box input { width: 90%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
+        .login-box h2 { margin-top: 0; }
+
+        /* Admin Panel */
+        .admin-header { background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 20px;}
+        .admin-panel form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
+        .admin-panel input, .admin-panel textarea { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Poppins', sans-serif;}
+        .admin-item { display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;}
+
+        footer { text-align: center; padding: 20px; background: var(--dark); color: white; margin-top: 40px; }
+
+        @media (min-width: 768px) {
+            .product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+            .card img { height: 300px; }
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="nav">
-    <div class="logo">Zarafiya <span>Fashion</span></div>
-    
-    <nav class="nav-center">
-      <a href="#collection">🛍️ कलेक्शन</a>
-      <a href="#process">🧵 बुनाई</a>
-      <a href="#testimonials">⭐ ग्राहक</a>
-      <a href="#contact">📞 संपर्क</a>
-    </nav>
-    
-    <div class="nav-right">
-      <button class="nav-cta" id="waNav">WhatsApp</button>
-      <a class="admin-btn" href="admin.html">🔐 Admin</a>
-      <button class="menu-btn" id="menuBtn">☰</button>
-    </div>
-  </div>
-  
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#collection">🛍️ कलेक्शन</a>
-    <a href="#process">🧵 बुनाई</a>
-    <a href="#testimonials">⭐ ग्राहक</a>
-    <a href="#contact">📞 संपर्क</a>
-    <div class="divider"></div>
-    <button id="waMenu">💬 WhatsApp पर संपर्क करें</button>
-    <a href="admin.html" style="color:var(--gold); font-weight:600;">🔐 Admin Login</a>
-  </div>
-</header>
+    <!-- Navbar -->
+    <header>
+        <div class="logo">Zarafiya Fashion</div>
+        <nav>
+            <a id="homeBtn">Home</a>
+            <a id="adminLoginBtn"><i class="fas fa-lock"></i> Admin</a>
+        </nav>
+    </header>
 
-<section class="hero">
-  <div class="wrap hero-grid">
-    <div>
-      <span class="hero-eyebrow-swatch">हैंडलूम और पावर लूम बनारसी साड़ियाँ</span>
-      <h1>हर धागे में <em>बनारस</em> की विरासत</h1>
-      <p>बनारस की बुनाई परंपरा से जुड़ी साड़ियाँ — हैंडलूम और पावर लूम, हर बजट में। शादी, त्योहार और रोज़ के पहनावे के लिए सही साड़ी यहाँ मिलेगी।</p>
-      <div class="hero-actions">
-        <a class="btn-gold" href="#collection">कलेक्शन देखें</a>
-        <button class="btn-outline" id="waHero">WhatsApp पर ऑर्डर करें</button>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <div class="saree-drape"></div>
-      <div class="saree-badge"><strong>बनारस से डायरेक्ट</strong>हैंडलूम और पावर लूम, दोनों तरह की साड़ियाँ</div>
-    </div>
-  </div>
-</section>
-
-<section class="collection" id="collection">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>हमारा कलेक्शन</h2>
-      <p>हर साड़ी हाथ से चुनी गई है — असली जरी, शुद्ध सिल्क और बनारस की पारंपरिक बुनाई के साथ।</p>
-    </div>
-    <div class="grid-6" id="collectionGrid">
-    </div>
-  </div>
-</section>
-
-<section class="process" id="process">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>हमारे यहाँ क्या मिलता है</h2>
-      <p>हम हैंडलूम और पावर लूम — दोनों तरह की बनारसी साड़ियाँ रखते हैं, ताकि हर बजट में असली बनारसी डिज़ाइन मिल सके।</p>
-    </div>
-    <div class="loom-grid">
-      <div class="loom-card">
-        <span class="badge-tag">हैंडलूम</span>
-        <h3>हैंडलूम बनारसी साड़ी</h3>
-        <p>कारीगर हाथ से करघे पर बुनते हैं — एक साड़ी बनने में कई दिन लगते हैं, इसलिए कीमत भी अधिक होती है।</p>
-      </div>
-      <div class="loom-card">
-        <span class="badge-tag">पावर लूम</span>
-        <h3>पावर लूम बनारसी साड़ी</h3>
-        <p>मशीन करघे पर बुनी जाती है — वही बनारसी डिज़ाइन, कम समय में, इसलिए किफ़ायती कीमत पर मिलती है।</p>
-      </div>
-    </div>
-    <p class="loom-note">नोट: हमारे कलेक्शन में अभी दिख रही सभी साड़ियाँ <strong>पावर लूम</strong> हैं। यह साफ़ तौर पर हर साड़ी के साथ लिखा गया है।</p>
-  </div>
-</section>
-
-<section class="testimonials" id="testimonials">
-  <div class="wrap">
-    <div class="section-head">
-      <h2>ग्राहकों की बातें</h2>
-      <p>हमारी साड़ियाँ देश-विदेश में शादी और त्योहारों की शान बनी हैं।</p>
-    </div>
-    <div class="quote-grid">
-      <div class="quote">
-        <p>साड़ी की क्वालिटी बिल्कुल वैसी ही थी जैसी फोटो में दिखी थी। जरी का काम बहुत सुंदर है।</p>
-        <div class="who">— प्रिया, लखनऊ</div>
-      </div>
-      <div class="quote">
-        <p>शादी के लिए साड़ी ली थी, हर किसी ने तारीफ़ की। डिलीवरी भी समय पर आई।</p>
-        <div class="who">— अंजलि, दिल्ली</div>
-      </div>
-      <div class="quote">
-        <p>असली बनारसी सिल्क है, यह देखते ही पता चल जाता है। दोबारा ज़रूर खरीदूंगी।</p>
-        <div class="who">— सुनीता, मुंबई</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="cta-band">
-  <div class="wrap">
-    <h2>अपनी पसंद की साड़ी के लिए आज ही बात करें</h2>
-    <p>फोटो, रंग और कीमत की पूरी जानकारी के लिए सीधे WhatsApp पर मैसेज करें।</p>
-    <button class="btn-gold" id="waCta">WhatsApp पर ऑर्डर करें</button>
-  </div>
-</div>
-
-<footer id="contact">
-  <div class="wrap footer-grid">
-    <div>
-      <h4>Zarafiya Fashion</h4>
-      <p style="font-size:0.9rem; color:#cbb9a8;">वाराणसी से, हैंडलूम और पावर लूम बनारसी साड़ियाँ — सीधे आपके घर तक।</p>
-    </div>
-    <div>
-      <h4>क्विक लिंक</h4>
-      <a href="#collection">कलेक्शन</a>
-      <a href="#process">बुनाई प्रक्रिया</a>
-      <a href="#testimonials">ग्राहक</a>
-    </div>
-    <div>
-      <h4>संपर्क करें</h4>
-      <a id="waFooter">WhatsApp: +91 73182 59001</a>
-      <a id="emailFooter" href="mailto:sareefulh6@gmail.com">Email: sareefulh6@gmail.com</a>
-      <a href="#">वाराणसी, उत्तर प्रदेश</a>
-    </div>
-  </div>
-  <div class="footer-bottom">© 2026 Zarafiya Fashion. सर्वाधिकार सुरक्षित।</div>
-</footer>
-
-<button class="wa-float" id="waFloat" aria-label="WhatsApp पर मैसेज करें">💬</button>
-
-<script>
-const SITE_CONFIG = {
-  whatsapp: "917318259001",
-  email: "sareefulh6@gmail.com"
-};
-
-// Mobile Menu Toggle
-const menuBtn = document.getElementById('menuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-
-menuBtn.addEventListener('click', () => {
-  mobileMenu.classList.toggle('show');
-});
-
-// Close menu when clicking on a link
-document.querySelectorAll('.mobile-menu a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.remove('show');
-  });
-});
-
-function getDriveImageUrl(driveLink) {
-  const match = driveLink.match(/\/d\/([a-zA-Z0-9-_]+)/);
-  if (match) {
-    const fileId = match[1];
-    return `https://drive.google.com/uc?export=view&id=${fileId}`;
-  }
-  return driveLink;
-}
-
-const PRODUCTS = [
-  {
-    name: "काशी घाट बूटा",
-    type: "पावर लूम",
-    description: "टेम्पल बॉर्डर साड़ी",
-    colors: "बॉटल ग्रीन, वाइन, ऑरेंज, रॉयल ब्लू, ब्लैक",
-    price: "₹2,299",
-    priceNum: 2299,
-    img: getDriveImageUrl("https://drive.google.com/file/d/1rng91G3ep1nDB82l48Bi0BoF-CmQ7e9n/view?usp=drivesdk")
-  },
-  {
-    name: "नेवी बूटी साड़ी",
-    type: "पावर लूम",
-    description: "बूटी डिज़ाइन साड़ी",
-    colors: "नेवी ब्लू",
-    price: "₹2,399",
-    priceNum: 2399,
-    img: getDriveImageUrl("https://drive.google.com/file/d/15dyws9yF_nPSAYc36fIx5msJOzj0ZQqO/view?usp=drivesdk")
-  },
-  {
-    name: "रानी पिंक बूटी",
-    type: "पावर लूम",
-    description: "बूटी डिज़ाइन साड़ी",
-    colors: "रानी पिंक",
-    price: "₹2,399",
-    priceNum: 2399,
-    img: getDriveImageUrl("https://drive.google.com/file/d/1rYhDWqT0qoFlKWi_FDPgYMJnZbcLyVJE/view?usp=drivesdk")
-  },
-  {
-    name: "मरून चेक ब्राइडल",
-    type: "पावर लूम",
-    description: "चेक ज़री ब्राइडल साड़ी",
-    colors: "मरून",
-    price: "₹2,499",
-    priceNum: 2499,
-    img: getDriveImageUrl("https://drive.google.com/file/d/1fPizumjc0OWFnO4S7-YGjfKf9VXVTiIe/view?usp=drivesdk")
-  }
-];
-
-function generateWhatsAppLink(message = "") {
-  const text = message || "नमस्ते! मुझे बनारसी साड़ी के बारे में जानकारी चाहिए।";
-  return `https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
-}
-
-function renderProducts() {
-  const grid = document.getElementById('collectionGrid');
-  
-  // Load from localStorage if available
-  const saved = localStorage.getItem('zarafiya_products');
-  const products = saved ? JSON.parse(saved) : PRODUCTS;
-  
-  grid.innerHTML = products.map((product, idx) => `
-    <div class="card">
-      <div class="swatch">
-        <img src="${product.img}" alt="${product.name}" onerror="this.style.display='none'">
-      </div>
-      <div class="card-body">
-        <h3>${product.name}</h3>
-        <span class="tag">${product.type}</span>
-        <p style="font-size:0.9rem; color:#5a4a42; margin-bottom:8px;">${product.description}</p>
-        <span class="colors">${product.colors}</span>
-        <div class="price-row">
-          <span class="price">${product.price}</span>
-          <a class="order-link" onclick="openWhatsApp('${product.name}')">ऑर्डर करें</a>
+    <!-- Main Customer View -->
+    <main id="customerView">
+        <section class="hero">
+            <h1>Premium Banarasi Silk Sarees</h1>
+            <p>Elegance and Tradition in Every Thread</p>
+        </section>
+        
+        <div class="container">
+            <h2 class="section-title">Our Collection</h2>
+            <!-- Real-time Products yahan aayenge -->
+            <div id="productGrid" class="product-grid">
+                <p style="text-align: center; width: 100%; grid-column: 1 / -1;">Loading products...</p>
+            </div>
         </div>
-      </div>
+    </main>
+
+    <!-- Product Detail Modal (Customer click karne par khulega) -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeProductModal">&times;</span>
+            <div id="productDetailContent"></div>
+        </div>
     </div>
-  `).join('');
-}
 
-function openWhatsApp(productName = "") {
-  const msg = productName 
-    ? `मुझे "${productName}" साड़ी के बारे में जानकारी चाहिए।`
-    : "नमस्ते! मुझे बनारसी साड़ी के बारे में जानकारी चाहिए।";
-  window.open(generateWhatsAppLink(msg), '_blank');
-}
+    <!-- Admin Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content login-box">
+            <span class="close-btn" id="closeLoginModal">&times;</span>
+            <h2>Admin Login</h2>
+            <input type="email" id="adminEmail" placeholder="Email">
+            <input type="password" id="adminPassword" placeholder="Password">
+            <button id="loginBtn" class="btn" style="width: 100%;">Login</button>
+        </div>
+    </div>
 
-document.getElementById('waNav').onclick = () => openWhatsApp();
-document.getElementById('waHero').onclick = () => openWhatsApp();
-document.getElementById('waCta').onclick = () => openWhatsApp();
-document.getElementById('waFooter').onclick = () => openWhatsApp();
-document.getElementById('waFloat').onclick = () => openWhatsApp();
-document.getElementById('waMenu').onclick = () => openWhatsApp();
+    <!-- Admin Dashboard (Normal users se chupa rahega) -->
+    <main id="adminView" style="display: none;" class="container">
+        <div class="admin-header">
+            <h2 style="margin: 0;">Admin Dashboard</h2>
+            <button id="logoutBtn" class="btn danger">Logout</button>
+        </div>
+        
+        <div class="admin-panel">
+            <h3>Add New Product</h3>
+            <form id="addProductForm">
+                <input type="text" id="pName" placeholder="Product Name (e.g. Red Banarasi Saree)" required>
+                <input type="text" id="pImage" placeholder="Image URL (Link)" required>
+                <input type="number" id="pPrice" placeholder="Regular Price (e.g. 2500)" required>
+                <input type="number" id="pDiscount" placeholder="Discount Price (e.g. 1999)" required>
+                <input type="text" id="pCategory" placeholder="Category (e.g. Banarasi Silk)" required>
+                <input type="text" id="pSku" placeholder="Product Code / SKU (e.g. ZF-001)" required>
+                <textarea id="pDesc" placeholder="Description & Fabric Details" rows="3" required></textarea>
+                <button type="submit" class="btn success" style="width: 100%;">Add Product to Database</button>
+            </form>
+        </div>
+        
+        <h3>Manage Products</h3>
+        <div id="adminProductList"></div>
+    </main>
 
-renderProducts();
-</script>
+    <footer>
+        <p>&copy; 2026 Zarafiya Fashion. All rights reserved.</p>
+    </footer>
 
+    <!-- YAHAN SE JAVASCRIPT (FIREBASE LOGIC) SHURU -->
+    <script type="module">
+        // Firebase SDKs Import
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+        // ==========================================
+        // 🔴🔴 STEP 1: APNA FIREBASE CONFIG YAHAN DAALEIN 🔴🔴
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY_HERE",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // ==========================================
+        // 🔴🔴 STEP 2: APNA WHATSAPP NUMBER YAHAN DAALEIN 🔴🔴
+        // ==========================================
+        const whatsappNumber = "919876543210"; // Bina '+' ke, country code ke sath
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // DOM Elements
+        const customerView = document.getElementById('customerView');
+        const adminView = document.getElementById('adminView');
+        const productGrid = document.getElementById('productGrid');
+        const adminProductList = document.getElementById('adminProductList');
+        const loginModal = document.getElementById('loginModal');
+        const productModal = document.getElementById('productModal');
+
+        // ==== REAL-TIME SYNC (CENTRAL DATABASE SE LIVE UPDATE) ====
+        onSnapshot(collection(db, "products"), (snapshot) => {
+            productGrid.innerHTML = "";
+            adminProductList.innerHTML = "";
+            
+            if(snapshot.empty) {
+                productGrid.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>No products available right now.</p>";
+                adminProductList.innerHTML = "<p>No products in database.</p>";
+                return;
+            }
+
+            snapshot.forEach((docSnap) => {
+                const product = docSnap.data();
+                const id = docSnap.id;
+                
+                // 1. Customer Frontend Card
+                const card = document.createElement('div');
+                card.className = "card";
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <div class="price-box">
+                        <span class="discount">₹${product.discountPrice}</span>
+                        <span class="regular">₹${product.price}</span>
+                    </div>
+                    <button class="btn" onclick="openProduct('${id}')">View Details</button>
+                `;
+                productGrid.appendChild(card);
+
+                // 2. Admin List Item
+                const adminItem = document.createElement('div');
+                adminItem.className = "admin-item";
+                adminItem.innerHTML = `
+                    <div>
+                        <strong>${product.name}</strong><br>
+                        <small>SKU: ${product.sku} | ₹${product.discountPrice}</small>
+                    </div>
+                    <button class="btn danger" onclick="deleteProduct('${id}')"><i class="fas fa-trash"></i> Delete</button>
+                `;
+                adminProductList.appendChild(adminItem);
+            });
+        });
+
+        // ==== ADD PRODUCT TO DATABASE ====
+        document.getElementById('addProductForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if(!auth.currentUser) return alert("Please login first!");
+
+            const submitBtn = e.target.querySelector('button');
+            submitBtn.innerText = "Adding...";
+            submitBtn.disabled = true;
+
+            const newProduct = {
+                name: document.getElementById('pName').value,
+                image: document.getElementById('pImage').value,
+                price: Number(document.getElementById('pPrice').value),
+                discountPrice: Number(document.getElementById('pDiscount').value),
+                category: document.getElementById('pCategory').value,
+                sku: document.getElementById('pSku').value,
+                description: document.getElementById('pDesc').value,
+                createdAt: new Date()
+            };
+
+            try {
+                await addDoc(collection(db, "products"), newProduct);
+                alert("Product Added Successfully to Database!");
+                document.getElementById('addProductForm').reset();
+            } catch (error) {
+                alert("Error adding product: " + error.message);
+            } finally {
+                submitBtn.innerText = "Add Product to Database";
+                submitBtn.disabled = false;
+            }
+        });
+
+        // ==== DELETE PRODUCT (Global Function) ====
+        window.deleteProduct = async (id) => {
+            if(confirm("Are you sure you want to delete this product from ALL devices?")) {
+                try {
+                    await deleteDoc(doc(db, "products", id));
+                } catch(error) {
+                    alert("Error: " + error.message);
+                }
+            }
+        };
+
+        // ==== OPEN PRODUCT DETAILS & WHATSAPP (Global Function) ====
+        window.openProduct = async (id) => {
+            productModal.style.display = 'flex';
+            document.getElementById('productDetailContent').innerHTML = "<p>Loading details...</p>";
+            
+            try {
+                const docRef = doc(db, "products", id);
+                const docSnap = await getDoc(docRef);
+                
+                if (docSnap.exists()) {
+                    const p = docSnap.data();
+                    const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
+                    const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
+
+                    document.getElementById('productDetailContent').innerHTML = `
+                        <img src="${p.image}" style="width:100%; max-height:400px; object-fit:cover; border-radius:8px; margin-bottom:15px;">
+                        <h2 style="margin: 0 0 10px 0;">${p.name}</h2>
+                        <p style="margin: 0 0 10px 0; color: #666; font-size: 14px;"><strong>SKU:</strong> ${p.sku} | <strong>Category:</strong> ${p.category}</p>
+                        <div class="price-box" style="justify-content: flex-start; font-size: 22px; margin-bottom: 15px;">
+                            <span class="discount" style="color: #d81b60; font-weight: bold;">₹${p.discountPrice}</span>
+                            <span class="regular" style="text-decoration: line-through; color: gray; margin-left: 10px; font-size:16px;">₹${p.price}</span>
+                        </div>
+                        <p style="margin-bottom: 20px; line-height: 1.6;">${p.description}</p>
+                        <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:12px; font-size: 16px;">
+                            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                        </a>
+                    `;
+                }
+            } catch(error) {
+                document.getElementById('productDetailContent').innerHTML = "<p>Error loading product details.</p>";
+            }
+        };
+
+        // ==== AUTHENTICATION (Login / Logout / Security) ====
+        document.getElementById('adminLoginBtn').onclick = () => loginModal.style.display = 'flex';
+        document.getElementById('closeLoginModal').onclick = () => loginModal.style.display = 'none';
+        document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
+        
+        document.getElementById('homeBtn').onclick = () => {
+            customerView.style.display = 'block';
+            adminView.style.display = 'none';
+        };
+
+        document.getElementById('loginBtn').onclick = async () => {
+            const email = document.getElementById('adminEmail').value;
+            const pass = document.getElementById('adminPassword').value;
+            const btn = document.getElementById('loginBtn');
+            btn.innerText = "Logging in...";
+            
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                loginModal.style.display = 'none';
+                document.getElementById('adminEmail').value = "";
+                document.getElementById('adminPassword').value = "";
+            } catch(e) { 
+                alert("Login Failed: " + e.message); 
+            } finally {
+                btn.innerText = "Login";
+            }
+        };
+
+        document.getElementById('logoutBtn').onclick = () => signOut(auth);
+
+        // Security: Check if admin is logged in, hide/show panels accordingly
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+                customerView.style.display = 'none';
+                adminView.style.display = 'block'; 
+                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-user-check"></i> Admin Active`;
+                loginModal.style.display = 'none';
+            } else {
+                customerView.style.display = 'block';
+                adminView.style.display = 'none';
+                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-lock"></i> Admin`;
+            }
+        });
+    </script>
 </body>
 </html>
