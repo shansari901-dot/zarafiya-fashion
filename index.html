@@ -3,40 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zarafiya Fashion | Premium Banarasi Sarees</title>
+    <title>Zarafiya Fashion | Premium Ethnic Wear</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap');
-        :root { --primary: #d81b60; --gold: #d4af37; --dark: #222; --light: #f8f9fa; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: var(--dark); }
-        header { background-color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .logo { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--primary); font-weight: 600; }
-        nav a { text-decoration: none; color: var(--dark); margin-left: 15px; font-weight: 600; cursor: pointer; }
-        .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1610189012351-14022a94f6f7?auto=format&fit=crop&w=1200&q=80') center/cover; color: white; text-align: center; padding: 60px 20px; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); margin-bottom: 10px;}
+        :root { --primary: #d81b60; --gold: #d4af37; --dark: #3a1119; --light: #fdfbf7; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: #222; }
+        
+        header { background-color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .logo-box { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--primary); font-weight: 600; line-height: 1.1; }
+        .logo-sub { font-size: 13px; color: var(--gold); }
+        .nav-buttons { display: flex; gap: 8px; align-items: center; }
+        .wa-top-btn { background: #25D366; color: white; padding: 6px 10px; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; }
+        .admin-top-btn { background: var(--gold); color: #222; padding: 6px 10px; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; border: none; cursor: pointer; }
+
+        /* Hero Banner */
+        .hero-banner { background: var(--dark); color: white; padding: 35px 20px; text-align: center; border-bottom: 3px solid var(--gold); }
+        .hero-banner h1 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--gold); margin-bottom: 10px; }
+        .hero-banner p { font-size: 13px; line-height: 1.5; color: #eee; margin-bottom: 15px; }
+
+        /* Category Filter Tabs */
+        .category-tabs { display: flex; gap: 8px; overflow-x: auto; padding: 15px 10px; background: white; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); white-space: nowrap; }
+        .cat-btn { background: #f1f1f1; border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; color: #444; transition: 0.3s; }
+        .cat-btn.active, .cat-btn:hover { background: var(--primary); color: white; }
+
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .section-title { text-align: center; margin-bottom: 30px; color: var(--primary); font-family: 'Playfair Display', serif; }
+        .section-title { text-align: center; margin: 20px 0; color: var(--primary); font-family: 'Playfair Display', serif; font-size: 22px; }
+
+        /* Product Grid */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; padding-bottom: 15px; }
+        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; padding-bottom: 15px; border: 1px solid #eee; }
         .card img { width: 100%; height: 220px; object-fit: cover; background: #eee; }
-        .card h3 { font-size: 14px; margin: 10px 5px; color: #333;}
-        .price-box { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px;}
+        .card h3 { font-size: 14px; margin: 10px 5px; color: #333; }
+        .price-box { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
         .price-box .discount { color: var(--primary); font-weight: bold; }
         .price-box .regular { text-decoration: line-through; color: gray; font-size: 12px; }
-        .btn { padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; background: var(--primary); color: white; font-weight: bold; width: 90%; display: inline-block; box-sizing: border-box; text-decoration: none; }
+
+        .btn { padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; background: var(--primary); color: white; font-weight: bold; width: 90%; display: inline-block; box-sizing: border-box; text-decoration: none; font-size: 13px; }
         .btn.success { background: #25D366; }
-        .btn.danger { background: #ff4444; width: auto;}
-        .btn.info { background: #007bff; width: auto;}
+        .btn.danger { background: #ff4444; width: auto; }
+        .btn.info { background: #007bff; width: auto; }
+
+        /* Modals */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; }
-        .modal-content { background: white; width: 90%; max-width: 500px; padding: 20px; border-radius: 8px; position: relative; max-height: 90vh; overflow-y: auto; }
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #333;}
-        .login-box input { width: 90%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
-        .admin-header { background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 20px;}
-        .admin-panel form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
-        .admin-panel input, .admin-panel textarea { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Poppins', sans-serif;}
-        .admin-item { display: flex; flex-direction: column; background: white; padding: 15px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; gap: 10px;}
+        .modal-content { background: white; width: 90%; max-width: 450px; padding: 20px; border-radius: 8px; position: relative; max-height: 90vh; overflow-y: auto; box-sizing: border-box; }
+        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #333; }
+        
+        .form-control { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Poppins', sans-serif; box-sizing: border-box; }
+
+        /* Admin Panel */
+        .admin-header { background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 20px; }
+        .admin-item { display: flex; flex-direction: column; background: white; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; gap: 8px; }
         .admin-item-actions { display: flex; gap: 10px; }
-        footer { text-align: center; padding: 20px; background: var(--dark); color: white; margin-top: 40px; }
+
+        footer { background: var(--dark); color: white; padding: 25px 20px; margin-top: 40px; border-top: 3px solid var(--gold); text-align: center; font-size: 13px; }
+        footer p { color: #ccc; line-height: 1.5; }
+
         @media (min-width: 768px) {
             .product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
             .card img { height: 300px; }
@@ -45,27 +67,62 @@
     </style>
 </head>
 <body>
+
+    <!-- Header -->
     <header>
-        <div class="logo">Zarafiya Fashion</div>
-        <nav>
-            <a id="homeBtn">Home</a>
-            <a id="adminLoginBtn"><i class="fas fa-lock"></i> Admin</a>
-        </nav>
+        <div class="logo-box">
+            Zarafiya <span style="color:#222;">Fashion</span>
+            <div class="logo-sub">Banarasi & Ethnic Wear</div>
+        </div>
+        <div class="nav-buttons">
+            <a href="https://wa.me/918887802046" target="_blank" class="wa-top-btn"><i class="fab fa-whatsapp"></i> Chat</a>
+            <button id="adminLoginBtn" class="admin-top-btn"><i class="fas fa-lock"></i> Admin</button>
+        </div>
     </header>
 
+    <!-- OTP Login Modal (For First Time Users) -->
+    <div id="otpModal" class="modal" style="display: flex;">
+        <div class="modal-content" style="text-align: center;">
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Welcome to Zarafiya</h2>
+            <p style="font-size: 13px; color: #666;">Please login with your mobile number to continue shopping.</p>
+            
+            <div id="phoneStep">
+                <input type="tel" id="userPhone" class="form-control" placeholder="Enter Phone Number (e.g. +919876543210)" required>
+                <button id="sendOtpBtn" class="btn" style="width: 100%;">Send OTP</button>
+            </div>
+
+            <div id="otpStep" style="display: none; margin-top: 15px;">
+                <input type="text" id="userOtp" class="form-control" placeholder="Enter 6-digit OTP" required>
+                <button id="verifyOtpBtn" class="btn success" style="width: 100%;">Verify & Login</button>
+            </div>
+            <div id="recaptcha-container" style="margin: 10px auto; display: flex; justify-content: center;"></div>
+        </div>
+    </div>
+
+    <!-- Customer View -->
     <main id="customerView">
-        <section class="hero">
-            <h1>Premium Banarasi Silk Sarees</h1>
-            <p>Elegance and Tradition in Every Thread</p>
+        <section class="hero-banner">
+            <h1>हर धागे में बनारस की विरासत</h1>
+            <p>Exclusive Sarees, Ghararas, Suits & Dupattas directly from Varanasi weavers.</p>
         </section>
+
+        <!-- Category Filter Tabs -->
+        <div class="category-tabs">
+            <button class="cat-btn active" onclick="filterCategory('All', this)">All Collection</button>
+            <button class="cat-btn" onclick="filterCategory('Sarees', this)">Sarees</button>
+            <button class="cat-btn" onclick="filterCategory('Gharara', this)">Gharara</button>
+            <button class="cat-btn" onclick="filterCategory('Suit', this)">Suit</button>
+            <button class="cat-btn" onclick="filterCategory('Dupatta', this)">Dupatta</button>
+        </div>
+
         <div class="container">
-            <h2 class="section-title">Our Collection</h2>
             <div id="productGrid" class="product-grid">
                 <p style="text-align: center; width: 100%; grid-column: 1 / -1;">Loading products...</p>
             </div>
         </div>
     </main>
 
+    <!-- Product Detail Modal -->
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeProductModal">&times;</span>
@@ -73,47 +130,63 @@
         </div>
     </div>
 
+    <!-- Admin Login Modal -->
     <div id="loginModal" class="modal">
-        <div class="modal-content login-box">
+        <div class="modal-content">
             <span class="close-btn" id="closeLoginModal">&times;</span>
             <h2>Admin Login</h2>
-            <input type="email" id="adminEmail" placeholder="Email">
-            <input type="password" id="adminPassword" placeholder="Password">
+            <input type="email" id="adminEmail" class="form-control" placeholder="Email">
+            <input type="password" id="adminPassword" class="form-control" placeholder="Password">
             <button id="loginBtn" class="btn" style="width: 100%;">Login</button>
         </div>
     </div>
 
+    <!-- Admin Dashboard -->
     <main id="adminView" style="display: none;" class="container">
         <div class="admin-header">
             <h2 style="margin: 0;">Admin Dashboard</h2>
             <button id="logoutBtn" class="btn danger">Logout</button>
         </div>
-        <div class="admin-panel">
-            <h3 id="formTitle">Add New Product</h3>
+        
+        <div class="admin-panel" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 30px;">
+            <h3 id="formTitle" style="margin-top:0; color: var(--primary);">Add New Product</h3>
             <form id="addProductForm">
-                <input type="text" id="pName" placeholder="Product Name" required>
-                <input type="text" id="pImage" placeholder="Image URL (Link)" required>
-                <input type="number" id="pPrice" placeholder="Regular Price" required>
-                <input type="number" id="pDiscount" placeholder="Discount Price" required>
-                <input type="text" id="pCategory" placeholder="Category" required>
-                <input type="text" id="pSku" placeholder="Product Code / SKU" required>
-                <textarea id="pDesc" placeholder="Description" rows="3" required></textarea>
+                <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
+                <input type="text" id="pImage" class="form-control" placeholder="Image URL (ImgBB Direct Link)" required>
+                <input type="number" id="pPrice" class="form-control" placeholder="Regular Price" required>
+                <input type="number" id="pDiscount" class="form-control" placeholder="Discount Price" required>
+                
+                <select id="pCategory" class="form-control" required>
+                    <option value="">Select Category</option>
+                    <option value="Sarees">Sarees</option>
+                    <option value="Gharara">Gharara</option>
+                    <option value="Suit">Suit</option>
+                    <option value="Dupatta">Dupatta</option>
+                </select>
+
+                <input type="text" id="pSku" class="form-control" placeholder="Product Code / SKU" required>
+                <textarea id="pDesc" class="form-control" placeholder="Description & Fabric Details" rows="3" required></textarea>
+                
                 <button type="submit" id="submitProductBtn" class="btn success" style="width: 100%;">Add Product to Database</button>
-                <button type="button" id="cancelEditBtn" class="btn danger" style="display: none; width: 100%;">Cancel Edit</button>
+                <button type="button" id="cancelEditBtn" class="btn danger" style="display: none; width: 100%; margin-top: 8px;">Cancel Edit</button>
             </form>
         </div>
+        
         <h3>Manage Products</h3>
         <div id="adminProductList"></div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Zarafiya Fashion. All rights reserved.</p>
+        <h3>Zarafiya Fashion</h3>
+        <p>वाराणसी से, प्रीमियम एथनिक Wear — सीधे आपके घर तक।<br>WhatsApp: +91 88878 02046</p>
+        <p style="margin-bottom: 0; font-size: 11px;">&copy; 2026 Zarafiya Fashion. All rights reserved.</p>
     </footer>
 
+    <!-- Firebase & App Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, browserLocalPersistence, setPersistence } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, RecaptchaVerifier, signInWithPhoneNumber, browserLocalPersistence, setPersistence } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         const firebaseConfig = {
           apiKey: "AIzaSyBL8tiQZOGPNsOxVGMB5Hbs_YhpSmqwFJQ",
@@ -130,10 +203,7 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Keep user logged in across page clicks
-        setPersistence(auth, browserLocalPersistence).catch((error) => {
-            console.log("Persistence error: ", error);
-        });
+        setPersistence(auth, browserLocalPersistence).catch((error) => console.log(error));
 
         const customerView = document.getElementById('customerView');
         const adminView = document.getElementById('adminView');
@@ -141,26 +211,87 @@
         const adminProductList = document.getElementById('adminProductList');
         const loginModal = document.getElementById('loginModal');
         const productModal = document.getElementById('productModal');
-        
-        let editingProductId = null;
-        const submitProductBtn = document.getElementById('submitProductBtn');
-        const cancelEditBtn = document.getElementById('cancelEditBtn');
-        const formTitle = document.getElementById('formTitle');
+        const otpModal = document.getElementById('otpModal');
 
-        onSnapshot(collection(db, "products"), (snapshot) => {
-            productGrid.innerHTML = "";
-            adminProductList.innerHTML = "";
+        let allProducts = [];
+        let currentCategory = 'All';
+
+        // Check if user already logged in via OTP or Admin
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+                // If user logged in, hide OTP modal
+                otpModal.style.display = 'none';
+                if(user.email) {
+                    // Admin logged in
+                    customerView.style.display = 'none';
+                    adminView.style.display = 'block';
+                    document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-user-check"></i> Admin`;
+                    loginModal.style.display = 'none';
+                }
+            } else {
+                // Show OTP modal for first-time visitors if not logged in
+                otpModal.style.display = 'flex';
+            }
+        });
+
+        // Setup Phone OTP Auth
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+            'size': 'normal'
+        });
+        recaptchaVerifier.render();
+
+        document.getElementById('sendOtpBtn').onclick = () => {
+            const phoneNumber = document.getElementById('userPhone').value;
+            if(!phoneNumber) return alert("Please enter phone number with country code (e.g. +91...)");
             
-            if(snapshot.empty) {
-                productGrid.innerHTML = "<p style='text-align:center; grid-column: 1/-1;'>No products available right now.</p>";
-                adminProductList.innerHTML = "<p>No products in database.</p>";
+            signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier)
+                .then((confirmationResult) => {
+                    window.confirmationResult = confirmationResult;
+                    document.getElementById('phoneStep').style.display = 'none';
+                    document.getElementById('otpStep').style.display = 'block';
+                    alert("OTP sent successfully!");
+                }).catch((error) => {
+                    alert("SMS not sent: " + error.message);
+                });
+        };
+
+        document.getElementById('verifyOtpBtn').onclick = () => {
+            const code = document.getElementById('userOtp').value;
+            confirmationResult.confirm(code).then((result) => {
+                alert("Login Successful!");
+                otpModal.style.display = 'none';
+            }).catch((error) => {
+                alert("Incorrect OTP! Please try again.");
+            });
+        };
+
+        // Real-time Products Sync & Rendering with Categories
+        onSnapshot(collection(db, "products"), (snapshot) => {
+            allProducts = [];
+            snapshot.forEach((docSnap) => {
+                allProducts.push({ id: docSnap.id, ...docSnap.data() });
+            });
+            renderProducts();
+            renderAdminList();
+        });
+
+        window.filterCategory = (cat, btnElement) => {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            renderProducts();
+        };
+
+        function renderProducts() {
+            productGrid.innerHTML = "";
+            let filtered = currentCategory === 'All' ? allProducts : allProducts.filter(p => p.category === currentCategory);
+
+            if(filtered.length === 0) {
+                productGrid.innerHTML = "<p style='text-align:center; grid-column: 1/-1; color:#777;'>No products found in this category.</p>";
                 return;
             }
 
-            snapshot.forEach((docSnap) => {
-                const product = docSnap.data();
-                const id = docSnap.id;
-                
+            filtered.forEach((product) => {
                 const card = document.createElement('div');
                 card.className = "card";
                 card.innerHTML = `
@@ -170,25 +301,40 @@
                         <span class="discount">₹${product.discountPrice}</span>
                         <span class="regular">₹${product.price}</span>
                     </div>
-                    <button class="btn" onclick="openProduct('${id}')">View Details</button>
+                    <button class="btn" onclick="openProduct('${product.id}')">View Details</button>
                 `;
                 productGrid.appendChild(card);
+            });
+        }
 
+        function renderAdminList() {
+            adminProductList.innerHTML = "";
+            if(allProducts.length === 0) {
+                adminProductList.innerHTML = "<p>No products in database.</p>";
+                return;
+            }
+            allProducts.forEach((product) => {
                 const adminItem = document.createElement('div');
                 adminItem.className = "admin-item";
                 adminItem.innerHTML = `
                     <div>
                         <strong>${product.name}</strong><br>
-                        <small>SKU: ${product.sku} | ₹${product.discountPrice}</small>
+                        <small>[${product.category}] SKU: ${product.sku} | ₹${product.discountPrice}</small>
                     </div>
                     <div class="admin-item-actions">
-                        <button class="btn info" onclick="editProduct('${id}')"><i class="fas fa-edit"></i> Edit</button>
-                        <button class="btn danger" onclick="deleteProduct('${id}')"><i class="fas fa-trash"></i> Delete</button>
+                        <button class="btn info" onclick="editProduct('${product.id}')"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn danger" onclick="deleteProduct('${product.id}')"><i class="fas fa-trash"></i> Delete</button>
                     </div>
                 `;
                 adminProductList.appendChild(adminItem);
             });
-        });
+        }
+
+        // Add / Update Product
+        let editingProductId = null;
+        const submitProductBtn = document.getElementById('submitProductBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        const formTitle = document.getElementById('formTitle');
 
         document.getElementById('addProductForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -215,11 +361,11 @@
                 } else {
                     productData.createdAt = new Date();
                     await addDoc(collection(db, "products"), productData);
-                    alert("Product Added Successfully to Database!");
+                    alert("Product Added Successfully!");
                     document.getElementById('addProductForm').reset();
                 }
             } catch (error) {
-                alert("Error saving product: " + error.message);
+                alert("Error saving: " + error.message);
             } finally {
                 submitProductBtn.innerText = editingProductId ? "Update Product" : "Add Product to Database";
                 submitProductBtn.disabled = false;
@@ -279,19 +425,19 @@
                 const docSnap = await getDoc(doc(db, "products", id));
                 if (docSnap.exists()) {
                     const p = docSnap.data();
-                    const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
+                    const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category}%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
                     const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
 
                     document.getElementById('productDetailContent').innerHTML = `
-                        <img src="${p.image}" style="width:100%; max-height:400px; object-fit:cover; border-radius:8px; margin-bottom:15px;">
-                        <h2 style="margin: 0 0 10px 0;">${p.name}</h2>
-                        <p style="margin: 0 0 10px 0; color: #666; font-size: 14px;"><strong>SKU:</strong> ${p.sku} | <strong>Category:</strong> ${p.category}</p>
-                        <div class="price-box" style="justify-content: flex-start; font-size: 22px; margin-bottom: 15px;">
-                            <span class="discount" style="color: #d81b60; font-weight: bold;">₹${p.discountProfile || p.discountPrice}</span>
-                            <span class="regular" style="text-decoration: line-through; color: gray; margin-left: 10px; font-size:16px;">₹${p.price}</span>
+                        <img src="${p.image}" style="width:100%; max-height:350px; object-type:cover; border-radius:8px; margin-bottom:12px;">
+                        <h2 style="margin: 0 0 5px 0; font-size:18px;">${p.name}</h2>
+                        <p style="margin: 0 0 8px 0; color: #666; font-size: 13px;"><strong>Category:</strong> ${p.category} | <strong>SKU:</strong> ${p.sku}</p>
+                        <div class="price-box" style="justify-content: flex-start; font-size: 20px; margin-bottom: 12px;">
+                            <span class="discount" style="color: #d81b60; font-weight: bold;">₹${p.discountPrice}</span>
+                            <span class="regular" style="text-decoration: line-through; color: gray; margin-left: 10px; font-size:15px;">₹${p.price}</span>
                         </div>
-                        <p style="margin-bottom: 20px; line-height: 1.6;">${p.description}</p>
-                        <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:12px; font-size: 16px;">
+                        <p style="margin-bottom: 15px; line-height: 1.5; font-size: 13px;">${p.description}</p>
+                        <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:10px; font-size: 15px;">
                             <i class="fab fa-whatsapp"></i> Order on WhatsApp
                         </a>
                     `;
@@ -301,19 +447,10 @@
             }
         };
 
+        // Admin Modals & Controls
         document.getElementById('adminLoginBtn').onclick = () => loginModal.style.display = 'flex';
         document.getElementById('closeLoginModal').onclick = () => loginModal.style.display = 'none';
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
-        
-        document.getElementById('homeBtn').onclick = () => { 
-            if(auth.currentUser) {
-                adminView.style.display = 'block';
-                customerView.style.display = 'none';
-            } else {
-                customerView.style.display = 'block'; 
-                adminView.style.display = 'none'; 
-            }
-        };
 
         document.getElementById('loginBtn').onclick = async () => {
             const email = document.getElementById('adminEmail').value;
@@ -327,19 +464,6 @@
         };
 
         document.getElementById('logoutBtn').onclick = () => signOut(auth);
-
-        onAuthStateChanged(auth, (user) => {
-            if(user) {
-                customerView.style.display = 'none';
-                adminView.style.display = 'block'; 
-                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-user-check"></i> Admin Active`;
-                loginModal.style.display = 'none';
-            } else {
-                customerView.style.display = 'block';
-                adminView.style.display = 'none';
-                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-lock"></i> Admin`;
-            }
-        });
     </script>
 </body>
 </html>
