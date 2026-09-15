@@ -3,115 +3,370 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zarafiya Fashion | Premium Ethnic Wear</title>
+    <title>Zarafiya Fashion | Grace in Every Thread</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap');
-        :root { --primary: #d81b60; --gold: #d4af37; --dark: #3a1119; --light: #fdfbf7; }
-        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: #222; }
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap');
         
-        header { background-color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .logo-box { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--primary); font-weight: 600; line-height: 1.1; cursor: pointer; }
-        .logo-sub { font-size: 13px; color: var(--gold); }
-        .nav-buttons { display: flex; gap: 8px; align-items: center; }
-        .wa-top-btn { background: #25D366; color: white; padding: 6px 10px; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; }
-        .admin-top-btn { background: var(--gold); color: #222; padding: 6px 10px; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; border: none; cursor: pointer; }
+        :root {
+            --primary: #5c1824; /* Deep Royal Maroon */
+            --accent: #d4af37;  /* Metallic Gold */
+            --bg-light: #fdfbf7;
+            --card-bg: #fff;
+            --text-dark: #2c2c2c;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0 0 65px 0; /* Space for bottom nav */
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+        /* Top Header */
+        header {
+            background-color: #fff;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo-area {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+        }
+        .logo-title {
+            font-size: 22px;
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1;
+        }
+        .logo-sub {
+            font-size: 10px;
+            color: #777;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        .header-icons {
+            display: flex;
+            gap: 15px;
+            font-size: 18px;
+            color: var(--primary);
+            align-items: center;
+        }
 
         /* Hero Banner */
-        .hero-banner { background: var(--dark); color: white; padding: 35px 20px; text-align: center; border-bottom: 3px solid var(--gold); }
-        .hero-banner h1 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--gold); margin-bottom: 10px; }
-        .hero-banner p { font-size: 13px; line-height: 1.5; color: #eee; margin-bottom: 15px; }
+        .hero {
+            background: linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%);
+            margin: 12px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+        }
+        .hero-content {
+            padding: 25px 20px;
+        }
+        .hero-tag {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--primary);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: var(--primary);
+            margin: 0 0 8px 0;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        .shop-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(92, 24, 36, 0.3);
+        }
 
-        /* Category Filter Tabs */
-        .category-tabs { display: flex; gap: 8px; overflow-x: auto; padding: 15px 10px; background: white; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.03); white-space: nowrap; }
-        .cat-btn { background: #f1f1f1; border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; color: #444; transition: 0.3s; }
-        .cat-btn.active, .cat-btn:hover { background: var(--primary); color: white; }
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin: 25px 0 15px 0;
+        }
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: var(--primary);
+            margin: 0;
+        }
+        .section-header p {
+            font-size: 11px;
+            color: #777;
+            margin-top: 3px;
+        }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        /* Gorgeous 4 Category Cards Grid */
+        .category-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            padding: 0 12px;
+            margin-bottom: 25px;
+        }
+        .cat-card {
+            border-radius: 14px;
+            padding: 18px 12px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .cat-card:active { transform: scale(0.97); }
+        
+        /* Category card specific soft pastel backgrounds */
+        .cat-saree { background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); border: 1px solid #f48fb1; }
+        .cat-suit { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border: 1px solid #a5d6a7; }
+        .cat-dupatta { background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%); border: 1px solid #b39ddb; }
+        .cat-gharara { background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border: 1px solid #ffe082; }
 
-        /* Product Grid */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
-        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; padding-bottom: 15px; border: 1px solid #eee; }
-        .card img { width: 100%; height: 220px; object-fit: cover; background: #eee; }
-        .card h3 { font-size: 14px; margin: 10px 5px; color: #333; }
-        .price-box { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
-        .price-box .discount { color: var(--primary); font-weight: bold; }
-        .price-box .regular { text-decoration: line-through; color: gray; font-size: 12px; }
+        .cat-icon-circle {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px auto;
+            color: var(--primary);
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+        .cat-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            color: var(--primary);
+            margin: 0 0 3px 0;
+        }
+        .cat-card p {
+            font-size: 10px;
+            color: #555;
+            margin: 0 0 10px 0;
+            line-height: 1.3;
+        }
+        .cat-arrow {
+            width: 26px;
+            height: 26px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+        }
 
-        .btn { padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; background: var(--primary); color: white; font-weight: bold; width: 90%; display: inline-block; box-sizing: border-box; text-decoration: none; font-size: 13px; }
+        /* Products Grid */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 12px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+            text-align: center;
+            padding-bottom: 12px;
+            border: 1px solid #eee;
+        }
+        .card img { width: 100%; height: 200px; object-fit: cover; background: #f9f9f9; }
+        .card h3 { font-size: 13px; margin: 8px 5px 4px 5px; color: #333; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .price-box { display: flex; justify-content: center; gap: 8px; margin-bottom: 8px; align-items: baseline; }
+        .price-box .discount { color: var(--primary); font-weight: 600; font-size: 14px; }
+        .price-box .regular { text-decoration: line-through; color: #888; font-size: 11px; }
+
+        .btn { padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; background: var(--primary); color: white; font-weight: 500; width: 90%; display: inline-block; box-sizing: border-box; text-decoration: none; font-size: 12px; }
         .btn.success { background: #25D366; }
         .btn.danger { background: #ff4444; width: auto; }
         .btn.info { background: #007bff; width: auto; }
 
-        /* Modals */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; }
-        .modal-content { background: white; width: 90%; max-width: 450px; padding: 20px; border-radius: 8px; position: relative; max-height: 90vh; overflow-y: auto; box-sizing: border-box; }
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #333; }
-        
-        .form-control { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Poppins', sans-serif; box-sizing: border-box; }
-
-        /* Admin Panel */
-        .admin-header { background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 20px; }
-        .admin-item { display: flex; flex-direction: column; background: white; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; gap: 8px; }
-        .admin-item-actions { display: flex; gap: 10px; }
-
-        footer { background: var(--dark); color: white; padding: 25px 20px; margin-top: 40px; border-top: 3px solid var(--gold); text-align: center; font-size: 13px; }
-        footer p { color: #ccc; line-height: 1.5; }
-
-        @media (min-width: 768px) {
-            .product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
-            .card img { height: 300px; }
-            .admin-item { flex-direction: row; justify-content: space-between; align-items: center; }
+        /* Trust Badges Bar */
+        .trust-bar {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            background: #fff;
+            padding: 15px 5px;
+            margin: 25px 12px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            text-align: center;
         }
+        .trust-item i { font-size: 16px; color: var(--primary); margin-bottom: 4px; }
+        .trust-item h4 { font-size: 10px; margin: 0; color: #333; font-weight: 600; }
+        .trust-item p { font-size: 8px; margin: 2px 0 0 0; color: #777; }
+
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+            z-index: 150;
+            border-top: 1px solid #eee;
+        }
+        .nav-item {
+            text-align: center;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 10px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            text-decoration: none;
+        }
+        .nav-item i { font-size: 18px; display: block; margin-bottom: 2px; }
+        .nav-item.active { color: var(--primary); font-weight: 600; }
+
+        /* Modals & Admin Panel */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 200; align-items: center; justify-content: center; }
+        .modal-content { background: white; width: 90%; max-width: 450px; padding: 20px; border-radius: 12px; position: relative; max-height: 90vh; overflow-y: auto; box-sizing: border-box; }
+        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 22px; cursor: pointer; color: #333; }
+        .form-control { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Poppins', sans-serif; box-sizing: border-box; font-size: 13px; }
+
+        .admin-header { background: var(--primary); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 20px; }
+        .admin-item { display: flex; flex-direction: column; background: white; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; gap: 8px; }
+        .admin-item-actions { display: flex; gap: 8px; }
+
+        footer { background: var(--primary); color: white; padding: 25px 15px; text-align: center; font-size: 12px; margin-top: 30px; }
+        footer p { color: #f0f0f0; line-height: 1.5; margin: 5px 0; }
     </style>
 </head>
 <body>
 
     <!-- Header -->
     <header>
-        <div class="logo-box" onclick="switchToCustomer()">
-            Zarafiya <span style="color:#222;">Fashion</span>
-            <div class="logo-sub">Banarasi & Ethnic Wear</div>
+        <div class="logo-area" onclick="goHome()">
+            <div class="logo-title">Zarafiya</div>
+            <div class="logo-sub">Fashion</div>
         </div>
-        <div class="nav-buttons">
-            <a href="https://wa.me/918887802046" target="_blank" class="wa-top-btn"><i class="fab fa-whatsapp"></i> Chat</a>
-            <button id="adminLoginBtn" class="admin-top-btn" onclick="openLoginModal()"><i class="fas fa-lock"></i> Admin</button>
+        <div class="header-icons">
+            <i class="fas fa-search" onclick="alert('Search feature coming soon!')"></i>
+            <div style="position: relative;" onclick="window.open('https://wa.me/918887802046', '_blank')">
+                <i class="fas fa-shopping-bag"></i>
+                <span style="position: absolute; top: -6px; right: -8px; background: var(--primary); color: white; font-size: 9px; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+            </div>
+            <i class="fas fa-bars" onclick="openLoginModal()" style="font-size: 16px;"></i>
         </div>
     </header>
 
-    <!-- Welcome Modal -->
-    <div id="welcomeModal" class="modal" style="display: flex;">
-        <div class="modal-content" style="text-align: center;">
-            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Zarafiya Fashion</h2>
-            <p style="font-size: 13px; color: #666; line-height: 1.5;">Welcome! Explore exclusive Banarasi Sarees, Ghararas, Suits & Dupattas directly from weavers.</p>
-            
-            <a href="https://wa.me/918887802046?text=Hello%20Zarafiya%20Fashion,%20I%20am%20opening%20your%20app%20and%20want%20to%20explore%20collection." target="_blank" class="btn success" style="display: block; width: 100%; padding: 12px; font-size: 15px; margin: 15px 0; text-decoration: none; box-sizing: border-box;" onclick="closeWelcome()">
-                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
-            </a>
-            
-            <button onclick="closeWelcome()" style="background: none; border: none; color: #888; text-decoration: underline; cursor: pointer; font-size: 13px;">Skip & View Catalog</button>
-        </div>
-    </div>
-
-    <!-- Customer View -->
+    <!-- Customer Home View -->
     <main id="customerView">
-        <section class="hero-banner">
-            <h1>हर धागे में बनारस की विरासत</h1>
-            <p>Exclusive Sarees, Ghararas, Suits & Dupattas directly from Varanasi weavers.</p>
+        <!-- Hero Banner -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-tag">Traditional &bull; Elegant &bull; Timeless</div>
+                <h1>Premium Banarasi Silk Sarees</h1>
+                <p>Elegance and Tradition in Every Thread. Handcrafted directly from Varanasi weavers.</p>
+                <button class="shop-btn" onclick="scrollToCollection()">Shop Now <i class="fas fa-arrow-right" style="font-size: 10px; margin-left: 4px;"></i></button>
+            </div>
         </section>
 
-        <!-- Category Filter Tabs -->
-        <div class="category-tabs">
-            <button class="cat-btn active" onclick="filterCategory('All', this)">All Collection</button>
-            <button class="cat-btn" onclick="filterCategory('Sarees', this)">Sarees</button>
-            <button class="cat-btn" onclick="filterCategory('Gharara', this)">Gharara</button>
-            <button class="cat-btn" onclick="filterCategory('Suit', this)">Suit</button>
-            <button class="cat-btn" onclick="filterCategory('Dupatta', this)">Dupatta</button>
+        <!-- Our Collection Header -->
+        <div class="section-header" id="collectionSection">
+            <h2>Our Collection</h2>
+            <p>Choose Your Style</p>
         </div>
 
+        <!-- 4 Gorgeous Category Showcase Cards (Like Screenshot) -->
+        <div class="category-showcase">
+            <div class="cat-card cat-saree" onclick="filterCategory('Sarees', this)">
+                <div class="cat-icon-circle"><i class="fas fa-female"></i></div>
+                <h3>Sarees</h3>
+                <p>Timeless Grace in Every Drape</p>
+                <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+            </div>
+            
+            <div class="cat-card cat-suit" onclick="filterCategory('Suit', this)">
+                <div class="cat-icon-circle"><i class="fas fa-tshirt"></i></div>
+                <h3>Suits</h3>
+                <p>Comfort Meets Elegance</p>
+                <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+            </div>
+
+            <div class="cat-card cat-dupatta" onclick="filterCategory('Dupatta', this)">
+                <div class="cat-icon-circle"><i class="fas fa-gift"></i></div>
+                <h3>Dupatta</h3>
+                <p>Complete Your Look</p>
+                <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+            </div>
+
+            <div class="cat-card cat-gharara" onclick="filterCategory('Gharara', this)">
+                <div class="cat-icon-circle"><i class="fas fa-star"></i></div>
+                <h3>Gharara</h3>
+                <p>Royal Look for Special Moments</p>
+                <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
+            </div>
+        </div>
+
+        <!-- Products Listing Section -->
         <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <h3 id="activeCatTitle" style="font-family: 'Playfair Display', serif; font-size: 16px; color: var(--primary); margin: 0;">All Collection</h3>
+                <span style="font-size: 11px; color: #888; cursor: pointer;" onclick="filterCategory('All', null)">View All</span>
+            </div>
             <div id="productGrid" class="product-grid">
-                <p style="text-align: center; width: 100%; grid-column: 1 / -1;">Loading products...</p>
+                <p style="text-align: center; width: 100%; grid-column: 1 / -1; color:#777;">Loading products...</p>
+            </div>
+        </div>
+
+        <!-- Trust Badges Bar -->
+        <div class="trust-bar">
+            <div class="trust-item">
+                <i class="fas fa-shipping-fast"></i>
+                <h4>Free Shipping</h4>
+                <p>On All Orders</p>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Secure Pay</h4>
+                <p>100% Safe</p>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-award"></i>
+                <h4>Premium Quality</h4>
+                <p>Handpicked Fabrics</p>
+            </div>
+            <div class="trust-item">
+                <i class="fas fa-headset"></i>
+                <h4>24/7 Support</h4>
+                <p>Here for You</p>
             </div>
         </div>
     </main>
@@ -128,27 +383,23 @@
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeLoginModal">&times;</span>
-            <h2>Admin Login</h2>
-            <input type="email" id="adminEmail" class="form-control" placeholder="Email">
+            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Admin Access</h2>
+            <p style="font-size: 12px; color: #666;">Enter admin credentials to manage products.</p>
+            <input type="email" id="adminEmail" class="form-control" placeholder="Admin Email">
             <input type="password" id="adminPassword" class="form-control" placeholder="Password">
-            <button id="loginBtn" class="btn" style="width: 100%;">Login</button>
+            <button id="loginBtn" class="btn" style="width: 100%; padding: 10px;">Login to Dashboard</button>
         </div>
     </div>
 
-    <!-- Admin Dashboard -->
+    <!-- Admin Dashboard View -->
     <main id="adminView" style="display: none;" class="container">
         <div class="admin-header">
-            <div>
-                <h2 style="margin: 0;">Admin Dashboard</h2>
-            </div>
-            <div style="display: flex; gap: 10px;">
-                <button class="btn info" onclick="switchToCustomer()" style="width: auto; padding: 6px 12px; font-size: 12px;"><i class="fas fa-home"></i> Home</button>
-                <button id="logoutBtn" class="btn danger" style="width: auto; padding: 6px 12px; font-size: 12px;">Logout</button>
-            </div>
+            <h2 style="margin: 0; font-size: 18px;">Admin Dashboard</h2>
+            <button id="logoutBtn" class="btn danger" style="padding: 5px 10px; font-size: 11px;">Logout</button>
         </div>
         
-        <div class="admin-panel" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 30px;">
-            <h3 id="formTitle" style="margin-top:0; color: var(--primary);">Add New Product</h3>
+        <div class="admin-panel" style="background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 25px;">
+            <h3 id="formTitle" style="margin-top:0; color: var(--primary); font-size: 15px;">Add New Product</h3>
             <form id="addProductForm">
                 <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
                 <input type="text" id="pImage" class="form-control" placeholder="Image URL (ImgBB Direct Link)" required>
@@ -158,27 +409,43 @@
                 <select id="pCategory" class="form-control" required>
                     <option value="">Select Category</option>
                     <option value="Sarees">Sarees</option>
-                    <option value="Gharara">Gharara</option>
                     <option value="Suit">Suit</option>
                     <option value="Dupatta">Dupatta</option>
+                    <option value="Gharara">Gharara</option>
                 </select>
 
                 <input type="text" id="pSku" class="form-control" placeholder="Product Code / SKU" required>
                 <textarea id="pDesc" class="form-control" placeholder="Description & Fabric Details" rows="3" required></textarea>
                 
-                <button type="submit" id="submitProductBtn" class="btn success" style="width: 100%;">Add Product to Database</button>
-                <button type="button" id="cancelEditBtn" class="btn danger" style="display: none; width: 100%; margin-top: 8px;">Cancel Edit</button>
+                <button type="submit" id="submitProductBtn" class="btn success" style="width: 100%; padding: 10px;">Add Product to Database</button>
+                <button type="button" id="cancelEditBtn" class="btn danger" style="display: none; width: 100%; margin-top: 8px; padding: 8px;">Cancel Edit</button>
             </form>
         </div>
         
-        <h3>Manage Products</h3>
+        <h3 style="font-size: 16px; color: var(--primary);">Manage Products</h3>
         <div id="adminProductList"></div>
     </main>
 
+    <!-- Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="goHome()">
+            <i class="fas fa-home"></i> Home
+        </button>
+        <button class="nav-item" onclick="scrollToCollection()">
+            <i class="fas fa-th-large"></i> Categories
+        </button>
+        <button class="nav-item" onclick="window.open('https://wa.me/918887802046?text=Hello%20Zarafiya%20Fashion', '_blank')">
+            <i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp
+        </button>
+        <button class="nav-item" onclick="handleAccountClick()">
+            <i class="fas fa-user-shield"></i> Account
+        </button>
+    </nav>
+
     <footer>
-        <h3>Zarafiya Fashion</h3>
-        <p>वाराणसी से, प्रीमियम एथनिक Wear — सीधे आपके घर तक。<br>WhatsApp: +91 88878 02046</p>
-        <p style="margin-bottom: 0; font-size: 11px;">&copy; 2026 Zarafiya Fashion. All rights reserved.</p>
+        <p><strong>Zarafiya Fashion</strong></p>
+        <p>Grace in Every Thread | Varanasi, UP</p>
+        <p style="font-size: 10px; color: #ccc; margin-top: 10px;">&copy; 2026 All rights reserved.</p>
     </footer>
 
     <!-- Firebase & App Logic -->
@@ -210,25 +477,47 @@
         const adminProductList = document.getElementById('adminProductList');
         const loginModal = document.getElementById('loginModal');
         const productModal = document.getElementById('productModal');
-        const welcomeModal = document.getElementById('welcomeModal');
 
-        window.closeWelcome = () => {
-            welcomeModal.style.display = 'none';
+        window.goHome = () => {
+            adminView.style.display = 'none';
+            customerView.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.scrollToCollection = () => {
+            document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
         window.openLoginModal = () => {
-            loginModal.style.display = 'flex';
+            if(auth.currentUser) {
+                adminView.style.display = 'block';
+                customerView.style.display = 'none';
+            } else {
+                loginModal.style.display = 'flex';
+            }
         }
 
-        window.switchToCustomer = () => {
-            adminView.style.display = 'none';
-            customerView.style.display = 'block';
+        window.handleAccountClick = () => {
+            if(auth.currentUser) {
+                adminView.style.display = 'block';
+                customerView.style.display = 'none';
+            } else {
+                loginModal.style.display = 'flex';
+            }
         }
 
         let allProducts = [];
         let currentCategory = 'All';
 
-        // Real-time Products Sync & Categories
+        // Keep session persistent and handle admin state automatically
+        onAuthStateChanged(auth, (user) => {
+            if(user && user.email) {
+                // If admin is logged in, they can toggle easily, but default start on home unless requested
+                console.log("Admin active:", user.email);
+            }
+        });
+
+        // Real-time Products Sync
         onSnapshot(collection(db, "products"), (snapshot) => {
             allProducts = [];
             snapshot.forEach((docSnap) => {
@@ -238,11 +527,11 @@
             renderAdminList();
         });
 
-        window.filterCategory = (cat, btnElement) => {
+        window.filterCategory = (cat, element) => {
             currentCategory = cat;
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-            btnElement.classList.add('active');
+            document.getElementById('activeCatTitle').innerText = cat === 'All' ? 'All Collection' : cat + ' Collection';
             renderProducts();
+            scrollToCollection();
         };
 
         function renderProducts() {
@@ -250,7 +539,7 @@
             let filtered = currentCategory === 'All' ? allProducts : allProducts.filter(p => p.category === currentCategory);
 
             if(filtered.length === 0) {
-                productGrid.innerHTML = "<p style='text-align:center; grid-column: 1/-1; color:#777;'>No products found in this category.</p>";
+                productGrid.innerHTML = "<p style='text-align:center; grid-column: 1/-1; color:#777; font-size:12px; padding:20px;'>No products found in this category.</p>";
                 return;
             }
 
@@ -273,7 +562,7 @@
         function renderAdminList() {
             adminProductList.innerHTML = "";
             if(allProducts.length === 0) {
-                adminProductList.innerHTML = "<p>No products in database.</p>";
+                adminProductList.innerHTML = "<p style='font-size:12px; color:#777;'>No products in database.</p>";
                 return;
             }
             allProducts.forEach((product) => {
@@ -282,18 +571,18 @@
                 adminItem.innerHTML = `
                     <div>
                         <strong>${product.name}</strong><br>
-                        <small>[${product.category}] SKU: ${product.sku} | ₹${product.discountPrice}</small>
+                        <small style="color:#666;">[${product.category}] SKU: ${product.sku} | ₹${product.discountPrice}</small>
                     </div>
                     <div class="admin-item-actions">
-                        <button class="btn info" onclick="editProduct('${product.id}')"><i class="fas fa-edit"></i> Edit</button>
-                        <button class="btn danger" onclick="deleteProduct('${product.id}')"><i class="fas fa-trash"></i> Delete</button>
+                        <button class="btn info" onclick="editProduct('${product.id}')" style="padding: 4px 8px; font-size: 11px;"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn danger" onclick="deleteProduct('${product.id}')" style="padding: 4px 8px; font-size: 11px;"><i class="fas fa-trash"></i> Delete</button>
                     </div>
                 `;
                 adminProductList.appendChild(adminItem);
             });
         }
 
-        // Add / Update Product
+        // Add / Update Product Logic
         let editingProductId = null;
         const submitProductBtn = document.getElementById('submitProductBtn');
         const cancelEditBtn = document.getElementById('cancelEditBtn');
@@ -383,7 +672,7 @@
 
         window.openProduct = async (id) => {
             productModal.style.display = 'flex';
-            document.getElementById('productDetailContent').innerHTML = "<p>Loading details...</p>";
+            document.getElementById('productDetailContent').innerHTML = "<p style='text-align:center;'>Loading details...</p>";
             try {
                 const docSnap = await getDoc(doc(db, "products", id));
                 if (docSnap.exists()) {
@@ -392,15 +681,15 @@
                     const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
 
                     document.getElementById('productDetailContent').innerHTML = `
-                        <img src="${p.image}" style="width:100%; max-height:350px; object-fit:cover; border-radius:8px; margin-bottom:12px;" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-                        <h2 style="margin: 0 0 5px 0; font-size:18px;">${p.name}</h2>
-                        <p style="margin: 0 0 8px 0; color: #666; font-size: 13px;"><strong>Category:</strong> ${p.category} | <strong>SKU:</strong> ${p.sku}</p>
-                        <div class="price-box" style="justify-content: flex-start; font-size: 20px; margin-bottom: 12px;">
-                            <span class="discount" style="color: #d81b60; font-weight: bold;">₹${p.discountPrice}</span>
-                            <span class="regular" style="text-decoration: line-through; color: gray; margin-left: 10px; font-size:15px;">₹${p.price}</span>
+                        <img src="${p.image}" style="width:100%; max-height:300px; object-fit:cover; border-radius:8px; margin-bottom:10px;" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                        <h2 style="margin: 0 0 4px 0; font-size:16px; color:var(--primary); font-family:'Playfair Display',serif;">${p.name}</h2>
+                        <p style="margin: 0 0 6px 0; color: #666; font-size: 11px;"><strong>Category:</strong> ${p.category} | <strong>SKU:</strong> ${p.sku}</p>
+                        <div class="price-box" style="justify-content: flex-start; font-size: 18px; margin-bottom: 10px;">
+                            <span class="discount" style="color: #5c1824; font-weight: 600;">₹${p.discountPrice}</span>
+                            <span class="regular" style="text-decoration: line-through; color: #888; margin-left: 8px; font-size:13px;">₹${p.price}</span>
                         </div>
-                        <p style="margin-bottom: 15px; line-height: 1.5; font-size: 13px;">${p.description}</p>
-                        <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:10px; font-size: 15px; text-decoration:none;">
+                        <p style="margin-bottom: 12px; line-height: 1.4; font-size: 12px; color:#444;">${p.description}</p>
+                        <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:10px; font-size: 14px; text-decoration:none;">
                             <i class="fab fa-whatsapp"></i> Order on WhatsApp
                         </a>
                     `;
@@ -410,7 +699,7 @@
             }
         };
 
-        // Admin Modals & Controls
+        // Admin Auth Modals
         document.getElementById('closeLoginModal').onclick = () => loginModal.style.display = 'none';
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
 
@@ -424,7 +713,6 @@
                 document.getElementById('adminPassword').value = "";
                 customerView.style.display = 'none';
                 adminView.style.display = 'block';
-                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-user-check"></i> Admin`;
             } catch(e) { alert("Login Failed: " + e.message); }
         };
 
@@ -432,7 +720,6 @@
             await signOut(auth);
             adminView.style.display = 'none';
             customerView.style.display = 'block';
-            document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-lock"></i> Admin`;
         };
     </script>
 </body>
