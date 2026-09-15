@@ -198,7 +198,6 @@
 
     <!-- JAVASCRIPT LOGIC -->
     <script type="module">
-        // Added 'updateDoc' here
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
@@ -338,7 +337,6 @@
                     submitProductBtn.className = "btn info";
                     cancelEditBtn.style.display = "block";
                     
-                    // Scroll to top to see the form
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             } catch(error) {
@@ -424,4 +422,6 @@
                 document.getElementById('adminEmail').value = "";
                 document.getElementById('adminPassword').value = "";
             } catch(e) { 
-                aler
+                alert("Login Failed: " + e.message); 
+            } finally {
+                btn.innerText
