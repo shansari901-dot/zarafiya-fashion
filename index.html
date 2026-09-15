@@ -4,115 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zarafiya Fashion | Premium Banarasi Sarees</title>
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    
-    <!-- YAHAN SE CSS (DESIGN) SHURU -->
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;600&display=swap');
-
-        :root {
-            --primary: #d81b60; /* Rose Pink */
-            --gold: #d4af37;
-            --dark: #222;
-            --light: #f8f9fa;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--light);
-            color: var(--dark);
-        }
-
-        header {
-            background-color: white;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: var(--primary);
-            font-weight: 600;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--dark);
-            margin-left: 15px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1610189012351-14022a94f6f7?auto=format&fit=crop&w=1200&q=80') center/cover;
-            color: white;
-            text-align: center;
-            padding: 60px 20px;
-        }
-
+        :root { --primary: #d81b60; --gold: #d4af37; --dark: #222; --light: #f8f9fa; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: var(--dark); }
+        header { background-color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--primary); font-weight: 600; }
+        nav a { text-decoration: none; color: var(--dark); margin-left: 15px; font-weight: 600; cursor: pointer; }
+        .hero { background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1610189012351-14022a94f6f7?auto=format&fit=crop&w=1200&q=80') center/cover; color: white; text-align: center; padding: 60px 20px; }
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); margin-bottom: 10px;}
-
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
         .section-title { text-align: center; margin-bottom: 30px; color: var(--primary); font-family: 'Playfair Display', serif; }
-
-        /* Product Grid */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 15px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            text-align: center;
-            padding-bottom: 15px;
-        }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; }
+        .card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: center; padding-bottom: 15px; }
         .card img { width: 100%; height: 220px; object-fit: cover; }
         .card h3 { font-size: 14px; margin: 10px 5px; color: #333;}
         .price-box { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px;}
         .price-box .discount { color: var(--primary); font-weight: bold; }
         .price-box .regular { text-decoration: line-through; color: gray; font-size: 12px; }
-
-        .btn {
-            padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer;
-            background: var(--primary); color: white; font-weight: bold; width: 90%;
-            display: inline-block; box-sizing: border-box; text-decoration: none;
-        }
-        .btn.success { background: #25D366; } /* WhatsApp Green */
+        .btn { padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; background: var(--primary); color: white; font-weight: bold; width: 90%; display: inline-block; box-sizing: border-box; text-decoration: none; }
+        .btn.success { background: #25D366; }
         .btn.danger { background: #ff4444; width: auto;}
         .btn.info { background: #007bff; width: auto;}
-
-        /* Modals */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; }
         .modal-content { background: white; width: 90%; max-width: 500px; padding: 20px; border-radius: 8px; position: relative; max-height: 90vh; overflow-y: auto; }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 24px; cursor: pointer; color: #333;}
-        
         .login-box input { width: 90%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
-        .login-box h2 { margin-top: 0; }
-
-        /* Admin Panel */
         .admin-header { background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 20px;}
         .admin-panel form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
         .admin-panel input, .admin-panel textarea { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Poppins', sans-serif;}
         .admin-item { display: flex; flex-direction: column; background: white; padding: 15px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; gap: 10px;}
-        .admin-item-header { display: flex; justify-content: space-between; align-items: flex-start; }
         .admin-item-actions { display: flex; gap: 10px; }
-
         footer { text-align: center; padding: 20px; background: var(--dark); color: white; margin-top: 40px; }
-
         @media (min-width: 768px) {
             .product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
             .card img { height: 300px; }
@@ -121,8 +45,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Navbar -->
     <header>
         <div class="logo">Zarafiya Fashion</div>
         <nav>
@@ -131,23 +53,19 @@
         </nav>
     </header>
 
-    <!-- Main Customer View -->
     <main id="customerView">
         <section class="hero">
             <h1>Premium Banarasi Silk Sarees</h1>
             <p>Elegance and Tradition in Every Thread</p>
         </section>
-        
         <div class="container">
             <h2 class="section-title">Our Collection</h2>
-            <!-- Real-time Products yahan aayenge -->
             <div id="productGrid" class="product-grid">
                 <p style="text-align: center; width: 100%; grid-column: 1 / -1;">Loading products...</p>
             </div>
         </div>
     </main>
 
-    <!-- Product Detail Modal -->
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeProductModal">&times;</span>
@@ -155,7 +73,6 @@
         </div>
     </div>
 
-    <!-- Admin Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content login-box">
             <span class="close-btn" id="closeLoginModal">&times;</span>
@@ -166,28 +83,25 @@
         </div>
     </div>
 
-    <!-- Admin Dashboard -->
     <main id="adminView" style="display: none;" class="container">
         <div class="admin-header">
             <h2 style="margin: 0;">Admin Dashboard</h2>
             <button id="logoutBtn" class="btn danger">Logout</button>
         </div>
-        
         <div class="admin-panel">
             <h3 id="formTitle">Add New Product</h3>
             <form id="addProductForm">
-                <input type="text" id="pName" placeholder="Product Name (e.g. Red Banarasi Saree)" required>
+                <input type="text" id="pName" placeholder="Product Name" required>
                 <input type="text" id="pImage" placeholder="Image URL (Link)" required>
-                <input type="number" id="pPrice" placeholder="Regular Price (e.g. 2500)" required>
-                <input type="number" id="pDiscount" placeholder="Discount Price (e.g. 1999)" required>
-                <input type="text" id="pCategory" placeholder="Category (e.g. Banarasi Silk)" required>
-                <input type="text" id="pSku" placeholder="Product Code / SKU (e.g. ZF-001)" required>
-                <textarea id="pDesc" placeholder="Description & Fabric Details" rows="3" required></textarea>
+                <input type="number" id="pPrice" placeholder="Regular Price" required>
+                <input type="number" id="pDiscount" placeholder="Discount Price" required>
+                <input type="text" id="pCategory" placeholder="Category" required>
+                <input type="text" id="pSku" placeholder="Product Code / SKU" required>
+                <textarea id="pDesc" placeholder="Description" rows="3" required></textarea>
                 <button type="submit" id="submitProductBtn" class="btn success" style="width: 100%;">Add Product to Database</button>
                 <button type="button" id="cancelEditBtn" class="btn danger" style="display: none; width: 100%;">Cancel Edit</button>
             </form>
         </div>
-        
         <h3>Manage Products</h3>
         <div id="adminProductList"></div>
     </main>
@@ -196,7 +110,6 @@
         <p>&copy; 2026 Zarafiya Fashion. All rights reserved.</p>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -213,7 +126,6 @@
         };
         
         const whatsappNumber = "918887802046";
-
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
@@ -225,13 +137,11 @@
         const loginModal = document.getElementById('loginModal');
         const productModal = document.getElementById('productModal');
         
-        // Edit Mode Variables
         let editingProductId = null;
         const submitProductBtn = document.getElementById('submitProductBtn');
         const cancelEditBtn = document.getElementById('cancelEditBtn');
         const formTitle = document.getElementById('formTitle');
 
-        // ==== REAL-TIME SYNC ====
         onSnapshot(collection(db, "products"), (snapshot) => {
             productGrid.innerHTML = "";
             adminProductList.innerHTML = "";
@@ -246,7 +156,6 @@
                 const product = docSnap.data();
                 const id = docSnap.id;
                 
-                // Customer Card
                 const card = document.createElement('div');
                 card.className = "card";
                 card.innerHTML = `
@@ -260,15 +169,12 @@
                 `;
                 productGrid.appendChild(card);
 
-                // Admin Item with Edit and Delete
                 const adminItem = document.createElement('div');
                 adminItem.className = "admin-item";
                 adminItem.innerHTML = `
-                    <div class="admin-item-header">
-                        <div>
-                            <strong>${product.name}</strong><br>
-                            <small>SKU: ${product.sku} | ₹${product.discountPrice}</small>
-                        </div>
+                    <div>
+                        <strong>${product.name}</strong><br>
+                        <small>SKU: ${product.sku} | ₹${product.discountPrice}</small>
                     </div>
                     <div class="admin-item-actions">
                         <button class="btn info" onclick="editProduct('${id}')"><i class="fas fa-edit"></i> Edit</button>
@@ -279,12 +185,10 @@
             });
         });
 
-        // ==== ADD / UPDATE PRODUCT ====
         document.getElementById('addProductForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             if(!auth.currentUser) return alert("Please login first!");
 
-            const originalText = submitProductBtn.innerText;
             submitProductBtn.innerText = "Saving...";
             submitProductBtn.disabled = true;
 
@@ -317,7 +221,6 @@
             }
         });
 
-        // ==== EDIT PRODUCT ====
         window.editProduct = async (id) => {
             try {
                 const docSnap = await getDoc(doc(db, "products", id));
@@ -336,7 +239,6 @@
                     submitProductBtn.innerText = "Update Product";
                     submitProductBtn.className = "btn info";
                     cancelEditBtn.style.display = "block";
-                    
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             } catch(error) {
@@ -344,7 +246,6 @@
             }
         };
 
-        // ==== CANCEL EDIT ====
         cancelEditBtn.onclick = resetForm;
 
         function resetForm() {
@@ -356,7 +257,6 @@
             cancelEditBtn.style.display = "none";
         }
 
-        // ==== DELETE PRODUCT ====
         window.deleteProduct = async (id) => {
             if(confirm("Are you sure you want to delete this product?")) {
                 try {
@@ -367,15 +267,11 @@
             }
         };
 
-        // ==== OPEN PRODUCT DETAILS ====
         window.openProduct = async (id) => {
             productModal.style.display = 'flex';
             document.getElementById('productDetailContent').innerHTML = "<p>Loading details...</p>";
-            
             try {
-                const docRef = doc(db, "products", id);
-                const docSnap = await getDoc(docRef);
-                
+                const docSnap = await getDoc(doc(db, "products", id));
                 if (docSnap.exists()) {
                     const p = docSnap.data();
                     const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
@@ -396,32 +292,38 @@
                     `;
                 }
             } catch(error) {
-                document.getElementById('productDetailContent').innerHTML = "<p>Error loading product details.</p>";
+                document.getElementById('productDetailContent').innerHTML = "<p>Error loading details.</p>";
             }
         };
 
-        // ==== AUTHENTICATION ====
         document.getElementById('adminLoginBtn').onclick = () => loginModal.style.display = 'flex';
         document.getElementById('closeLoginModal').onclick = () => loginModal.style.display = 'none';
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
-        
-        document.getElementById('homeBtn').onclick = () => {
-            customerView.style.display = 'block';
-            adminView.style.display = 'none';
-        };
+        document.getElementById('homeBtn').onclick = () => { customerView.style.display = 'block'; adminView.style.display = 'none'; };
 
         document.getElementById('loginBtn').onclick = async () => {
             const email = document.getElementById('adminEmail').value;
             const pass = document.getElementById('adminPassword').value;
-            const btn = document.getElementById('loginBtn');
-            btn.innerText = "Logging in...";
-            
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
                 loginModal.style.display = 'none';
-                document.getElementById('adminEmail').value = "";
-                document.getElementById('adminPassword').value = "";
-            } catch(e) { 
-                alert("Login Failed: " + e.message); 
-            } finally {
-                btn.innerText
+            } catch(e) { alert("Login Failed: " + e.message); }
+        };
+
+        document.getElementById('logoutBtn').onclick = () => signOut(auth);
+
+        onAuthStateChanged(auth, (user) => {
+            if(user) {
+                customerView.style.display = 'none';
+                adminView.style.display = 'block'; 
+                document.getElementById('adminLoginBtninnerHTML` = `<i class="fas fa-user-check"></i> Admin Active`;
+                loginModal.style.display = 'none';
+            } else {
+                customerView.style.display = 'block';
+                adminView.style.display = 'none';
+                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-lock"></i> Admin`;
+            }
+        });
+    </script>
+</body>
+</html>
