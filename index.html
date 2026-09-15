@@ -19,7 +19,7 @@
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
-            padding: 0 0 65px 0; /* Space for bottom nav */
+            padding: 0 0 65px 0;
             background-color: var(--bg-light);
             color: var(--text-dark);
         }
@@ -39,12 +39,12 @@
         .logo-area {
             text-align: center;
             font-family: 'Playfair Display', serif;
+            cursor: pointer;
         }
         .logo-title {
             font-size: 22px;
             color: var(--primary);
             font-weight: 700;
-            letter-spacing: 0.5px;
             line-height: 1;
         }
         .logo-sub {
@@ -60,6 +60,28 @@
             font-size: 18px;
             color: var(--primary);
             align-items: center;
+            cursor: pointer;
+        }
+
+        /* Search Bar Modal / Box */
+        .search-container {
+            display: none;
+            background: white;
+            padding: 10px 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 57px;
+            z-index: 99;
+        }
+        .search-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            box-sizing: border-box;
+            outline: none;
         }
 
         /* Hero Banner */
@@ -70,7 +92,6 @@
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.06);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            position: relative;
         }
         .hero-content {
             padding: 25px 20px;
@@ -125,7 +146,7 @@
             margin-top: 3px;
         }
 
-        /* Gorgeous 4 Category Cards Grid */
+        /* 4 Category Cards Grid */
         .category-showcase {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -145,7 +166,6 @@
         }
         .cat-card:active { transform: scale(0.97); }
         
-        /* Category card specific soft pastel backgrounds */
         .cat-saree { background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); border: 1px solid #f48fb1; }
         .cat-suit { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border: 1px solid #a5d6a7; }
         .cat-dupatta { background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%); border: 1px solid #b39ddb; }
@@ -199,6 +219,7 @@
             text-align: center;
             padding-bottom: 12px;
             border: 1px solid #eee;
+            cursor: pointer;
         }
         .card img { width: 100%; height: 200px; object-fit: cover; background: #f9f9f9; }
         .card h3 { font-size: 13px; margin: 8px 5px 4px 5px; color: #333; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -277,14 +298,19 @@
             <div class="logo-sub">Fashion</div>
         </div>
         <div class="header-icons">
-            <i class="fas fa-search" onclick="alert('Search feature coming soon!')"></i>
-            <div style="position: relative;" onclick="window.open('https://wa.me/918887802046', '_blank')">
+            <i class="fas fa-search" onclick="toggleSearchBox()"></i>
+            <div style="position: relative;" onclick="window.open('https://wa.me/918887802046?text=Hello%20Zarafiya%20Fashion,%20I%20want%20to%20enquire%20about%20my%20bag', '_blank')">
                 <i class="fas fa-shopping-bag"></i>
-                <span style="position: absolute; top: -6px; right: -8px; background: var(--primary); color: white; font-size: 9px; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
+                <span id="cartCount" style="position: absolute; top: -6px; right: -8px; background: var(--primary); color: white; font-size: 9px; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
             </div>
             <i class="fas fa-bars" onclick="openLoginModal()" style="font-size: 16px;"></i>
         </div>
     </header>
+
+    <!-- Search Box Bar -->
+    <div id="searchBox" class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by Saree name or SKU..." onkeyup="searchProducts()">
+    </div>
 
     <!-- Customer Home View -->
     <main id="customerView">
@@ -304,30 +330,30 @@
             <p>Choose Your Style</p>
         </div>
 
-        <!-- 4 Gorgeous Category Showcase Cards (Like Screenshot) -->
+        <!-- 4 Category Showcase Cards -->
         <div class="category-showcase">
-            <div class="cat-card cat-saree" onclick="filterCategory('Sarees', this)">
+            <div class="cat-card cat-saree" onclick="filterCategory('Sarees')">
                 <div class="cat-icon-circle"><i class="fas fa-female"></i></div>
                 <h3>Sarees</h3>
                 <p>Timeless Grace in Every Drape</p>
                 <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
             
-            <div class="cat-card cat-suit" onclick="filterCategory('Suit', this)">
+            <div class="cat-card cat-suit" onclick="filterCategory('Suit')">
                 <div class="cat-icon-circle"><i class="fas fa-tshirt"></i></div>
                 <h3>Suits</h3>
                 <p>Comfort Meets Elegance</p>
                 <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
 
-            <div class="cat-card cat-dupatta" onclick="filterCategory('Dupatta', this)">
+            <div class="cat-card cat-dupatta" onclick="filterCategory('Dupatta')">
                 <div class="cat-icon-circle"><i class="fas fa-gift"></i></div>
                 <h3>Dupatta</h3>
                 <p>Complete Your Look</p>
                 <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
             </div>
 
-            <div class="cat-card cat-gharara" onclick="filterCategory('Gharara', this)">
+            <div class="cat-card cat-gharara" onclick="filterCategory('Gharara')">
                 <div class="cat-icon-circle"><i class="fas fa-star"></i></div>
                 <h3>Gharara</h3>
                 <p>Royal Look for Special Moments</p>
@@ -339,7 +365,7 @@
         <div class="container">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                 <h3 id="activeCatTitle" style="font-family: 'Playfair Display', serif; font-size: 16px; color: var(--primary); margin: 0;">All Collection</h3>
-                <span style="font-size: 11px; color: #888; cursor: pointer;" onclick="filterCategory('All', null)">View All</span>
+                <span style="font-size: 11px; color: var(--primary); cursor: pointer; font-weight: 500;" onclick="filterCategory('All')">View All</span>
             </div>
             <div id="productGrid" class="product-grid">
                 <p style="text-align: center; width: 100%; grid-column: 1 / -1; color:#777;">Loading products...</p>
@@ -393,7 +419,7 @@
 
     <!-- Admin Dashboard View -->
     <main id="adminView" style="display: none;" class="container">
-        <div class="admin-header">
+        <div class="admin-header" style="margin-top: 15px;">
             <h2 style="margin: 0; font-size: 18px;">Admin Dashboard</h2>
             <button id="logoutBtn" class="btn danger" style="padding: 5px 10px; font-size: 11px;">Logout</button>
         </div>
@@ -485,13 +511,15 @@
         }
 
         window.scrollToCollection = () => {
+            customerView.style.display = 'block';
+            adminView.style.display = 'none';
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
         window.openLoginModal = () => {
             if(auth.currentUser) {
-                adminView.style.display = 'block';
                 customerView.style.display = 'none';
+                adminView.style.display = 'block';
             } else {
                 loginModal.style.display = 'flex';
             }
@@ -499,23 +527,21 @@
 
         window.handleAccountClick = () => {
             if(auth.currentUser) {
-                adminView.style.display = 'block';
                 customerView.style.display = 'none';
+                adminView.style.display = 'block';
             } else {
                 loginModal.style.display = 'flex';
             }
         }
 
+        window.toggleSearchBox = () => {
+            const box = document.getElementById('searchBox');
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+            if(box.style.display === 'block') document.getElementById('searchInput').focus();
+        }
+
         let allProducts = [];
         let currentCategory = 'All';
-
-        // Keep session persistent and handle admin state automatically
-        onAuthStateChanged(auth, (user) => {
-            if(user && user.email) {
-                // If admin is logged in, they can toggle easily, but default start on home unless requested
-                console.log("Admin active:", user.email);
-            }
-        });
 
         // Real-time Products Sync
         onSnapshot(collection(db, "products"), (snapshot) => {
@@ -523,29 +549,36 @@
             snapshot.forEach((docSnap) => {
                 allProducts.push({ id: docSnap.id, ...docSnap.data() });
             });
-            renderProducts();
+            renderProducts(allProducts);
             renderAdminList();
+            document.getElementById('cartCount').innerText = allProducts.length;
         });
 
-        window.filterCategory = (cat, element) => {
+        window.filterCategory = (cat) => {
             currentCategory = cat;
             document.getElementById('activeCatTitle').innerText = cat === 'All' ? 'All Collection' : cat + ' Collection';
-            renderProducts();
+            let filtered = cat === 'All' ? allProducts : allProducts.filter(p => p.category === cat);
+            renderProducts(filtered);
             scrollToCollection();
         };
 
-        function renderProducts() {
-            productGrid.innerHTML = "";
-            let filtered = currentCategory === 'All' ? allProducts : allProducts.filter(p => p.category === currentCategory);
+        window.searchProducts = () => {
+            let query = document.getElementById('searchInput').value.toLowerCase();
+            let filtered = allProducts.filter(p => p.name.toLowerCase().includes(query) || (p.sku && p.sku.toLowerCase().includes(query)));
+            renderProducts(filtered);
+        };
 
-            if(filtered.length === 0) {
-                productGrid.innerHTML = "<p style='text-align:center; grid-column: 1/-1; color:#777; font-size:12px; padding:20px;'>No products found in this category.</p>";
+        function renderProducts(productsArray) {
+            productGrid.innerHTML = "";
+            if(productsArray.length === 0) {
+                productGrid.innerHTML = "<p style='text-align:center; grid-column: 1/-1; color:#777; font-size:12px; padding:20px;'>No products found.</p>";
                 return;
             }
 
-            filtered.forEach((product) => {
+            productsArray.forEach((product) => {
                 const card = document.createElement('div');
                 card.className = "card";
+                card.onclick = () => openProduct(product.id);
                 card.innerHTML = `
                     <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
                     <h3>${product.name}</h3>
@@ -553,7 +586,7 @@
                         <span class="discount">₹${product.discountPrice}</span>
                         <span class="regular">₹${product.price}</span>
                     </div>
-                    <button class="btn" onclick="openProduct('${product.id}')">View Details</button>
+                    <button class="btn" onclick="event.stopPropagation(); openProduct('${product.id}')">View Details</button>
                 `;
                 productGrid.appendChild(card);
             });
@@ -695,7 +728,7 @@
                     `;
                 }
             } catch(error) {
-                document.getElementById('productDetailContent').innerHTML = "<p>Error loading details.</p>";
+                document.getElementById('productModal').style.display = 'none';
             }
         };
 
@@ -723,4 +756,4 @@
         };
     </script>
 </body>
-</html>
+    </html>
