@@ -199,11 +199,27 @@
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
         // ==========================================
-        // 🔴🔴 STEP 1: APNA FIREBASE CONFIG YAHAN DAALEIN 🔴🔴
-        // ==========================================
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY_HERE",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+        // // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBL8tiQZOGPNsOxVGMB5Hbs_YhpSmqwFJQ",
+  authDomain: "zarafiya-fashion.firebaseapp.com",
+  projectId: "zarafiya-fashion",
+  storageBucket: "zarafiya-fashion.firebasestorage.app",
+  messagingSenderId: "1022372302059",
+  appId: "1:1022372302059:web:846bd4aa38baf866fdc2ae",
+  measurementId: "G-0JVFNYZSF6"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
             projectId: "YOUR_PROJECT_ID",
             storageBucket: "YOUR_PROJECT_ID.appspot.com",
             messagingSenderId: "YOUR_SENDER_ID",
