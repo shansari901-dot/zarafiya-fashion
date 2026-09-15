@@ -63,7 +63,7 @@
             cursor: pointer;
         }
 
-        /* Search Bar Modal / Box */
+        /* Search Bar */
         .search-container {
             display: none;
             background: white;
@@ -221,13 +221,15 @@
             border: 1px solid #eee;
             cursor: pointer;
         }
-        .card img { width: 100%; height: 200px; object-fit: cover; background: #f9f9f9; }
+        .card img { width: 100%; height: 180px; object-fit: cover; background: #f9f9f9; }
         .card h3 { font-size: 13px; margin: 8px 5px 4px 5px; color: #333; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .price-box { display: flex; justify-content: center; gap: 8px; margin-bottom: 8px; align-items: baseline; }
         .price-box .discount { color: var(--primary); font-weight: 600; font-size: 14px; }
         .price-box .regular { text-decoration: line-through; color: #888; font-size: 11px; }
 
-        .btn { padding: 6px 12px; border: none; border-radius: 6px; cursor: pointer; background: var(--primary); color: white; font-weight: 500; width: 90%; display: inline-block; box-sizing: border-box; text-decoration: none; font-size: 12px; }
+        .btn-group { display: flex; flex-direction: column; gap: 5px; align-items: center; }
+        .btn { padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer; background: var(--primary); color: white; font-weight: 500; width: 90%; display: inline-block; box-sizing: border-box; text-decoration: none; font-size: 11px; }
+        .btn.cart-btn { background: #222; }
         .btn.success { background: #25D366; }
         .btn.danger { background: #ff4444; width: auto; }
         .btn.info { background: #007bff; width: auto; }
@@ -275,11 +277,14 @@
         .nav-item i { font-size: 18px; display: block; margin-bottom: 2px; }
         .nav-item.active { color: var(--primary); font-weight: 600; }
 
-        /* Modals & Admin Panel */
+        /* Modals & Cart Drawer */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 200; align-items: center; justify-content: center; }
         .modal-content { background: white; width: 90%; max-width: 450px; padding: 20px; border-radius: 12px; position: relative; max-height: 90vh; overflow-y: auto; box-sizing: border-box; }
         .close-btn { position: absolute; right: 15px; top: 10px; font-size: 22px; cursor: pointer; color: #333; }
         .form-control { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Poppins', sans-serif; box-sizing: border-box; font-size: 13px; }
+
+        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 8px 0; font-size: 12px; }
+        .cart-item img { width: 45px; height: 45px; object-fit: cover; border-radius: 4px; }
 
         .admin-header { background: var(--primary); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 20px; }
         .admin-item { display: flex; flex-direction: column; background: white; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; gap: 8px; }
@@ -299,7 +304,7 @@
         </div>
         <div class="header-icons">
             <i class="fas fa-search" onclick="toggleSearchBox()"></i>
-            <div style="position: relative;" onclick="window.open('https://wa.me/918887802046?text=Hello%20Zarafiya%20Fashion,%20I%20want%20to%20enquire%20about%20my%20bag', '_blank')">
+            <div style="position: relative;" onclick="openCartModal()">
                 <i class="fas fa-shopping-bag"></i>
                 <span id="cartCount" style="position: absolute; top: -6px; right: -8px; background: var(--primary); color: white; font-size: 9px; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
             </div>
@@ -314,7 +319,6 @@
 
     <!-- Customer Home View -->
     <main id="customerView">
-        <!-- Hero Banner -->
         <section class="hero">
             <div class="hero-content">
                 <div class="hero-tag">Traditional &bull; Elegant &bull; Timeless</div>
@@ -324,13 +328,11 @@
             </div>
         </section>
 
-        <!-- Our Collection Header -->
         <div class="section-header" id="collectionSection">
             <h2>Our Collection</h2>
             <p>Choose Your Style</p>
         </div>
 
-        <!-- 4 Category Showcase Cards -->
         <div class="category-showcase">
             <div class="cat-card cat-saree" onclick="filterCategory('Sarees')">
                 <div class="cat-icon-circle"><i class="fas fa-female"></i></div>
@@ -361,7 +363,6 @@
             </div>
         </div>
 
-        <!-- Products Listing Section -->
         <div class="container">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                 <h3 id="activeCatTitle" style="font-family: 'Playfair Display', serif; font-size: 16px; color: var(--primary); margin: 0;">All Collection</h3>
@@ -372,28 +373,11 @@
             </div>
         </div>
 
-        <!-- Trust Badges Bar -->
         <div class="trust-bar">
-            <div class="trust-item">
-                <i class="fas fa-shipping-fast"></i>
-                <h4>Free Shipping</h4>
-                <p>On All Orders</p>
-            </div>
-            <div class="trust-item">
-                <i class="fas fa-shield-alt"></i>
-                <h4>Secure Pay</h4>
-                <p>100% Safe</p>
-            </div>
-            <div class="trust-item">
-                <i class="fas fa-award"></i>
-                <h4>Premium Quality</h4>
-                <p>Handpicked Fabrics</p>
-            </div>
-            <div class="trust-item">
-                <i class="fas fa-headset"></i>
-                <h4>24/7 Support</h4>
-                <p>Here for You</p>
-            </div>
+            <div class="trust-item"><i class="fas fa-shipping-fast"></i><h4>Free Shipping</h4><p>On All Orders</p></div>
+            <div class="trust-item"><i class="fas fa-shield-alt"></i><h4>Secure Pay</h4><p>100% Safe</p></div>
+            <div class="trust-item"><i class="fas fa-award"></i><h4>Premium Quality</h4><p>Handpicked Fabrics</p></div>
+            <div class="trust-item"><i class="fas fa-headset"></i><h4>24/7 Support</h4><p>Here for You</p></div>
         </div>
     </main>
 
@@ -402,6 +386,24 @@
         <div class="modal-content">
             <span class="close-btn" id="closeProductModal">&times;</span>
             <div id="productDetailContent"></div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="document.getElementById('cartModal').style.display='none'">&times;</span>
+            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Your Shopping Bag</h3>
+            <div id="cartItemsList" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;">
+                <p style="text-align: center; font-size: 12px; color: #777;">Your cart is empty.</p>
+            </div>
+            <div style="border-top: 1px solid #ddd; padding-top: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; font-weight: 600;">
+                <span>Total:</span>
+                <span id="cartTotalPrice">₹0</span>
+            </div>
+            <button onclick="checkoutWhatsApp()" class="btn success" style="width: 100%; padding: 10px; font-size: 14px;">
+                <i class="fab fa-whatsapp"></i> Order Cart via WhatsApp
+            </button>
         </div>
     </div>
 
@@ -460,8 +462,8 @@
         <button class="nav-item" onclick="scrollToCollection()">
             <i class="fas fa-th-large"></i> Categories
         </button>
-        <button class="nav-item" onclick="window.open('https://wa.me/918887802046?text=Hello%20Zarafiya%20Fashion', '_blank')">
-            <i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp
+        <button class="nav-item" onclick="openCartModal()">
+            <i class="fas fa-shopping-bag"></i> Cart
         </button>
         <button class="nav-item" onclick="handleAccountClick()">
             <i class="fas fa-user-shield"></i> Account
@@ -503,6 +505,9 @@
         const adminProductList = document.getElementById('adminProductList');
         const loginModal = document.getElementById('loginModal');
         const productModal = document.getElementById('productModal');
+        const cartModal = document.getElementById('cartModal');
+
+        let cart = [];
 
         window.goHome = () => {
             adminView.style.display = 'none';
@@ -540,10 +545,65 @@
             if(box.style.display === 'block') document.getElementById('searchInput').focus();
         }
 
+        window.openCartModal = () => {
+            renderCartItems();
+            cartModal.style.display = 'flex';
+        }
+
+        window.addToCart = (id, name, price, image) => {
+            cart.push({ id, name, price, image });
+            document.getElementById('cartCount').innerText = cart.length;
+            alert(name + " added to Cart!");
+        }
+
+        function renderCartItems() {
+            const list = document.getElementById('cartItemsList');
+            const totalBox = document.getElementById('cartTotalPrice');
+            list.innerHTML = "";
+            
+            if(cart.length === 0) {
+                list.innerHTML = "<p style='text-align: center; font-size: 12px; color: #777;'>Your cart is empty.</p>";
+                totalBox.innerText = "₹0";
+                return;
+            }
+
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += Number(item.price);
+                list.innerHTML += `
+                    <div class="cart-item">
+                        <img src="${item.image}">
+                        <div style="flex:1; margin-left:10px;">
+                            <strong>${item.name}</strong><br>₹${item.price}
+                        </div>
+                        <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
+                    </div>
+                `;
+            });
+            totalBox.innerText = "₹" + total;
+        }
+
+        window.removeFromCart = (index) => {
+            cart.splice(index, 1);
+            document.getElementById('cartCount').innerText = cart.length;
+            renderCartItems();
+        }
+
+        window.checkoutWhatsApp = () => {
+            if(cart.length === 0) return alert("Your cart is empty!");
+            let msg = "Hello Zarafiya Fashion, I want to order the following items:%0A%0A";
+            let total = 0;
+            cart.forEach((item, i) => {
+                msg += `${i+1}. *${item.name}* - ₹${item.price}%0A`;
+                total += Number(item.price);
+            });
+            msg += `%0A*Total Amount: ₹${total}*`;
+            window.open(`https://wa.me/${whatsappNumber}?text=${msg}`, '_blank');
+        }
+
         let allProducts = [];
         let currentCategory = 'All';
 
-        // Real-time Products Sync
         onSnapshot(collection(db, "products"), (snapshot) => {
             allProducts = [];
             snapshot.forEach((docSnap) => {
@@ -551,7 +611,6 @@
             });
             renderProducts(allProducts);
             renderAdminList();
-            document.getElementById('cartCount').innerText = allProducts.length;
         });
 
         window.filterCategory = (cat) => {
@@ -578,15 +637,17 @@
             productsArray.forEach((product) => {
                 const card = document.createElement('div');
                 card.className = "card";
-                card.onclick = () => openProduct(product.id);
                 card.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
-                    <h3>${product.name}</h3>
-                    <div class="price-box">
+                    <img src="${product.image}" alt="${product.name}" onclick="openProduct('${product.id}')" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
+                    <h3 onclick="openProduct('${product.id}')">${product.name}</h3>
+                    <div class="price-box" onclick="openProduct('${product.id}')">
                         <span class="discount">₹${product.discountPrice}</span>
                         <span class="regular">₹${product.price}</span>
                     </div>
-                    <button class="btn" onclick="event.stopPropagation(); openProduct('${product.id}')">View Details</button>
+                    <div class="btn-group">
+                        <button class="btn" onclick="openProduct('${product.id}')">View Details</button>
+                        <button class="btn cart-btn" onclick="addToCart('${product.id}', '${product.name}', ${product.discountPrice}, '${product.image}')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                    </div>
                 `;
                 productGrid.appendChild(card);
             });
@@ -615,7 +676,6 @@
             });
         }
 
-        // Add / Update Product Logic
         let editingProductId = null;
         const submitProductBtn = document.getElementById('submitProductBtn');
         const cancelEditBtn = document.getElementById('cancelEditBtn');
@@ -722,8 +782,9 @@
                             <span class="regular" style="text-decoration: line-through; color: #888; margin-left: 8px; font-size:13px;">₹${p.price}</span>
                         </div>
                         <p style="margin-bottom: 12px; line-height: 1.4; font-size: 12px; color:#444;">${p.description}</p>
+                        <button class="btn cart-btn" onclick="addToCart('${id}', '${p.name}', ${p.discountPrice}, '${p.image}')" style="width:100%; margin-bottom:8px; padding:10px;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
                         <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:10px; font-size: 14px; text-decoration:none;">
-                            <i class="fab fa-whatsapp"></i> Order on WhatsApp
+                            <i class="fab fa-whatsapp"></i> Direct Order on WhatsApp
                         </a>
                     `;
                 }
@@ -732,7 +793,6 @@
             }
         };
 
-        // Admin Auth Modals
         document.getElementById('closeLoginModal').onclick = () => loginModal.style.display = 'none';
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
 
@@ -756,4 +816,4 @@
         };
     </script>
 </body>
-    </html>
+</html>
