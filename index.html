@@ -93,6 +93,7 @@
         }
         .btn.success { background: #25D366; } /* WhatsApp Green */
         .btn.danger { background: #ff4444; width: auto;}
+        .btn.info { background: #007bff; width: auto;}
 
         /* Modals */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 200; align-items: center; justify-content: center; }
@@ -106,13 +107,16 @@
         .admin-header { background: var(--dark); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px; margin-bottom: 20px;}
         .admin-panel form { display: flex; flex-direction: column; gap: 10px; margin-bottom: 30px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
         .admin-panel input, .admin-panel textarea { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-family: 'Poppins', sans-serif;}
-        .admin-item { display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px;}
+        .admin-item { display: flex; flex-direction: column; background: white; padding: 15px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 4px; gap: 10px;}
+        .admin-item-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .admin-item-actions { display: flex; gap: 10px; }
 
         footer { text-align: center; padding: 20px; background: var(--dark); color: white; margin-top: 40px; }
 
         @media (min-width: 768px) {
             .product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
             .card img { height: 300px; }
+            .admin-item { flex-direction: row; justify-content: space-between; align-items: center; }
         }
     </style>
 </head>
@@ -143,7 +147,7 @@
         </div>
     </main>
 
-    <!-- Product Detail Modal (Customer click karne par khulega) -->
+    <!-- Product Detail Modal -->
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeProductModal">&times;</span>
@@ -162,7 +166,7 @@
         </div>
     </div>
 
-    <!-- Admin Dashboard (Normal users se chupa rahega) -->
+    <!-- Admin Dashboard -->
     <main id="adminView" style="display: none;" class="container">
         <div class="admin-header">
             <h2 style="margin: 0;">Admin Dashboard</h2>
@@ -170,7 +174,7 @@
         </div>
         
         <div class="admin-panel">
-            <h3>Add New Product</h3>
+            <h3 id="formTitle">Add New Product</h3>
             <form id="addProductForm">
                 <input type="text" id="pName" placeholder="Product Name (e.g. Red Banarasi Saree)" required>
                 <input type="text" id="pImage" placeholder="Image URL (Link)" required>
@@ -179,7 +183,8 @@
                 <input type="text" id="pCategory" placeholder="Category (e.g. Banarasi Silk)" required>
                 <input type="text" id="pSku" placeholder="Product Code / SKU (e.g. ZF-001)" required>
                 <textarea id="pDesc" placeholder="Description & Fabric Details" rows="3" required></textarea>
-                <button type="submit" class="btn success" style="width: 100%;">Add Product to Database</button>
+                <button type="submit" id="submitProductBtn" class="btn success" style="width: 100%;">Add Product to Database</button>
+                <button type="button" id="cancelEditBtn" class="btn danger" style="display: none; width: 100%;">Cancel Edit</button>
             </form>
         </div>
         
@@ -191,44 +196,43 @@
         <p>&copy; 2026 Zarafiya Fashion. All rights reserved.</p>
     </footer>
 
-    <!-- YAHAN SE JAVASCRIPT (FIREBASE LOGIC) SHURU -->
+    <!-- JAVASCRIPT LOGIC -->
     <script type="module">
-        // Firebase SDKs Import
+        // Added 'updateDoc' here
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
-        // ==========================================
+        const firebaseConfig = {
+          apiKey: "AIzaSyBL8tiQZOGPNsOxVGMB5Hbs_YhpSmqwFJQ",
+          authDomain: "zarafiya-fashion.firebaseapp.com",
+          projectId: "zarafiya-fashion",
+          storageBucket: "zarafiya-fashion.firebasestorage.app",
+          messagingSenderId: "1022372302059",
+          appId: "1:1022372302059:web:846bd4aa38baf866fdc2ae",
+          measurementId: "G-0JVFNYZSF6"
+        };
         
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyBL8tiQZOGPNsOxVGMB5Hbs_YhpSmqwFJQ",
-  authDomain: "zarafiya-fashion.firebaseapp.com",
-  projectId: "zarafiya-fashion",
-  storageBucket: "zarafiya-fashion.firebasestorage.app",
-  messagingSenderId: "1022372302059",
-  appId: "1:1022372302059:web:846bd4aa38baf866fdc2ae",
-  measurementId: "G-0JVFNYZSF6"
-};
-        // ==========================================
-        // 🔴🔴 STEP 2: APNA WHATSAPP NUMBER YAHAN DAALEIN 🔴🔴
-        // ==========================================
-        const whatsappNumber = "918887802046"; // Bina '+' ke, country code ke sath
+        const whatsappNumber = "918887802046";
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // DOM Elements
         const customerView = document.getElementById('customerView');
         const adminView = document.getElementById('adminView');
         const productGrid = document.getElementById('productGrid');
         const adminProductList = document.getElementById('adminProductList');
         const loginModal = document.getElementById('loginModal');
         const productModal = document.getElementById('productModal');
+        
+        // Edit Mode Variables
+        let editingProductId = null;
+        const submitProductBtn = document.getElementById('submitProductBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        const formTitle = document.getElementById('formTitle');
 
-        // ==== REAL-TIME SYNC (CENTRAL DATABASE SE LIVE UPDATE) ====
+        // ==== REAL-TIME SYNC ====
         onSnapshot(collection(db, "products"), (snapshot) => {
             productGrid.innerHTML = "";
             adminProductList.innerHTML = "";
@@ -243,7 +247,7 @@ const firebaseConfig = {
                 const product = docSnap.data();
                 const id = docSnap.id;
                 
-                // 1. Customer Frontend Card
+                // Customer Card
                 const card = document.createElement('div');
                 card.className = "card";
                 card.innerHTML = `
@@ -257,55 +261,106 @@ const firebaseConfig = {
                 `;
                 productGrid.appendChild(card);
 
-                // 2. Admin List Item
+                // Admin Item with Edit and Delete
                 const adminItem = document.createElement('div');
                 adminItem.className = "admin-item";
                 adminItem.innerHTML = `
-                    <div>
-                        <strong>${product.name}</strong><br>
-                        <small>SKU: ${product.sku} | ₹${product.discountPrice}</small>
+                    <div class="admin-item-header">
+                        <div>
+                            <strong>${product.name}</strong><br>
+                            <small>SKU: ${product.sku} | ₹${product.discountPrice}</small>
+                        </div>
                     </div>
-                    <button class="btn danger" onclick="deleteProduct('${id}')"><i class="fas fa-trash"></i> Delete</button>
+                    <div class="admin-item-actions">
+                        <button class="btn info" onclick="editProduct('${id}')"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn danger" onclick="deleteProduct('${id}')"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
                 `;
                 adminProductList.appendChild(adminItem);
             });
         });
 
-        // ==== ADD PRODUCT TO DATABASE ====
+        // ==== ADD / UPDATE PRODUCT ====
         document.getElementById('addProductForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             if(!auth.currentUser) return alert("Please login first!");
 
-            const submitBtn = e.target.querySelector('button');
-            submitBtn.innerText = "Adding...";
-            submitBtn.disabled = true;
+            const originalText = submitProductBtn.innerText;
+            submitProductBtn.innerText = "Saving...";
+            submitProductBtn.disabled = true;
 
-            const newProduct = {
+            const productData = {
                 name: document.getElementById('pName').value,
                 image: document.getElementById('pImage').value,
                 price: Number(document.getElementById('pPrice').value),
                 discountPrice: Number(document.getElementById('pDiscount').value),
                 category: document.getElementById('pCategory').value,
                 sku: document.getElementById('pSku').value,
-                description: document.getElementById('pDesc').value,
-                createdAt: new Date()
+                description: document.getElementById('pDesc').value
             };
 
             try {
-                await addDoc(collection(db, "products"), newProduct);
-                alert("Product Added Successfully to Database!");
-                document.getElementById('addProductForm').reset();
+                if (editingProductId) {
+                    await updateDoc(doc(db, "products", editingProductId), productData);
+                    alert("Product Updated Successfully!");
+                    resetForm();
+                } else {
+                    productData.createdAt = new Date();
+                    await addDoc(collection(db, "products"), productData);
+                    alert("Product Added Successfully to Database!");
+                    document.getElementById('addProductForm').reset();
+                }
             } catch (error) {
-                alert("Error adding product: " + error.message);
+                alert("Error saving product: " + error.message);
             } finally {
-                submitBtn.innerText = "Add Product to Database";
-                submitBtn.disabled = false;
+                submitProductBtn.innerText = editingProductId ? "Update Product" : "Add Product to Database";
+                submitProductBtn.disabled = false;
             }
         });
 
-        // ==== DELETE PRODUCT (Global Function) ====
+        // ==== EDIT PRODUCT ====
+        window.editProduct = async (id) => {
+            try {
+                const docSnap = await getDoc(doc(db, "products", id));
+                if (docSnap.exists()) {
+                    const p = docSnap.data();
+                    document.getElementById('pName').value = p.name;
+                    document.getElementById('pImage').value = p.image;
+                    document.getElementById('pPrice').value = p.price;
+                    document.getElementById('pDiscount').value = p.discountPrice;
+                    document.getElementById('pCategory').value = p.category;
+                    document.getElementById('pSku').value = p.sku;
+                    document.getElementById('pDesc').value = p.description;
+                    
+                    editingProductId = id;
+                    formTitle.innerText = "Edit Product";
+                    submitProductBtn.innerText = "Update Product";
+                    submitProductBtn.className = "btn info";
+                    cancelEditBtn.style.display = "block";
+                    
+                    // Scroll to top to see the form
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            } catch(error) {
+                alert("Error loading product: " + error.message);
+            }
+        };
+
+        // ==== CANCEL EDIT ====
+        cancelEditBtn.onclick = resetForm;
+
+        function resetForm() {
+            editingProductId = null;
+            document.getElementById('addProductForm').reset();
+            formTitle.innerText = "Add New Product";
+            submitProductBtn.innerText = "Add Product to Database";
+            submitProductBtn.className = "btn success";
+            cancelEditBtn.style.display = "none";
+        }
+
+        // ==== DELETE PRODUCT ====
         window.deleteProduct = async (id) => {
-            if(confirm("Are you sure you want to delete this product from ALL devices?")) {
+            if(confirm("Are you sure you want to delete this product?")) {
                 try {
                     await deleteDoc(doc(db, "products", id));
                 } catch(error) {
@@ -314,7 +369,7 @@ const firebaseConfig = {
             }
         };
 
-        // ==== OPEN PRODUCT DETAILS & WHATSAPP (Global Function) ====
+        // ==== OPEN PRODUCT DETAILS ====
         window.openProduct = async (id) => {
             productModal.style.display = 'flex';
             document.getElementById('productDetailContent').innerHTML = "<p>Loading details...</p>";
@@ -347,7 +402,7 @@ const firebaseConfig = {
             }
         };
 
-        // ==== AUTHENTICATION (Login / Logout / Security) ====
+        // ==== AUTHENTICATION ====
         document.getElementById('adminLoginBtn').onclick = () => loginModal.style.display = 'flex';
         document.getElementById('closeLoginModal').onclick = () => loginModal.style.display = 'none';
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
@@ -369,27 +424,4 @@ const firebaseConfig = {
                 document.getElementById('adminEmail').value = "";
                 document.getElementById('adminPassword').value = "";
             } catch(e) { 
-                alert("Login Failed: " + e.message); 
-            } finally {
-                btn.innerText = "Login";
-            }
-        };
-
-        document.getElementById('logoutBtn').onclick = () => signOut(auth);
-
-        // Security: Check if admin is logged in, hide/show panels accordingly
-        onAuthStateChanged(auth, (user) => {
-            if(user) {
-                customerView.style.display = 'none';
-                adminView.style.display = 'block'; 
-                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-user-check"></i> Admin Active`;
-                loginModal.style.display = 'none';
-            } else {
-                customerView.style.display = 'block';
-                adminView.style.display = 'none';
-                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-lock"></i> Admin`;
-            }
-        });
-    </script>
-</body>
-</html>
+                aler
