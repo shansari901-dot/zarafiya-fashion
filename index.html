@@ -11,7 +11,7 @@
         body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background-color: var(--light); color: #222; }
         
         header { background-color: white; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100; }
-        .logo-box { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--primary); font-weight: 600; line-height: 1.1; }
+        .logo-box { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--primary); font-weight: 600; line-height: 1.1; cursor: pointer; }
         .logo-sub { font-size: 13px; color: var(--gold); }
         .nav-buttons { display: flex; gap: 8px; align-items: center; }
         .wa-top-btn { background: #25D366; color: white; padding: 6px 10px; border-radius: 4px; text-decoration: none; font-size: 12px; font-weight: 600; }
@@ -69,24 +69,24 @@
 
     <!-- Header -->
     <header>
-        <div class="logo-box">
+        <div class="logo-box" onclick="switchToCustomer()">
             Zarafiya <span style="color:#222;">Fashion</span>
             <div class="logo-sub">Banarasi & Ethnic Wear</div>
         </div>
         <div class="nav-buttons">
             <a href="https://wa.me/918887802046" target="_blank" class="wa-top-btn"><i class="fab fa-whatsapp"></i> Chat</a>
-            <button id="adminLoginBtn" class="admin-top-btn"><i class="fas fa-lock"></i> Admin</button>
+            <button id="adminLoginBtn" class="admin-top-btn" onclick="openLoginModal()"><i class="fas fa-lock"></i> Admin</button>
         </div>
     </header>
 
-    <!-- Welcome / WhatsApp Login Modal (First Time Open) -->
+    <!-- Welcome Modal -->
     <div id="welcomeModal" class="modal" style="display: flex;">
         <div class="modal-content" style="text-align: center;">
             <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Zarafiya Fashion</h2>
             <p style="font-size: 13px; color: #666; line-height: 1.5;">Welcome! Explore exclusive Banarasi Sarees, Ghararas, Suits & Dupattas directly from weavers.</p>
             
             <a href="https://wa.me/918887802046?text=Hello%20Zarafiya%20Fashion,%20I%20am%20opening%20your%20app%20and%20want%20to%20explore%20collection." target="_blank" class="btn success" style="display: block; width: 100%; padding: 12px; font-size: 15px; margin: 15px 0; text-decoration: none; box-sizing: border-box;" onclick="closeWelcome()">
-                <i class="fab fa-whatsapp"></i> Continue with WhatsApp
+                <i class="fab fa-whatsapp"></i> Chat on WhatsApp
             </a>
             
             <button onclick="closeWelcome()" style="background: none; border: none; color: #888; text-decoration: underline; cursor: pointer; font-size: 13px;">Skip & View Catalog</button>
@@ -138,8 +138,13 @@
     <!-- Admin Dashboard -->
     <main id="adminView" style="display: none;" class="container">
         <div class="admin-header">
-            <h2 style="margin: 0;">Admin Dashboard</h2>
-            <button id="logoutBtn" class="btn danger">Logout</button>
+            <div>
+                <h2 style="margin: 0;">Admin Dashboard</h2>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn info" onclick="switchToCustomer()" style="width: auto; padding: 6px 12px; font-size: 12px;"><i class="fas fa-home"></i> Home</button>
+                <button id="logoutBtn" class="btn danger" style="width: auto; padding: 6px 12px; font-size: 12px;">Logout</button>
+            </div>
         </div>
         
         <div class="admin-panel" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 30px;">
@@ -211,19 +216,17 @@
             welcomeModal.style.display = 'none';
         }
 
+        window.openLoginModal = () => {
+            loginModal.style.display = 'flex';
+        }
+
+        window.switchToCustomer = () => {
+            adminView.style.display = 'none';
+            customerView.style.display = 'block';
+        }
+
         let allProducts = [];
         let currentCategory = 'All';
-
-        // Check if admin is logged in
-        onAuthStateChanged(auth, (user) => {
-            if(user && user.email) {
-                customerView.style.display = 'none';
-                adminView.style.display = 'block';
-                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-user-check"></i> Admin`;
-                loginModal.style.display = 'none';
-                welcomeModal.style.display = 'none';
-            }
-        });
 
         // Real-time Products Sync & Categories
         onSnapshot(collection(db, "products"), (snapshot) => {
@@ -408,7 +411,6 @@
         };
 
         // Admin Modals & Controls
-        document.getElementById('adminLoginBtn').onclick = () => loginModal.style.display = 'flex';
         document.getElementById('closeLoginModal').onclick = () => loginModal.style.display = 'none';
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
 
@@ -420,10 +422,18 @@
                 loginModal.style.display = 'none';
                 document.getElementById('adminEmail').value = "";
                 document.getElementById('adminPassword').value = "";
+                customerView.style.display = 'none';
+                adminView.style.display = 'block';
+                document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-user-check"></i> Admin`;
             } catch(e) { alert("Login Failed: " + e.message); }
         };
 
-        document.getElementById('logoutBtn').onclick = () => signOut(auth);
+        document.getElementById('logoutBtn').onclick = async () => {
+            await signOut(auth);
+            adminView.style.display = 'none';
+            customerView.style.display = 'block';
+            document.getElementById('adminLoginBtn').innerHTML = `<i class="fas fa-lock"></i> Admin`;
+        };
     </script>
 </body>
 </html>
