@@ -537,10 +537,10 @@
             <i class="fas fa-times" style="cursor:pointer;" onclick="toggleAiChat()"></i>
         </div>
         <div id="aiChatBody" class="ai-chat-body">
-            <div class="ai-msg bot">Namaste! Main Zarafiya AI Assistant hoon. Banarasi Sarees, Suits ya order karne ke baare mein kuch bhi poohein! 😊</div>
+            <div class="ai-msg bot">Namaste! Main Zarafiya AI Assistant hoon. Aap Banarasi Sarees, Suits, Gharara, Dupatta ya prices ke baare mein kuch bhi pooch sakte hain! 😊</div>
         </div>
         <div class="ai-chat-footer">
-            <input type="text" id="aiUserInput" class="ai-chat-input" placeholder="Ask anything about sarees..." onkeypress="handleAiEnter(event)">
+            <input type="text" id="aiUserInput" class="ai-chat-input" placeholder="Type your question here..." onkeypress="handleAiEnter(event)">
             <button class="ai-send-btn" onclick="sendAiMessage()"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
@@ -717,7 +717,7 @@
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // AI Chat Toggle & Logic (Fixed)
+        // Properly Trained Smart AI Assistant Logic
         window.toggleAiChat = () => {
             aiChatBox.style.display = aiChatBox.style.display === 'block' ? 'none' : 'block';
         };
@@ -737,16 +737,24 @@
             chatBody.scrollTop = chatBody.scrollHeight;
 
             setTimeout(() => {
-                let reply = "Humari sarees pure Banarasi handloom aur premium quality ki hoti hain. Aapko koi specific design dekhna hai ya WhatsApp par baat karni hai?";
-                
-                if(query.includes('price') || query.includes('daam') || query.includes('rate') || query.includes('kitne')) {
-                    reply = "Humari sarees ke prices ₹1,500 se shuru hote hain aur 3000+ tak ke premium collection available hain. Aap collection check kar sakte hain!";
-                } else if(query.includes('location') || query.includes('address') || query.includes('kahan') || query.includes('shop')) {
-                    reply = "Humari shop Lohta, Varanasi, Uttar Pradesh mein hai. Aap direct order WhatsApp par bhi kar sakte hain!";
-                } else if(query.includes('order') || query.includes('buy') || query.includes('khariad')) {
-                    reply = "Order karne ke liye product ke niche 'Add to Cart' dabayein aur bag se WhatsApp par order bhej dein!";
-                } else if(query.includes('hello') || query.includes('hi') || query.includes('hey')) {
-                    reply = "Hello ji! Zarafiya Fashion mein aapka swagat hai. Bataiye hum aapki kya madad kar sakte hain?";
+                let reply = "Aapke is sawal ke liye, aap humein seedha WhatsApp par contact kar sakte hain! Wahan humari team aapki poori madad karegi. 😊";
+
+                if (query.includes('gharara') || query.includes('gharare')) {
+                    reply = "✨ Humare Gharara collection mein royal aur heavy festive designs available hain jo special moments ke liye ekdum best hain. Aap 'Gharara' category par click karke designs dekh sakte hain!";
+                } else if (query.includes('saree') || query.includes('sari') || query.includes('banarasi')) {
+                    reply = "👑 Humare paas Varanasi ke handloom weavers ki banai hui premium Banarasi Silk Sarees hain. Ye shadi aur tyohar ke liye special hain!";
+                } else if (query.includes('suit') || query.includes('suits')) {
+                    reply = "💫 Humare Suits comfortable aur elegant fabric mein aate hain jo daily wear aur festive dono ke liye shandar hain.";
+                } else if (query.includes('dupatta')) {
+                    reply = "🌟 Heavy zari work aur traditional dupattay aapke ethnic look ko complete karte hain!";
+                } else if (query.includes('price') || query.includes('daam') || query.includes('rate') || query.includes('kitne') || query.includes('cost')) {
+                    reply = "💰 Humari items ke prices bohot reasonable hain jo ₹1,500 se start hote hain. Har product ke niche uska discount price diya gaya hai!";
+                } else if (query.includes('location') || query.includes('address') || query.includes('kahan') || query.includes('shop') || query.includes('dukan')) {
+                    reply = "📍 Humara store Lohta, Varanasi, Uttar Pradesh mein hai. Aap online order bhi kar sakte hain jo seedha ghar pahunch jayega.";
+                } else if (query.includes('order') || query.includes('buy') || query.includes('khariad') || query.includes('kaise')) {
+                    reply = "🛒 Order karne ke liye pasandida product par 'Add to Cart' dabayein aur phir Cart se WhatsApp par order bhej dein!";
+                } else if (query.includes('hello') || query.includes('hi') || query.includes('hey') || query.includes('namaste')) {
+                    reply = "Namaste ji! Zarafiya Fashion mein aapka swagat hai. Aaj hum aapki kya madad kar sakte hain?";
                 }
 
                 chatBody.innerHTML += `<div class="ai-msg bot">${reply}</div>`;
@@ -1061,4 +1069,4 @@
         };
     </script>
 </body>
-</html>
+                    </html>
