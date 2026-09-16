@@ -308,7 +308,7 @@
             100% { transform: scale(1); }
         }
 
-        /* AI Chat Modal */
+        /* AI Chat Window Popup */
         .ai-chat-box {
             display: none;
             position: fixed;
@@ -717,7 +717,7 @@
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // AI Chat Toggle & Logic
+        // AI Chat Toggle & Logic (Fixed)
         window.toggleAiChat = () => {
             aiChatBox.style.display = aiChatBox.style.display === 'block' ? 'none' : 'block';
         };
@@ -732,18 +732,16 @@
             let query = input.value.trim().toLowerCase();
             if(!query) return;
 
-            // User Message
             chatBody.innerHTML += `<div class="ai-msg user">${escapeHTML(input.value)}</div>`;
             input.value = "";
             chatBody.scrollTop = chatBody.scrollHeight;
 
-            // AI Smart Reply Logic
             setTimeout(() => {
                 let reply = "Humari sarees pure Banarasi handloom aur premium quality ki hoti hain. Aapko koi specific design dekhna hai ya WhatsApp par baat karni hai?";
                 
                 if(query.includes('price') || query.includes('daam') || query.includes('rate') || query.includes('kitne')) {
                     reply = "Humari sarees ke prices ₹1,500 se shuru hote hain aur 3000+ tak ke premium collection available hain. Aap collection check kar sakte hain!";
-                } else.includes('location') || query.includes('address') || query.includes('kahan') || query.includes('shop')) {
+                } else if(query.includes('location') || query.includes('address') || query.includes('kahan') || query.includes('shop')) {
                     reply = "Humari shop Lohta, Varanasi, Uttar Pradesh mein hai. Aap direct order WhatsApp par bhi kar sakte hain!";
                 } else if(query.includes('order') || query.includes('buy') || query.includes('khariad')) {
                     reply = "Order karne ke liye product ke niche 'Add to Cart' dabayein aur bag se WhatsApp par order bhej dein!";
