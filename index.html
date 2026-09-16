@@ -867,10 +867,10 @@
             renderCartItems();
         }
 
-        // Secure COD WhatsApp Checkout with Empty Cart Protection & No URL in Popup
+        // Secure COD WhatsApp Checkout with Clean Empty Cart Handling (No browser alert)
         window.checkoutWhatsApp = () => {
             if(cart.length === 0) {
-                alert("Your cart is empty! Please add products before ordering.");
+                document.getElementById('cartItemsList').innerHTML = "<p style='text-align: center; font-size: 12px; color: #ff4444; font-weight: 500;'>Your cart is empty! Please add products before ordering.</p>";
                 return;
             }
             let msg = "Hello Zarafiya Fashion, I want to place a *Cash on Delivery (COD)* order:%0A%0A*--- Order Items ---*%0A";
@@ -1096,4 +1096,4 @@
         };
     </script>
 </body>
-                </html>
+    </html>
