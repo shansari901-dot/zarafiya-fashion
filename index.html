@@ -717,7 +717,7 @@
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Multi-language AI Support Assistant (English, Hindi, Urdu)
+        // Multi-language AI Support Assistant
         window.toggleAiChat = () => {
             aiChatBox.style.display = aiChatBox.style.display === 'block' ? 'none' : 'block';
         };
@@ -867,9 +867,12 @@
             renderCartItems();
         }
 
-        // Secure COD WhatsApp Checkout with Address & Verification format
+        // Secure COD WhatsApp Checkout with Empty Cart Protection & No URL in Popup
         window.checkoutWhatsApp = () => {
-            if(cart.length === 0) return alert("Your cart is empty!");
+            if(cart.length === 0) {
+                alert("Your cart is empty! Please add products before ordering.");
+                return;
+            }
             let msg = "Hello Zarafiya Fashion, I want to place a *Cash on Delivery (COD)* order:%0A%0A*--- Order Items ---*%0A";
             let total = 0;
             cart.forEach((item, i) => {
@@ -1093,4 +1096,4 @@
         };
     </script>
 </body>
-    </html>
+                </html>
