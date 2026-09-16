@@ -717,7 +717,7 @@
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Shahi Urdu Adab Trained AI Assistant Logic
+        // Shahi Urdu Adab Trained AI Assistant Logic with Salam Handler
         window.toggleAiChat = () => {
             aiChatBox.style.display = aiChatBox.style.display === 'block' ? 'none' : 'block';
         };
@@ -737,9 +737,11 @@
             chatBody.scrollTop = chatBody.scrollHeight;
 
             setTimeout(() => {
-                let reply = "✨ Aapka yeh sawal hamare liye qabili-e-गौर hai, banda-nawaz! Mazeed behtareen khidmat aur direct guftgu ke liye aap humein WhatsApp par bhi paigaam (message) bhej sakte hain. Wahan humari team aapki poori madad karegi! 😊";
+                let reply = "✨ Aapka yeh sawal hamare liye qabili-e-गौर hai, banda-nawaz! Mazeed behtareen khidmat aur direct guftgu ke liye aap humein WhatsApp par bhi paigaam (message) bhej sakte hain. Wahan hamari team aapki poori madad karegi! 😊";
 
-                if (query.includes('gharara') || query.includes('gharare')) {
+                if (query.includes('salam') || query.includes('assalam') || query.includes('asalamualaikum')) {
+                    reply = "🤲 *Walaikum Assalam wa Rahmatullahi wa Barakatuh!* Banda-nawaz, Zarafiya Fashion ki is haseen mehfil mein aapka khair-maqdam hai. Farmaiye, aaj hum aapki kya khidmat kar sakte hain? ✨";
+                } else if (query.includes('gharara') || query.includes('gharare')) {
                     reply = "👑 Mashallah! Humara 'Gharara' collection aisi nafees aur shahi silai se tayaar kiya gaya hai jo har khass mauqe aur shadi-byah ki raunak ko do-bala kar deta hai. Isme aapko traditional handloom aur heavy zari ka behad haseen kaam milega. Aap safha-e-awwal (home page) par 'Gharara' category par click karke tamam haseen designs ka mushayeda kar sakte hain! ✨";
                 } else if (query.includes('saree') || query.includes('sari') || query.includes('banarasi') || query.includes('silk')) {
                     reply = "🌟 Subhan Allah! Banarasi Silk Sarees hamari dukan ki jaan hain. Ye pure Varanasi ke mahir unn (weavers) ke hathon se tayar hoti hain. Har dhaage mein virasat aur sharafat jhalakti hai. Pehnne mein behad halki aur dikhne mein shahi ahsas karati hain. Aap collection mein jaakar pasand farma sakte hain! 🌸";
@@ -747,13 +749,13 @@
                     reply = "💫 Humare suits mein aaram (comfort) aur nazaakat (elegance) ka behtareen sangam milta hai. Ye rozaana ke istemal se lekar khas mehfilon ke liye ekdum munasib hain. Inka fabric apke libaas mein chaar chand laga dega! 🪡";
                 } else if (query.includes('dupatta')) {
                     reply = "🌹 Ek mukammal libaas bina haseen dupatta ke adhura hai! Humare heavy zari aur traditional dupatte aapke ethnic look ko ek shahi aur mukammal roop dete hain.";
-                } else if (query.includes('price') || query.includes('daam') || query.includes('rate') || query.includes('kitne') || query.includes('cost')  || query.includes('paisa')) {
+                } else if (query.includes('price') || query.includes('daam') || query.includes('rate') || query.includes('kitne') || query.includes('cost') || query.includes('paisa')) {
                     reply = "💰 Humari shahi cheezein behad munasib daamon par dastiyab hain, jo sirf ₹1,500 se shuru hoti hain. Har libaas par unka asli aur discount price wazeh taur par darj hai taaki aapko kharidari mein koi dushwari na ho! 🏷️";
                 } else if (query.includes('location') || query.includes('address') || query.includes('kahan') || query.includes('shop') || query.includes('dukan') || query.includes('store') || query.includes('pata')) {
                     reply = "📍 Humara khubsurat store 'Lohta, Varanasi, Uttar Pradesh' ki sarzameen par waqia hai. Agar aap online order farmaana chahein, toh wo bhi seedha aapke ghar tak hifazat ke sath pahunch jayega! 🚚";
                 } else if (query.includes('order') || query.includes('buy') || query.includes('khariad') || query.includes('kaise') || query.includes('lena')) {
                     reply = "🛍️ Kharidari ka tareeqa behad asan hai janaab! Jis libaas ko aap pasand farmaayein, uske niche 'Add to Cart' ke button par click karein. Phir apne Cart mein jakar 'Order via WhatsApp' ka button dabayein — aapka order seedha hamare paas aa jayega! 📱";
-                } else if (query.includes('hello') || query.includes('hi') || query.includes('hey') || query.includes('namaste') || query.includes('salam') || query.includes('assalam')) {
+                } else if (query.includes('hello') || query.includes('hi') || query.includes('hey') || query.includes('namaste')) {
                     reply = "✨ *Aapka khair-maqdam hai!* Zarafiya Fashion mein aapka swagat hai. Aaj is haseen mehfil mein hum aapki kya khidmat farma sakte hain? Farmaiye! 😊";
                 }
 
