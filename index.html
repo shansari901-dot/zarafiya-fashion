@@ -221,7 +221,7 @@
 
         /* Products Grid - Strict 2 Columns Layout */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 12px; }
-        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; align-items: start; }
+        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; align-items: stretch; }
         .card {
             background: white;
             border-radius: 12px;
@@ -231,23 +231,40 @@
             padding-bottom: 12px;
             border: 1px solid #eee;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
-        .card img { width: 100%; height: 180px; object-fit: cover; background: #f9f9f9; cursor: pointer; display: block; }
-        .card h3 { font-size: 13px; margin: 8px 5px 4px 5px; color: #333; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
-        .badge-type { position: absolute; top: 8px; left: 8px; background: rgba(92, 24, 36, 0.85); color: #fff; font-size: 9px; padding: 3px 7px; border-radius: 4px; font-weight: 500; z-index: 2; }
+        /* Enforce exact image dimensions */
+        .card-img-wrapper {
+            width: 100%;
+            height: 190px;
+            background: #f9f9f9;
+            overflow: hidden;
+        }
+        .card-img-wrapper img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            cursor: pointer; 
+            display: block; 
+        }
         
-        .price-box { display: flex; justify-content: center; gap: 8px; margin-bottom: 8px; align-items: baseline; cursor: pointer; }
-        .price-box .discount { color: var(--primary); font-weight: 600; font-size: 14px; }
+        .card h3 { font-size: 13px; margin: 10px 5px 4px 5px; color: #333; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
+        .badge-type { position: absolute; top: 8px; left: 8px; background: rgba(92, 24, 36, 0.9); color: #fff; font-size: 9px; padding: 4px 8px; border-radius: 4px; font-weight: 500; z-index: 2; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        .price-box { display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; align-items: baseline; cursor: pointer; }
+        .price-box .discount { color: var(--primary); font-weight: 600; font-size: 15px; }
         .price-box .regular { text-decoration: line-through; color: #888; font-size: 11px; }
 
-        .btn-group { display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; }
-        .btn { padding: 6px 10px; border: none; border-radius: 6px; cursor: pointer; background: var(--primary); color: white; font-weight: 500; width: 90%; display: inline-block; box-sizing: border-box; text-decoration: none; font-size: 11px; }
+        .btn-group { display: flex; flex-direction: column; gap: 6px; align-items: center; width: 100%; padding: 0 10px; box-sizing: border-box; margin-top: auto; }
+        .btn { padding: 8px 10px; border: none; border-radius: 6px; cursor: pointer; background: var(--primary); color: white; font-weight: 500; width: 100%; display: inline-block; box-sizing: border-box; text-decoration: none; font-size: 11px; }
         .btn.cart-btn { background: #222; }
         .btn.success { background: #25D366; }
         .btn.danger { background: #ff4444; width: auto; }
         .btn.info { background: #007bff; width: auto; }
         
-        .admin-action-bar { display: flex; gap: 5px; margin-top: 6px; justify-content: center; width: 100%; }
+        .admin-action-bar { display: flex; gap: 5px; margin-top: 4px; justify-content: center; width: 100%; }
 
         /* Trust Bar */
         .trust-bar {
@@ -528,6 +545,12 @@
         let cart = [];
         let isAdminLoggedIn = false;
 
+        // SANITIZER FUNCTION - Yeh function kisibhi kharab link ya symbol ko theek kar dega
+        function escapeHTML(str) {
+            if(!str) return '';
+            return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+        }
+
         window.goHome = () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -582,9 +605,9 @@
                 total += Number(item.price);
                 list.innerHTML += `
                     <div class="cart-item">
-                        <img src="${item.image}">
+                        <img src="${escapeHTML(item.image)}">
                         <div style="flex:1; margin-left:10px;">
-                            <strong>${item.name}</strong><br>₹${item.price}
+                            <strong>${escapeHTML(item.name)}</strong><br>₹${item.price}
                         </div>
                         <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
                     </div>
@@ -658,27 +681,37 @@
                 const card = document.createElement('div');
                 card.className = "card";
                 
+                // Sanitizing text so that single quotes don't break HTML tags
+                let safeName = escapeHTML(product.name);
+                // Clean image link: if multiple links are present separated by comma or space, take the first one
+                let rawImg = product.image ? product.image.split(',')[0].split(' ')[0].trim() : '';
+                let safeImg = escapeHTML(rawImg);
+                let safeId = escapeHTML(product.id);
+                let safeMake = escapeHTML(product.makeType || 'Handloom');
+                
                 let adminActionHtml = '';
                 if(isAdminLoggedIn) {
                     adminActionHtml = `
                         <div class="admin-action-bar">
-                            <button class="btn info" onclick="editProduct('${product.id}')" style="padding: 4px 8px; font-size: 10px;"><i class="fas fa-edit"></i> Edit</button>
-                            <button class="btn danger" onclick="deleteProduct('${product.id}')" style="padding: 4px 8px; font-size: 10px;"><i class="fas fa-trash"></i> Del</button>
+                            <button class="btn info" onclick="editProduct('${safeId}')" style="padding: 5px 8px; font-size: 10px;"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="btn danger" onclick="deleteProduct('${safeId}')" style="padding: 5px 8px; font-size: 10px;"><i class="fas fa-trash"></i> Del</button>
                         </div>
                     `;
                 }
 
                 card.innerHTML = `
-                    <span class="badge-type">${product.makeType || 'Handloom'}</span>
-                    <img src="${product.image}" alt="${product.name}" onclick="openProduct('${product.id}')" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
-                    <h3 onclick="openProduct('${product.id}')">${product.name}</h3>
-                    <div class="price-box" onclick="openProduct('${product.id}')">
+                    <span class="badge-type">${safeMake}</span>
+                    <div class="card-img-wrapper">
+                        <img src="${safeImg}" alt="${safeName}" onclick="openProduct('${safeId}')" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
+                    </div>
+                    <h3 onclick="openProduct('${safeId}')">${safeName}</h3>
+                    <div class="price-box" onclick="openProduct('${safeId}')">
                         <span class="discount">₹${product.discountPrice}</span>
                         <span class="regular">₹${product.price}</span>
                     </div>
                     <div class="btn-group">
-                        <button class="btn" onclick="openProduct('${product.id}')">View Details</button>
-                        <button class="btn cart-btn" onclick="addToCart('${product.id}', '${product.name}', ${product.discountPrice}, '${product.image}')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="btn" onclick="openProduct('${safeId}')">View Details</button>
+                        <button class="btn cart-btn" onclick="addToCart('${safeId}', '${safeName}', ${product.discountPrice}, '${safeImg}')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
                         ${adminActionHtml}
                     </div>
                 `;
@@ -778,19 +811,24 @@
                 const docSnap = await getDoc(doc(db, "products", id));
                 if (docSnap.exists()) {
                     const p = docSnap.data();
+                    let safeName = escapeHTML(p.name);
+                    let rawImg = p.image ? p.image.split(',')[0].split(' ')[0].trim() : '';
+                    let safeImg = escapeHTML(rawImg);
+                    let safeMake = escapeHTML(p.makeType || 'Handloom');
+
                     const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category} (${p.makeType || 'Handloom'})%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
                     const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
 
                     document.getElementById('productDetailContent').innerHTML = `
-                        <img src="${p.image}" style="width:100%; max-height:300px; object-fit:cover; border-radius:8px; margin-bottom:10px;" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
-                        <h2 style="margin: 0 0 4px 0; font-size:16px; color:var(--primary); font-family:'Playfair Display',serif;">${p.name}</h2>
-                        <p style="margin: 0 0 6px 0; color: #666; font-size: 11px;"><strong>Category:</strong> ${p.category} | <strong>Type:</strong> ${p.makeType || 'Handloom'} | <strong>SKU:</strong> ${p.sku}</p>
+                        <img src="${safeImg}" style="width:100%; max-height:300px; object-fit:cover; border-radius:8px; margin-bottom:10px;" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                        <h2 style="margin: 10px 0 4px 0; font-size:16px; color:var(--primary); font-family:'Playfair Display',serif;">${safeName}</h2>
+                        <p style="margin: 0 0 6px 0; color: #666; font-size: 11px;"><strong>Category:</strong> ${p.category} | <strong>Type:</strong> ${safeMake} | <strong>SKU:</strong> ${p.sku}</p>
                         <div class="price-box" style="justify-content: flex-start; font-size: 18px; margin-bottom: 10px;">
                             <span class="discount" style="color: #5c1824; font-weight: 600;">₹${p.discountPrice}</span>
                             <span class="regular" style="text-decoration: line-through; color: #888; margin-left: 8px; font-size:13px;">₹${p.price}</span>
                         </div>
-                        <p style="margin-bottom: 12px; line-height: 1.4; font-size: 12px; color:#444;">${p.description}</p>
-                        <button class="btn cart-btn" onclick="addToCart('${id}', '${p.name}', ${p.discountPrice}, '${p.image}')" style="width:100%; margin-bottom:8px; padding:10px;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <p style="margin-bottom: 12px; line-height: 1.4; font-size: 12px; color:#444;">${escapeHTML(p.description)}</p>
+                        <button class="btn cart-btn" onclick="addToCart('${id}', '${safeName}', ${p.discountPrice}, '${safeImg}')" style="width:100%; margin-bottom:8px; padding:10px;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
                         <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:10px; font-size: 14px; text-decoration:none;">
                             <i class="fab fa-whatsapp"></i> Direct Order on WhatsApp
                         </a>
