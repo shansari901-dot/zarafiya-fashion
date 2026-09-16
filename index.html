@@ -235,7 +235,6 @@
             flex-direction: column;
             justify-content: flex-start;
         }
-        /* Enforce exact image dimensions */
         .card-img-wrapper {
             width: 100%;
             height: 190px;
@@ -545,7 +544,6 @@
         let cart = [];
         let isAdminLoggedIn = false;
 
-        // SANITIZER FUNCTION - Yeh function kisibhi kharab link ya symbol ko theek kar dega
         function escapeHTML(str) {
             if(!str) return '';
             return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
@@ -605,7 +603,7 @@
                 total += Number(item.price);
                 list.innerHTML += `
                     <div class="cart-item">
-                        <img src="${escapeHTML(item.image)}">
+                        <img src="${item.image}">
                         <div style="flex:1; margin-left:10px;">
                             <strong>${escapeHTML(item.name)}</strong><br>₹${item.price}
                         </div>
@@ -681,11 +679,9 @@
                 const card = document.createElement('div');
                 card.className = "card";
                 
-                // Sanitizing text so that single quotes don't break HTML tags
                 let safeName = escapeHTML(product.name);
-                // Clean image link: if multiple links are present separated by comma or space, take the first one
+                // Raw image link without escaping special URL characters
                 let rawImg = product.image ? product.image.split(',')[0].split(' ')[0].trim() : '';
-                let safeImg = escapeHTML(rawImg);
                 let safeId = escapeHTML(product.id);
                 let safeMake = escapeHTML(product.makeType || 'Handloom');
                 
@@ -702,7 +698,7 @@
                 card.innerHTML = `
                     <span class="badge-type">${safeMake}</span>
                     <div class="card-img-wrapper">
-                        <img src="${safeImg}" alt="${safeName}" onclick="openProduct('${safeId}')" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
+                        <img src="${rawImg}" alt="${safeName}" onclick="openProduct('${safeId}')" onerror="this.src='https://via.placeholder.com/200?text=No+Image'">
                     </div>
                     <h3 onclick="openProduct('${safeId}')">${safeName}</h3>
                     <div class="price-box" onclick="openProduct('${safeId}')">
@@ -711,7 +707,7 @@
                     </div>
                     <div class="btn-group">
                         <button class="btn" onclick="openProduct('${safeId}')">View Details</button>
-                        <button class="btn cart-btn" onclick="addToCart('${safeId}', '${safeName}', ${product.discountPrice}, '${safeImg}')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="btn cart-btn" onclick="addToCart('${safeId}', '${safeName}', ${product.discountPrice}, '${rawImg}')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
                         ${adminActionHtml}
                     </div>
                 `;
@@ -813,14 +809,13 @@
                     const p = docSnap.data();
                     let safeName = escapeHTML(p.name);
                     let rawImg = p.image ? p.image.split(',')[0].split(' ')[0].trim() : '';
-                    let safeImg = escapeHTML(rawImg);
                     let safeMake = escapeHTML(p.makeType || 'Handloom');
 
                     const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category} (${p.makeType || 'Handloom'})%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
                     const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
 
                     document.getElementById('productDetailContent').innerHTML = `
-                        <img src="${safeImg}" style="width:100%; max-height:300px; object-fit:cover; border-radius:8px; margin-bottom:10px;" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
+                        <img src="${rawImg}" style="width:100%; max-height:300px; object-fit:cover; border-radius:8px; margin-bottom:10px;" onerror="this.src='https://via.placeholder.com/300?text=No+Image'">
                         <h2 style="margin: 10px 0 4px 0; font-size:16px; color:var(--primary); font-family:'Playfair Display',serif;">${safeName}</h2>
                         <p style="margin: 0 0 6px 0; color: #666; font-size: 11px;"><strong>Category:</strong> ${p.category} | <strong>Type:</strong> ${safeMake} | <strong>SKU:</strong> ${p.sku}</p>
                         <div class="price-box" style="justify-content: flex-start; font-size: 18px; margin-bottom: 10px;">
@@ -828,7 +823,7 @@
                             <span class="regular" style="text-decoration: line-through; color: #888; margin-left: 8px; font-size:13px;">₹${p.price}</span>
                         </div>
                         <p style="margin-bottom: 12px; line-height: 1.4; font-size: 12px; color:#444;">${escapeHTML(p.description)}</p>
-                        <button class="btn cart-btn" onclick="addToCart('${id}', '${safeName}', ${p.discountPrice}, '${safeImg}')" style="width:100%; margin-bottom:8px; padding:10px;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
+                        <button class="btn cart-btn" onclick="addToCart('${id}', '${safeName}', ${p.discountPrice}, '${rawImg}')" style="width:100%; margin-bottom:8px; padding:10px;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
                         <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:10px; font-size: 14px; text-decoration:none;">
                             <i class="fab fa-whatsapp"></i> Direct Order on WhatsApp
                         </a>
