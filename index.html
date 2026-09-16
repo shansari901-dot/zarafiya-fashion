@@ -337,7 +337,6 @@
             <div class="logo-sub">Fashion</div>
         </div>
         <div class="header-icons">
-            <!-- Share Icon that opens Custom Social Share Modal -->
             <i class="fas fa-share-alt" onclick="openShareModal()" title="Share App"></i>
             <i class="fas fa-search" onclick="toggleSearchBox()"></i>
             <div style="position: relative;" onclick="openCartModal()">
@@ -597,12 +596,10 @@
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Open Share Popup Modal with configured links for all social apps
         window.openShareModal = () => {
             const appLink = "https://www.appcreator24.com/app4187228-hpd1mq";
             const shareText = "✨ Explore Zarafiya Fashion for exclusive Banarasi Silk Sarees & Suits! Download our official app here: " + appLink;
             
-            // Set hrefs for social platforms
             document.getElementById('shareWa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
             document.getElementById('shareFb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(appLink)}`;
             document.getElementById('shareTele').href = `https://telegram.me/share/url?url=${encodeURIComponent(appLink)}&text=${encodeURIComponent("Explore Zarafiya Fashion App!")}`;
@@ -643,10 +640,10 @@
             cartModal.style.display = 'flex';
         }
 
+        // Silent add to cart without alert popup (Flipkart style)
         window.addToCart = (id, name, price, image) => {
             cart.push({ id, name, price, image });
             document.getElementById('cartCount').innerText = cart.length;
-            alert(name + " added to Cart!");
         }
 
         function renderCartItems() {
