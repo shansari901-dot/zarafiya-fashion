@@ -237,9 +237,10 @@
         }
         .card-img-wrapper {
             width: 100%;
-            height: 190px;
-            background: #f9f9f9;
+            height: 180px;
+            background: #f4f4f4;
             overflow: hidden;
+            position: relative;
         }
         .card-img-wrapper img { 
             width: 100%; 
@@ -680,8 +681,7 @@
                 card.className = "card";
                 
                 let safeName = escapeHTML(product.name);
-                // Raw image link without escaping special URL characters
-                let rawImg = product.image ? product.image.split(',')[0].split(' ')[0].trim() : '';
+                let rawImg = product.image ? product.image.trim() : '';
                 let safeId = escapeHTML(product.id);
                 let safeMake = escapeHTML(product.makeType || 'Handloom');
                 
@@ -808,7 +808,7 @@
                 if (docSnap.exists()) {
                     const p = docSnap.data();
                     let safeName = escapeHTML(p.name);
-                    let rawImg = p.image ? p.image.split(',')[0].split(' ')[0].trim() : '';
+                    let rawImg = p.image ? p.image.trim() : '';
                     let safeMake = escapeHTML(p.makeType || 'Handloom');
 
                     const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category} (${p.makeType || 'Handloom'})%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
