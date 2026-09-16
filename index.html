@@ -314,7 +314,7 @@
             position: fixed;
             bottom: 135px;
             right: 15px;
-            width: 300px;
+            width: 310px;
             max-width: 90vw;
             background: white;
             border-radius: 14px;
@@ -335,7 +335,7 @@
         }
         .ai-chat-body {
             padding: 12px;
-            height: 220px;
+            height: 250px;
             overflow-y: auto;
             background: #fdfbf7;
             font-size: 11px;
@@ -347,8 +347,8 @@
             background: #eee;
             padding: 8px 10px;
             border-radius: 8px;
-            max-width: 80%;
-            line-height: 1.4;
+            max-width: 85%;
+            line-height: 1.5;
         }
         .ai-msg.bot { background: #f2e6e8; color: var(--primary); align-self: flex-start; border-bottom-left-radius: 2px; }
         .ai-msg.user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
@@ -533,14 +533,14 @@
     <!-- AI Chat Window Popup -->
     <div id="aiChatBox" class="ai-chat-box">
         <div class="ai-chat-header">
-            <span><i class="fas fa-robot"></i> Zarafiya AI Assistant</span>
+            <span><i class="fas fa-robot"></i> Zarafiya Shahi Assistant</span>
             <i class="fas fa-times" style="cursor:pointer;" onclick="toggleAiChat()"></i>
         </div>
         <div id="aiChatBody" class="ai-chat-body">
-            <div class="ai-msg bot">Namaste! Main Zarafiya AI Assistant hoon. Aap Banarasi Sarees, Suits, Gharara, Dupatta ya prices ke baare mein kuch bhi pooch sakte hain! 😊</div>
+            <div class="ai-msg bot">✨ *Aapka khair-maqdam hai!* Main Zarafiya Fashion ka Shahi Assistant hoon. Banarasi Sarees, Suits, Gharara ya kisi bhi nayi ada ke liye aap humse be-jhijhak guftgu kar sakte hain. Boliye, hum aapki kya khidmat kar sakte hain? 😊</div>
         </div>
         <div class="ai-chat-footer">
-            <input type="text" id="aiUserInput" class="ai-chat-input" placeholder="Type your question here..." onkeypress="handleAiEnter(event)">
+            <input type="text" id="aiUserInput" class="ai-chat-input" placeholder="Yahan apna sawal likhein..." onkeypress="handleAiEnter(event)">
             <button class="ai-send-btn" onclick="sendAiMessage()"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
@@ -717,7 +717,7 @@
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Properly Trained Smart AI Assistant Logic
+        // Shahi Urdu Adab Trained AI Assistant Logic
         window.toggleAiChat = () => {
             aiChatBox.style.display = aiChatBox.style.display === 'block' ? 'none' : 'block';
         };
@@ -737,24 +737,24 @@
             chatBody.scrollTop = chatBody.scrollHeight;
 
             setTimeout(() => {
-                let reply = "Aapke is sawal ke liye, aap humein seedha WhatsApp par contact kar sakte hain! Wahan humari team aapki poori madad karegi. 😊";
+                let reply = "✨ Aapka yeh sawal hamare liye qabili-e-गौर hai, banda-nawaz! Mazeed behtareen khidmat aur direct guftgu ke liye aap humein WhatsApp par bhi paigaam (message) bhej sakte hain. Wahan humari team aapki poori madad karegi! 😊";
 
                 if (query.includes('gharara') || query.includes('gharare')) {
-                    reply = "✨ Humare Gharara collection mein royal aur heavy festive designs available hain jo special moments ke liye ekdum best hain. Aap 'Gharara' category par click karke designs dekh sakte hain!";
-                } else if (query.includes('saree') || query.includes('sari') || query.includes('banarasi')) {
-                    reply = "👑 Humare paas Varanasi ke handloom weavers ki banai hui premium Banarasi Silk Sarees hain. Ye shadi aur tyohar ke liye special hain!";
+                    reply = "👑 Mashallah! Humara 'Gharara' collection aisi nafees aur shahi silai se tayaar kiya gaya hai jo har khass mauqe aur shadi-byah ki raunak ko do-bala kar deta hai. Isme aapko traditional handloom aur heavy zari ka behad haseen kaam milega. Aap safha-e-awwal (home page) par 'Gharara' category par click karke tamam haseen designs ka mushayeda kar sakte hain! ✨";
+                } else if (query.includes('saree') || query.includes('sari') || query.includes('banarasi') || query.includes('silk')) {
+                    reply = "🌟 Subhan Allah! Banarasi Silk Sarees hamari dukan ki jaan hain. Ye pure Varanasi ke mahir unn (weavers) ke hathon se tayar hoti hain. Har dhaage mein virasat aur sharafat jhalakti hai. Pehnne mein behad halki aur dikhne mein shahi ahsas karati hain. Aap collection mein jaakar pasand farma sakte hain! 🌸";
                 } else if (query.includes('suit') || query.includes('suits')) {
-                    reply = "💫 Humare Suits comfortable aur elegant fabric mein aate hain jo daily wear aur festive dono ke liye shandar hain.";
+                    reply = "💫 Humare suits mein aaram (comfort) aur nazaakat (elegance) ka behtareen sangam milta hai. Ye rozaana ke istemal se lekar khas mehfilon ke liye ekdum munasib hain. Inka fabric apke libaas mein chaar chand laga dega! 🪡";
                 } else if (query.includes('dupatta')) {
-                    reply = "🌟 Heavy zari work aur traditional dupattay aapke ethnic look ko complete karte hain!";
-                } else if (query.includes('price') || query.includes('daam') || query.includes('rate') || query.includes('kitne') || query.includes('cost')) {
-                    reply = "💰 Humari items ke prices bohot reasonable hain jo ₹1,500 se start hote hain. Har product ke niche uska discount price diya gaya hai!";
-                } else if (query.includes('location') || query.includes('address') || query.includes('kahan') || query.includes('shop') || query.includes('dukan')) {
-                    reply = "📍 Humara store Lohta, Varanasi, Uttar Pradesh mein hai. Aap online order bhi kar sakte hain jo seedha ghar pahunch jayega.";
-                } else if (query.includes('order') || query.includes('buy') || query.includes('khariad') || query.includes('kaise')) {
-                    reply = "🛒 Order karne ke liye pasandida product par 'Add to Cart' dabayein aur phir Cart se WhatsApp par order bhej dein!";
-                } else if (query.includes('hello') || query.includes('hi') || query.includes('hey') || query.includes('namaste')) {
-                    reply = "Namaste ji! Zarafiya Fashion mein aapka swagat hai. Aaj hum aapki kya madad kar sakte hain?";
+                    reply = "🌹 Ek mukammal libaas bina haseen dupatta ke adhura hai! Humare heavy zari aur traditional dupatte aapke ethnic look ko ek shahi aur mukammal roop dete hain.";
+                } else if (query.includes('price') || query.includes('daam') || query.includes('rate') || query.includes('kitne') || query.includes('cost')  || query.includes('paisa')) {
+                    reply = "💰 Humari shahi cheezein behad munasib daamon par dastiyab hain, jo sirf ₹1,500 se shuru hoti hain. Har libaas par unka asli aur discount price wazeh taur par darj hai taaki aapko kharidari mein koi dushwari na ho! 🏷️";
+                } else if (query.includes('location') || query.includes('address') || query.includes('kahan') || query.includes('shop') || query.includes('dukan') || query.includes('store') || query.includes('pata')) {
+                    reply = "📍 Humara khubsurat store 'Lohta, Varanasi, Uttar Pradesh' ki sarzameen par waqia hai. Agar aap online order farmaana chahein, toh wo bhi seedha aapke ghar tak hifazat ke sath pahunch jayega! 🚚";
+                } else if (query.includes('order') || query.includes('buy') || query.includes('khariad') || query.includes('kaise') || query.includes('lena')) {
+                    reply = "🛍️ Kharidari ka tareeqa behad asan hai janaab! Jis libaas ko aap pasand farmaayein, uske niche 'Add to Cart' ke button par click karein. Phir apne Cart mein jakar 'Order via WhatsApp' ka button dabayein — aapka order seedha hamare paas aa jayega! 📱";
+                } else if (query.includes('hello') || query.includes('hi') || query.includes('hey') || query.includes('namaste') || query.includes('salam') || query.includes('assalam')) {
+                    reply = "✨ *Aapka khair-maqdam hai!* Zarafiya Fashion mein aapka swagat hai. Aaj is haseen mehfil mein hum aapki kya khidmat farma sakte hain? Farmaiye! 😊";
                 }
 
                 chatBody.innerHTML += `<div class="ai-msg bot">${reply}</div>`;
@@ -1069,4 +1069,4 @@
         };
     </script>
 </body>
-                    </html>
+</html>
