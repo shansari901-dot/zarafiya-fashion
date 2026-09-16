@@ -320,20 +320,6 @@
 
         footer { background: var(--primary); color: white; padding: 25px 15px; text-align: center; font-size: 12px; margin-top: 30px; }
         footer p { color: #f0f0f0; line-height: 1.5; margin: 5px 0; }
-        .download-app-btn {
-            background: var(--accent);
-            color: #2c2c2c;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-            display: inline-block;
-            text-decoration: none;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-        }
     </style>
 </head>
 <body>
@@ -345,7 +331,7 @@
             <div class="logo-sub">Fashion</div>
         </div>
         <div class="header-icons">
-            <i class="fas fa-share-alt" onclick="shareApp()" title="Share App"></i>
+            <i class="fas fa-share-alt" onclick="shareApp()" title="Download App Link"></i>
             <i class="fas fa-search" onclick="toggleSearchBox()"></i>
             <div style="position: relative;" onclick="openCartModal()">
                 <i class="fas fa-shopping-bag"></i>
@@ -524,7 +510,6 @@
     <footer>
         <p><strong>Zarafiya Fashion</strong></p>
         <p>Grace in Every Thread | Varanasi, UP</p>
-        <a href="#" id="downloadAppBtn" class="download-app-btn"><i class="fas fa-download"></i> Download App</a>
         <p style="font-size: 10px; color: #ccc; margin-top: 10px;">&copy; 2026 All rights reserved.</p>
     </footer>
 
@@ -575,25 +560,17 @@
         }
 
         window.shareApp = () => {
+            // Yahan aap apna AppCreator24 ka direct App Download link daal sakte hain
+            let appDownloadLink = "https://www.appcreator24.com/app3456789"; // Apne App ka link yahan badal sakte hain
+            
             if (navigator.share) {
                 navigator.share({
-                    title: 'Zarafiya Fashion',
-                    text: 'Explore premium Banarasi Silk Sarees & Suits on Zarafiya Fashion!',
-                    url: window.location.href
+                    title: 'Zarafiya Fashion App',
+                    text: 'Download Zarafiya Fashion App for exclusive Banarasi Silk Sarees & Suits:',
+                    url: appDownloadLink
                 }).catch(() => {});
             } else {
-                alert("Share link: " + window.location.href);
-            }
-        };
-
-        // Automatic Download App link generator from AppCreator24
-        window.onload = () => {
-            const btn = document.getElementById('downloadAppBtn');
-            if(btn) {
-                // AppCreator24 standard download link format based on package name or current domain
-                let apkUrl = "https://www.appcreator24.com/app" + window.location.hostname.split('.')[0]; 
-                // Fallback to direct app download link if hosted on github pages pointing to appcreator24
-                btn.href = "https://www.appcreator24.com/app/" + (window.location.pathname.split('/')[1] || "zarafiya");
+                alert("App Download Link:\n" + appDownloadLink);
             }
         };
 
@@ -878,9 +855,9 @@
 
         document.getElementById('loginBtn').onclick = async () => {
             const email = document.getElementById('adminEmail').value;
-            const pass = document.getElementById('adminPassword5').value; // fallback safety
+            const pass = document.getElementById('adminPassword').value;
             try {
-                // simple login trigger
+                // handle login
             } catch(e) {}
         };
     </script>
