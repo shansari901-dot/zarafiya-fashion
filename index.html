@@ -452,7 +452,7 @@
         <span id="adminStatusText"><i class="fas fa-user-shield"></i> Admin Mode Active</span>
         <div>
             <button onclick="openAddProductModal()" style="background:var(--accent); border:none; padding:4px 10px; border-radius:4px; font-weight:600; cursor:pointer; font-size:11px; margin-right:5px;"><i class="fas fa-plus"></i> Add Product</button>
-            <button onclick="logoutAdmin()" style="background:#ff4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:11px;">Logout</button>
+            <button onclick="logoutAdminBtn()" style="background:#ff4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:11px;">Logout</button>
         </div>
     </div>
 
@@ -867,7 +867,7 @@
             renderCartItems();
         }
 
-        // Secure COD WhatsApp Checkout with Clean Empty Cart Handling (No browser alert)
+        // Secure COD WhatsApp Checkout with Clean Empty Cart Handling
         window.checkoutWhatsApp = () => {
             if(cart.length === 0) {
                 document.getElementById('cartItemsList').innerHTML = "<p style='text-align: center; font-size: 12px; color: #ff4444; font-weight: 500;'>Your cart is empty! Please add products before ordering.</p>";
@@ -886,6 +886,7 @@
         let allProducts = [];
         let currentCategory = 'All';
 
+        // Firebase Auth State Listener
         onAuthStateChanged(auth, (user) => {
             if(user && user.email) {
                 isAdminLoggedIn = true;
@@ -896,6 +897,35 @@
             }
             renderProducts(allProducts);
         });
+
+        // Login Button Click Handler
+        document.getElementById('loginBtn').onclick = async () => {
+            const email = document.getElementById('adminEmail').value.trim();
+            const pass = document.getElementById('adminPassword').value.trim();
+            if(!email || !pass) {
+                alert("Please enter both email and password!");
+                return;
+            }
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                alert("Admin Login Successful!");
+                loginModal.style.display = 'none';
+                document.getElementById('adminEmail').value = "";
+                document.getElementById('adminPassword').value = "";
+            } catch (error) {
+                alert("Login Failed: " + error.message);
+            }
+        };
+
+        // Logout Function
+        window.logoutAdminBtn = async () => {
+            try {
+                await signOut(auth);
+                alert("Logged out successfully!");
+            } catch (error) {
+                alert("Error logging out: " + error.message);
+            }
+        };
 
         onSnapshot(collection(db, "products"), (snapshot) => {
             allProducts = [];
@@ -1086,14 +1116,6 @@
 
         document.getElementById('closeLoginModal').onclick = () => loginModal.style.display = 'none';
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
-
-        document.getElementById('loginBtn').onclick = async () => {
-            const email = document.getElementById('adminEmail').value;
-            const pass = document.getElementById('adminPassword').value;
-            try {
-                // handle login
-            } catch(e) {}
-        };
     </script>
 </body>
-    </html>
+</html>
