@@ -62,10 +62,6 @@
             align-items: center;
             cursor: pointer;
         }
-        .header-icons a {
-            color: var(--primary);
-            text-decoration: none;
-        }
 
         /* Admin Quick Bar */
         #adminBar {
@@ -335,8 +331,8 @@
             <div class="logo-sub">Fashion</div>
         </div>
         <div class="header-icons">
-            <!-- Asli App Download Link Yahan Set Hai -->
-            <a href="https://www.appcreator24.com/app4187228-hpd1mq" target="_blank" title="Download App"><i class="fas fa-download"></i></a>
+            <!-- Share Icon with App Download Link -->
+            <i class="fas fa-share-alt" onclick="shareApp()" title="Share App"></i>
             <i class="fas fa-search" onclick="toggleSearchBox()"></i>
             <div style="position: relative;" onclick="openCartModal()">
                 <i class="fas fa-shopping-bag"></i>
@@ -563,6 +559,23 @@
         window.scrollToCollection = () => {
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
+
+        // Share App Function with App Download Link
+        window.shareApp = () => {
+            const appDownloadLink = "https://www.appcreator24.com/app4187228-hpd1mq";
+            const shareText = "✨ Explore Zarafiya Fashion for exclusive Banarasi Silk Sarees & Suits! Download our official Android app here: " + appDownloadLink;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Zarafiya Fashion App',
+                    text: shareText,
+                    url: appDownloadLink
+                }).catch(() => {});
+            } else {
+                // Fallback for browsers that don't support native share: Copy to clipboard or open WhatsApp directly
+                window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
+            }
+        };
 
         window.openLoginModal = () => {
             if(isAdminLoggedIn) {
@@ -852,4 +865,4 @@
         };
     </script>
 </body>
-</html>
+    </html>
