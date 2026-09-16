@@ -630,7 +630,7 @@
                 <span id="cartTotalPrice">₹0</span>
             </div>
             <button onclick="checkoutWhatsApp()" class="btn success" style="width: 100%; padding: 10px; font-size: 14px;">
-                <i class="fab fa-whatsapp"></i> Order Cart via WhatsApp
+                <i class="fab fa-whatsapp"></i> Order Cart via WhatsApp (COD)
             </button>
         </div>
     </div>
@@ -739,15 +739,15 @@
             setTimeout(() => {
                 let reply = "Hello! For any further assistance or direct orders, you can message us on WhatsApp. We are always here to help you! 😊";
 
-                // Urdu / Arabic Script or Urdu vocabulary detection
                 if (q.includes('urdu') || q.includes('kya haal') || q.includes('aap kaise') || /[\u0600-\u06FF]/.test(q)) {
                     reply = "Walaikum Assalam! Zarafiya Fashion mein aapka khair-maqdam hai. Banarasi Sarees, Suits aur Gharara ke hawale se aap jo bhi maloomat chahein, hum se pooch sakte hain. Hum aapki kya khidmat kar sakte hain? ✨";
                 } 
-                // Hindi / Hinglish detection
-                else if (q.includes('saree') || q.includes('sari') || q.includes('suit') || q.includes('gharara') || q.includes('price') || q.includes('daam') || q.includes('order') || q.includes('kahan') || q.includes('kaise') || q.includes('hai') || q.includes('kya') || q.includes('hain')) {
+                else if (q.includes('saree') || q.includes('sari') || q.includes('suit') || q.includes('gharara') || q.includes('price') || q.includes('daam') || q.includes('order') || q.includes('kahan') || q.includes('kaise') || q.includes('hai') || q.includes('kya') || q.includes('hain') || q.includes('cod')) {
                     
                     if (q.includes('salam') || q.includes('assalam')) {
                         reply = "Walaikum Assalam! Zarafiya Fashion mein aapka swagat hai. Banarasi Silk Sarees, Suits aur Gharara ke baare mein aap kya janna chahte hain? Batayein, hum aapki poori madad karenge! 😊";
+                    } else if (q.includes('cod') || q.includes('cash on delivery')) {
+                        reply = "Yes, Cash on Delivery (COD) is available! To prevent fake orders, we confirm your complete shipping address and contact number via WhatsApp before dispatching. 🛡️";
                     } else if (q.includes('gharara')) {
                         reply = "Hamara Gharara collection shadi aur festive occasions ke liye sabse best hai. Isme heavy zari aur traditional handloom ka kaam milta hai. Aap 'Gharara' category par click karke saare designs dekh sakte hain! ✨";
                     } else if (q.includes('saree') || q.includes('sari') || q.includes('banarasi') || q.includes('silk')) {
@@ -757,25 +757,26 @@
                     } else if (q.includes('price') || q.includes('daam') || q.includes('rate') || q.includes('kitne')) {
                         reply = "Sabhi products ke prices bohot munasib hain jo ₹1,500 se shuru hote hain. Har product ke niche discount price diya gaya hai! 🏷️";
                     } else if (q.includes('location') || q.includes('address') || q.includes('kahan') || q.includes('shop') || q.includes('dukan')) {
-                        reply = "Hamara store Lohta, Varanasi, Uttar Pradesh mein hai. Aap online order bhi kar sakte hain jo seedha aapke ghar pahunch jayega! 🚚";
+                        reply = "Hamara store Lohta, Varanasi, Uttar Pradesh mein hai. Aap online COD order bhi kar sakte hain! 🚚";
                     } else if (q.includes('order') || q.includes('buy') || q.includes('khariad')) {
-                        reply = "Order karne ke liye product ke niche 'Add to Cart' dabayein aur Cart mein jakar 'Order via WhatsApp' par click karein! 📱";
+                        reply = "Order karne ke liye product ke niche 'Add to Cart' dabayein aur Cart mein jakar 'Order via WhatsApp (COD)' par click karein! 📱";
                     } else {
                         reply = "Zarafiya Fashion mein aapka swagat hai! Hum Banarasi Sarees, Suits aur Gharara mein deal karte hain. Aapko kya dekhna hai, batayein? 😊";
                     }
                 } 
-                // English Default Detection
                 else {
                     if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('welcome')) {
-                        reply = "Welcome to Zarafiya Fashion! How can I help you today? You can ask about our Banarasi Sarees, Suits, Gharara, prices, or how to order! 😊";
+                        reply = "Welcome to Zarafiya Fashion! How can I help you today? We offer Cash on Delivery (COD). You can ask about our Banarasi Sarees, Suits, Gharara, prices, or orders! 😊";
+                    } else if (q.includes('cod') || q.includes('cash on delivery')) {
+                        reply = "Yes! Cash on Delivery (COD) is available. We verify genuine orders via WhatsApp to ensure secure delivery. 🛡️";
                     } else if (q.includes('price') || q.includes('cost') || q.includes('rate')) {
                         reply = "Our product prices are very affordable, starting from ₹1,500. You can check the discount price mentioned under each product! 🏷️";
                     } else if (q.includes('location') || q.includes('address') || q.includes('store')) {
-                        reply = "Our physical store is located in Lohta, Varanasi, Uttar Pradesh. We also deliver online orders directly to your doorstep! 🚚";
+                        reply = "Our physical store is located in Lohta, Varanasi, Uttar Pradesh. We offer secure COD delivery across India! 🚚";
                     } else if (q.includes('order') || q.includes('buy')) {
-                        reply = "To place an order, click 'Add to Cart' on your favorite product, then go to Cart and click 'Order via WhatsApp'! 📱";
+                        reply = "To place a COD order, click 'Add to Cart' on your favorite product, then go to Cart and click 'Order via WhatsApp (COD)'! 📱";
                     } else {
-                        reply = "Welcome to Zarafiya Fashion! We offer exclusive handloom Banarasi Silk Sarees, Suits, and Ghararas. Let me know what you are looking for! ✨";
+                        reply = "Welcome to Zarafiya Fashion! We offer exclusive handloom Banarasi Silk Sarees, Suits, and Ghararas with Cash on Delivery. Let me know what you are looking for! ✨";
                     }
                 }
 
@@ -866,15 +867,16 @@
             renderCartItems();
         }
 
+        // Secure COD WhatsApp Checkout with Address & Verification format
         window.checkoutWhatsApp = () => {
             if(cart.length === 0) return alert("Your cart is empty!");
-            let msg = "Hello Zarafiya Fashion, I want to order the following items:%0A%0A";
+            let msg = "Hello Zarafiya Fashion, I want to place a *Cash on Delivery (COD)* order:%0A%0A*--- Order Items ---*%0A";
             let total = 0;
             cart.forEach((item, i) => {
                 msg += `${i+1}. *${item.name}* - ₹${item.price}%0A`;
                 total += Number(item.price);
             });
-            msg += `%0A*Total Amount: ₹${total}*`;
+            msg += `%0A*Total Amount: ₹${total}*%0A%0A*--- Delivery Details (Please Fill) ---*%0A*Full Name:* %0A*Complete Address:* %0A*Pincode:* %0A*Alternate Phone Number:* %0A%0APlease confirm my order!`;
             window.open(`https://wa.me/${whatsappNumber}?text=${msg}`, '_blank');
         }
 
@@ -1056,7 +1058,7 @@
                     let rawImg = p.image ? p.image.trim() : '';
                     let safeMake = escapeHTML(p.makeType || 'Handloom');
 
-                    const msg = `Hello Zarafiya Fashion, I want to order:%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category} (${p.makeType || 'Handloom'})%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}`;
+                    const msg = `Hello Zarafiya Fashion, I want to order (COD):%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category} (${p.makeType || 'Handloom'})%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}%0A%0A*Name:* %0A*Address:* %0A*Phone:*`;
                     const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
 
                     document.getElementById('productDetailContent').innerHTML = `
@@ -1070,7 +1072,7 @@
                         <p style="margin-bottom: 12px; line-height: 1.4; font-size: 12px; color:#444;">${escapeHTML(p.description)}</p>
                         <button class="btn cart-btn" onclick="addToCart('${id}', '${safeName}', ${p.discountPrice}, '${rawImg}')" style="width:100%; margin-bottom:8px; padding:10px;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
                         <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:10px; font-size: 14px; text-decoration:none;">
-                            <i class="fab fa-whatsapp"></i> Direct Order on WhatsApp
+                            <i class="fab fa-whatsapp"></i> Order on WhatsApp (COD)
                         </a>
                     `;
                 }
@@ -1091,4 +1093,4 @@
         };
     </script>
 </body>
-</html>
+    </html>
