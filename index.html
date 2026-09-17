@@ -140,125 +140,94 @@
         /* Hero Banner */
         .hero {
             background: linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%);
-            margin: 12px;
-            border-radius: 16px;
+            margin: 10px 12px;
+            border-radius: 14px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.06);
             border: 1px solid rgba(212, 175, 55, 0.3);
         }
         .hero-content {
-            padding: 25px 20px;
+            padding: 16px 15px;
         }
         .hero-tag {
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 2px;
             color: var(--primary);
             text-transform: uppercase;
             font-weight: 600;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 26px;
+            font-size: 22px;
             color: var(--primary);
-            margin: 0 0 8px 0;
+            margin: 0 0 6px 0;
             line-height: 1.2;
         }
         .hero p {
-            font-size: 12px;
+            font-size: 11px;
             color: #555;
-            margin-bottom: 15px;
-            line-height: 1.5;
+            margin-bottom: 12px;
+            line-height: 1.4;
         }
         .shop-btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 8px 20px;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(92, 24, 36, 0.3);
         }
 
+        /* Ultra-Compact Horizontal Categories Bar */
+        .category-slider {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 4px 12px 12px 12px;
+            scrollbar-width: none;
+        }
+        .category-slider::-webkit-scrollbar { display: none; }
+
+        .cat-chip-card {
+            background: white;
+            border: 1px solid #d4af37;
+            border-radius: 20px;
+            padding: 5px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            transition: 0.2s;
+        }
+        .cat-chip-card:active { transform: scale(0.95); background: #fdf5eb; }
+        .cat-chip-card span {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+        }
+
         /* Section Header */
         .section-header {
             text-align: center;
-            margin: 25px 0 15px 0;
+            margin: 10px 0 10px 0;
         }
         .section-header h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 22px;
+            font-size: 18px;
             color: var(--primary);
             margin: 0;
         }
         .section-header p {
-            font-size: 11px;
-            color: #777;
-            margin-top: 3px;
-        }
-
-        /* 4 Category Cards Grid */
-        .category-showcase {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            padding: 0 12px;
-            margin-bottom: 25px;
-        }
-        .cat-card {
-            border-radius: 14px;
-            padding: 18px 12px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .cat-card:active { transform: scale(0.97); }
-        
-        .cat-saree { background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%); border: 1px solid #f48fb1; }
-        .cat-suit { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border: 1px solid #a5d6a7; }
-        .cat-dupatta { background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%); border: 1px solid #b39ddb; }
-        .cat-gharara { background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border: 1px solid #ffe082; }
-
-        .cat-icon-circle {
-            width: 45px;
-            height: 45px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 8px auto;
-            color: var(--primary);
-            font-size: 18px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-        }
-        .cat-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 16px;
-            color: var(--primary);
-            margin: 0 0 3px 0;
-        }
-        .cat-card p {
             font-size: 10px;
-            color: #555;
-            margin: 0 0 10px 0;
-            line-height: 1.3;
-        }
-        .cat-arrow {
-            width: 26px;
-            height: 26px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
+            color: #777;
+            margin-top: 2px;
         }
 
         /* Products Grid - Strict 2 Columns Layout */
@@ -527,46 +496,36 @@
             </div>
         </section>
 
+        <!-- Ultra-Compact Horizontal Categories Bar -->
+        <div class="category-slider">
+            <div class="cat-chip-card" onclick="filterCategory('All')">
+                <i class="fas fa-th-large" style="color:var(--primary); font-size:11px;"></i>
+                <span>All</span>
+            </div>
+            <div class="cat-chip-card" onclick="filterCategory('Sarees')">
+                <i class="fas fa-female" style="color:var(--primary); font-size:11px;"></i>
+                <span>Sarees</span>
+            </div>
+            <div class="cat-chip-card" onclick="filterCategory('Suit')">
+                <i class="fas fa-tshirt" style="color:var(--primary); font-size:11px;"></i>
+                <span>Suits</span>
+            </div>
+            <div class="cat-chip-card" onclick="filterCategory('Dupatta')">
+                <i class="fas fa-gift" style="color:var(--primary); font-size:11px;"></i>
+                <span>Dupatta</span>
+            </div>
+            <div class="cat-chip-card" onclick="filterCategory('Gharara')">
+                <i class="fas fa-star" style="color:var(--primary); font-size:11px;"></i>
+                <span>Gharara</span>
+            </div>
+        </div>
+
         <div class="section-header" id="collectionSection">
-            <h2>Our Collection</h2>
+            <h2 id="activeCatTitle">All Collection</h2>
             <p>Choose Your Style</p>
         </div>
 
-        <div class="category-showcase">
-            <div class="cat-card cat-saree" onclick="filterCategory('Sarees')">
-                <div class="cat-icon-circle"><i class="fas fa-female"></i></div>
-                <h3>Sarees</h3>
-                <p>Timeless Grace in Every Drape</p>
-                <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
-            </div>
-            
-            <div class="cat-card cat-suit" onclick="filterCategory('Suit')">
-                <div class="cat-icon-circle"><i class="fas fa-tshirt"></i></div>
-                <h3>Suits</h3>
-                <p>Comfort Meets Elegance</p>
-                <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
-            </div>
-
-            <div class="cat-card cat-dupatta" onclick="filterCategory('Dupatta')">
-                <div class="cat-icon-circle"><i class="fas fa-gift"></i></div>
-                <h3>Dupatta</h3>
-                <p>Complete Your Look</p>
-                <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
-            </div>
-
-            <div class="cat-card cat-gharara" onclick="filterCategory('Gharara')">
-                <div class="cat-icon-circle"><i class="fas fa-star"></i></div>
-                <h3>Gharara</h3>
-                <p>Royal Look for Special Moments</p>
-                <div class="cat-arrow"><i class="fas fa-arrow-right"></i></div>
-            </div>
-        </div>
-
         <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <h3 id="activeCatTitle" style="font-family: 'Playfair Display', serif; font-size: 16px; color: var(--primary); margin: 0;">All Collection</h3>
-                <span style="font-size: 11px; color: var(--primary); cursor: pointer; font-weight: 500;" onclick="filterCategory('All')">View All</span>
-            </div>
             <div id="productGrid" class="product-grid">
                 <p style="text-align: center; width: 100%; grid-column: 1 / -1; color:#777;">Loading products...</p>
             </div>
@@ -785,7 +744,6 @@
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Custom Color Input Toggle Handler
         window.checkCustomColor = (val) => {
             const customInput = document.getElementById('pCustomColor');
             if (val === 'other') {
@@ -878,7 +836,6 @@
             shareModal.style.display = 'flex';
         };
 
-        // Function to share individual product on WhatsApp
         window.shareProductWhatsApp = (name, price, image) => {
             const text = `✨ *Zarafiya Fashion Exclusive Product*%0A%0A*Name:* ${name}%0A*Price:* ₹${price}%0A*Image:* ${image}%0A%0AOrder now via our app!`;
             window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
@@ -953,7 +910,6 @@
             renderCartItems();
         }
 
-        // Secure COD WhatsApp Checkout with Clean Empty Cart Handling
         window.checkoutWhatsApp = () => {
             if(cart.length === 0) {
                 document.getElementById('cartItemsList').innerHTML = "<p style='text-align: center; font-size: 12px; color: #ff4444; font-weight: 500;'>Your cart is empty! Please add products before ordering.</p>";
@@ -972,7 +928,6 @@
         let allProducts = [];
         let currentCategory = 'All';
 
-        // Firebase Auth State Listener
         onAuthStateChanged(auth, (user) => {
             if(user && user.email) {
                 isAdminLoggedIn = true;
@@ -984,7 +939,6 @@
             renderProducts(allProducts);
         });
 
-        // Login Button Click Handler
         document.getElementById('loginBtn').onclick = async () => {
             const email = document.getElementById('adminEmail').value.trim();
             const pass = document.getElementById('adminPassword').value.trim();
@@ -1003,7 +957,6 @@
             }
         };
 
-        // Logout Function
         window.logoutAdminBtn = async () => {
             try {
                 await signOut(auth);
