@@ -134,6 +134,7 @@
         .c-maroon { background: #5c1824; border: 1px solid var(--accent); }
         .c-green { background: #4caf50; }
         .c-yellow { background: #ff9800; color: #333; }
+        .c-other { background: #795548; }
         .c-all { background: #444; }
 
         /* Hero Banner */
@@ -512,6 +513,7 @@
         <button class="color-chip c-maroon" onclick="filterColor('maroon')"><i class="fas fa-circle"></i> Maroon</button>
         <button class="color-chip c-green" onclick="filterColor('green')"><i class="fas fa-circle"></i> Green</button>
         <button class="color-chip c-yellow" onclick="filterColor('yellow')"><i class="fas fa-circle"></i> Yellow</button>
+        <button class="color-chip c-other" onclick="filterColor('other')"><i class="fas fa-circle"></i> Other</button>
     </div>
 
     <!-- Customer Home View -->
@@ -662,8 +664,18 @@
                     <option value="Repair Machine">Repair Machine</option>
                 </select>
 
-                <!-- Color input is now optional text field -->
-                <input type="text" id="pColor" class="form-control" placeholder="Color (Optional, e.g. pink, blue)">
+                <select id="pColor" class="form-control" onchange="checkCustomColor(this.value)">
+                    <option value="">Select Color (Optional)</option>
+                    <option value="pink">Pink</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                    <option value="maroon">Maroon</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="other">Other / Custom Color</option>
+                </select>
+
+                <input type="text" id="pCustomColor" class="form-control" placeholder="Type Custom Color Name" style="display: none;">
 
                 <input type="text" id="pSku" class="form-control" placeholder="Product Code / SKU" required>
                 <textarea id="pDesc" class="form-control" placeholder="Description & Fabric Details" rows="3" required></textarea>
@@ -772,6 +784,18 @@
         window.scrollToCollection = () => {
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
+
+        // Custom Color Input Toggle Handler
+        window.checkCustomColor = (val) => {
+            const customInput = document.getElementById('pCustomColor');
+            if (val === 'other') {
+                customInput.style.display = 'block';
+                customInput.focus();
+            } else {
+                customInput.style.display = 'none';
+                customInput.value = '';
+            }
+        };
 
         // Multi-language AI Support Assistant
         window.toggleAiChat = () => {
@@ -941,7 +965,7 @@
                 msg += `${i+1}. *${item.name}* - ₹${item.price}%0A`;
                 total += Number(item.price);
             });
-            msg += `%0A*Total Amount: ₹${total}*%0A%0A*--- Delivery Details (Please Fill) ---*%0A*Full Name:* %0A*Complete Address:* %0A*Pincode:* %0A*Alternate Phone Number:* %0A%0APlease confirm my order!`;
+            msg += `%0A*Total Amount: ₹${total}*%0A%0A*--- Delivery Details (Please Fill) ---*%0A*Full Name:* %0A*Complete Address:* %0A*Pincode:* %0A*Alternate Phone Number:* %0A*Please confirm my order!`;
             window.open(`https://wa.me/${whatsappNumber}?text=${msg}`, '_blank');
         }
 
@@ -1009,8 +1033,12 @@
             if (color === 'all') {
                 renderProducts(allProducts);
                 document.getElementById('activeCatTitle').innerText = 'All Collection';
+            } else if (color === 'other') {
+                let filtered = allProducts.filter(p => p.color && p.color !== 'pink' && p.color !== 'blue' && p.color !== 'red' && p.color !== 'maroon' && p.color !== 'green' && p.color !== 'yellow');
+                renderProducts(filtered);
+                document.getElementById('activeCatTitle').innerText = 'Other Colors Collection';
             } else {
-                let filtered = allProducts.filter(p => (p.color && p.color.toLowerCase().includes(color)) || (p.name && p.name.toLowerCase().includes(color)) || (p.description && p.description.toLowerCase().includes(color)));
+                let filtered = allProducts.filter(p => p.color === color || (p.name && p.name.toLowerCase().includes(color)) || (p.description && p.description.toLowerCase().includes(color)));
                 renderProducts(filtered);
                 document.getElementById('activeCatTitle').innerText = color.toUpperCase() + ' Collection';
             }
@@ -1080,6 +1108,10 @@
             submitProductBtn.innerText = "Saving...";
             submitProductBtn.disabled = true;
 
+            const selectedColor = document.getElementById('pColor').value;
+            const customColor = document.getElementById('pCustomColor').value.trim();
+            const finalColor = (selectedColor === 'other' && customColor) ? customColor.toLowerCase() : selectedColor;
+
             const productData = {
                 name: document.getElementById('pName').value,
                 image: document.getElementById('pImage').value,
@@ -1087,7 +1119,7 @@
                 discountPrice: Number(document.getElementById('pDiscount').value),
                 category: document.getElementById('pCategory').value,
                 makeType: document.getElementById('pMakeType').value,
-                color: document.getElementById('pColor').value.trim(),
+                color: finalColor,
                 sku: document.getElementById('pSku').value,
                 description: document.getElementById('pDesc').value
             };
@@ -1123,7 +1155,23 @@
                     document.getElementById('pDiscount').value = p.discountPrice;
                     document.getElementById('pCategory').value = p.category;
                     document.getElementById('pMakeType').value = p.makeType || 'Handloom';
-                    document.getElementById('pColor').value = p.color || '';
+                    
+                    const col = p.color || '';
+                    const standardColors = ['pink', 'blue', 'red', 'maroon', 'green', 'yellow'];
+                    if (standardColors.includes(col)) {
+                        document.getElementById('pColor').value = col;
+                        document.getElementById('pCustomColor').style.display = 'none';
+                        document.getElementById('pCustomColor').value = '';
+                    } else if (col) {
+                        document.getElementById('pColor').value = 'other';
+                        document.getElementById('pCustomColor').style.display = 'block';
+                        document.getElementById('pCustomColor').value = col;
+                    } else {
+                        document.getElementById('pColor').value = '';
+                        document.getElementById('pCustomColor').style.display = 'none';
+                        document.getElementById('pCustomColor').value = '';
+                    }
+
                     document.getElementById('pSku').value = p.sku;
                     document.getElementById('pDesc').value = p.description;
                     
@@ -1141,6 +1189,7 @@
         function resetForm() {
             editingProductId = null;
             document.getElementById('addProductForm').reset();
+            document.getElementById('pCustomColor').style.display = 'none';
             formTitle.innerText = "Add New Product";
             submitProductBtn.innerText = "Add Product to Database";
             submitProductBtn.className = "btn success";
