@@ -662,15 +662,8 @@
                     <option value="Repair Machine">Repair Machine</option>
                 </select>
 
-                <select id="pColor" class="form-control" required>
-                    <option value="">Select Color</option>
-                    <option value="pink">Pink</option>
-                    <option value="blue">Blue</option>
-                    <option value="red">Red</option>
-                    <option value="maroon">Maroon</option>
-                    <option value="green">Green</option>
-                    <option value="yellow">Yellow</option>
-                </select>
+                <!-- Color input is now optional text field -->
+                <input type="text" id="pColor" class="form-control" placeholder="Color (Optional, e.g. pink, blue)">
 
                 <input type="text" id="pSku" class="form-control" placeholder="Product Code / SKU" required>
                 <textarea id="pDesc" class="form-control" placeholder="Description & Fabric Details" rows="3" required></textarea>
@@ -1017,7 +1010,7 @@
                 renderProducts(allProducts);
                 document.getElementById('activeCatTitle').innerText = 'All Collection';
             } else {
-                let filtered = allProducts.filter(p => p.color === color || (p.name && p.name.toLowerCase().includes(color)) || (p.description && p.description.toLowerCase().includes(color)));
+                let filtered = allProducts.filter(p => (p.color && p.color.toLowerCase().includes(color)) || (p.name && p.name.toLowerCase().includes(color)) || (p.description && p.description.toLowerCase().includes(color)));
                 renderProducts(filtered);
                 document.getElementById('activeCatTitle').innerText = color.toUpperCase() + ' Collection';
             }
@@ -1094,7 +1087,7 @@
                 discountPrice: Number(document.getElementById('pDiscount').value),
                 category: document.getElementById('pCategory').value,
                 makeType: document.getElementById('pMakeType').value,
-                color: document.getElementById('pColor').value,
+                color: document.getElementById('pColor').value.trim(),
                 sku: document.getElementById('pSku').value,
                 description: document.getElementById('pDesc').value
             };
@@ -1130,7 +1123,7 @@
                     document.getElementById('pDiscount').value = p.discountPrice;
                     document.getElementById('pCategory').value = p.category;
                     document.getElementById('pMakeType').value = p.makeType || 'Handloom';
-                    document.getElementById('pColor').value = p.color || 'pink';
+                    document.getElementById('pColor').value = p.color || '';
                     document.getElementById('pSku').value = p.sku;
                     document.getElementById('pDesc').value = p.description;
                     
