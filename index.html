@@ -219,6 +219,57 @@
             font-size: 11px;
         }
 
+        /* Shop by Color Section (Placed at the bottom of products) */
+        .color-section {
+            background: #fff;
+            margin: 25px 12px;
+            padding: 18px 15px;
+            border-radius: 14px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+            border: 1px solid #eee;
+            text-align: center;
+        }
+        .color-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--primary);
+            margin: 0 0 5px 0;
+        }
+        .color-section p {
+            font-size: 11px;
+            color: #777;
+            margin: 0 0 15px 0;
+        }
+        .color-grid {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .color-btn {
+            border: none;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-family: 'Poppins', sans-serif;
+            transition: transform 0.2s;
+        }
+        .color-btn:active { transform: scale(0.95); }
+        .c-pink { background: #e91e63; }
+        .c-blue { background: #2196f3; }
+        .c-red { background: #f44336; }
+        .c-maroon { background: #5c1824; border: 1px solid var(--accent); }
+        .c-green { background: #4caf50; }
+        .c-yellow { background: #ff9800; color: #333; }
+        .c-all { background: #444; }
+
         /* Products Grid - Strict 2 Columns Layout */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 12px; }
         .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; align-items: stretch; }
@@ -518,6 +569,21 @@
             </div>
         </div>
 
+        <!-- Shop by Color Section (Placed at the bottom right above trust/footer) -->
+        <div class="color-section">
+            <h3>Shop by Color</h3>
+            <p>Apne pasandida rang ki talash karein</p>
+            <div class="color-grid">
+                <button class="color-btn c-pink" onclick="filterColor('pink')"><i class="fas fa-circle"></i> Pink</button>
+                <button class="color-btn c-blue" onclick="filterColor('blue')"><i class="fas fa-circle"></i> Blue</button>
+                <button class="color-btn c-red" onclick="filterColor('red')"><i class="fas fa-circle"></i> Red</button>
+                <button class="color-btn c-maroon" onclick="filterColor('maroon')"><i class="fas fa-circle"></i> Maroon</button>
+                <button class="color-btn c-green" onclick="filterColor('green')"><i class="fas fa-circle"></i> Green</button>
+                <button class="color-btn c-yellow" onclick="filterColor('yellow')"><i class="fas fa-circle"></i> Yellow</button>
+                <button class="color-btn c-all" onclick="filterColor('all')">All Colors</button>
+            </div>
+        </div>
+
         <div class="trust-bar">
             <div class="trust-item"><i class="fas fa-shipping-fast"></i><h4>Free Shipping</h4><p>On All Orders</p></div>
             <div class="trust-item"><i class="fas fa-shield-alt"></i><h4>Secure Pay</h4><p>100% Safe</p></div>
@@ -590,7 +656,7 @@
             <span class="close-btn" onclick="document.getElementById('productFormModal').style.display='none'">&times;</span>
             <h3 id="formTitle" style="margin-top:0; color: var(--primary); font-size: 16px; font-family:'Playfair Display',serif;">Add New Product</h3>
             <form id="addProductForm">
-                <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
+                <input type="text" id="pName" class="form-control" placeholder="Product Name (e.g. Pink Saree)" required>
                 <input type="text" id="pImage" class="form-control" placeholder="Image URL (ImgBB Direct Link)" required>
                 <input type="number" id="pPrice" class="form-control" placeholder="Regular Price" required>
                 <input type="number" id="pDiscount" class="form-control" placeholder="Discount Price" required>
@@ -950,6 +1016,18 @@
             scrollToCollection();
         };
 
+        window.filterColor = (color) => {
+            if (color === 'all') {
+                renderProducts(allProducts);
+                document.getElementById('activeCatTitle').innerText = 'All Collection';
+            } else {
+                let filtered = allProducts.filter(p => p.name.toLowerCase().includes(color) || (p.description && p.description.toLowerCase().includes(color)));
+                renderProducts(filtered);
+                document.getElementById('activeCatTitle').innerText = color.toUpperCase() + ' Collection';
+            }
+            scrollToCollection();
+        };
+
         window.searchProducts = () => {
             let query = document.getElementById('searchInput').value.toLowerCase();
             let filtered = allProducts.filter(p => p.name.toLowerCase().includes(query) || (p.sku && p.sku.toLowerCase().includes(query)));
@@ -1126,4 +1204,4 @@
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
     </script>
 </body>
-                        </html>
+</html>
