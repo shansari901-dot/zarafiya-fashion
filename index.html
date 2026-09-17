@@ -95,7 +95,7 @@
             outline: none;
         }
 
-        /* Sticky Shop by Color Bar (Always visible below header/search when scrolling) */
+        /* Sticky Shop by Color Filter Bar */
         .sticky-color-bar {
             background: #fff;
             padding: 8px 10px;
@@ -108,9 +108,9 @@
             z-index: 98;
             box-shadow: 0 2px 6px rgba(0,0,0,0.05);
             border-bottom: 1px solid #eee;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
         }
-        .sticky-color-bar::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+        .sticky-color-bar::-webkit-scrollbar { display: none; }
 
         .color-chip {
             border: none;
@@ -503,7 +503,7 @@
         <input type="text" id="searchInput" class="search-input" placeholder="Search by Saree name or SKU..." onkeyup="searchProducts()">
     </div>
 
-    <!-- Sticky Shop by Color Filter Bar (Stays on screen while scrolling) -->
+    <!-- Sticky Shop by Color Filter Bar -->
     <div class="sticky-color-bar">
         <button class="color-chip c-all" onclick="filterColor('all')"><i class="fas fa-th"></i> All Colors</button>
         <button class="color-chip c-pink" onclick="filterColor('pink')"><i class="fas fa-circle"></i> Pink</button>
@@ -642,7 +642,7 @@
             <span class="close-btn" onclick="document.getElementById('productFormModal').style.display='none'">&times;</span>
             <h3 id="formTitle" style="margin-top:0; color: var(--primary); font-size: 16px; font-family:'Playfair Display',serif;">Add New Product</h3>
             <form id="addProductForm">
-                <input type="text" id="pName" class="form-control" placeholder="Product Name (e.g. Pink Saree)" required>
+                <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
                 <input type="text" id="pImage" class="form-control" placeholder="Image URL (ImgBB Direct Link)" required>
                 <input type="number" id="pPrice" class="form-control" placeholder="Regular Price" required>
                 <input type="number" id="pDiscount" class="form-control" placeholder="Discount Price" required>
@@ -660,6 +660,16 @@
                     <option value="Handloom">Handloom</option>
                     <option value="Power Loom">Power Loom</option>
                     <option value="Repair Machine">Repair Machine</option>
+                </select>
+
+                <select id="pColor" class="form-control" required>
+                    <option value="">Select Color</option>
+                    <option value="pink">Pink</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                    <option value="maroon">Maroon</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
                 </select>
 
                 <input type="text" id="pSku" class="form-control" placeholder="Product Code / SKU" required>
@@ -1007,7 +1017,7 @@
                 renderProducts(allProducts);
                 document.getElementById('activeCatTitle').innerText = 'All Collection';
             } else {
-                let filtered = allProducts.filter(p => p.name.toLowerCase().includes(color) || (p.description && p.description.toLowerCase().includes(color)));
+                let filtered = allProducts.filter(p => p.color === color || (p.name && p.name.toLowerCase().includes(color)) || (p.description && p.description.toLowerCase().includes(color)));
                 renderProducts(filtered);
                 document.getElementById('activeCatTitle').innerText = color.toUpperCase() + ' Collection';
             }
@@ -1084,6 +1094,7 @@
                 discountPrice: Number(document.getElementById('pDiscount').value),
                 category: document.getElementById('pCategory').value,
                 makeType: document.getElementById('pMakeType').value,
+                color: document.getElementById('pColor').value,
                 sku: document.getElementById('pSku').value,
                 description: document.getElementById('pDesc').value
             };
@@ -1119,6 +1130,7 @@
                     document.getElementById('pDiscount').value = p.discountPrice;
                     document.getElementById('pCategory').value = p.category;
                     document.getElementById('pMakeType').value = p.makeType || 'Handloom';
+                    document.getElementById('pColor').value = p.color || 'pink';
                     document.getElementById('pSku').value = p.sku;
                     document.getElementById('pDesc').value = p.description;
                     
