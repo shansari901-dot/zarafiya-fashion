@@ -605,10 +605,10 @@
             <form id="addProductForm">
                 <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
                 
-                <!-- Direct Gallery Image File Picker -->
+                <!-- Direct Gallery Image File Picker with Auto Compression -->
                 <div style="margin-bottom: 12px; text-align: left;">
                     <label style="font-size: 11px; color: #555; font-weight: 500; display: block; margin-bottom: 4px;">Select Product Image from Gallery:</label>
-                    <input type="file" id="pImageFile" class="form-control" accept="image/*" onchange="convertImageToBase64(this)" style="padding: 6px;">
+                    <input type="file" id="pImageFile" class="form-control" accept="image/*" onchange="compressAndConvertImage(this)" style="padding: 6px;">
                     <input type="hidden" id="pImage" required>
                     <div id="imagePreviewContainer" style="margin-top: 6px; display: none;">
                         <img id="imgPreviewTag" src="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd;">
@@ -754,18 +754,50 @@
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Image File to Base64 Converter Function
-        window.convertImageToBase64 = (input) => {
+        // Automatic Image Compression & Resizing to prevent Firebase 1MB limit error
+        window.compressAndConvertImage = (input) => {
             const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('pImage').value = e.target.result;
-                    document.getElementById('imgPreviewTag').src = e.target.result;
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+
+                    // Max dimension limit for high quality yet small size
+                    const MAX_WIDTH = 600;
+                    const MAX_HEIGHT = 600;
+
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    // Compress to JPEG with 0.7 quality to keep size well under 1MB
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+                    
+                    document.getElementById('pImage').value = dataUrl;
+                    document.getElementById('imgPreviewTag').src = dataUrl;
                     document.getElementById('imagePreviewContainer').style.display = 'block';
                 };
-                reader.readAsDataURL(file);
-            }
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         };
 
         window.checkCustomColor = (val) => {
@@ -1232,4 +1264,4 @@
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
     </script>
 </body>
-    </html>
+</html>
