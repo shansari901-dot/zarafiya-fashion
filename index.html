@@ -604,7 +604,17 @@
             <h3 id="formTitle" style="margin-top:0; color: var(--primary); font-size: 16px; font-family:'Playfair Display',serif;">Add New Product</h3>
             <form id="addProductForm">
                 <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
-                <input type="text" id="pImage" class="form-control" placeholder="Image URL (ImgBB Direct Link)" required>
+                
+                <!-- Direct Gallery Image File Picker -->
+                <div style="margin-bottom: 12px; text-align: left;">
+                    <label style="font-size: 11px; color: #555; font-weight: 500; display: block; margin-bottom: 4px;">Select Product Image from Gallery:</label>
+                    <input type="file" id="pImageFile" class="form-control" accept="image/*" onchange="convertImageToBase64(this)" style="padding: 6px;">
+                    <input type="hidden" id="pImage" required>
+                    <div id="imagePreviewContainer" style="margin-top: 6px; display: none;">
+                        <img id="imgPreviewTag" src="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd;">
+                    </div>
+                </div>
+
                 <input type="number" id="pPrice" class="form-control" placeholder="Regular Price" required>
                 <input type="number" id="pDiscount" class="form-control" placeholder="Discount Price" required>
                 
@@ -743,6 +753,20 @@
         window.scrollToCollection = () => {
             document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
         }
+
+        // Image File to Base64 Converter Function
+        window.convertImageToBase64 = (input) => {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('pImage').value = e.target.result;
+                    document.getElementById('imgPreviewTag').src = e.target.result;
+                    document.getElementById('imagePreviewContainer').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        };
 
         window.checkCustomColor = (val) => {
             const customInput = document.getElementById('pCustomColor');
@@ -1058,6 +1082,12 @@
             e.preventDefault();
             if(!auth.currentUser) return alert("Please login first!");
 
+            const imgVal = document.getElementById('pImage').value;
+            if(!imgVal) {
+                alert("Please select a product image!");
+                return;
+            }
+
             submitProductBtn.innerText = "Saving...";
             submitProductBtn.disabled = true;
 
@@ -1067,7 +1097,7 @@
 
             const productData = {
                 name: document.getElementById('pName').value,
-                image: document.getElementById('pImage').value,
+                image: imgVal,
                 price: Number(document.getElementById('pPrice').value),
                 discountPrice: Number(document.getElementById('pDiscount').value),
                 category: document.getElementById('pCategory').value,
@@ -1087,6 +1117,7 @@
                     await addDoc(collection(db, "products"), productData);
                     alert("Product Added Successfully!");
                     document.getElementById('addProductForm').reset();
+                    document.getElementById('imagePreviewContainer').style.display = 'none';
                 }
                 productFormModal.style.display = 'none';
             } catch (error) {
@@ -1104,6 +1135,9 @@
                     const p = docSnap.data();
                     document.getElementById('pName').value = p.name;
                     document.getElementById('pImage').value = p.image;
+                    document.getElementById('imgPreviewTag').src = p.image;
+                    document.getElementById('imagePreviewContainer').style.display = 'block';
+
                     document.getElementById('pPrice').value = p.price;
                     document.getElementById('pDiscount').value = p.discountPrice;
                     document.getElementById('pCategory').value = p.category;
@@ -1142,6 +1176,7 @@
         function resetForm() {
             editingProductId = null;
             document.getElementById('addProductForm').reset();
+            document.getElementById('imagePreviewContainer').style.display = 'none';
             document.getElementById('pCustomColor').style.display = 'none';
             formTitle.innerText = "Add New Product";
             submitProductBtn.innerText = "Add Product to Database";
@@ -1197,4 +1232,4 @@
         document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
     </script>
 </body>
-</html>
+    </html>
