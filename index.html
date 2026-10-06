@@ -2,245 +2,686 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Zarafiya Fashion | Grace in Every Thread</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root{
-  --primary:#2b1a1e; --accent:#a67c52; --brand:#5c1824;
-  --bg:#fafafa; --surface:#fff; --line:#e6e6e6;
-  --text:#1a1a1a; --muted:#8a8a8a;
+  --primary:#7B1E3A;
+  --primary-dark:#5c1824;
+  --primary-light:#A33255;
+  --accent:#D4AF37;
+  --accent-soft:#FDF6E3;
+  --bg:#F5F3F0;
+  --surface:#ffffff;
+  --line:#EDE8E3;
+  --text:#1a1a1a;
+  --muted:#8B8078;
+  --success:#25D366;
+  --danger:#E53935;
+  --shadow-sm:0 1px 3px rgba(123,30,58,.06);
+  --shadow-md:0 4px 14px rgba(123,30,58,.08);
+  --shadow-lg:0 10px 30px rgba(123,30,58,.14);
 }
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-body{font-family:'Inter',sans-serif;margin:0;padding:0 0 70px;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;letter-spacing:.01em;}
 
-/* OFFER TICKER */
-.offer-ticker{background:var(--brand);color:#fff;padding:8px 16px;text-align:center;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;font-weight:500;display:flex;justify-content:center;align-items:center;gap:8px;}
-.offer-ticker .cd{background:rgba(255,255,255,.15);padding:3px 8px;font-weight:600;letter-spacing:1px;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding-bottom:78px;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+button,input,select,textarea{font-family:inherit;}
 
-/* HEADER */
-header{background:var(--surface);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;}
-.logo-area{text-align:left;cursor:pointer;}
-.logo-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--primary);font-weight:500;line-height:1;letter-spacing:.5px;}
-.logo-sub{font-size:9px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:3px;}
-.header-icons{display:flex;gap:16px;font-size:15px;color:var(--primary);align-items:center;}
-.header-icons i{cursor:pointer;}
-.header-icons .badge-wrap{position:relative;}
-.header-icons .badge{position:absolute;top:-6px;right:-8px;background:var(--brand);color:#fff;font-size:8px;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;}
+/* ========= OFFER TICKER ========= */
+.offer-ticker{
+  background:linear-gradient(90deg,var(--primary-dark),var(--primary),var(--primary-light));
+  color:#fff;padding:9px 16px;text-align:center;font-size:11px;letter-spacing:.6px;font-weight:500;
+  display:flex;justify-content:center;align-items:center;gap:8px;position:sticky;top:0;z-index:110;
+}
+.offer-ticker i{color:var(--accent);animation:flash 1.5s infinite;}
+@keyframes flash{0%,100%{opacity:1;}50%{opacity:.4;}}
+.offer-ticker .cd{background:rgba(255,255,255,.18);padding:3px 9px;border-radius:20px;font-weight:600;letter-spacing:1.5px;font-size:10.5px;}
+.offer-ticker b{color:var(--accent);}
 
-/* ADMIN BAR */
-#adminBar{display:none;background:var(--primary);color:#fff;padding:8px 20px;font-size:11px;justify-content:space-between;align-items:center;letter-spacing:.5px;}
+/* ========= HEADER ========= */
+header{
+  background:var(--surface);padding:12px 16px;display:flex;justify-content:space-between;
+  align-items:center;box-shadow:var(--shadow-sm);position:sticky;top:34px;z-index:100;
+}
+.logo-area{cursor:pointer;display:flex;align-items:center;gap:10px;}
+.logo-mark{
+  width:38px;height:38px;background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;
+  font-family:'Playfair Display',serif;font-weight:700;font-size:20px;box-shadow:0 3px 10px rgba(123,30,58,.3);
+}
+.logo-text{display:flex;flex-direction:column;line-height:1;}
+.logo-title{font-family:'Playfair Display',serif;font-size:19px;color:var(--primary);font-weight:600;letter-spacing:.3px;}
+.logo-sub{font-size:8px;color:var(--muted);letter-spacing:3.5px;text-transform:uppercase;margin-top:3px;font-weight:500;}
+.header-icons{display:flex;gap:8px;align-items:center;}
+.icon-btn{
+  width:38px;height:38px;border-radius:12px;background:transparent;border:none;display:flex;
+  align-items:center;justify-content:center;color:var(--primary);font-size:16px;cursor:pointer;
+  position:relative;transition:.2s;
+}
+.icon-btn:active{background:var(--accent-soft);transform:scale(.94);}
+.icon-btn .badge{
+  position:absolute;top:2px;right:2px;background:var(--primary);color:#fff;font-size:9px;
+  min-width:17px;height:17px;padding:0 4px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-weight:700;border:2px solid #fff;
+}
 
-/* SEARCH */
-.search-container{display:none;background:var(--surface);padding:14px 20px;border-bottom:1px solid var(--line);}
-.search-input{width:100%;padding:10px 0;border:none;border-bottom:1px solid var(--primary);font-family:'Inter',sans-serif;font-size:13px;background:transparent;outline:none;letter-spacing:.5px;}
+/* ========= ADMIN BAR ========= */
+#adminBar{
+  display:none;background:linear-gradient(90deg,var(--primary-dark),var(--primary));
+  color:#fff;padding:10px 16px;font-size:11.5px;justify-content:space-between;align-items:center;
+  letter-spacing:.4px;font-weight:500;
+}
+#adminBar .admin-btn{
+  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;
+  padding:6px 12px;border-radius:8px;font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;
+  cursor:pointer;font-weight:500;margin-left:6px;
+}
+#adminBar .admin-btn:hover{background:rgba(255,255,255,.25);}
 
-/* COLOR BAR */
-.sticky-color-bar{background:var(--surface);padding:12px 20px;display:flex;gap:8px;overflow-x:auto;white-space:nowrap;position:sticky;top:61px;z-index:98;border-bottom:1px solid var(--line);scrollbar-width:none;}
+/* ========= SEARCH ========= */
+.search-container{
+  display:none;background:var(--surface);padding:12px 16px;border-bottom:1px solid var(--line);
+}
+.search-wrap{position:relative;}
+.search-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;}
+.search-input{
+  width:100%;padding:11px 14px 11px 38px;border:1px solid var(--line);border-radius:12px;
+  font-size:13px;background:var(--bg);outline:none;transition:.2s;
+}
+.search-input:focus{border-color:var(--primary);background:#fff;}
+
+/* ========= COLOR BAR ========= */
+.sticky-color-bar{
+  background:var(--surface);padding:10px 16px;display:flex;gap:8px;overflow-x:auto;
+  white-space:nowrap;position:sticky;top:96px;z-index:98;
+  border-bottom:1px solid var(--line);scrollbar-width:none;
+}
 .sticky-color-bar::-webkit-scrollbar{display:none;}
-.color-chip{border:1px solid var(--line);padding:6px 14px;border-radius:100px;font-size:10px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;color:var(--primary);background:transparent;flex-shrink:0;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;}
-.color-chip:active{background:var(--primary);color:#fff;}
-.color-chip .dot{width:7px;height:7px;border-radius:50%;display:inline-block;}
-.c-all .dot{background:#444;}.c-pink .dot{background:#e91e63;}.c-blue .dot{background:#2196f3;}
-.c-red .dot{background:#f44336;}.c-maroon .dot{background:#5c1824;}.c-green .dot{background:#4caf50;}
-.c-yellow .dot{background:#ff9800;}.c-other .dot{background:#795548;}
+.color-chip{
+  border:1.5px solid var(--line);padding:7px 14px;border-radius:20px;font-size:11px;
+  font-weight:500;letter-spacing:.3px;cursor:pointer;color:var(--text);background:var(--surface);
+  flex-shrink:0;display:inline-flex;align-items:center;gap:7px;transition:.2s;
+}
+.color-chip:active{transform:scale(.95);}
+.color-chip.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.color-chip .dot{width:9px;height:9px;border-radius:50%;display:inline-block;box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);}
+.c-all .dot{background:linear-gradient(135deg,#666,#999);}
+.c-pink .dot{background:#EC407A;}
+.c-blue .dot{background:#2196F3;}
+.c-red .dot{background:#F44336;}
+.c-maroon .dot{background:#7B1E3A;}
+.c-green .dot{background:#4CAF50;}
+.c-yellow .dot{background:#FFB300;}
+.c-other .dot{background:#8D6E63;}
 
-/* HERO */
-.hero{background:var(--surface);padding:60px 24px 70px;border-bottom:1px solid var(--line);text-align:center;}
-.hero-tag{font-size:10px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:20px;}
-.hero h1{font-family:'Playfair Display',serif;font-size:34px;color:var(--primary);margin:0 auto 18px;line-height:1.15;font-weight:400;max-width:340px;letter-spacing:-.5px;}
-.hero h1 em{font-style:italic;color:var(--brand);}
-.hero p{font-size:12px;color:var(--muted);margin:0 auto 28px;line-height:1.7;max-width:320px;}
-.shop-btn{background:var(--primary);color:#fff;border:none;padding:12px 32px;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;}
+/* ========= HERO ========= */
+.hero{
+  margin:14px 16px 0;border-radius:18px;overflow:hidden;position:relative;
+  background:linear-gradient(135deg,#7B1E3A 0%,#A33255 60%,#D4AF37 140%);
+  padding:32px 24px 34px;color:#fff;box-shadow:var(--shadow-lg);
+}
+.hero::before{
+  content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;
+  background:radial-gradient(circle,rgba(212,175,55,.35) 0%,transparent 70%);border-radius:50%;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-60px;left:-30px;width:160px;height:160px;
+  background:radial-gradient(circle,rgba(255,255,255,.12) 0%,transparent 70%);border-radius:50%;
+}
+.hero-content{position:relative;z-index:2;}
+.hero-tag{
+  display:inline-block;font-size:9.5px;letter-spacing:3px;text-transform:uppercase;
+  background:rgba(255,255,255,.18);padding:5px 12px;border-radius:20px;font-weight:500;
+  backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.25);margin-bottom:16px;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;font-size:28px;line-height:1.15;font-weight:600;
+  margin-bottom:10px;letter-spacing:-.3px;
+}
+.hero h1 em{font-style:italic;color:var(--accent);font-weight:500;}
+.hero p{font-size:12px;opacity:.85;line-height:1.6;margin-bottom:20px;max-width:280px;font-weight:300;}
+.shop-btn{
+  background:#fff;color:var(--primary);border:none;padding:12px 26px;border-radius:30px;
+  font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;
+  box-shadow:0 8px 20px rgba(0,0,0,.2);transition:.2s;display:inline-flex;align-items:center;gap:8px;
+}
+.shop-btn:active{transform:scale(.95);}
 
-/* CATEGORY */
-.category-slider{display:flex;overflow-x:auto;background:var(--surface);border-bottom:1px solid var(--line);scrollbar-width:none;}
-.category-slider::-webkit-scrollbar{display:none;}
-.cat-chip-card{background:transparent;border:none;border-right:1px solid var(--line);padding:16px 22px;display:flex;align-items:center;gap:8px;cursor:pointer;flex-shrink:0;}
-.cat-chip-card:active{background:#f2f2f2;}
-.cat-chip-card i{font-size:12px;color:var(--muted);}
-.cat-chip-card span{font-size:10px;font-weight:500;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase;}
+/* ========= CATEGORIES ========= */
+.cat-section{padding:22px 0 10px;}
+.cat-section h3{
+  font-family:'Playfair Display',serif;font-size:17px;color:var(--primary);font-weight:600;
+  padding:0 20px;margin-bottom:16px;letter-spacing:.2px;
+}
+.cat-slider{display:flex;gap:18px;overflow-x:auto;padding:0 20px 8px;scrollbar-width:none;}
+.cat-slider::-webkit-scrollbar{display:none;}
+.cat-item{
+  flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:8px;
+  background:none;border:none;cursor:pointer;padding:0;
+}
+.cat-circle{
+  width:66px;height:66px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:24px;color:#fff;box-shadow:var(--shadow-md);transition:.25s;position:relative;
+}
+.cat-item:active .cat-circle{transform:scale(.92);}
+.cat-1 .cat-circle{background:linear-gradient(135deg,#7B1E3A,#A33255);}
+.cat-2 .cat-circle{background:linear-gradient(135deg,#D4AF37,#E8C766);color:#5c1824;}
+.cat-3 .cat-circle{background:linear-gradient(135deg,#2C5F8D,#4A90C2);}
+.cat-4 .cat-circle{background:linear-gradient(135deg,#8E24AA,#B84DC9);}
+.cat-5 .cat-circle{background:linear-gradient(135deg,#00897B,#26A69A);}
+.cat-item span{font-size:11px;font-weight:500;color:var(--text);letter-spacing:.2px;}
 
-/* SECTION */
-.section-header{text-align:center;margin:50px 0 30px;}
-.section-header h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--primary);margin:0;font-weight:400;letter-spacing:-.3px;}
-.section-header p{font-size:10px;color:var(--muted);margin-top:8px;letter-spacing:3px;text-transform:uppercase;}
-.section-header::after{content:'';display:block;width:30px;height:1px;background:var(--accent);margin:14px auto 0;}
+/* ========= SECTION HEADER ========= */
+.section-header{padding:26px 20px 14px;display:flex;justify-content:space-between;align-items:flex-end;}
+.section-header h2{
+  font-family:'Playfair Display',serif;font-size:22px;color:var(--primary);font-weight:600;
+  letter-spacing:-.2px;
+}
+.section-header p{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.4px;}
+.section-header .count{
+  font-size:11px;color:var(--muted);background:var(--surface);padding:4px 10px;border-radius:20px;
+  border:1px solid var(--line);font-weight:500;
+}
 
-/* RECENTLY VIEWED */
-.recent-strip{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0 24px;}
-.recent-strip h3{font-family:'Playfair Display',serif;font-size:15px;color:var(--primary);margin:0 0 14px 20px;font-weight:400;letter-spacing:.3px;}
+/* ========= PRODUCT GRID ========= */
+.container{padding:0 16px;}
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.card{
+  background:var(--surface);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;
+  box-shadow:var(--shadow-sm);transition:.25s;position:relative;
+}
+.card:active{transform:scale(.985);box-shadow:var(--shadow-md);}
+.card-img-wrapper{
+  width:100%;height:200px;background:#f4f0eb;overflow:hidden;position:relative;
+}
+.card-img-wrapper img{
+  width:100%;height:100%;object-fit:cover;cursor:pointer;display:block;transition:transform .5s ease;
+}
+.card:active .card-img-wrapper img{transform:scale(1.03);}
+.badge-type{
+  position:absolute;top:8px;left:8px;background:rgba(255,255,255,.96);color:var(--primary);
+  font-size:9px;padding:4px 8px;border-radius:6px;letter-spacing:.8px;text-transform:uppercase;
+  font-weight:700;box-shadow:var(--shadow-sm);
+}
+.discount-badge{
+  position:absolute;top:8px;right:8px;background:linear-gradient(135deg,#E53935,#C62828);
+  color:#fff;font-size:10px;padding:4px 8px;border-radius:6px;font-weight:700;letter-spacing:.3px;
+  box-shadow:0 3px 8px rgba(229,57,53,.35);
+}
+.wishlist-btn{
+  position:absolute;bottom:8px;right:8px;background:rgba(255,255,255,.96);width:32px;height:32px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  border:none;color:var(--muted);font-size:13px;transition:.2s;box-shadow:var(--shadow-md);
+}
+.wishlist-btn.active{color:#EC407A;}
+.wishlist-btn:active{transform:scale(.88);}
+.trending-badge{
+  position:absolute;top:8px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(90deg,#D4AF37,#E8C766);color:#5c1824;font-size:9px;padding:3px 9px;
+  border-radius:20px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+  box-shadow:0 3px 8px rgba(212,175,55,.4);white-space:nowrap;
+}
+.card-body{padding:12px 12px 14px;display:flex;flex-direction:column;flex:1;}
+.card h3{
+  font-size:13px;color:var(--text);font-weight:500;line-height:1.35;cursor:pointer;
+  margin-bottom:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  min-height:35px;
+}
+.rating-row{display:flex;align-items:center;gap:5px;margin-bottom:8px;font-size:10px;color:var(--muted);}
+.rating-row .stars{color:#FFB300;letter-spacing:1px;font-size:10px;}
+.rating-row .sep{color:#ddd;}
+.price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;}
+.price-row .final{color:var(--primary);font-weight:700;font-size:16px;letter-spacing:-.2px;}
+.price-row .mrp{text-decoration:line-through;color:var(--muted);font-size:11px;}
+.price-row .off{color:#2E7D32;font-size:10px;font-weight:600;background:#E8F5E9;padding:2px 6px;border-radius:4px;}
+.card-actions{margin-top:auto;display:flex;gap:6px;}
+.btn-card{
+  flex:1;padding:9px 8px;border:none;border-radius:9px;font-size:10.5px;font-weight:600;
+  letter-spacing:.5px;cursor:pointer;transition:.2s;text-transform:uppercase;
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;
+}
+.btn-card.primary{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;}
+.btn-card.primary:active{transform:scale(.96);}
+.btn-card.ghost{background:var(--accent-soft);color:var(--primary);border:1px solid var(--accent);}
+.btn-card.ghost:active{transform:scale(.96);}
+
+.admin-action-bar{display:flex;gap:6px;margin-top:8px;}
+.btn-admin{
+  flex:1;padding:6px 8px;border-radius:7px;font-size:10px;font-weight:600;cursor:pointer;
+  border:none;letter-spacing:.4px;text-transform:uppercase;
+}
+.btn-admin.edit{background:#E3F2FD;color:#1565C0;}
+.btn-admin.del{background:#FFEBEE;color:#C62828;}
+
+/* ========= TRUST BAR ========= */
+.trust-bar{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:30px 16px 20px;
+}
+.trust-item{
+  background:var(--surface);border-radius:12px;padding:16px 6px;text-align:center;
+  box-shadow:var(--shadow-sm);
+}
+.trust-item .ic{
+  width:36px;height:36px;border-radius:10px;margin:0 auto 8px;display:flex;
+  align-items:center;justify-content:center;font-size:15px;
+}
+.trust-item:nth-child(1) .ic{background:#E8F5E9;color:#2E7D32;}
+.trust-item:nth-child(2) .ic{background:#E3F2FD;color:#1565C0;}
+.trust-item:nth-child(3) .ic{background:#FFF8E1;color:#F57F17;}
+.trust-item:nth-child(4) .ic{background:#FCE4EC;color:#C2185B;}
+.trust-item h4{font-size:9.5px;color:var(--text);font-weight:600;letter-spacing:.3px;margin-bottom:3px;}
+.trust-item p{font-size:9px;color:var(--muted);}
+
+/* ========= AI BUTTON ========= */
+.ai-float-btn{
+  position:fixed;bottom:88px;right:16px;background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  color:#fff;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:22px;box-shadow:0 8px 24px rgba(123,30,58,.4);cursor:pointer;
+  z-index:140;border:2px solid var(--accent);transition:.2s;
+  animation:pulseBtn 2.4s infinite;
+}
+.ai-float-btn:active{transform:scale(.9);}
+@keyframes pulseBtn{
+  0%,100%{box-shadow:0 8px 24px rgba(123,30,58,.4), 0 0 0 0 rgba(212,175,55,.6);}
+  50%{box-shadow:0 8px 24px rgba(123,30,58,.4), 0 0 0 12px rgba(212,175,55,0);}
+}
+
+/* ========= AI CHAT ========= */
+.ai-chat-box{
+  display:none;position:fixed;bottom:150px;right:16px;width:330px;max-width:calc(100vw - 32px);
+  background:var(--surface);border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.22);
+  z-index:200;overflow:hidden;border:1px solid var(--line);
+}
+.ai-chat-header{
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;
+  padding:14px 16px;display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;font-weight:600;letter-spacing:.3px;
+}
+.ai-chat-header i.fa-robot{margin-right:6px;color:var(--accent);}
+.ai-chat-body{
+  padding:14px;height:280px;overflow-y:auto;background:var(--bg);
+  display:flex;flex-direction:column;gap:10px;
+}
+.ai-msg{padding:10px 13px;border-radius:12px;max-width:85%;line-height:1.55;font-size:12.5px;word-wrap:break-word;}
+.ai-msg.bot{background:#fff;color:var(--text);align-self:flex-start;border-bottom-left-radius:3px;box-shadow:var(--shadow-sm);}
+.ai-msg.user{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;align-self:flex-end;border-bottom-right-radius:3px;}
+.ai-chat-footer{display:flex;padding:10px;background:var(--surface);border-top:1px solid var(--line);gap:8px;}
+.ai-chat-input{
+  flex:1;padding:10px 14px;border:1px solid var(--line);border-radius:22px;font-size:12.5px;
+  outline:none;background:var(--bg);transition:.2s;
+}
+.ai-chat-input:focus{border-color:var(--primary);background:#fff;}
+.ai-send-btn{
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;border:none;
+  width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;
+  justify-content:center;font-size:14px;flex-shrink:0;transition:.2s;
+}
+.ai-send-btn:active{transform:scale(.9);}
+
+/* ========= BOTTOM NAV ========= */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;width:100%;background:#fff;display:flex;justify-content:space-around;
+  padding:8px 6px 10px;box-shadow:0 -4px 20px rgba(0,0,0,.08);z-index:150;
+  border-top:1px solid var(--line);
+}
+.nav-item{
+  text-align:center;background:none;border:none;color:var(--muted);font-size:9.5px;
+  cursor:pointer;letter-spacing:.3px;text-transform:uppercase;font-weight:600;
+  position:relative;padding:6px 12px;border-radius:10px;transition:.2s;flex:1;
+}
+.nav-item i{font-size:19px;display:block;margin-bottom:3px;transition:.2s;}
+.nav-item.active{color:var(--primary);}
+.nav-item.active i{transform:translateY(-1px);}
+.nav-item.active::before{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:24px;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent));
+  border-radius:0 0 3px 3px;
+}
+.nav-item .nav-badge{
+  position:absolute;top:2px;right:14px;background:var(--primary);color:#fff;font-size:8.5px;
+  min-width:16px;height:16px;padding:0 4px;border-radius:9px;display:flex;align-items:center;
+  justify-content:center;font-weight:700;border:2px solid #fff;
+}
+
+/* ========= MODALS ========= */
+.modal{
+  display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(20,10,15,.55);
+  backdrop-filter:blur(4px);z-index:300;align-items:flex-end;justify-content:center;
+  animation:fadeIn .2s ease;
+}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.modal-content{
+  background:#fff;width:100%;max-width:520px;padding:24px 20px 30px;position:relative;
+  max-height:92vh;overflow-y:auto;border-radius:24px 24px 0 0;
+  animation:slideUp .3s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes slideUp{from{transform:translateY(30px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.modal-content::before{
+  content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);
+  width:40px;height:4px;background:var(--line);border-radius:2px;
+}
+.close-btn{
+  position:absolute;right:16px;top:20px;width:32px;height:32px;border-radius:50%;
+  background:var(--bg);border:none;font-size:16px;cursor:pointer;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;transition:.2s;
+}
+.close-btn:active{background:var(--line);transform:scale(.9);}
+
+.modal-title{
+  font-family:'Playfair Display',serif;font-size:22px;color:var(--primary);font-weight:600;
+  margin-bottom:6px;letter-spacing:-.2px;
+}
+.modal-sub{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.5;}
+
+.form-control{
+  width:100%;padding:13px 16px;margin-bottom:12px;border:1.5px solid var(--line);
+  border-radius:11px;font-size:13px;background:var(--bg);outline:none;transition:.2s;color:var(--text);
+}
+.form-control:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 3px rgba(123,30,58,.08);}
+.form-label{
+  font-size:10.5px;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;
+  display:block;margin-bottom:6px;font-weight:600;
+}
+
+.btn{
+  padding:13px 20px;border:1.5px solid var(--primary);border-radius:11px;cursor:pointer;
+  background:transparent;color:var(--primary);font-weight:600;width:100%;display:inline-block;
+  text-decoration:none;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;transition:.2s;
+  text-align:center;
+}
+.btn:active{transform:scale(.97);}
+.btn.cart-btn{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;border:none;box-shadow:0 6px 16px rgba(123,30,58,.25);}
+.btn.success{background:#fff;color:#111;border-color:#111;}
+.btn.success:active{background:#111;color:#fff;}
+.btn.share-btn{background:#E8F9F0;color:#25D366;border-color:#B8EFD0;}
+.btn.danger{background:#FFEBEE;color:#C62828;border-color:#FFCDD2;width:auto;padding:8px 14px;font-size:10.5px;}
+.btn.info{background:#E3F2FD;color:#1565C0;border-color:#BBDEFB;width:auto;padding:8px 14px;font-size:10.5px;}
+
+/* ========= ACCOUNT MODAL ========= */
+.account-header{
+  display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:20px;
+}
+.account-avatar{
+  width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-light));
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:30px;
+  margin-bottom:12px;box-shadow:0 8px 20px rgba(123,30,58,.3);
+}
+.account-name{font-family:'Playfair Display',serif;font-size:20px;color:var(--primary);font-weight:600;margin-bottom:4px;}
+.account-email{font-size:12px;color:var(--muted);}
+.account-badge{
+  display:inline-flex;align-items:center;gap:6px;background:#FFF8E1;color:#F57F17;
+  padding:5px 12px;border-radius:20px;font-size:10.5px;font-weight:700;letter-spacing:.5px;
+  text-transform:uppercase;margin-top:10px;border:1px solid #FFE082;
+}
+.account-menu{margin-top:8px;}
+.account-menu-item{
+  display:flex;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid var(--line);
+  cursor:pointer;transition:.2s;background:none;border:none;width:100%;text-align:left;
+}
+.account-menu-item:active{background:var(--bg);}
+.account-menu-item .mi-icon{
+  width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;
+  font-size:15px;flex-shrink:0;
+}
+.account-menu-item .mi-text{flex:1;}
+.account-menu-item .mi-text strong{display:block;font-size:13px;color:var(--text);font-weight:600;margin-bottom:2px;}
+.account-menu-item .mi-text span{font-size:11px;color:var(--muted);}
+.account-menu-item .mi-icon.red{background:#FFEBEE;color:#C62828;}
+.account-menu-item .mi-icon.blue{background:#E3F2FD;color:#1565C0;}
+.account-menu-item .mi-icon.green{background:#E8F5E9;color:#2E7D32;}
+.account-menu-item .mi-icon.gold{background:#FFF8E1;color:#F57F17;}
+.account-menu-item .mi-icon.grey{background:#F5F5F5;color:#616161;}
+.account-menu-item i.fa-chevron-right{color:#ccc;font-size:12px;}
+
+/* ========= SHARE ========= */
+.share-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px;}
+.share-option-btn{
+  background:var(--bg);border:1.5px solid var(--line);padding:16px 8px;border-radius:12px;
+  text-align:center;cursor:pointer;text-decoration:none;color:var(--text);
+  font-size:10.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:8px;
+  transition:.2s;letter-spacing:.2px;
+}
+.share-option-btn:active{transform:scale(.96);background:#fff;}
+.share-option-btn i{font-size:22px;}
+
+/* ========= CART ========= */
+.cart-item{
+  display:flex;gap:12px;padding:14px 0;border-bottom:1px solid var(--line);align-items:center;
+}
+.cart-item img{width:64px;height:64px;object-fit:cover;border-radius:10px;}
+.cart-item .ci-info{flex:1;min-width:0;}
+.cart-item .ci-info strong{
+  font-size:12.5px;color:var(--text);font-weight:600;display:block;margin-bottom:3px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.cart-item .ci-info .ci-price{color:var(--primary);font-weight:700;font-size:13px;}
+.qty-box{display:flex;align-items:center;gap:8px;margin-top:8px;}
+.qty-btn{
+  width:26px;height:26px;border-radius:7px;border:1px solid var(--line);background:#fff;
+  cursor:pointer;font-size:12px;color:var(--text);display:flex;align-items:center;justify-content:center;
+}
+.qty-btn:active{background:var(--bg);}
+.qty-num{font-size:12px;font-weight:600;min-width:16px;text-align:center;}
+.ci-remove{
+  background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;padding:6px;
+  border-radius:8px;transition:.2s;
+}
+.ci-remove:active{background:#FFEBEE;color:#C62828;}
+
+/* ========= COUPON ========= */
+.coupon-row{display:flex;gap:8px;margin:14px 0 10px;}
+.coupon-row input{
+  flex:1;padding:12px 14px;border:1.5px dashed var(--accent);border-radius:11px;
+  font-size:12.5px;background:var(--accent-soft);outline:none;letter-spacing:1.5px;
+  text-transform:uppercase;font-weight:600;
+}
+.coupon-row input::placeholder{color:#B8A87A;letter-spacing:.4px;font-weight:500;text-transform:none;}
+.coupon-row button{
+  background:linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;border:none;
+  padding:12px 18px;border-radius:11px;font-size:11px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;cursor:pointer;
+}
+.coupon-msg{font-size:11.5px;margin-bottom:12px;padding:9px 12px;border-radius:9px;display:none;}
+.coupon-msg.ok{background:#E8F5E9;color:#2E7D32;display:block;}
+.coupon-msg.err{background:#FFEBEE;color:#C62828;display:block;}
+
+.cart-summary{
+  background:var(--bg);border-radius:14px;padding:16px;margin-bottom:14px;
+}
+.summary-row{
+  display:flex;justify-content:space-between;font-size:12.5px;color:var(--text);
+  margin-bottom:8px;letter-spacing:.2px;
+}
+.summary-row.total{
+  font-weight:700;font-size:15px;color:var(--primary);padding-top:10px;
+  border-top:1.5px dashed var(--line);margin-top:10px;margin-bottom:0;
+}
+.summary-row.discount{color:#2E7D32;font-weight:600;}
+
+/* ========= PRODUCT DETAIL ========= */
+.pd-image{
+  width:100%;max-height:380px;object-fit:cover;border-radius:14px;margin-bottom:16px;
+  background:#f4f0eb;
+}
+.pd-cat{
+  font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;
+  font-weight:600;margin-bottom:6px;
+}
+.pd-title{
+  font-family:'Playfair Display',serif;font-size:22px;color:var(--primary);font-weight:600;
+  line-height:1.25;margin-bottom:10px;
+}
+.pd-sku{font-size:11px;color:var(--muted);margin-bottom:12px;letter-spacing:.3px;}
+.pd-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+.pd-price-row .final{font-size:24px;font-weight:700;color:var(--primary);letter-spacing:-.4px;}
+.pd-price-row .mrp{font-size:14px;text-decoration:line-through;color:var(--muted);}
+.pd-price-row .off{
+  background:#E8F5E9;color:#2E7D32;font-size:11px;font-weight:700;padding:4px 10px;
+  border-radius:6px;letter-spacing:.3px;
+}
+.live-viewers{
+  display:inline-flex;align-items:center;gap:6px;background:#FFF3E0;color:#E65100;
+  font-size:11px;padding:6px 12px;border-radius:20px;font-weight:600;margin-bottom:14px;
+  letter-spacing:.2px;
+}
+.live-viewers .pulse{
+  width:7px;height:7px;background:#E65100;border-radius:50%;animation:pulseDot 1.4s infinite;
+}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.3;transform:scale(.8);}}
+.pd-desc{font-size:13px;line-height:1.7;color:#444;margin-bottom:18px;}
+.pd-actions{display:flex;flex-direction:column;gap:10px;}
+
+/* ========= RECOMMENDATIONS ========= */
+.rec-section{margin-top:24px;padding-top:20px;border-top:1.5px dashed var(--line);}
+.rec-section h4{
+  font-family:'Playfair Display',serif;font-size:16px;color:var(--primary);font-weight:600;
+  margin-bottom:14px;
+}
+.rec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.rec-card{
+  cursor:pointer;background:var(--bg);border-radius:11px;overflow:hidden;transition:.2s;
+}
+.rec-card:active{transform:scale(.97);}
+.rec-card img{width:100%;height:130px;object-fit:cover;display:block;}
+.rec-card .rc-info{padding:10px;}
+.rec-card span{
+  font-size:11.5px;color:var(--text);font-weight:500;display:block;line-height:1.3;
+  overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;
+  -webkit-box-orient:vertical;margin-bottom:4px;min-height:30px;
+}
+.rec-card .p{font-size:12.5px;color:var(--primary);font-weight:700;}
+
+/* ========= FOOTER ========= */
+footer{
+  background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;
+  padding:40px 20px 30px;text-align:center;margin-top:50px;
+}
+footer .ft-logo{
+  font-family:'Playfair Display',serif;font-size:24px;letter-spacing:3px;font-weight:600;
+  margin-bottom:8px;
+}
+footer p{font-size:11.5px;color:rgba(255,255,255,.7);line-height:1.8;letter-spacing:.4px;}
+footer .ft-line{width:40px;height:2px;background:var(--accent);margin:16px auto;}
+footer .ft-copy{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:1.5px;margin-top:20px;}
+
+/* Recently viewed */
+.recent-strip{
+  background:var(--surface);padding:16px 0 18px;margin:16px 0 0;border-top:1px solid var(--line);
+}
+.recent-strip h3{
+  font-family:'Playfair Display',serif;font-size:15px;color:var(--primary);font-weight:600;
+  padding:0 20px;margin-bottom:12px;
+}
 .recent-scroll{display:flex;gap:12px;overflow-x:auto;padding:0 20px;scrollbar-width:none;}
 .recent-scroll::-webkit-scrollbar{display:none;}
-.recent-item{flex-shrink:0;width:90px;cursor:pointer;}
-.recent-item img{width:90px;height:110px;object-fit:cover;border:1px solid var(--line);display:block;}
-.recent-item span{display:block;font-size:9.5px;color:var(--muted);margin-top:5px;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;}
-
-/* GRID */
-.container{max-width:1200px;margin:0 auto;padding:0 16px;}
-.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
-.card{background:var(--surface);overflow:hidden;text-align:left;padding:0 0 16px;position:relative;display:flex;flex-direction:column;}
-.card-img-wrapper{width:100%;height:220px;background:#f4f4f4;overflow:hidden;position:relative;}
-.card-img-wrapper img{width:100%;height:100%;object-fit:cover;cursor:pointer;display:block;transition:transform .6s;}
-.card-img-wrapper img:hover{transform:scale(1.04);}
-.card h3{font-size:12px;margin:14px 14px 4px;color:var(--text);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;font-family:'Playfair Display',serif;}
-.badge-type{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.95);color:var(--primary);font-size:9px;padding:4px 8px;letter-spacing:1px;text-transform:uppercase;font-weight:500;z-index:2;}
-.rating-row{display:flex;align-items:center;gap:4px;margin:0 14px 6px;font-size:10px;color:var(--muted);}
-.rating-row .stars{color:#f4b400;letter-spacing:1px;font-size:9.5px;}
-.wishlist-btn{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.95);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3;border:none;color:var(--muted);font-size:13px;transition:.2s;}
-.wishlist-btn.active{color:#e91e63;}
-.share-mini-btn{position:absolute;bottom:12px;right:12px;background:rgba(255,255,255,.95);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3;border:none;color:#25D366;font-size:12px;}
-.price-box{display:flex;gap:8px;margin:0 14px 14px;align-items:baseline;cursor:pointer;}
-.price-box .discount{color:var(--brand);font-weight:500;font-size:14px;}
-.price-box .regular{text-decoration:line-through;color:var(--muted);font-size:11px;}
-.btn-group{display:flex;flex-direction:column;gap:6px;width:100%;padding:0 14px;margin-top:auto;}
-.btn{padding:10px 12px;border:1px solid var(--primary);border-radius:0;cursor:pointer;background:transparent;color:var(--primary);font-weight:500;width:100%;display:inline-block;text-decoration:none;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:'Inter',sans-serif;transition:.25s;}
-.btn:hover{background:var(--primary);color:#fff;}
-.btn.cart-btn{background:var(--primary);color:#fff;}
-.btn.success{background:transparent;color:#1a1a1a;border-color:#1a1a1a;}
-.btn.danger{border-color:#d32f2f;color:#d32f2f;width:auto;padding:6px 10px;font-size:9px;}
-.btn.info{border-color:var(--accent);color:var(--accent);width:auto;padding:6px 10px;font-size:9px;}
-.admin-action-bar{display:flex;gap:6px;margin-top:8px;justify-content:center;}
-
-/* TRUST */
-.trust-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);margin:50px 16px;border:1px solid var(--line);text-align:center;}
-.trust-item{padding:22px 8px;border-right:1px solid var(--line);}
-.trust-item:last-child{border-right:none;}
-.trust-item i{font-size:16px;color:var(--accent);margin-bottom:10px;display:block;}
-.trust-item h4{font-size:9px;margin:0;color:var(--primary);font-weight:500;letter-spacing:1.2px;text-transform:uppercase;}
-.trust-item p{font-size:9px;margin:5px 0 0;color:var(--muted);}
-
-/* AI BUTTON */
-.ai-float-btn{position:fixed;bottom:82px;right:16px;background:var(--primary);color:#fff;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 6px 20px rgba(0,0,0,.15);cursor:pointer;z-index:140;}
-
-/* AI CHAT */
-.ai-chat-box{display:none;position:fixed;bottom:140px;right:16px;width:320px;max-width:92vw;background:var(--surface);box-shadow:0 20px 60px rgba(0,0,0,.18);z-index:200;overflow:hidden;border:1px solid var(--line);}
-.ai-chat-header{background:var(--primary);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;}
-.ai-chat-body{padding:16px;height:260px;overflow-y:auto;background:var(--bg);font-size:12px;display:flex;flex-direction:column;gap:10px;}
-.ai-msg{padding:10px 12px;max-width:85%;line-height:1.6;font-size:11.5px;}
-.ai-msg.bot{background:var(--surface);color:var(--primary);align-self:flex-start;border-left:2px solid var(--accent);}
-.ai-msg.user{background:var(--primary);color:#fff;align-self:flex-end;}
-.ai-chat-footer{display:flex;padding:10px;background:var(--surface);border-top:1px solid var(--line);}
-.ai-chat-input{flex:1;padding:8px 12px;border:1px solid var(--line);font-size:11.5px;outline:none;font-family:'Inter',sans-serif;}
-.ai-send-btn{background:var(--primary);color:#fff;border:none;width:34px;height:34px;margin-left:6px;cursor:pointer;}
-
-/* BOTTOM NAV */
-.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:var(--surface);display:flex;justify-content:space-around;padding:10px 0 12px;border-top:1px solid var(--line);z-index:150;}
-.nav-item{text-align:center;background:none;border:none;color:var(--muted);font-size:9px;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:1px;text-transform:uppercase;font-weight:500;position:relative;}
-.nav-item i{font-size:15px;display:block;margin-bottom:4px;}
-.nav-item.active{color:var(--primary);}
-.nav-item .nav-badge{position:absolute;top:-4px;right:14px;background:var(--brand);color:#fff;font-size:7.5px;min-width:14px;height:14px;padding:0 3px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:600;}
-
-/* MODALS */
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(20,20,20,.55);z-index:200;align-items:center;justify-content:center;padding:20px;}
-.modal-content{background:var(--surface);width:90%;max-width:440px;padding:28px 24px;position:relative;max-height:90vh;overflow-y:auto;}
-.close-btn{position:absolute;right:18px;top:14px;font-size:22px;cursor:pointer;color:var(--muted);font-weight:300;}
-.form-control{width:100%;padding:12px 0;margin-bottom:16px;border:none;border-bottom:1px solid var(--line);font-family:'Inter',sans-serif;font-size:13px;background:transparent;outline:none;color:var(--text);}
-.form-control:focus{border-bottom-color:var(--primary);}
-
-/* COUPON */
-.coupon-row{display:flex;gap:8px;margin-bottom:14px;}
-.coupon-row input{flex:1;padding:10px 12px;border:1px solid var(--line);font-size:12px;font-family:'Inter',sans-serif;outline:none;}
-.coupon-row button{background:var(--primary);color:#fff;border:none;padding:10px 16px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;cursor:pointer;}
-.coupon-msg{font-size:11px;margin:-8px 0 12px;padding:8px 10px;}
-.coupon-msg.ok{background:#e8f5e9;color:#2e7d32;}
-.coupon-msg.err{background:#ffebee;color:#c62828;}
-
-/* LIVE VIEWERS */
-.live-viewers{display:inline-flex;align-items:center;gap:6px;background:#fff3e0;color:#e65100;font-size:10px;padding:5px 10px;letter-spacing:.5px;font-weight:500;margin-bottom:12px;}
-.live-viewers .pulse{width:6px;height:6px;background:#e65100;border-radius:50%;animation:pulseDot 1.5s infinite;}
-@keyframes pulseDot{0%,100%{opacity:1;}50%{opacity:.3;}}
-
-/* SHARE / OPTIN */
-.share-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;}
-.share-option-btn{background:var(--bg);border:1px solid var(--line);padding:16px 8px;text-align:center;cursor:pointer;text-decoration:none;color:var(--primary);font-size:10px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:8px;letter-spacing:.8px;}
-.share-option-btn i{font-size:20px;}
-
-/* CART */
-.cart-item{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:12px 0;font-size:12px;}
-.cart-item img{width:50px;height:50px;object-fit:cover;}
-
-/* RECOMMEND */
-.rec-section{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);}
-.rec-section h4{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--primary);margin:0 0 14px;letter-spacing:.3px;}
-.rec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.rec-card{cursor:pointer;}
-.rec-card img{width:100%;height:120px;object-fit:cover;border:1px solid var(--line);}
-.rec-card span{display:block;font-size:10px;color:var(--text);margin-top:6px;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.rec-card .p{font-size:11px;color:var(--brand);font-weight:500;margin-top:2px;}
-
-footer{background:var(--primary);color:#fff;padding:40px 20px 30px;text-align:center;font-size:12px;margin-top:60px;}
-footer p{color:#ddd;line-height:1.7;margin:6px 0;letter-spacing:.5px;}
-footer p strong{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;letter-spacing:2px;}
+.recent-item{flex-shrink:0;width:82px;cursor:pointer;}
+.recent-item img{
+  width:82px;height:100px;object-fit:cover;border-radius:10px;display:block;
+  background:#f4f0eb;box-shadow:var(--shadow-sm);
+}
+.recent-item span{
+  display:block;font-size:10px;color:var(--muted);margin-top:6px;text-align:center;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;
+}
 </style>
 </head>
 <body>
 
 <!-- OFFER TICKER -->
 <div class="offer-ticker" id="offerTicker">
-  <i class="fas fa-bolt"></i> FESTIVE SALE — Extra 10% off, code <b>ZARA10</b> · Ends in <span class="cd" id="countdown">--:--:--</span>
+  <i class="fas fa-bolt"></i> FESTIVE SALE — Extra 10% off · Code <b>ZARA10</b> · Ends in <span class="cd" id="countdown">--:--:--</span>
 </div>
 
 <!-- HEADER -->
 <header>
   <div class="logo-area" onclick="goHome()">
-    <div class="logo-title">Zarafiya</div>
-    <div class="logo-sub">Fashion</div>
+    <div class="logo-mark">Z</div>
+    <div class="logo-text">
+      <div class="logo-title">Zarafiya</div>
+      <div class="logo-sub">Fashion</div>
+    </div>
   </div>
   <div class="header-icons">
-    <i class="fas fa-share-alt" onclick="openShareModal()"></i>
-    <i class="fas fa-search" onclick="toggleSearchBox()"></i>
-    <div class="badge-wrap" onclick="openWishlist()">
+    <button class="icon-btn" onclick="openShareModal()" title="Share"><i class="fas fa-share-alt"></i></button>
+    <button class="icon-btn" onclick="toggleSearchBox()" title="Search"><i class="fas fa-search"></i></button>
+    <button class="icon-btn" onclick="openWishlist()" title="Wishlist">
       <i class="fas fa-heart"></i>
-      <span class="badge" id="wishCount">0</span>
-    </div>
-    <div class="badge-wrap" onclick="openCartModal()">
+      <span class="badge" id="wishCount" style="display:none;">0</span>
+    </button>
+    <button class="icon-btn" onclick="openCartModal()" title="Bag">
       <i class="fas fa-shopping-bag"></i>
-      <span class="badge" id="cartCount">0</span>
-    </div>
-    <i class="fas fa-bars" onclick="openLoginModal()"></i>
+      <span class="badge" id="cartCount" style="display:none;">0</span>
+    </button>
   </div>
 </header>
 
 <div id="adminBar">
-  <span><i class="fas fa-user-shield"></i> Admin Mode</span>
+  <span><i class="fas fa-user-shield"></i> Admin Mode Active</span>
   <div>
-    <button onclick="openAddProductModal()" style="background:transparent;border:1px solid #fff;color:#fff;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-right:8px;"><i class="fas fa-plus"></i> Add</button>
-    <button onclick="logoutAdminBtn()" style="background:#fff;color:var(--primary);border:none;padding:5px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;">Logout</button>
+    <button class="admin-btn" onclick="openAddProductModal()"><i class="fas fa-plus"></i> Add</button>
+    <button class="admin-btn" onclick="logoutAdminBtn()">Logout</button>
   </div>
 </div>
 
 <div id="searchBox" class="search-container">
-  <input type="text" id="searchInput" class="search-input" placeholder="Search by name, SKU, color..." onkeyup="searchProducts()">
+  <div class="search-wrap">
+    <i class="fas fa-search"></i>
+    <input type="text" id="searchInput" class="search-input" placeholder="Search sarees, suits, dupatta..." onkeyup="searchProducts()">
+  </div>
 </div>
 
 <div class="sticky-color-bar">
-  <button class="color-chip c-all" onclick="filterColor('all')"><span class="dot"></span>All</button>
-  <button class="color-chip c-pink" onclick="filterColor('pink')"><span class="dot"></span>Pink</button>
-  <button class="color-chip c-blue" onclick="filterColor('blue')"><span class="dot"></span>Blue</button>
-  <button class="color-chip c-red" onclick="filterColor('red')"><span class="dot"></span>Red</button>
-  <button class="color-chip c-maroon" onclick="filterColor('maroon')"><span class="dot"></span>Maroon</button>
-  <button class="color-chip c-green" onclick="filterColor('green')"><span class="dot"></span>Green</button>
-  <button class="color-chip c-yellow" onclick="filterColor('yellow')"><span class="dot"></span>Yellow</button>
-  <button class="color-chip c-other" onclick="filterColor('other')"><span class="dot"></span>Other</button>
+  <button class="color-chip c-all active" onclick="filterColor('all', this)"><span class="dot"></span>All</button>
+  <button class="color-chip c-pink" onclick="filterColor('pink', this)"><span class="dot"></span>Pink</button>
+  <button class="color-chip c-blue" onclick="filterColor('blue', this)"><span class="dot"></span>Blue</button>
+  <button class="color-chip c-red" onclick="filterColor('red', this)"><span class="dot"></span>Red</button>
+  <button class="color-chip c-maroon" onclick="filterColor('maroon', this)"><span class="dot"></span>Maroon</button>
+  <button class="color-chip c-green" onclick="filterColor('green', this)"><span class="dot"></span>Green</button>
+  <button class="color-chip c-yellow" onclick="filterColor('yellow', this)"><span class="dot"></span>Yellow</button>
+  <button class="color-chip c-other" onclick="filterColor('other', this)"><span class="dot"></span>Other</button>
 </div>
 
 <main id="customerView">
+
+  <!-- HERO -->
   <section class="hero">
-    <div class="hero-tag">Handcrafted in Varanasi</div>
-    <h1>Premium <em>Banarasi</em> Silk Sarees</h1>
-    <p>Timeless weaves, crafted directly by master artisans. Elegance in every thread.</p>
-    <button class="shop-btn" onclick="scrollToCollection()">Explore Collection</button>
+    <div class="hero-content">
+      <div class="hero-tag">Handcrafted in Varanasi</div>
+      <h1>Premium <em>Banarasi</em><br>Silk Sarees</h1>
+      <p>Timeless weaves, crafted by master artisans. Elegance in every thread.</p>
+      <button class="shop-btn" onclick="scrollToCollection()">Explore Collection <i class="fas fa-arrow-right"></i></button>
+    </div>
   </section>
 
-  <div class="category-slider">
-    <div class="cat-chip-card" onclick="filterCategory('All')"><i class="fas fa-th-large"></i><span>All</span></div>
-    <div class="cat-chip-card" onclick="filterCategory('Sarees')"><i class="fas fa-female"></i><span>Sarees</span></div>
-    <div class="cat-chip-card" onclick="filterCategory('Suit')"><i class="fas fa-tshirt"></i><span>Suits</span></div>
-    <div class="cat-chip-card" onclick="filterCategory('Dupatta')"><i class="fas fa-gift"></i><span>Dupatta</span></div>
-    <div class="cat-chip-card" onclick="filterCategory('Gharara')"><i class="fas fa-star"></i><span>Gharara</span></div>
+  <!-- CATEGORIES -->
+  <div class="cat-section">
+    <h3>Shop by Category</h3>
+    <div class="cat-slider">
+      <button class="cat-item cat-1" onclick="filterCategory('Sarees')">
+        <div class="cat-circle"><i class="fas fa-female"></i></div>
+        <span>Sarees</span>
+      </button>
+      <button class="cat-item cat-2" onclick="filterCategory('Suit')">
+        <div class="cat-circle"><i class="fas fa-tshirt"></i></div>
+        <span>Suits</span>
+      </button>
+      <button class="cat-item cat-3" onclick="filterCategory('Dupatta')">
+        <div class="cat-circle"><i class="fas fa-scroll"></i></div>
+        <span>Dupatta</span>
+      </button>
+      <button class="cat-item cat-4" onclick="filterCategory('Gharara')">
+        <div class="cat-circle"><i class="fas fa-star"></i></div>
+        <span>Gharara</span>
+      </button>
+      <button class="cat-item cat-5" onclick="filterCategory('All')">
+        <div class="cat-circle"><i class="fas fa-th-large"></i></div>
+        <span>All</span>
+      </button>
+    </div>
   </div>
 
   <!-- RECENTLY VIEWED -->
@@ -249,37 +690,43 @@ footer p strong{font-family:'Playfair Display',serif;font-size:18px;font-weight:
     <div class="recent-scroll" id="recentScroll"></div>
   </div>
 
+  <!-- COLLECTION -->
   <div class="section-header" id="collectionSection">
-    <h2 id="activeCatTitle">All Collection</h2>
-    <p>Curated Selection</p>
+    <div>
+      <h2 id="activeCatTitle">All Collection</h2>
+      <p>Curated Selection</p>
+    </div>
+    <span class="count" id="productCount">0 items</span>
   </div>
 
   <div class="container">
     <div id="productGrid" class="product-grid">
-      <p style="text-align:center;width:100%;grid-column:1/-1;color:#8a8a8a;padding:40px;font-size:12px;">Loading collection...</p>
+      <p style="text-align:center;grid-column:1/-1;color:#8B8078;padding:50px 20px;font-size:13px;">Loading collection...</p>
     </div>
   </div>
 
   <div class="trust-bar">
-    <div class="trust-item"><i class="fas fa-shipping-fast"></i><h4>Free Ship</h4><p>All Orders</p></div>
-    <div class="trust-item"><i class="fas fa-shield-alt"></i><h4>Secure</h4><p>100% Safe</p></div>
-    <div class="trust-item"><i class="fas fa-award"></i><h4>Premium</h4><p>Handpicked</p></div>
-    <div class="trust-item"><i class="fas fa-headset"></i><h4>Support</h4><p>24/7</p></div>
+    <div class="trust-item"><div class="ic"><i class="fas fa-shipping-fast"></i></div><h4>Free Ship</h4><p>All Orders</p></div>
+    <div class="trust-item"><div class="ic"><i class="fas fa-shield-alt"></i></div><h4>Secure</h4><p>100% Safe</p></div>
+    <div class="trust-item"><div class="ic"><i class="fas fa-award"></i></div><h4>Premium</h4><p>Handpicked</p></div>
+    <div class="trust-item"><div class="ic"><i class="fas fa-headset"></i></div><h4>Support</h4><p>24/7</p></div>
   </div>
 </main>
 
-<div class="ai-float-btn" onclick="toggleAiChat()"><i class="fas fa-robot"></i></div>
+<!-- AI FLOAT -->
+<button class="ai-float-btn" onclick="toggleAiChat()" title="AI Help"><i class="fas fa-robot"></i></button>
 
+<!-- AI CHAT -->
 <div id="aiChatBox" class="ai-chat-box">
   <div class="ai-chat-header">
     <span><i class="fas fa-robot"></i> Zarafiya Assistant</span>
     <i class="fas fa-times" style="cursor:pointer;" onclick="toggleAiChat()"></i>
   </div>
   <div id="aiChatBody" class="ai-chat-body">
-    <div class="ai-msg bot">Welcome to Zarafiya. Ask me about sarees, prices, or say <b>"₹2000 mein wedding saree dikhao"</b> — English, Hindi ya Urdu mein.</div>
+    <div class="ai-msg bot">👋 Welcome to Zarafiya Fashion!<br><br>Aap mujhse sarees, suits, prices ya orders ke baare mein kuch bhi pooch sakte hain — English, Hindi ya Urdu mein.</div>
   </div>
   <div class="ai-chat-footer">
-    <input type="text" id="aiUserInput" class="ai-chat-input" placeholder="Write a message..." onkeypress="handleAiEnter(event)">
+    <input type="text" id="aiUserInput" class="ai-chat-input" placeholder="Ask me anything..." onkeypress="handleAiEnter(event)">
     <button class="ai-send-btn" onclick="sendAiMessage()"><i class="fas fa-paper-plane"></i></button>
   </div>
 </div>
@@ -287,24 +734,24 @@ footer p strong{font-family:'Playfair Display',serif;font-size:18px;font-weight:
 <!-- SHARE MODAL -->
 <div id="shareModal" class="modal">
   <div class="modal-content" style="text-align:center;">
-    <span class="close-btn" onclick="closeModal('shareModal')">&times;</span>
-    <h3 style="font-family:'Playfair Display',serif;color:var(--primary);margin-top:0;font-weight:400;font-size:20px;">Share Zarafiya</h3>
-    <p style="font-size:11px;color:#8a8a8a;letter-spacing:.5px;">Share with friends — they get ₹100 off, you get ₹100 off on next order</p>
+    <button class="close-btn" onclick="closeModal('shareModal')"><i class="fas fa-times"></i></button>
+    <h3 class="modal-title">Share Zarafiya</h3>
+    <p class="modal-sub">Friends ko share karein — unhe ₹100 off, aapko ₹100 off on next order</p>
     <div class="share-options">
       <a id="shareWa" href="#" target="_blank" class="share-option-btn"><i class="fab fa-whatsapp" style="color:#25D366;"></i>WhatsApp</a>
       <a id="shareFb" href="#" target="_blank" class="share-option-btn"><i class="fab fa-facebook" style="color:#1877F2;"></i>Facebook</a>
       <a id="shareTele" href="#" target="_blank" class="share-option-btn"><i class="fab fa-telegram" style="color:#0088cc;"></i>Telegram</a>
       <a id="shareEmail" href="#" target="_blank" class="share-option-btn"><i class="fas fa-envelope" style="color:#ea4335;"></i>Email</a>
       <a id="shareTwitter" href="#" target="_blank" class="share-option-btn"><i class="fab fa-twitter" style="color:#1da1f2;"></i>Twitter</a>
-      <div onclick="copyAppLinkId()" class="share-option-btn"><i class="fas fa-copy" style="color:var(--brand);"></i>Copy</div>
+      <div onclick="copyAppLinkId()" class="share-option-btn"><i class="fas fa-copy" style="color:var(--primary);"></i>Copy Link</div>
     </div>
   </div>
 </div>
 
-<!-- PRODUCT MODAL -->
+<!-- PRODUCT DETAIL MODAL -->
 <div id="productModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" onclick="closeModal('productModal')">&times;</span>
+    <button class="close-btn" onclick="closeModal('productModal')"><i class="fas fa-times"></i></button>
     <div id="productDetailContent"></div>
   </div>
 </div>
@@ -312,29 +759,96 @@ footer p strong{font-family:'Playfair Display',serif;font-size:18px;font-weight:
 <!-- WISHLIST MODAL -->
 <div id="wishlistModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" onclick="closeModal('wishlistModal')">&times;</span>
-    <h3 style="font-family:'Playfair Display',serif;color:var(--primary);margin-top:0;font-weight:400;font-size:20px;">Your Wishlist</h3>
-    <div id="wishlistContent" style="max-height:400px;overflow-y:auto;"></div>
+    <button class="close-btn" onclick="closeModal('wishlistModal')"><i class="fas fa-times"></i></button>
+    <h3 class="modal-title">Your Wishlist</h3>
+    <p class="modal-sub">Save karein apne favourite sarees</p>
+    <div id="wishlistContent"></div>
   </div>
 </div>
 
-<!-- PRODUCT FORM MODAL -->
+<!-- ACCOUNT MODAL (Login + Profile) -->
+<div id="accountModal" class="modal">
+  <div class="modal-content">
+    <button class="close-btn" onclick="closeModal('accountModal')"><i class="fas fa-times"></i></button>
+    <div id="accountLoginView">
+      <h3 class="modal-title">Welcome Back</h3>
+      <p class="modal-sub">Admin ya customer account mein login karein</p>
+      <label class="form-label">Email</label>
+      <input type="email" id="adminEmail" class="form-control" placeholder="you@example.com">
+      <label class="form-label">Password</label>
+      <input type="password" id="adminPassword" class="form-control" placeholder="••••••••">
+      <button id="loginBtn" class="btn cart-btn" style="padding:14px;">Login</button>
+      <p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.6;">
+        Customer? No login needed — direct WhatsApp pe order karein 😊
+      </p>
+    </div>
+    <div id="accountProfileView" style="display:none;">
+      <div class="account-header">
+        <div class="account-avatar"><i class="fas fa-user-shield"></i></div>
+        <div class="account-name" id="acctName">Admin</div>
+        <div class="account-email" id="acctEmail">admin@zarafiya.com</div>
+        <div class="account-badge"><i class="fas fa-check-circle"></i> Verified Admin</div>
+      </div>
+      <div class="account-menu">
+        <button class="account-menu-item" onclick="closeModal('accountModal');openAddProductModal();">
+          <div class="mi-icon green"><i class="fas fa-plus"></i></div>
+          <div class="mi-text"><strong>Add New Product</strong><span>Naya product list karein</span></div>
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <button class="account-menu-item" onclick="closeModal('accountModal');openShareModal();">
+          <div class="mi-icon blue"><i class="fas fa-share-alt"></i></div>
+          <div class="mi-text"><strong>Share App</strong><span>Friends ko bhejein</span></div>
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <button class="account-menu-item" onclick="closeModal('accountModal');openCartModal();">
+          <div class="mi-icon gold"><i class="fas fa-shopping-bag"></i></div>
+          <div class="mi-text"><strong>My Bag</strong><span>Cart items dekhein</span></div>
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <button class="account-menu-item" onclick="closeModal('accountModal');openWishlist();">
+          <div class="mi-icon red"><i class="fas fa-heart"></i></div>
+          <div class="mi-text"><strong>Wishlist</strong><span>Saved sarees</span></div>
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <button class="account-menu-item" onclick="logoutAdminBtn()">
+          <div class="mi-icon grey"><i class="fas fa-sign-out-alt"></i></div>
+          <div class="mi-text"><strong>Logout</strong><span>Account se bahar nikalein</span></div>
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD/EDIT PRODUCT MODAL -->
 <div id="productFormModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" onclick="closeModal('productFormModal')">&times;</span>
-    <h3 id="formTitle" style="margin-top:0;color:var(--primary);font-size:18px;font-family:'Playfair Display',serif;font-weight:400;">Add New Product</h3>
+    <button class="close-btn" onclick="closeModal('productFormModal')"><i class="fas fa-times"></i></button>
+    <h3 id="formTitle" class="modal-title">Add New Product</h3>
+    <p class="modal-sub">Product details bharein aur list karein</p>
     <form id="addProductForm">
-      <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
-      <div style="margin-bottom:12px;">
-        <label style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">Product Image</label>
-        <input type="file" id="pImageFile" class="form-control" accept="image/*" onchange="compressAndConvertImage(this)">
-        <input type="hidden" id="pImage" required>
-        <div id="imagePreviewContainer" style="margin-top:8px;display:none;">
-          <img id="imgPreviewTag" src="" style="width:70px;height:70px;object-fit:cover;">
+      <label class="form-label">Product Name</label>
+      <input type="text" id="pName" class="form-control" placeholder="e.g. Banarasi Silk Saree" required>
+      
+      <label class="form-label">Product Image</label>
+      <input type="file" id="pImageFile" class="form-control" accept="image/*" onchange="compressAndConvertImage(this)" style="padding:10px;">
+      <input type="hidden" id="pImage" required>
+      <div id="imagePreviewContainer" style="margin-top:8px;display:none;">
+        <img id="imgPreviewTag" src="" style="width:80px;height:80px;object-fit:cover;border-radius:10px;">
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div>
+          <label class="form-label">MRP ₹</label>
+          <input type="number" id="pPrice" class="form-control" placeholder="2999" required>
+        </div>
+        <div>
+          <label class="form-label">Offer ₹</label>
+          <input type="number" id="pDiscount" class="form-control" placeholder="1499" required>
         </div>
       </div>
-      <input type="number" id="pPrice" class="form-control" placeholder="Regular Price" required>
-      <input type="number" id="pDiscount" class="form-control" placeholder="Discount Price" required>
+
+      <label class="form-label">Category</label>
       <select id="pCategory" class="form-control" required>
         <option value="">Select Category</option>
         <option value="Sarees">Sarees</option>
@@ -342,12 +856,16 @@ footer p strong{font-family:'Playfair Display',serif;font-size:18px;font-weight:
         <option value="Dupatta">Dupatta</option>
         <option value="Gharara">Gharara</option>
       </select>
+
+      <label class="form-label">Weaving Type</label>
       <select id="pMakeType" class="form-control" required>
-        <option value="">Weaving Type</option>
+        <option value="">Select Type</option>
         <option value="Handloom">Handloom</option>
         <option value="Power Loom">Power Loom</option>
         <option value="Repair Machine">Repair Machine</option>
       </select>
+
+      <label class="form-label">Color</label>
       <select id="pColor" class="form-control" onchange="checkCustomColor(this.value)">
         <option value="">Select Color (Optional)</option>
         <option value="pink">Pink</option>
@@ -359,9 +877,14 @@ footer p strong{font-family:'Playfair Display',serif;font-size:18px;font-weight:
         <option value="other">Other / Custom</option>
       </select>
       <input type="text" id="pCustomColor" class="form-control" placeholder="Custom color name" style="display:none;">
-      <input type="text" id="pSku" class="form-control" placeholder="Product Code / SKU" required>
-      <textarea id="pDesc" class="form-control" placeholder="Description & Fabric Details" rows="3" required></textarea>
-      <button type="submit" id="submitProductBtn" class="btn success" style="width:100%;padding:14px;margin-top:10px;">Add Product</button>
+
+      <label class="form-label">SKU / Product Code</label>
+      <input type="text" id="pSku" class="form-control" placeholder="e.g. ZR-SR-001" required>
+
+      <label class="form-label">Description</label>
+      <textarea id="pDesc" class="form-control" placeholder="Fabric, length, blouse details..." rows="3" required></textarea>
+
+      <button type="submit" id="submitProductBtn" class="btn cart-btn" style="margin-top:6px;">Add Product</button>
     </form>
   </div>
 </div>
@@ -369,60 +892,67 @@ footer p strong{font-family:'Playfair Display',serif;font-size:18px;font-weight:
 <!-- CART MODAL -->
 <div id="cartModal" class="modal">
   <div class="modal-content">
-    <span class="close-btn" onclick="closeModal('cartModal')">&times;</span>
-    <h3 style="font-family:'Playfair Display',serif;color:var(--primary);margin-top:0;font-weight:400;font-size:20px;">Your Bag</h3>
-    <div id="cartItemsList" style="max-height:220px;overflow-y:auto;margin-bottom:12px;"></div>
-    <div class="coupon-row">
-      <input type="text" id="couponInput" placeholder="Enter coupon code" style="text-transform:uppercase;">
-      <button onclick="applyCoupon()">Apply</button>
+    <button class="close-btn" onclick="closeModal('cartModal')"><i class="fas fa-times"></i></button>
+    <h3 class="modal-title">Your Bag</h3>
+    <p class="modal-sub" id="cartSubtitle">Fresh picks, waiting to be yours</p>
+    <div id="cartItemsList"></div>
+    
+    <div id="couponSection" style="display:none;">
+      <div class="coupon-row">
+        <input type="text" id="couponInput" placeholder="Enter coupon code">
+        <button onclick="applyCoupon()">Apply</button>
+      </div>
+      <div id="couponMsg" class="coupon-msg"></div>
     </div>
-    <div id="couponMsg" class="coupon-msg" style="display:none;"></div>
-    <div style="border-top:1px solid var(--line);padding-top:14px;margin-bottom:18px;">
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:.5px;"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
-      <div style="display:flex;justify-content:space-between;font-size:11px;color:#2e7d32;margin-bottom:6px;letter-spacing:.5px;display:none;" id="discountRow"><span>Discount</span><span id="cartDiscount">-₹0</span></div>
-      <div style="display:flex;justify-content:space-between;font-weight:600;letter-spacing:1px;font-size:13px;text-transform:uppercase;padding-top:8px;border-top:1px solid var(--line);"><span>Total</span><span id="cartTotalPrice">₹0</span></div>
-    </div>
-    <button onclick="checkoutWhatsApp()" class="btn success" style="width:100%;padding:14px;font-size:11px;"><i class="fab fa-whatsapp"></i> Order via WhatsApp (COD)</button>
-  </div>
-</div>
 
-<!-- LOGIN MODAL -->
-<div id="loginModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
-    <h2 style="font-family:'Playfair Display',serif;color:var(--primary);margin-top:0;font-weight:400;font-size:22px;">Admin Access</h2>
-    <input type="email" id="adminEmail" class="form-control" placeholder="Admin Email">
-    <input type="password" id="adminPassword" class="form-control" placeholder="Password">
-    <button id="loginBtn" class="btn cart-btn" style="width:100%;padding:14px;">Login</button>
+    <div class="cart-summary" id="cartSummary" style="display:none;">
+      <div class="summary-row"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+      <div class="summary-row discount" id="discountRow" style="display:none;"><span>Discount</span><span id="cartDiscount">-₹0</span></div>
+      <div class="summary-row"><span>Delivery</span><span style="color:#2E7D32;font-weight:600;">FREE</span></div>
+      <div class="summary-row total"><span>Total</span><span id="cartTotalPrice">₹0</span></div>
+    </div>
+    <button onclick="checkoutWhatsApp()" class="btn cart-btn" style="padding:15px;">
+      <i class="fab fa-whatsapp"></i> Order via WhatsApp (COD)
+    </button>
   </div>
 </div>
 
 <!-- WHATSAPP OPT-IN MODAL -->
 <div id="optinModal" class="modal">
   <div class="modal-content" style="text-align:center;">
-    <span class="close-btn" onclick="closeOptin()">&times;</span>
-    <div style="font-size:32px;color:#25D366;margin-bottom:10px;"><i class="fab fa-whatsapp"></i></div>
-    <h3 style="font-family:'Playfair Display',serif;color:var(--primary);margin:0 0 8px;font-weight:400;font-size:20px;">Get Exclusive Offers</h3>
-    <p style="font-size:12px;color:#8a8a8a;line-height:1.6;margin-bottom:18px;">Naye saree launch, festive sale aur <b>₹100 off</b> ka coupon seedha WhatsApp pe paayein.</p>
-    <input type="tel" id="optinPhone" class="form-control" placeholder="Your WhatsApp Number" style="text-align:center;">
-    <button onclick="saveOptin()" class="btn cart-btn" style="width:100%;padding:14px;font-size:11px;">Send Me Offers</button>
-    <p onclick="closeOptin()" style="font-size:11px;color:#8a8a8a;margin-top:14px;cursor:pointer;">Maybe later</p>
+    <button class="close-btn" onclick="closeOptin()"><i class="fas fa-times"></i></button>
+    <div style="width:64px;height:64px;border-radius:50%;background:#E8F9F0;color:#25D366;display:flex;align-items:center;justify-content:center;font-size:30px;margin:6px auto 14px;">
+      <i class="fab fa-whatsapp"></i>
+    </div>
+    <h3 class="modal-title">Get Exclusive Offers</h3>
+    <p class="modal-sub">Naye saree launch, festive sale aur <b style="color:var(--primary);">₹100 off</b> ka coupon seedha WhatsApp pe paayein</p>
+    <input type="tel" id="optinPhone" class="form-control" placeholder="Your WhatsApp number" style="text-align:center;letter-spacing:1px;">
+    <button onclick="saveOptin()" class="btn cart-btn" style="padding:14px;">Send Me Offers</button>
+    <p onclick="closeOptin()" style="font-size:12px;color:var(--muted);margin-top:14px;cursor:pointer;padding:8px;">Maybe later</p>
   </div>
 </div>
 
+<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
-  <button class="nav-item active" onclick="goHome()"><i class="fas fa-home"></i>Home</button>
-  <button class="nav-item" onclick="scrollToCollection()"><i class="fas fa-th-large"></i>Shop</button>
-  <button class="nav-item" onclick="openWishlist()"><i class="fas fa-heart"></i>Wishlist<span class="nav-badge" id="wishNavBadge" style="display:none;">0</span></button>
-  <button class="nav-item" onclick="openCartModal()"><i class="fas fa-shopping-bag"></i>Bag<span class="nav-badge" id="cartNavBadge" style="display:none;">0</span></button>
-  <button class="nav-item" onclick="openLoginModal()"><i class="fas fa-user"></i>Account</button>
+  <button class="nav-item active" onclick="setActiveNav(this);goHome()"><i class="fas fa-home"></i>Home</button>
+  <button class="nav-item" onclick="setActiveNav(this);scrollToCollection()"><i class="fas fa-th-large"></i>Shop</button>
+  <button class="nav-item" onclick="setActiveNav(this);openWishlist()">
+    <i class="fas fa-heart"></i>Wishlist
+    <span class="nav-badge" id="wishNavBadge" style="display:none;">0</span>
+  </button>
+  <button class="nav-item" onclick="setActiveNav(this);openCartModal()">
+    <i class="fas fa-shopping-bag"></i>Bag
+    <span class="nav-badge" id="cartNavBadge" style="display:none;">0</span>
+  </button>
+  <button class="nav-item" onclick="setActiveNav(this);openAccountModal()"><i class="fas fa-user"></i>Account</button>
 </nav>
 
 <footer>
-  <p><strong>ZARAFIYA</strong></p>
+  <div class="ft-logo">ZARAFIYA</div>
   <p>Grace in Every Thread</p>
+  <div class="ft-line"></div>
   <p>Varanasi, Uttar Pradesh</p>
-  <p style="font-size:10px;color:#999;margin-top:20px;letter-spacing:1.5px;">&copy; 2026 — ALL RIGHTS RESERVED</p>
+  <p class="ft-copy">© 2026 · ALL RIGHTS RESERVED</p>
 </footer>
 
 <script type="module">
@@ -444,19 +974,17 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 setPersistence(auth, browserLocalPersistence).catch(e => console.log(e));
 
-// ===== COUPONS (yahan naye coupons add karte raho) =====
 const COUPONS = {
-  'ZARA10':   { type:'percent', value:10, min:999,  desc:'10% off on ₹999+' },
-  'FIRST15':  { type:'percent', value:15, min:1499, desc:'15% off — first order' },
-  'FESTIVE200': { type:'flat', value:200, min:1999, desc:'₹200 off on ₹1999+' },
-  'REFER100': { type:'flat', value:100, min:999, desc:'₹100 off — referral' }
+  'ZARA10':    { type:'percent', value:10, min:999,  desc:'10% off on ₹999+' },
+  'FIRST15':   { type:'percent', value:15, min:1499, desc:'15% off — first order' },
+  'FESTIVE200':{ type:'flat',    value:200, min:1999, desc:'₹200 off on ₹1999+' },
+  'REFER100':  { type:'flat',    value:100, min:999,  desc:'₹100 off — referral' }
 };
 
 let cart = JSON.parse(localStorage.getItem('zarafiya_cart') || '[]');
 let wishlist = JSON.parse(localStorage.getItem('zarafiya_wish') || '[]');
 let recentlyViewed = JSON.parse(localStorage.getItem('zarafiya_recent') || '[]');
 let allProducts = [];
-let currentCategory = 'All';
 let isAdminLoggedIn = false;
 let editingProductId = null;
 let appliedCoupon = null;
@@ -471,47 +999,69 @@ function saveState() {
   updateBadges();
 }
 function updateBadges() {
-  $('cartCount').textContent = cart.length;
-  $('wishCount').textContent = wishlist.length;
+  const cc = $('cartCount'), wc = $('wishCount');
   const cnb = $('cartNavBadge'), wnb = $('wishNavBadge');
-  if (cart.length) { cnb.style.display='flex'; cnb.textContent=cart.length; } else cnb.style.display='none';
-  if (wishlist.length) { wnb.style.display='flex'; wnb.textContent=wishlist.length; } else wnb.style.display='none';
+  if (cart.length) { cc.style.display='flex'; cc.textContent=cart.length; cnb.style.display='flex'; cnb.textContent=cart.length; }
+  else { cc.style.display='none'; cnb.style.display='none'; }
+  if (wishlist.length) { wc.style.display='flex'; wc.textContent=wishlist.length; wnb.style.display='flex'; wnb.textContent=wishlist.length; }
+  else { wc.style.display='none'; wnb.style.display='none'; }
 }
 
 // ===== COUNTDOWN =====
 function startCountdown() {
   const end = new Date(); end.setHours(23,59,59,999);
-  setInterval(() => {
-    const now = new Date();
-    let diff = Math.max(0, end - now);
+  const tick = () => {
+    const diff = Math.max(0, end - new Date());
     const h = String(Math.floor(diff/3600000)).padStart(2,'0');
     const m = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
     const s = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
     const el = $('countdown'); if(el) el.textContent = `${h}:${m}:${s}`;
-  }, 1000);
+  };
+  tick(); setInterval(tick, 1000);
 }
 
 // ===== OPT-IN =====
 function showOptinIfNeeded() {
   if (!localStorage.getItem('zarafiya_optin_done') && !localStorage.getItem('zarafiya_optin_skip')) {
-    setTimeout(() => $('optinModal').style.display = 'flex', 6000);
+    setTimeout(() => { $('optinModal').style.display = 'flex'; }, 8000);
   }
 }
-window.closeOptin = () => { localStorage.setItem('zarafiya_optin_skip','1'); $('optinModal').style.display='none'; };
+window.closeOptin = () => { localStorage.setItem('zarafiya_optin_skip','1'); closeModal('optinModal'); };
 window.saveOptin = () => {
   const phone = $('optinPhone').value.trim();
   if (phone.length < 10) return alert('Sahi WhatsApp number daalein');
-  // Yahan aap apna backend/Google Sheet/Firebase mein save kar sakte ho
-  try {
-    addDoc(collection(db, "optins"), { phone, at: new Date() });
-  } catch(e){}
+  try { addDoc(collection(db, "optins"), { phone, at: new Date() }); } catch(e){}
   localStorage.setItem('zarafiya_optin_done','1');
-  alert('Shukriya! Aapko offers milenge. 🎉\nUse code FIRST15 for 15% off on first order.');
-  $('optinModal').style.display = 'none';
+  alert('Shukriya! 🎉\nUse code FIRST15 for 15% off on first order.');
+  closeModal('optinModal');
 };
 
 // ===== MODALS =====
-window.closeModal = id => $(id).style.display = 'none';
+window.closeModal = id => { $(id).style.display = 'none'; };
+document.querySelectorAll('.modal').forEach(m => {
+  m.addEventListener('click', e => { if (e.target === m) m.style.display = 'none'; });
+});
+
+// ===== NAV HIGHLIGHT =====
+window.setActiveNav = btn => {
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+};
+
+// ===== ACCOUNT MODAL (FIXED) =====
+window.openAccountModal = () => {
+  if (isAdminLoggedIn) {
+    const user = auth.currentUser;
+    $('acctName').textContent = 'Admin';
+    $('acctEmail').textContent = user?.email || 'admin@zarafiya.com';
+    $('accountLoginView').style.display = 'none';
+    $('accountProfileView').style.display = 'block';
+  } else {
+    $('accountLoginView').style.display = 'block';
+    $('accountProfileView').style.display = 'none';
+  }
+  $('accountModal').style.display = 'flex';
+};
 
 // ===== SHARE =====
 window.openShareModal = () => {
@@ -543,11 +1093,11 @@ window.compressAndConvertImage = (input) => {
     img.onload = () => {
       const canvas = document.createElement('canvas');
       let w = img.width, h = img.height;
-      const MAX = 600;
+      const MAX = 700;
       if (w > h) { if (w > MAX) { h *= MAX/w; w = MAX; } } else { if (h > MAX) { w *= MAX/h; h = MAX; } }
       canvas.width = w; canvas.height = h;
       canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-      const url = canvas.toDataURL('image/jpeg', 0.7);
+      const url = canvas.toDataURL('image/jpeg', 0.72);
       $('pImage').value = url;
       $('imgPreviewTag').src = url;
       $('imagePreviewContainer').style.display = 'block';
@@ -612,77 +1162,101 @@ window.sendAiMessage = async () => {
 
 // ===== NAV =====
 window.goHome = () => window.scrollTo({ top:0, behavior:'smooth' });
-window.scrollToCollection = () => $('collectionSection').scrollIntoView({ behavior:'smooth' });
+window.scrollToCollection = () => $('collectionSection').scrollIntoView({ behavior:'smooth', block:'start' });
 window.toggleSearchBox = () => {
   const b = $('searchBox');
   b.style.display = b.style.display === 'block' ? 'none' : 'block';
   if (b.style.display === 'block') $('searchInput').focus();
 };
-window.openLoginModal = () => { if (isAdminLoggedIn) alert('Already logged in as Admin'); else $('loginModal').style.display='flex'; };
 window.openAddProductModal = () => { resetForm(); $('productFormModal').style.display='flex'; };
 window.openCartModal = () => { renderCartItems(); $('cartModal').style.display='flex'; };
 window.openWishlist = () => { renderWishlist(); $('wishlistModal').style.display='flex'; };
 
 // ===== CART =====
 window.addToCart = (id, name, price, image) => {
-  cart.push({ id, name, price, image });
+  const existing = cart.find(c => c.id === id);
+  if (existing) existing.qty = (existing.qty || 1) + 1;
+  else cart.push({ id, name, price, image, qty: 1 });
   saveState(); renderCartItems();
-  // Halka feedback
-  const c = $('cartCount'); c.style.transform='scale(1.3)';
+  const c = $('cartCount'); c.style.transform='scale(1.4)';
   setTimeout(()=>c.style.transform='scale(1)', 200);
 };
 window.removeFromCart = i => { cart.splice(i,1); saveState(); renderCartItems(); };
+window.changeQty = (i, delta) => {
+  cart[i].qty = (cart[i].qty || 1) + delta;
+  if (cart[i].qty <= 0) cart.splice(i,1);
+  saveState(); renderCartItems();
+};
+
 function renderCartItems() {
-  const list = $('cartItemsList'), totalBox = $('cartTotalPrice');
-  const subBox = $('cartSubtotal'), discRow = $('discountRow'), discBox = $('cartDiscount');
+  const list = $('cartItemsList');
+  const summary = $('cartSummary');
+  const couponSec = $('couponSection');
   if (!cart.length) {
-    list.innerHTML = "<p style='text-align:center;font-size:12px;color:#8a8a8a;padding:20px 0;'>Your bag is empty.</p>";
-    totalBox.textContent = "₹0"; subBox.textContent = "₹0"; discRow.style.display = 'none';
+    list.innerHTML = `<div style="text-align:center;padding:40px 20px;">
+      <div style="font-size:40px;color:#ddd;margin-bottom:12px;"><i class="fas fa-shopping-bag"></i></div>
+      <p style="font-size:13px;color:var(--muted);">Aapka bag khali hai</p>
+      <p style="font-size:11.5px;color:var(--muted);margin-top:6px;">Sarees add karein aur order karein</p>
+    </div>`;
+    summary.style.display = 'none';
+    couponSec.style.display = 'none';
+    $('cartSubtitle').textContent = 'Fresh picks, waiting to be yours';
     return;
   }
+  $('cartSubtitle').textContent = `${cart.length} item${cart.length>1?'s':''} in your bag`;
+  summary.style.display = 'block';
+  couponSec.style.display = 'block';
+  
   let subtotal = 0;
   list.innerHTML = cart.map((it, i) => {
-    subtotal += Number(it.price);
+    const qty = it.qty || 1;
+    subtotal += Number(it.price) * qty;
     return `<div class="cart-item">
-      <img src="${it.image}" onerror="this.src='https://via.placeholder.com/50'">
-      <div style="flex:1;margin-left:14px;">
-        <strong style="font-weight:500;font-family:'Playfair Display',serif;">${escapeHTML(it.name)}</strong>
-        <br><span style="color:var(--brand);font-size:11px;">₹${it.price}</span>
+      <img src="${it.image}" onerror="this.src='https://via.placeholder.com/64'">
+      <div class="ci-info">
+        <strong>${escapeHTML(it.name)}</strong>
+        <span class="ci-price">₹${it.price}</span>
+        <div class="qty-box">
+          <button class="qty-btn" onclick="changeQty(${i},-1)"><i class="fas fa-minus"></i></button>
+          <span class="qty-num">${qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i},1)"><i class="fas fa-plus"></i></button>
+        </div>
       </div>
-      <i class="fas fa-times" style="color:#8a8a8a;cursor:pointer;font-size:12px;" onclick="removeFromCart(${i})"></i>
+      <button class="ci-remove" onclick="removeFromCart(${i})"><i class="fas fa-trash-alt"></i></button>
     </div>`;
   }).join('');
+
   let discount = 0;
   if (appliedCoupon) {
     const cp = COUPONS[appliedCoupon];
     if (subtotal >= cp.min) {
       discount = cp.type === 'percent' ? Math.round(subtotal * cp.value / 100) : cp.value;
-      discRow.style.display = 'flex';
-      discBox.textContent = `-₹${discount}`;
+      $('discountRow').style.display = 'flex';
+      $('cartDiscount').textContent = `-₹${discount}`;
     } else {
-      appliedCoupon = null; discRow.style.display = 'none';
+      appliedCoupon = null; $('discountRow').style.display = 'none';
     }
-  } else discRow.style.display = 'none';
-  subBox.textContent = `₹${subtotal}`;
-  totalBox.textContent = `₹${subtotal - discount}`;
+  } else $('discountRow').style.display = 'none';
+  $('cartSubtotal').textContent = `₹${subtotal}`;
+  $('cartTotalPrice').textContent = `₹${subtotal - discount}`;
 }
 
 window.applyCoupon = () => {
   const code = $('couponInput').value.trim().toUpperCase();
-  const msg = $('couponMsg'); msg.style.display = 'block';
-  if (!code) { msg.className = 'coupon-msg err'; msg.textContent = 'Coupon code daalein'; return; }
+  const msg = $('couponMsg');
+  if (!code) { msg.className='coupon-msg err'; msg.textContent='Coupon code daalein'; return; }
   const cp = COUPONS[code];
-  if (!cp) { msg.className = 'coupon-msg err'; msg.textContent = '❌ Invalid coupon code'; return; }
-  let subtotal = cart.reduce((s,i)=>s+Number(i.price), 0);
-  if (subtotal < cp.min) { msg.className = 'coupon-msg err'; msg.textContent = `Minimum ₹${cp.min} ka order chahiye`; return; }
+  if (!cp) { msg.className='coupon-msg err'; msg.textContent='❌ Invalid coupon code'; return; }
+  const subtotal = cart.reduce((s,i)=>s+Number(i.price)*(i.qty||1), 0);
+  if (subtotal < cp.min) { msg.className='coupon-msg err'; msg.textContent=`Minimum ₹${cp.min} ka order chahiye`; return; }
   appliedCoupon = code;
-  msg.className = 'coupon-msg ok'; msg.textContent = `✅ ${cp.desc} applied!`;
+  msg.className='coupon-msg ok'; msg.textContent=`✅ ${cp.desc} applied!`;
   renderCartItems();
 };
 
 window.checkoutWhatsApp = () => {
   if (!cart.length) { alert('Bag empty hai!'); return; }
-  let subtotal = cart.reduce((s,i)=>s+Number(i.price), 0);
+  let subtotal = cart.reduce((s,i)=>s+Number(i.price)*(i.qty||1), 0);
   let discount = 0;
   if (appliedCoupon) {
     const cp = COUPONS[appliedCoupon];
@@ -690,7 +1264,10 @@ window.checkoutWhatsApp = () => {
   }
   const total = subtotal - discount;
   let msg = `Hello Zarafiya Fashion, I want to place a COD order:%0A%0A*--- Items ---*%0A`;
-  cart.forEach((it,i) => msg += `${i+1}. ${it.name} - ₹${it.price}%0A`);
+  cart.forEach((it,i) => {
+    const q = it.qty || 1;
+    msg += `${i+1}. ${it.name} × ${q} = ₹${it.price * q}%0A`;
+  });
   msg += `%0A*Subtotal:* ₹${subtotal}%0A`;
   if (discount) msg += `*Discount (${appliedCoupon}):* -₹${discount}%0A`;
   msg += `*Total:* ₹${total}%0A%0A*--- Delivery Details ---*%0A*Name:* %0A*Address:* %0A*Pincode:* %0A*Phone:* %0A%0APlease confirm.`;
@@ -706,18 +1283,26 @@ window.toggleWishlist = (id) => {
     if (p) wishlist.push({ id: p.id, name: p.name, image: p.image, price: p.discountPrice });
   }
   saveState(); renderProducts(allProducts);
+  if ($('wishlistModal').style.display === 'flex') renderWishlist();
 };
 function renderWishlist() {
   const box = $('wishlistContent');
-  if (!wishlist.length) { box.innerHTML = "<p style='text-align:center;font-size:12px;color:#8a8a8a;padding:20px 0;'>Wishlist khali hai.</p>"; return; }
+  if (!wishlist.length) {
+    box.innerHTML = `<div style="text-align:center;padding:40px 20px;">
+      <div style="font-size:40px;color:#ddd;margin-bottom:12px;"><i class="fas fa-heart"></i></div>
+      <p style="font-size:13px;color:var(--muted);">Wishlist khali hai</p>
+      <p style="font-size:11.5px;color:var(--muted);margin-top:6px;">Pasand aayi sarees save karein</p>
+    </div>`;
+    return;
+  }
   box.innerHTML = wishlist.map(w => `
     <div class="cart-item">
-      <img src="${w.image}" onerror="this.src='https://via.placeholder.com/50'">
-      <div style="flex:1;margin-left:14px;">
-        <strong style="font-family:'Playfair Display',serif;font-weight:500;">${escapeHTML(w.name)}</strong>
-        <br><span style="color:var(--brand);font-size:11px;">₹${w.price}</span>
+      <img src="${w.image}" onerror="this.src='https://via.placeholder.com/64'">
+      <div class="ci-info">
+        <strong>${escapeHTML(w.name)}</strong>
+        <span class="ci-price">₹${w.price}</span>
       </div>
-      <button class="btn cart-btn" style="width:auto;padding:8px 12px;font-size:9px;" onclick="addToCart('${w.id}','${escapeHTML(w.name)}',${w.price},'${w.image}'); closeModal('wishlistModal');">Add</button>
+      <button class="qty-btn" style="width:auto;padding:8px 12px;background:var(--primary);color:#fff;border:none;font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;border-radius:8px;" onclick="addToCart('${w.id}','${escapeHTML(w.name)}',${w.price},'${w.image}');closeModal('wishlistModal');">Add</button>
     </div>
   `).join('');
 }
@@ -727,18 +1312,24 @@ onAuthStateChanged(auth, user => {
   isAdminLoggedIn = !!(user && user.email);
   $('adminBar').style.display = isAdminLoggedIn ? 'flex' : 'none';
   renderProducts(allProducts);
+  if ($('accountModal').style.display === 'flex') openAccountModal();
 });
 $('loginBtn').onclick = async () => {
   const email = $('adminEmail').value.trim(), pass = $('adminPassword').value.trim();
-  if (!email || !pass) return alert('Enter email and password');
+  if (!email || !pass) return alert('Email aur password dono daalein');
   try {
     await signInWithEmailAndPassword(auth, email, pass);
-    alert('Admin login successful!');
-    closeModal('loginModal');
+    alert('✅ Login successful!');
+    closeModal('accountModal');
     $('adminEmail').value = ''; $('adminPassword').value = '';
   } catch (e) { alert('Login failed: ' + e.message); }
 };
-window.logoutAdminBtn = async () => { await signOut(auth); alert('Logged out'); };
+window.logoutAdminBtn = async () => {
+  if (!confirm('Logout karna hai?')) return;
+  await signOut(auth);
+  closeModal('accountModal');
+  alert('Logged out successfully');
+};
 
 // ===== PRODUCTS =====
 onSnapshot(collection(db, "products"), snap => {
@@ -749,12 +1340,13 @@ onSnapshot(collection(db, "products"), snap => {
 });
 
 window.filterCategory = cat => {
-  currentCategory = cat;
   $('activeCatTitle').textContent = cat === 'All' ? 'All Collection' : cat;
   renderProducts(cat === 'All' ? allProducts : allProducts.filter(p => p.category === cat));
   scrollToCollection();
 };
-window.filterColor = color => {
+window.filterColor = (color, btn) => {
+  document.querySelectorAll('.color-chip').forEach(c => c.classList.remove('active'));
+  if (btn) btn.classList.add('active');
   if (color === 'all') { renderProducts(allProducts); $('activeCatTitle').textContent='All Collection'; }
   else if (color === 'other') {
     const std = ['pink','blue','red','maroon','green','yellow'];
@@ -773,8 +1365,13 @@ window.searchProducts = () => {
 
 function renderProducts(arr) {
   const grid = $('productGrid');
+  $('productCount').textContent = `${arr.length} item${arr.length !== 1 ? 's' : ''}`;
   if (!arr.length) {
-    grid.innerHTML = "<p style='text-align:center;grid-column:1/-1;color:#8a8a8a;font-size:12px;padding:60px 20px;letter-spacing:1px;background:white;'>No products found</p>";
+    grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:60px 20px;background:#fff;border-radius:14px;">
+      <div style="font-size:44px;color:#ddd;margin-bottom:12px;"><i class="fas fa-search"></i></div>
+      <p style="font-size:14px;color:var(--text);font-weight:500;">No products found</p>
+      <p style="font-size:12px;color:var(--muted);margin-top:6px;">Try a different filter</p>
+    </div>`;
     return;
   }
   grid.innerHTML = arr.map(p => {
@@ -783,34 +1380,45 @@ function renderProducts(arr) {
     const safeId = escapeHTML(p.id);
     const safeMake = escapeHTML(p.makeType || 'Handloom');
     const inWish = wishlist.some(w => w.id === p.id);
-    // Deterministic fake rating based on product id
+    const offPct = p.price && p.discountPrice ? Math.round((1 - p.discountPrice/p.price)*100) : 0;
     const rating = (4 + (p.id.charCodeAt(0) % 10) / 10).toFixed(1);
     const stars = '★'.repeat(Math.round(rating)) + '☆'.repeat(5 - Math.round(rating));
+    const isTrending = (p.id.charCodeAt(0) % 3) === 0;
     const adminBtns = isAdminLoggedIn ? `
       <div class="admin-action-bar">
-        <button class="btn info" onclick="editProduct('${safeId}')"><i class="fas fa-edit"></i> Edit</button>
-        <button class="btn danger" onclick="deleteProduct('${safeId}')"><i class="fas fa-trash"></i> Del</button>
+        <button class="btn-admin edit" onclick="editProduct('${safeId}')"><i class="fas fa-edit"></i> Edit</button>
+        <button class="btn-admin del" onclick="deleteProduct('${safeId}')"><i class="fas fa-trash"></i> Delete</button>
       </div>` : '';
     return `<div class="card">
       <span class="badge-type">${safeMake}</span>
-      <button class="wishlist-btn ${inWish?'active':''}" onclick="toggleWishlist('${safeId}')">
-        <i class="fa${inWish?'s':'r'} fa-heart"></i>
-      </button>
-      <button class="share-mini-btn" onclick="event.stopPropagation();shareProductWhatsApp('${safeName}', ${p.discountPrice}, '${rawImg}')">
-        <i class="fab fa-whatsapp"></i>
-      </button>
+      ${offPct > 0 ? `<span class="discount-badge">${offPct}% OFF</span>` : ''}
+      ${isTrending ? `<span class="trending-badge"><i class="fas fa-fire"></i> Trending</span>` : ''}
       <div class="card-img-wrapper">
-        <img src="${rawImg}" alt="${safeName}" onclick="openProduct('${safeId}')" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=No+Image';">
+        <img src="${rawImg}" alt="${safeName}" onclick="openProduct('${safeId}')" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/300?text=Zarafiya';">
+        <button class="wishlist-btn ${inWish?'active':''}" onclick="event.stopPropagation();toggleWishlist('${safeId}')">
+          <i class="fa${inWish?'s':'r'} fa-heart"></i>
+        </button>
       </div>
-      <h3 onclick="openProduct('${safeId}')">${safeName}</h3>
-      <div class="rating-row"><span class="stars">${stars}</span> ${rating} <span style="color:#ccc;">|</span> Verified</div>
-      <div class="price-box" onclick="openProduct('${safeId}')">
-        <span class="discount">₹${p.discountPrice}</span>
-        <span class="regular">₹${p.price}</span>
-      </div>
-      <div class="btn-group">
-        <button class="btn" onclick="openProduct('${safeId}')">View Details</button>
-        <button class="btn cart-btn" onclick="addToCart('${safeId}','${safeName}',${p.discountPrice},'${rawImg}')"><i class="fas fa-shopping-bag"></i> Add to Bag</button>
+      <div class="card-body">
+        <h3 onclick="openProduct('${safeId}')">${safeName}</h3>
+        <div class="rating-row">
+          <span class="stars">${stars}</span>
+          <span>${rating}</span>
+          <span class="sep">·</span>
+          <span>Verified</span>
+        </div>
+        <div class="price-row" onclick="openProduct('${safeId}')">
+          <span class="final">₹${p.discountPrice}</span>
+          <span class="mrp">₹${p.price}</span>
+        </div>
+        <div class="card-actions">
+          <button class="btn-card primary" onclick="addToCart('${safeId}','${safeName}',${p.discountPrice},'${rawImg}')">
+            <i class="fas fa-shopping-bag"></i> Add
+          </button>
+          <button class="btn-card ghost" onclick="shareProductWhatsApp('${safeName}',${p.discountPrice},'${rawImg}')" style="flex:0 0 auto;padding:9px 12px;">
+            <i class="fab fa-whatsapp"></i>
+          </button>
+        </div>
         ${adminBtns}
       </div>
     </div>`;
@@ -822,7 +1430,7 @@ function renderRecentlyViewed() {
   $('recentStrip').style.display = 'block';
   $('recentScroll').innerHTML = recentlyViewed.map(r => `
     <div class="recent-item" onclick="openProduct('${r.id}')">
-      <img src="${r.image}" onerror="this.src='https://via.placeholder.com/90'">
+      <img src="${r.image}" onerror="this.src='https://via.placeholder.com/82'">
       <span>${escapeHTML(r.name)}</span>
     </div>`).join('');
 }
@@ -830,7 +1438,7 @@ function renderRecentlyViewed() {
 // ===== PRODUCT DETAIL =====
 window.openProduct = async id => {
   $('productModal').style.display = 'flex';
-  $('productDetailContent').innerHTML = "<p style='text-align:center;padding:30px;color:#8a8a8a;font-size:12px;'>Loading...</p>";
+  $('productDetailContent').innerHTML = "<p style='text-align:center;padding:40px;color:var(--muted);font-size:13px;'>Loading...</p>";
   try {
     const snap = await getDoc(doc(db, "products", id));
     if (!snap.exists()) return;
@@ -838,45 +1446,50 @@ window.openProduct = async id => {
     const safeName = escapeHTML(p.name);
     const rawImg = (p.image||'').trim();
     const safeMake = escapeHTML(p.makeType || 'Handloom');
-    // Add to recently viewed
     recentlyViewed = recentlyViewed.filter(r => r.id !== id);
     recentlyViewed.unshift({ id, name: p.name, image: rawImg, price: p.discountPrice });
     recentlyViewed = recentlyViewed.slice(0,8);
     saveState(); renderRecentlyViewed();
-    // Live viewers
     const viewers = 5 + Math.floor(Math.random() * 20);
-    // Recommendations - same category or same color
+    const offPct = p.price && p.discountPrice ? Math.round((1 - p.discountPrice/p.price)*100) : 0;
     const recs = allProducts.filter(x => x.id !== id && (x.category === p.category || x.color === p.color)).slice(0,4);
     const recHtml = recs.length ? `
       <div class="rec-section">
         <h4>You may also like</h4>
         <div class="rec-grid">
           ${recs.map(r => `
-            <div class="rec-card" onclick="closeModal('productModal'); setTimeout(()=>openProduct('${r.id}'),150);">
-              <img src="${(r.image||'').trim()}" onerror="this.src='https://via.placeholder.com/120'">
-              <span>${escapeHTML(r.name)}</span>
-              <div class="p">₹${r.discountPrice}</div>
+            <div class="rec-card" onclick="closeModal('productModal'); setTimeout(()=>openProduct('${r.id}'),200);">
+              <img src="${(r.image||'').trim()}" onerror="this.src='https://via.placeholder.com/130'">
+              <div class="rc-info">
+                <span>${escapeHTML(r.name)}</span>
+                <div class="p">₹${r.discountPrice}</div>
+              </div>
             </div>`).join('')}
         </div>
       </div>` : '';
     const msg = `Hello Zarafiya Fashion, I want to order (COD):%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category} (${p.makeType||'Handloom'})%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}%0A%0A*Name:* %0A*Address:* %0A*Phone:*`;
     const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
+    const inWish = wishlist.some(w => w.id === id);
     $('productDetailContent').innerHTML = `
-      <img src="${rawImg}" style="width:100%;max-height:320px;object-fit:cover;margin-bottom:14px;" onerror="this.src='https://via.placeholder.com/300'">
+      <img src="${rawImg}" class="pd-image" onerror="this.src='https://via.placeholder.com/400?text=Zarafiya'">
       <div class="live-viewers"><span class="pulse"></span> ${viewers} log abhi yeh dekh rahe hain</div>
-      <p style="font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">${p.category} — ${safeMake}</p>
-      <h2 style="margin:0 0 8px;font-size:22px;color:var(--primary);font-family:'Playfair Display',serif;font-weight:400;line-height:1.2;">${safeName}</h2>
-      <p style="margin:0 0 14px;color:var(--muted);font-size:11px;letter-spacing:1px;">SKU ${p.sku} · ⭐ Verified Purchase</p>
-      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px;">
-        <span style="color:var(--brand);font-weight:500;font-size:20px;">₹${p.discountPrice}</span>
-        <span style="text-decoration:line-through;color:var(--muted);font-size:13px;">₹${p.price}</span>
-        <span style="background:#e8f5e9;color:#2e7d32;font-size:10px;padding:3px 8px;font-weight:500;">${Math.round((1 - p.discountPrice/p.price)*100)}% OFF</span>
+      <div class="pd-cat">${p.category} · ${safeMake}</div>
+      <h2 class="pd-title">${safeName}</h2>
+      <p class="pd-sku">SKU: ${p.sku} · ⭐ Verified Purchase</p>
+      <div class="pd-price-row">
+        <span class="final">₹${p.discountPrice}</span>
+        <span class="mrp">₹${p.price}</span>
+        ${offPct > 0 ? `<span class="off">${offPct}% OFF</span>` : ''}
       </div>
-      <p style="margin-bottom:16px;line-height:1.7;font-size:12.5px;color:#555;">${escapeHTML(p.description)}</p>
-      <button class="btn cart-btn" onclick="addToCart('${id}','${safeName}',${p.discountPrice},'${rawImg}')" style="width:100%;margin-bottom:8px;padding:14px;"><i class="fas fa-shopping-bag"></i> Add to Bag</button>
-      <button class="btn" onclick="toggleWishlist('${id}');closeModal('productModal');" style="width:100%;margin-bottom:8px;padding:14px;"><i class="fas fa-heart"></i> ${wishlist.some(w=>w.id===id)?'Remove from Wishlist':'Add to Wishlist'}</button>
-      <button class="btn" onclick="shareProductWhatsApp('${safeName}',${p.discountPrice},'${rawImg}')" style="width:100%;margin-bottom:8px;padding:14px;"><i class="fab fa-whatsapp"></i> Share</button>
-      <a href="${waLink}" target="_blank" class="btn success" style="display:block;text-align:center;padding:14px;text-decoration:none;"><i class="fab fa-whatsapp"></i> Order via WhatsApp (COD)</a>
+      <p class="pd-desc">${escapeHTML(p.description)}</p>
+      <div class="pd-actions">
+        <button class="btn cart-btn" onclick="addToCart('${id}','${safeName}',${p.discountPrice},'${rawImg}')" style="padding:15px;"><i class="fas fa-shopping-bag"></i> Add to Bag</button>
+        <button class="btn" onclick="toggleWishlist('${id}');closeModal('productModal');" style="padding:14px;border-color:var(--line);color:var(--text);">
+          <i class="fa${inWish?'s':'r'} fa-heart" style="color:${inWish?'#EC407A':'inherit'};"></i> ${inWish?'Remove from Wishlist':'Add to Wishlist'}
+        </button>
+        <button class="btn share-btn" onclick="shareProductWhatsApp('${safeName}',${p.discountPrice},'${rawImg}')" style="padding:14px;"><i class="fab fa-whatsapp"></i> Share on WhatsApp</button>
+        <a href="${waLink}" target="_blank" class="btn success" style="padding:15px;"><i class="fab fa-whatsapp"></i> Order via WhatsApp (COD)</a>
+      </div>
       ${recHtml}
     `;
   } catch (e) { closeModal('productModal'); }
@@ -885,9 +1498,9 @@ window.openProduct = async id => {
 // ===== ADMIN FORM =====
 $('addProductForm').addEventListener('submit', async e => {
   e.preventDefault();
-  if (!auth.currentUser) return alert('Login first!');
+  if (!auth.currentUser) return alert('Pehle login karein!');
   const imgVal = $('pImage').value;
-  if (!imgVal) return alert('Select product image');
+  if (!imgVal) return alert('Product image select karein');
   $('submitProductBtn').textContent = 'Saving...';
   $('submitProductBtn').disabled = true;
   const selCol = $('pColor').value;
@@ -902,12 +1515,12 @@ $('addProductForm').addEventListener('submit', async e => {
   try {
     if (editingProductId) {
       await updateDoc(doc(db, "products", editingProductId), data);
-      alert('Product updated!');
+      alert('✅ Product updated!');
       resetForm();
     } else {
       data.createdAt = new Date();
       await addDoc(collection(db, "products"), data);
-      alert('Product added!');
+      alert('✅ Product added!');
       $('addProductForm').reset();
       $('imagePreviewContainer').style.display = 'none';
     }
@@ -942,7 +1555,6 @@ window.editProduct = async id => {
     editingProductId = id;
     $('formTitle').textContent = 'Edit Product';
     $('submitProductBtn').textContent = 'Update Product';
-    $('submitProductBtn').className = 'btn cart-btn';
     $('productFormModal').style.display = 'flex';
   } catch (e) { alert(e.message); }
 };
@@ -954,11 +1566,10 @@ function resetForm() {
   $('pCustomColor').style.display = 'none';
   $('formTitle').textContent = 'Add New Product';
   $('submitProductBtn').textContent = 'Add Product';
-  $('submitProductBtn').className = 'btn success';
 }
 
 window.deleteProduct = async id => {
-  if (!confirm('Delete this product?')) return;
+  if (!confirm('Yeh product delete karna hai?')) return;
   try { await deleteDoc(doc(db, "products", id)); } catch (e) { alert(e.message); }
 };
 
