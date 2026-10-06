@@ -1,1318 +1,971 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zarafiya Fashion | Grace in Every Thread</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap');
-        
-        :root {
-            --primary: #5c1824; /* Deep Royal Maroon */
-            --accent: #d4af37;  /* Metallic Gold */
-            --bg-light: #fdfbf7;
-            --card-bg: #fff;
-            --text-dark: #2c2c2c;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zarafiya Fashion | Grace in Every Thread</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0 0 65px 0;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-        }
+:root{
+  --primary:#2b1a1e; --accent:#a67c52; --brand:#5c1824;
+  --bg:#fafafa; --surface:#fff; --line:#e6e6e6;
+  --text:#1a1a1a; --muted:#8a8a8a;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Inter',sans-serif;margin:0;padding:0 0 70px;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;letter-spacing:.01em;}
 
-        /* Top Header */
-        header {
-            background-color: #fff;
-            padding: 12px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .logo-area {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            cursor: pointer;
-        }
-        .logo-title {
-            font-size: 22px;
-            color: var(--primary);
-            font-weight: 700;
-            line-height: 1;
-        }
-        .logo-sub {
-            font-size: 10px;
-            color: #777;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-top: 2px;
-        }
-        .header-icons {
-            display: flex;
-            gap: 15px;
-            font-size: 18px;
-            color: var(--primary);
-            align-items: center;
-            cursor: pointer;
-        }
+/* OFFER TICKER */
+.offer-ticker{background:var(--brand);color:#fff;padding:8px 16px;text-align:center;font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;font-weight:500;display:flex;justify-content:center;align-items:center;gap:8px;}
+.offer-ticker .cd{background:rgba(255,255,255,.15);padding:3px 8px;font-weight:600;letter-spacing:1px;}
 
-        /* Admin Quick Bar */
-        #adminBar {
-            display: none;
-            background: var(--primary);
-            color: white;
-            padding: 8px 15px;
-            font-size: 12px;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* HEADER */
+header{background:var(--surface);padding:14px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:100;}
+.logo-area{text-align:left;cursor:pointer;}
+.logo-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--primary);font-weight:500;line-height:1;letter-spacing:.5px;}
+.logo-sub{font-size:9px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin-top:3px;}
+.header-icons{display:flex;gap:16px;font-size:15px;color:var(--primary);align-items:center;}
+.header-icons i{cursor:pointer;}
+.header-icons .badge-wrap{position:relative;}
+.header-icons .badge{position:absolute;top:-6px;right:-8px;background:var(--brand);color:#fff;font-size:8px;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600;}
 
-        /* Search Bar */
-        .search-container {
-            display: none;
-            background: white;
-            padding: 10px 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 57px;
-            z-index: 99;
-        }
-        .search-input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid var(--accent);
-            border-radius: 20px;
-            font-family: 'Poppins', sans-serif;
-            font-size: 13px;
-            box-sizing: border-box;
-            outline: none;
-        }
+/* ADMIN BAR */
+#adminBar{display:none;background:var(--primary);color:#fff;padding:8px 20px;font-size:11px;justify-content:space-between;align-items:center;letter-spacing:.5px;}
 
-        /* Sticky Shop by Color Filter Bar */
-        .sticky-color-bar {
-            background: #fff;
-            padding: 8px 10px;
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            white-space: nowrap;
-            position: sticky;
-            top: 57px;
-            z-index: 98;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-            border-bottom: 1px solid #eee;
-            scrollbar-width: none;
-        }
-        .sticky-color-bar::-webkit-scrollbar { display: none; }
+/* SEARCH */
+.search-container{display:none;background:var(--surface);padding:14px 20px;border-bottom:1px solid var(--line);}
+.search-input{width:100%;padding:10px 0;border:none;border-bottom:1px solid var(--primary);font-family:'Inter',sans-serif;font-size:13px;background:transparent;outline:none;letter-spacing:.5px;}
 
-        .color-chip {
-            border: none;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 11px;
-            font-weight: 500;
-            cursor: pointer;
-            color: white;
-            flex-shrink: 0;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            font-family: 'Poppins', sans-serif;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .color-chip:active { transform: scale(0.95); }
-        .c-pink { background: #e91e63; }
-        .c-blue { background: #2196f3; }
-        .c-red { background: #f44336; }
-        .c-maroon { background: #5c1824; border: 1px solid var(--accent); }
-        .c-green { background: #4caf50; }
-        .c-yellow { background: #ff9800; color: #333; }
-        .c-other { background: #795548; }
-        .c-all { background: #444; }
+/* COLOR BAR */
+.sticky-color-bar{background:var(--surface);padding:12px 20px;display:flex;gap:8px;overflow-x:auto;white-space:nowrap;position:sticky;top:61px;z-index:98;border-bottom:1px solid var(--line);scrollbar-width:none;}
+.sticky-color-bar::-webkit-scrollbar{display:none;}
+.color-chip{border:1px solid var(--line);padding:6px 14px;border-radius:100px;font-size:10px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;color:var(--primary);background:transparent;flex-shrink:0;display:inline-flex;align-items:center;gap:6px;font-family:'Inter',sans-serif;}
+.color-chip:active{background:var(--primary);color:#fff;}
+.color-chip .dot{width:7px;height:7px;border-radius:50%;display:inline-block;}
+.c-all .dot{background:#444;}.c-pink .dot{background:#e91e63;}.c-blue .dot{background:#2196f3;}
+.c-red .dot{background:#f44336;}.c-maroon .dot{background:#5c1824;}.c-green .dot{background:#4caf50;}
+.c-yellow .dot{background:#ff9800;}.c-other .dot{background:#795548;}
 
-        /* Hero Banner */
-        .hero {
-            background: linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%);
-            margin: 10px 12px;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-        .hero-content {
-            padding: 16px 15px;
-        }
-        .hero-tag {
-            font-size: 10px;
-            letter-spacing: 2px;
-            color: var(--primary);
-            text-transform: uppercase;
-            font-weight: 600;
-            margin-bottom: 3px;
-        }
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            color: var(--primary);
-            margin: 0 0 6px 0;
-            line-height: 1.2;
-        }
-        .hero p {
-            font-size: 11px;
-            color: #555;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-        .shop-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(92, 24, 36, 0.3);
-        }
+/* HERO */
+.hero{background:var(--surface);padding:60px 24px 70px;border-bottom:1px solid var(--line);text-align:center;}
+.hero-tag{font-size:10px;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-bottom:20px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:34px;color:var(--primary);margin:0 auto 18px;line-height:1.15;font-weight:400;max-width:340px;letter-spacing:-.5px;}
+.hero h1 em{font-style:italic;color:var(--brand);}
+.hero p{font-size:12px;color:var(--muted);margin:0 auto 28px;line-height:1.7;max-width:320px;}
+.shop-btn{background:var(--primary);color:#fff;border:none;padding:12px 32px;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;}
 
-        /* Ultra-Compact Horizontal Categories Bar */
-        .category-slider {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 4px 12px 12px 12px;
-            scrollbar-width: none;
-        }
-        .category-slider::-webkit-scrollbar { display: none; }
+/* CATEGORY */
+.category-slider{display:flex;overflow-x:auto;background:var(--surface);border-bottom:1px solid var(--line);scrollbar-width:none;}
+.category-slider::-webkit-scrollbar{display:none;}
+.cat-chip-card{background:transparent;border:none;border-right:1px solid var(--line);padding:16px 22px;display:flex;align-items:center;gap:8px;cursor:pointer;flex-shrink:0;}
+.cat-chip-card:active{background:#f2f2f2;}
+.cat-chip-card i{font-size:12px;color:var(--muted);}
+.cat-chip-card span{font-size:10px;font-weight:500;color:var(--primary);letter-spacing:1.5px;text-transform:uppercase;}
 
-        .cat-chip-card {
-            background: white;
-            border: 1px solid #d4af37;
-            border-radius: 20px;
-            padding: 5px 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            flex-shrink: 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-            transition: 0.2s;
-        }
-        .cat-chip-card:active { transform: scale(0.95); background: #fdf5eb; }
-        .cat-chip-card span {
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--primary);
-            font-family: 'Poppins', sans-serif;
-        }
+/* SECTION */
+.section-header{text-align:center;margin:50px 0 30px;}
+.section-header h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--primary);margin:0;font-weight:400;letter-spacing:-.3px;}
+.section-header p{font-size:10px;color:var(--muted);margin-top:8px;letter-spacing:3px;text-transform:uppercase;}
+.section-header::after{content:'';display:block;width:30px;height:1px;background:var(--accent);margin:14px auto 0;}
 
-        /* Section Header */
-        .section-header {
-            text-align: center;
-            margin: 10px 0 10px 0;
-        }
-        .section-header h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            color: var(--primary);
-            margin: 0;
-        }
-        .section-header p {
-            font-size: 10px;
-            color: #777;
-            margin-top: 2px;
-        }
+/* RECENTLY VIEWED */
+.recent-strip{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:20px 0 24px;}
+.recent-strip h3{font-family:'Playfair Display',serif;font-size:15px;color:var(--primary);margin:0 0 14px 20px;font-weight:400;letter-spacing:.3px;}
+.recent-scroll{display:flex;gap:12px;overflow-x:auto;padding:0 20px;scrollbar-width:none;}
+.recent-scroll::-webkit-scrollbar{display:none;}
+.recent-item{flex-shrink:0;width:90px;cursor:pointer;}
+.recent-item img{width:90px;height:110px;object-fit:cover;border:1px solid var(--line);display:block;}
+.recent-item span{display:block;font-size:9.5px;color:var(--muted);margin-top:5px;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;}
 
-        /* Products Grid - Strict 2 Columns Layout */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 12px; }
-        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; align-items: stretch; }
-        .card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.04);
-            text-align: center;
-            padding-bottom: 12px;
-            border: 1px solid #eee;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-        }
-        .card-img-wrapper {
-            width: 100%;
-            height: 170px;
-            background: #f4f4f4;
-            overflow: hidden;
-            position: relative;
-        }
-        .card-img-wrapper img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            cursor: pointer; 
-            display: block; 
-        }
-        
-        .card h3 { font-size: 12px; margin: 8px 5px 4px 5px; color: #333; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; }
-        .badge-type { position: absolute; top: 8px; left: 8px; background: rgba(92, 24, 36, 0.9); color: #fff; font-size: 9px; padding: 4px 8px; border-radius: 4px; font-weight: 500; z-index: 2; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        
-        .price-box { display: flex; justify-content: center; gap: 6px; margin-bottom: 8px; align-items: baseline; cursor: pointer; }
-        .price-box .discount { color: var(--primary); font-weight: 600; font-size: 14px; }
-        .price-box .regular { text-decoration: line-through; color: #888; font-size: 10px; }
+/* GRID */
+.container{max-width:1200px;margin:0 auto;padding:0 16px;}
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+.card{background:var(--surface);overflow:hidden;text-align:left;padding:0 0 16px;position:relative;display:flex;flex-direction:column;}
+.card-img-wrapper{width:100%;height:220px;background:#f4f4f4;overflow:hidden;position:relative;}
+.card-img-wrapper img{width:100%;height:100%;object-fit:cover;cursor:pointer;display:block;transition:transform .6s;}
+.card-img-wrapper img:hover{transform:scale(1.04);}
+.card h3{font-size:12px;margin:14px 14px 4px;color:var(--text);font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;font-family:'Playfair Display',serif;}
+.badge-type{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.95);color:var(--primary);font-size:9px;padding:4px 8px;letter-spacing:1px;text-transform:uppercase;font-weight:500;z-index:2;}
+.rating-row{display:flex;align-items:center;gap:4px;margin:0 14px 6px;font-size:10px;color:var(--muted);}
+.rating-row .stars{color:#f4b400;letter-spacing:1px;font-size:9.5px;}
+.wishlist-btn{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.95);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3;border:none;color:var(--muted);font-size:13px;transition:.2s;}
+.wishlist-btn.active{color:#e91e63;}
+.share-mini-btn{position:absolute;bottom:12px;right:12px;background:rgba(255,255,255,.95);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3;border:none;color:#25D366;font-size:12px;}
+.price-box{display:flex;gap:8px;margin:0 14px 14px;align-items:baseline;cursor:pointer;}
+.price-box .discount{color:var(--brand);font-weight:500;font-size:14px;}
+.price-box .regular{text-decoration:line-through;color:var(--muted);font-size:11px;}
+.btn-group{display:flex;flex-direction:column;gap:6px;width:100%;padding:0 14px;margin-top:auto;}
+.btn{padding:10px 12px;border:1px solid var(--primary);border-radius:0;cursor:pointer;background:transparent;color:var(--primary);font-weight:500;width:100%;display:inline-block;text-decoration:none;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-family:'Inter',sans-serif;transition:.25s;}
+.btn:hover{background:var(--primary);color:#fff;}
+.btn.cart-btn{background:var(--primary);color:#fff;}
+.btn.success{background:transparent;color:#1a1a1a;border-color:#1a1a1a;}
+.btn.danger{border-color:#d32f2f;color:#d32f2f;width:auto;padding:6px 10px;font-size:9px;}
+.btn.info{border-color:var(--accent);color:var(--accent);width:auto;padding:6px 10px;font-size:9px;}
+.admin-action-bar{display:flex;gap:6px;margin-top:8px;justify-content:center;}
 
-        .btn-group { display: flex; flex-direction: column; gap: 5px; align-items: center; width: 100%; padding: 0 8px; box-sizing: border-box; margin-top: auto; }
-        .btn { padding: 7px 8px; border: none; border-radius: 6px; cursor: pointer; background: var(--primary); color: white; font-weight: 500; width: 100%; display: inline-block; box-sizing: border-box; text-decoration: none; font-size: 11px; }
-        .btn.cart-btn { background: #222; }
-        .btn.success { background: #25D366; }
-        .btn.share-btn { background: #128C7E; width: 100%; font-size: 11px; }
-        .btn.danger { background: #ff4444; width: auto; }
-        .btn.info { background: #007bff; width: auto; }
-        
-        .admin-action-bar { display: flex; gap: 4px; margin-top: 4px; justify-content: center; width: 100%; }
+/* TRUST */
+.trust-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--surface);margin:50px 16px;border:1px solid var(--line);text-align:center;}
+.trust-item{padding:22px 8px;border-right:1px solid var(--line);}
+.trust-item:last-child{border-right:none;}
+.trust-item i{font-size:16px;color:var(--accent);margin-bottom:10px;display:block;}
+.trust-item h4{font-size:9px;margin:0;color:var(--primary);font-weight:500;letter-spacing:1.2px;text-transform:uppercase;}
+.trust-item p{font-size:9px;margin:5px 0 0;color:var(--muted);}
 
-        /* Trust Bar */
-        .trust-bar {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 5px;
-            background: #fff;
-            padding: 15px 5px;
-            margin: 25px 12px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            text-align: center;
-        }
-        .trust-item i { font-size: 16px; color: var(--primary); margin-bottom: 4px; }
-        .trust-item h4 { font-size: 10px; margin: 0; color: #333; font-weight: 600; }
-        .trust-item p { font-size: 8px; margin: 2px 0 0 0; color: #777; }
+/* AI BUTTON */
+.ai-float-btn{position:fixed;bottom:82px;right:16px;background:var(--primary);color:#fff;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 6px 20px rgba(0,0,0,.15);cursor:pointer;z-index:140;}
 
-        /* Floating AI Support Button */
-        .ai-float-btn {
-            position: fixed;
-            bottom: 75px;
-            right: 15px;
-            background: var(--primary);
-            color: white;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            cursor: pointer;
-            z-index: 140;
-            border: 2px solid var(--accent);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-            100% { transform: scale(1); }
-        }
+/* AI CHAT */
+.ai-chat-box{display:none;position:fixed;bottom:140px;right:16px;width:320px;max-width:92vw;background:var(--surface);box-shadow:0 20px 60px rgba(0,0,0,.18);z-index:200;overflow:hidden;border:1px solid var(--line);}
+.ai-chat-header{background:var(--primary);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;}
+.ai-chat-body{padding:16px;height:260px;overflow-y:auto;background:var(--bg);font-size:12px;display:flex;flex-direction:column;gap:10px;}
+.ai-msg{padding:10px 12px;max-width:85%;line-height:1.6;font-size:11.5px;}
+.ai-msg.bot{background:var(--surface);color:var(--primary);align-self:flex-start;border-left:2px solid var(--accent);}
+.ai-msg.user{background:var(--primary);color:#fff;align-self:flex-end;}
+.ai-chat-footer{display:flex;padding:10px;background:var(--surface);border-top:1px solid var(--line);}
+.ai-chat-input{flex:1;padding:8px 12px;border:1px solid var(--line);font-size:11.5px;outline:none;font-family:'Inter',sans-serif;}
+.ai-send-btn{background:var(--primary);color:#fff;border:none;width:34px;height:34px;margin-left:6px;cursor:pointer;}
 
-        /* AI Chat Window Popup */
-        .ai-chat-box {
-            display: none;
-            position: fixed;
-            bottom: 135px;
-            right: 15px;
-            width: 310px;
-            max-width: 90vw;
-            background: white;
-            border-radius: 14px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            z-index: 200;
-            overflow: hidden;
-            border: 1px solid #ddd;
-        }
-        .ai-chat-header {
-            background: var(--primary);
-            color: white;
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .ai-chat-body {
-            padding: 12px;
-            height: 250px;
-            overflow-y: auto;
-            background: #fdfbf7;
-            font-size: 11px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .ai-msg {
-            background: #eee;
-            padding: 8px 10px;
-            border-radius: 8px;
-            max-width: 85%;
-            line-height: 1.5;
-        }
-        .ai-msg.bot { background: #f2e6e8; color: var(--primary); align-self: flex-start; border-bottom-left-radius: 2px; }
-        .ai-msg.user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
-        
-        .ai-chat-footer {
-            display: flex;
-            padding: 8px;
-            background: white;
-            border-top: 1px solid #eee;
-        }
-        .ai-chat-input {
-            flex: 1;
-            padding: 6px 10px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-size: 11px;
-            outline: none;
-        }
-        .ai-send-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            margin-left: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-        }
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;left:0;width:100%;background:var(--surface);display:flex;justify-content:space-around;padding:10px 0 12px;border-top:1px solid var(--line);z-index:150;}
+.nav-item{text-align:center;background:none;border:none;color:var(--muted);font-size:9px;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:1px;text-transform:uppercase;font-weight:500;position:relative;}
+.nav-item i{font-size:15px;display:block;margin-bottom:4px;}
+.nav-item.active{color:var(--primary);}
+.nav-item .nav-badge{position:absolute;top:-4px;right:14px;background:var(--brand);color:#fff;font-size:7.5px;min-width:14px;height:14px;padding:0 3px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:600;}
 
-        /* Bottom Nav */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #fff;
-            display: flex;
-            justify-content: space-around;
-            padding: 8px 0;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
-            z-index: 150;
-            border-top: 1px solid #eee;
-        }
-        .nav-item {
-            text-align: center;
-            background: none;
-            border: none;
-            color: #666;
-            font-size: 10px;
-            cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            text-decoration: none;
-        }
-        .nav-item i { font-size: 18px; display: block; margin-bottom: 2px; }
-        .nav-item.active { color: var(--primary); font-weight: 600; }
+/* MODALS */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(20,20,20,.55);z-index:200;align-items:center;justify-content:center;padding:20px;}
+.modal-content{background:var(--surface);width:90%;max-width:440px;padding:28px 24px;position:relative;max-height:90vh;overflow-y:auto;}
+.close-btn{position:absolute;right:18px;top:14px;font-size:22px;cursor:pointer;color:var(--muted);font-weight:300;}
+.form-control{width:100%;padding:12px 0;margin-bottom:16px;border:none;border-bottom:1px solid var(--line);font-family:'Inter',sans-serif;font-size:13px;background:transparent;outline:none;color:var(--text);}
+.form-control:focus{border-bottom-color:var(--primary);}
 
-        /* Modals */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 200; align-items: center; justify-content: center; }
-        .modal-content { background: white; width: 90%; max-width: 450px; padding: 20px; border-radius: 12px; position: relative; max-height: 90vh; overflow-y: auto; box-sizing: border-box; }
-        .close-btn { position: absolute; right: 15px; top: 10px; font-size: 22px; cursor: pointer; color: #333; }
-        .form-control { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: 'Poppins', sans-serif; box-sizing: border-box; font-size: 13px; }
+/* COUPON */
+.coupon-row{display:flex;gap:8px;margin-bottom:14px;}
+.coupon-row input{flex:1;padding:10px 12px;border:1px solid var(--line);font-size:12px;font-family:'Inter',sans-serif;outline:none;}
+.coupon-row button{background:var(--primary);color:#fff;border:none;padding:10px 16px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;font-weight:500;cursor:pointer;}
+.coupon-msg{font-size:11px;margin:-8px 0 12px;padding:8px 10px;}
+.coupon-msg.ok{background:#e8f5e9;color:#2e7d32;}
+.coupon-msg.err{background:#ffebee;color:#c62828;}
 
-        /* Custom Share Modal Styles */
-        .share-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 15px; }
-        .share-option-btn { background: #f9f9f9; border: 1px solid #ddd; padding: 12px 8px; border-radius: 10px; text-align: center; cursor: pointer; text-decoration: none; color: #333; font-size: 11px; font-weight: 500; display: flex; flex-direction: column; align-items: center; gap: 6px; transition: 0.2s; }
-        .share-option-btn:active { background: #eee; }
-        .share-option-btn i { font-size: 22px; }
+/* LIVE VIEWERS */
+.live-viewers{display:inline-flex;align-items:center;gap:6px;background:#fff3e0;color:#e65100;font-size:10px;padding:5px 10px;letter-spacing:.5px;font-weight:500;margin-bottom:12px;}
+.live-viewers .pulse{width:6px;height:6px;background:#e65100;border-radius:50%;animation:pulseDot 1.5s infinite;}
+@keyframes pulseDot{0%,100%{opacity:1;}50%{opacity:.3;}}
 
-        .cart-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding: 8px 0; font-size: 12px; }
-        .cart-item img { width: 45px; height: 45px; object-fit: cover; border-radius: 4px; }
+/* SHARE / OPTIN */
+.share-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;}
+.share-option-btn{background:var(--bg);border:1px solid var(--line);padding:16px 8px;text-align:center;cursor:pointer;text-decoration:none;color:var(--primary);font-size:10px;font-weight:500;display:flex;flex-direction:column;align-items:center;gap:8px;letter-spacing:.8px;}
+.share-option-btn i{font-size:20px;}
 
-        footer { background: var(--primary); color: white; padding: 25px 15px; text-align: center; font-size: 12px; margin-top: 30px; }
-        footer p { color: #f0f0f0; line-height: 1.5; margin: 5px 0; }
-    </style>
+/* CART */
+.cart-item{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:12px 0;font-size:12px;}
+.cart-item img{width:50px;height:50px;object-fit:cover;}
+
+/* RECOMMEND */
+.rec-section{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);}
+.rec-section h4{font-family:'Playfair Display',serif;font-size:15px;font-weight:400;color:var(--primary);margin:0 0 14px;letter-spacing:.3px;}
+.rec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.rec-card{cursor:pointer;}
+.rec-card img{width:100%;height:120px;object-fit:cover;border:1px solid var(--line);}
+.rec-card span{display:block;font-size:10px;color:var(--text);margin-top:6px;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rec-card .p{font-size:11px;color:var(--brand);font-weight:500;margin-top:2px;}
+
+footer{background:var(--primary);color:#fff;padding:40px 20px 30px;text-align:center;font-size:12px;margin-top:60px;}
+footer p{color:#ddd;line-height:1.7;margin:6px 0;letter-spacing:.5px;}
+footer p strong{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;letter-spacing:2px;}
+</style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="logo-area" onclick="goHome()">
-            <div class="logo-title">Zarafiya</div>
-            <div class="logo-sub">Fashion</div>
-        </div>
-        <div class="header-icons">
-            <i class="fas fa-share-alt" onclick="openShareModal()" title="Share App"></i>
-            <i class="fas fa-search" onclick="toggleSearchBox()"></i>
-            <div style="position: relative;" onclick="openCartModal()">
-                <i class="fas fa-shopping-bag"></i>
-                <span id="cartCount" style="position: absolute; top: -6px; right: -8px; background: var(--primary); color: white; font-size: 9px; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">0</span>
-            </div>
-            <i class="fas fa-bars" onclick="openLoginModal()" style="font-size: 16px;"></i>
-        </div>
-    </header>
+<!-- OFFER TICKER -->
+<div class="offer-ticker" id="offerTicker">
+  <i class="fas fa-bolt"></i> FESTIVE SALE — Extra 10% off, code <b>ZARA10</b> · Ends in <span class="cd" id="countdown">--:--:--</span>
+</div>
 
-    <!-- Admin Quick Notification Bar -->
-    <div id="adminBar">
-        <span id="adminStatusText"><i class="fas fa-user-shield"></i> Admin Mode Active</span>
-        <div>
-            <button onclick="openAddProductModal()" style="background:var(--accent); border:none; padding:4px 10px; border-radius:4px; font-weight:600; cursor:pointer; font-size:11px; margin-right:5px;"><i class="fas fa-plus"></i> Add Product</button>
-            <button onclick="logoutAdminBtn()" style="background:#ff4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer; font-size:11px;">Logout</button>
-        </div>
+<!-- HEADER -->
+<header>
+  <div class="logo-area" onclick="goHome()">
+    <div class="logo-title">Zarafiya</div>
+    <div class="logo-sub">Fashion</div>
+  </div>
+  <div class="header-icons">
+    <i class="fas fa-share-alt" onclick="openShareModal()"></i>
+    <i class="fas fa-search" onclick="toggleSearchBox()"></i>
+    <div class="badge-wrap" onclick="openWishlist()">
+      <i class="fas fa-heart"></i>
+      <span class="badge" id="wishCount">0</span>
     </div>
-
-    <!-- Search Box Bar -->
-    <div id="searchBox" class="search-container">
-        <input type="text" id="searchInput" class="search-input" placeholder="Search by Saree name or SKU..." onkeyup="searchProducts()">
+    <div class="badge-wrap" onclick="openCartModal()">
+      <i class="fas fa-shopping-bag"></i>
+      <span class="badge" id="cartCount">0</span>
     </div>
+    <i class="fas fa-bars" onclick="openLoginModal()"></i>
+  </div>
+</header>
 
-    <!-- Sticky Shop by Color Filter Bar -->
-    <div class="sticky-color-bar">
-        <button class="color-chip c-all" onclick="filterColor('all')"><i class="fas fa-th"></i> All Colors</button>
-        <button class="color-chip c-pink" onclick="filterColor('pink')"><i class="fas fa-circle"></i> Pink</button>
-        <button class="color-chip c-blue" onclick="filterColor('blue')"><i class="fas fa-circle"></i> Blue</button>
-        <button class="color-chip c-red" onclick="filterColor('red')"><i class="fas fa-circle"></i> Red</button>
-        <button class="color-chip c-maroon" onclick="filterColor('maroon')"><i class="fas fa-circle"></i> Maroon</button>
-        <button class="color-chip c-green" onclick="filterColor('green')"><i class="fas fa-circle"></i> Green</button>
-        <button class="color-chip c-yellow" onclick="filterColor('yellow')"><i class="fas fa-circle"></i> Yellow</button>
-        <button class="color-chip c-other" onclick="filterColor('other')"><i class="fas fa-circle"></i> Other</button>
+<div id="adminBar">
+  <span><i class="fas fa-user-shield"></i> Admin Mode</span>
+  <div>
+    <button onclick="openAddProductModal()" style="background:transparent;border:1px solid #fff;color:#fff;padding:4px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-right:8px;"><i class="fas fa-plus"></i> Add</button>
+    <button onclick="logoutAdminBtn()" style="background:#fff;color:var(--primary);border:none;padding:5px 10px;font-size:10px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;">Logout</button>
+  </div>
+</div>
+
+<div id="searchBox" class="search-container">
+  <input type="text" id="searchInput" class="search-input" placeholder="Search by name, SKU, color..." onkeyup="searchProducts()">
+</div>
+
+<div class="sticky-color-bar">
+  <button class="color-chip c-all" onclick="filterColor('all')"><span class="dot"></span>All</button>
+  <button class="color-chip c-pink" onclick="filterColor('pink')"><span class="dot"></span>Pink</button>
+  <button class="color-chip c-blue" onclick="filterColor('blue')"><span class="dot"></span>Blue</button>
+  <button class="color-chip c-red" onclick="filterColor('red')"><span class="dot"></span>Red</button>
+  <button class="color-chip c-maroon" onclick="filterColor('maroon')"><span class="dot"></span>Maroon</button>
+  <button class="color-chip c-green" onclick="filterColor('green')"><span class="dot"></span>Green</button>
+  <button class="color-chip c-yellow" onclick="filterColor('yellow')"><span class="dot"></span>Yellow</button>
+  <button class="color-chip c-other" onclick="filterColor('other')"><span class="dot"></span>Other</button>
+</div>
+
+<main id="customerView">
+  <section class="hero">
+    <div class="hero-tag">Handcrafted in Varanasi</div>
+    <h1>Premium <em>Banarasi</em> Silk Sarees</h1>
+    <p>Timeless weaves, crafted directly by master artisans. Elegance in every thread.</p>
+    <button class="shop-btn" onclick="scrollToCollection()">Explore Collection</button>
+  </section>
+
+  <div class="category-slider">
+    <div class="cat-chip-card" onclick="filterCategory('All')"><i class="fas fa-th-large"></i><span>All</span></div>
+    <div class="cat-chip-card" onclick="filterCategory('Sarees')"><i class="fas fa-female"></i><span>Sarees</span></div>
+    <div class="cat-chip-card" onclick="filterCategory('Suit')"><i class="fas fa-tshirt"></i><span>Suits</span></div>
+    <div class="cat-chip-card" onclick="filterCategory('Dupatta')"><i class="fas fa-gift"></i><span>Dupatta</span></div>
+    <div class="cat-chip-card" onclick="filterCategory('Gharara')"><i class="fas fa-star"></i><span>Gharara</span></div>
+  </div>
+
+  <!-- RECENTLY VIEWED -->
+  <div class="recent-strip" id="recentStrip" style="display:none;">
+    <h3>Recently Viewed</h3>
+    <div class="recent-scroll" id="recentScroll"></div>
+  </div>
+
+  <div class="section-header" id="collectionSection">
+    <h2 id="activeCatTitle">All Collection</h2>
+    <p>Curated Selection</p>
+  </div>
+
+  <div class="container">
+    <div id="productGrid" class="product-grid">
+      <p style="text-align:center;width:100%;grid-column:1/-1;color:#8a8a8a;padding:40px;font-size:12px;">Loading collection...</p>
     </div>
+  </div>
 
-    <!-- Customer Home View -->
-    <main id="customerView">
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-tag">Traditional &bull; Elegant &bull; Timeless</div>
-                <h1>Premium Banarasi Silk Sarees</h1>
-                <p>Elegance and Tradition in Every Thread. Handcrafted directly from Varanasi weavers.</p>
-                <button class="shop-btn" onclick="scrollToCollection()">Shop Now <i class="fas fa-arrow-right" style="font-size: 10px; margin-left: 4px;"></i></button>
-            </div>
-        </section>
+  <div class="trust-bar">
+    <div class="trust-item"><i class="fas fa-shipping-fast"></i><h4>Free Ship</h4><p>All Orders</p></div>
+    <div class="trust-item"><i class="fas fa-shield-alt"></i><h4>Secure</h4><p>100% Safe</p></div>
+    <div class="trust-item"><i class="fas fa-award"></i><h4>Premium</h4><p>Handpicked</p></div>
+    <div class="trust-item"><i class="fas fa-headset"></i><h4>Support</h4><p>24/7</p></div>
+  </div>
+</main>
 
-        <!-- Ultra-Compact Horizontal Categories Bar -->
-        <div class="category-slider">
-            <div class="cat-chip-card" onclick="filterCategory('All')">
-                <i class="fas fa-th-large" style="color:var(--primary); font-size:11px;"></i>
-                <span>All</span>
-            </div>
-            <div class="cat-chip-card" onclick="filterCategory('Sarees')">
-                <i class="fas fa-female" style="color:var(--primary); font-size:11px;"></i>
-                <span>Sarees</span>
-            </div>
-            <div class="cat-chip-card" onclick="filterCategory('Suit')">
-                <i class="fas fa-tshirt" style="color:var(--primary); font-size:11px;"></i>
-                <span>Suits</span>
-            </div>
-            <div class="cat-chip-card" onclick="filterCategory('Dupatta')">
-                <i class="fas fa-gift" style="color:var(--primary); font-size:11px;"></i>
-                <span>Dupatta</span>
-            </div>
-            <div class="cat-chip-card" onclick="filterCategory('Gharara')">
-                <i class="fas fa-star" style="color:var(--primary); font-size:11px;"></i>
-                <span>Gharara</span>
-            </div>
-        </div>
+<div class="ai-float-btn" onclick="toggleAiChat()"><i class="fas fa-robot"></i></div>
 
-        <div class="section-header" id="collectionSection">
-            <h2 id="activeCatTitle">All Collection</h2>
-            <p>Choose Your Style</p>
-        </div>
+<div id="aiChatBox" class="ai-chat-box">
+  <div class="ai-chat-header">
+    <span><i class="fas fa-robot"></i> Zarafiya Assistant</span>
+    <i class="fas fa-times" style="cursor:pointer;" onclick="toggleAiChat()"></i>
+  </div>
+  <div id="aiChatBody" class="ai-chat-body">
+    <div class="ai-msg bot">Welcome to Zarafiya. Ask me about sarees, prices, or say <b>"₹2000 mein wedding saree dikhao"</b> — English, Hindi ya Urdu mein.</div>
+  </div>
+  <div class="ai-chat-footer">
+    <input type="text" id="aiUserInput" class="ai-chat-input" placeholder="Write a message..." onkeypress="handleAiEnter(event)">
+    <button class="ai-send-btn" onclick="sendAiMessage()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
 
-        <div class="container">
-            <div id="productGrid" class="product-grid">
-                <p style="text-align: center; width: 100%; grid-column: 1 / -1; color:#777;">Loading products...</p>
-            </div>
-        </div>
-
-        <div class="trust-bar">
-            <div class="trust-item"><i class="fas fa-shipping-fast"></i><h4>Free Shipping</h4><p>On All Orders</p></div>
-            <div class="trust-item"><i class="fas fa-shield-alt"></i><h4>Secure Pay</h4><p>100% Safe</p></div>
-            <div class="trust-item"><i class="fas fa-award"></i><h4>Premium Quality</h4><p>Handpicked Fabrics</p></div>
-            <div class="trust-item"><i class="fas fa-headset"></i><h4>24/7 Support</h4><p>Here for You</p></div>
-        </div>
-    </main>
-
-    <!-- Floating AI Support Button -->
-    <div class="ai-float-btn" onclick="toggleAiChat()" title="AI Help & Support">
-        <i class="fas fa-robot"></i>
+<!-- SHARE MODAL -->
+<div id="shareModal" class="modal">
+  <div class="modal-content" style="text-align:center;">
+    <span class="close-btn" onclick="closeModal('shareModal')">&times;</span>
+    <h3 style="font-family:'Playfair Display',serif;color:var(--primary);margin-top:0;font-weight:400;font-size:20px;">Share Zarafiya</h3>
+    <p style="font-size:11px;color:#8a8a8a;letter-spacing:.5px;">Share with friends — they get ₹100 off, you get ₹100 off on next order</p>
+    <div class="share-options">
+      <a id="shareWa" href="#" target="_blank" class="share-option-btn"><i class="fab fa-whatsapp" style="color:#25D366;"></i>WhatsApp</a>
+      <a id="shareFb" href="#" target="_blank" class="share-option-btn"><i class="fab fa-facebook" style="color:#1877F2;"></i>Facebook</a>
+      <a id="shareTele" href="#" target="_blank" class="share-option-btn"><i class="fab fa-telegram" style="color:#0088cc;"></i>Telegram</a>
+      <a id="shareEmail" href="#" target="_blank" class="share-option-btn"><i class="fas fa-envelope" style="color:#ea4335;"></i>Email</a>
+      <a id="shareTwitter" href="#" target="_blank" class="share-option-btn"><i class="fab fa-twitter" style="color:#1da1f2;"></i>Twitter</a>
+      <div onclick="copyAppLinkId()" class="share-option-btn"><i class="fas fa-copy" style="color:var(--brand);"></i>Copy</div>
     </div>
+  </div>
+</div>
 
-    <!-- AI Chat Window Popup -->
-    <div id="aiChatBox" class="ai-chat-box">
-        <div class="ai-chat-header">
-            <span><i class="fas fa-robot"></i> Zarafiya Assistant</span>
-            <i class="fas fa-times" style="cursor:pointer;" onclick="toggleAiChat()"></i>
+<!-- PRODUCT MODAL -->
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('productModal')">&times;</span>
+    <div id="productDetailContent"></div>
+  </div>
+</div>
+
+<!-- WISHLIST MODAL -->
+<div id="wishlistModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('wishlistModal')">&times;</span>
+    <h3 style="font-family:'Playfair Display',serif;color:var(--primary);margin-top:0;font-weight:400;font-size:20px;">Your Wishlist</h3>
+    <div id="wishlistContent" style="max-height:400px;overflow-y:auto;"></div>
+  </div>
+</div>
+
+<!-- PRODUCT FORM MODAL -->
+<div id="productFormModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('productFormModal')">&times;</span>
+    <h3 id="formTitle" style="margin-top:0;color:var(--primary);font-size:18px;font-family:'Playfair Display',serif;font-weight:400;">Add New Product</h3>
+    <form id="addProductForm">
+      <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:6px;">Product Image</label>
+        <input type="file" id="pImageFile" class="form-control" accept="image/*" onchange="compressAndConvertImage(this)">
+        <input type="hidden" id="pImage" required>
+        <div id="imagePreviewContainer" style="margin-top:8px;display:none;">
+          <img id="imgPreviewTag" src="" style="width:70px;height:70px;object-fit:cover;">
         </div>
-        <div id="aiChatBody" class="ai-chat-body">
-            <div class="ai-msg bot">👋 Welcome! Welcome to Zarafiya Fashion. How can I help you today? You can ask about our Banarasi Sarees, Suits, Gharara, prices, or orders in English, Hindi, or Urdu! 😊</div>
-        </div>
-        <div class="ai-chat-footer">
-            <input type="text" id="aiUserInput" class="ai-chat-input" placeholder="Type your message here..." onkeypress="handleAiEnter(event)">
-            <button class="ai-send-btn" onclick="sendAiMessage()"><i class="fas fa-paper-plane"></i></button>
-        </div>
+      </div>
+      <input type="number" id="pPrice" class="form-control" placeholder="Regular Price" required>
+      <input type="number" id="pDiscount" class="form-control" placeholder="Discount Price" required>
+      <select id="pCategory" class="form-control" required>
+        <option value="">Select Category</option>
+        <option value="Sarees">Sarees</option>
+        <option value="Suit">Suit</option>
+        <option value="Dupatta">Dupatta</option>
+        <option value="Gharara">Gharara</option>
+      </select>
+      <select id="pMakeType" class="form-control" required>
+        <option value="">Weaving Type</option>
+        <option value="Handloom">Handloom</option>
+        <option value="Power Loom">Power Loom</option>
+        <option value="Repair Machine">Repair Machine</option>
+      </select>
+      <select id="pColor" class="form-control" onchange="checkCustomColor(this.value)">
+        <option value="">Select Color (Optional)</option>
+        <option value="pink">Pink</option>
+        <option value="blue">Blue</option>
+        <option value="red">Red</option>
+        <option value="maroon">Maroon</option>
+        <option value="green">Green</option>
+        <option value="yellow">Yellow</option>
+        <option value="other">Other / Custom</option>
+      </select>
+      <input type="text" id="pCustomColor" class="form-control" placeholder="Custom color name" style="display:none;">
+      <input type="text" id="pSku" class="form-control" placeholder="Product Code / SKU" required>
+      <textarea id="pDesc" class="form-control" placeholder="Description & Fabric Details" rows="3" required></textarea>
+      <button type="submit" id="submitProductBtn" class="btn success" style="width:100%;padding:14px;margin-top:10px;">Add Product</button>
+    </form>
+  </div>
+</div>
+
+<!-- CART MODAL -->
+<div id="cartModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('cartModal')">&times;</span>
+    <h3 style="font-family:'Playfair Display',serif;color:var(--primary);margin-top:0;font-weight:400;font-size:20px;">Your Bag</h3>
+    <div id="cartItemsList" style="max-height:220px;overflow-y:auto;margin-bottom:12px;"></div>
+    <div class="coupon-row">
+      <input type="text" id="couponInput" placeholder="Enter coupon code" style="text-transform:uppercase;">
+      <button onclick="applyCoupon()">Apply</button>
     </div>
-
-    <!-- Social Share Modal -->
-    <div id="shareModal" class="modal">
-        <div class="modal-content" style="text-align: center;">
-            <span class="close-btn" onclick="document.getElementById('shareModal').style.display='none'">&times;</span>
-            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Share Zarafiya App</h3>
-            <p style="font-size: 11px; color: #666; margin-bottom: 15px;">Choose your favorite platform to share the app link with your friends & customers:</p>
-            
-            <div class="share-options">
-                <a id="shareWa" href="#" target="_blank" class="share-option-btn" style="color: #25D366;">
-                    <i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp
-                </a>
-                <a id="shareFb" href="#" target="_blank" class="share-option-btn" style="color: #1877F2;">
-                    <i class="fab fa-facebook" style="color: #1877F2;"></i> Facebook
-                </a>
-                <a id="shareTele" href="#" target="_blank" class="share-option-btn" style="color: #0088cc;">
-                    <i class="fab fa-telegram" style="color: #0088cc;"></i> Telegram
-                </a>
-                <a id="shareEmail" href="#" target="_blank" class="share-option-btn" style="color: #ea4335;">
-                    <i class="fas fa-envelope" style="color: #ea4335;"></i> Email / SMS
-                </a>
-                <a id="shareTwitter" href="#" target="_blank" class="share-option-btn" style="color: #1da1f2;">
-                    <i class="fab fa-twitter" style="color: #1da1f2;"></i> Twitter
-                </a>
-                <div onclick="copyAppLinkId()" class="share-option-btn" style="color: #5c1824;">
-                    <i class="fas fa-copy" style="color: #5c1824;"></i> Copy Link
-                </div>
-            </div>
-        </div>
+    <div id="couponMsg" class="coupon-msg" style="display:none;"></div>
+    <div style="border-top:1px solid var(--line);padding-top:14px;margin-bottom:18px;">
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:.5px;"><span>Subtotal</span><span id="cartSubtotal">₹0</span></div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;color:#2e7d32;margin-bottom:6px;letter-spacing:.5px;display:none;" id="discountRow"><span>Discount</span><span id="cartDiscount">-₹0</span></div>
+      <div style="display:flex;justify-content:space-between;font-weight:600;letter-spacing:1px;font-size:13px;text-transform:uppercase;padding-top:8px;border-top:1px solid var(--line);"><span>Total</span><span id="cartTotalPrice">₹0</span></div>
     </div>
+    <button onclick="checkoutWhatsApp()" class="btn success" style="width:100%;padding:14px;font-size:11px;"><i class="fab fa-whatsapp"></i> Order via WhatsApp (COD)</button>
+  </div>
+</div>
 
-    <!-- Product Detail Modal -->
-    <div id="productModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeProductModal">&times;</span>
-            <div id="productDetailContent"></div>
-        </div>
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+    <h2 style="font-family:'Playfair Display',serif;color:var(--primary);margin-top:0;font-weight:400;font-size:22px;">Admin Access</h2>
+    <input type="email" id="adminEmail" class="form-control" placeholder="Admin Email">
+    <input type="password" id="adminPassword" class="form-control" placeholder="Password">
+    <button id="loginBtn" class="btn cart-btn" style="width:100%;padding:14px;">Login</button>
+  </div>
+</div>
+
+<!-- WHATSAPP OPT-IN MODAL -->
+<div id="optinModal" class="modal">
+  <div class="modal-content" style="text-align:center;">
+    <span class="close-btn" onclick="closeOptin()">&times;</span>
+    <div style="font-size:32px;color:#25D366;margin-bottom:10px;"><i class="fab fa-whatsapp"></i></div>
+    <h3 style="font-family:'Playfair Display',serif;color:var(--primary);margin:0 0 8px;font-weight:400;font-size:20px;">Get Exclusive Offers</h3>
+    <p style="font-size:12px;color:#8a8a8a;line-height:1.6;margin-bottom:18px;">Naye saree launch, festive sale aur <b>₹100 off</b> ka coupon seedha WhatsApp pe paayein.</p>
+    <input type="tel" id="optinPhone" class="form-control" placeholder="Your WhatsApp Number" style="text-align:center;">
+    <button onclick="saveOptin()" class="btn cart-btn" style="width:100%;padding:14px;font-size:11px;">Send Me Offers</button>
+    <p onclick="closeOptin()" style="font-size:11px;color:#8a8a8a;margin-top:14px;cursor:pointer;">Maybe later</p>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="goHome()"><i class="fas fa-home"></i>Home</button>
+  <button class="nav-item" onclick="scrollToCollection()"><i class="fas fa-th-large"></i>Shop</button>
+  <button class="nav-item" onclick="openWishlist()"><i class="fas fa-heart"></i>Wishlist<span class="nav-badge" id="wishNavBadge" style="display:none;">0</span></button>
+  <button class="nav-item" onclick="openCartModal()"><i class="fas fa-shopping-bag"></i>Bag<span class="nav-badge" id="cartNavBadge" style="display:none;">0</span></button>
+  <button class="nav-item" onclick="openLoginModal()"><i class="fas fa-user"></i>Account</button>
+</nav>
+
+<footer>
+  <p><strong>ZARAFIYA</strong></p>
+  <p>Grace in Every Thread</p>
+  <p>Varanasi, Uttar Pradesh</p>
+  <p style="font-size:10px;color:#999;margin-top:20px;letter-spacing:1.5px;">&copy; 2026 — ALL RIGHTS RESERVED</p>
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, browserLocalPersistence, setPersistence } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBL8tiQZOGPNsOxVGMB5Hbs_YhpSmqwFJQ",
+  authDomain: "zarafiya-fashion.firebaseapp.com",
+  projectId: "zarafiya-fashion",
+  storageBucket: "zarafiya-fashion.firebasestorage.app",
+  messagingSenderId: "1022372302059",
+  appId: "1:1022372302059:web:846bd4aa38baf866fdc2ae"
+};
+const whatsappNumber = "918887802046";
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+setPersistence(auth, browserLocalPersistence).catch(e => console.log(e));
+
+// ===== COUPONS (yahan naye coupons add karte raho) =====
+const COUPONS = {
+  'ZARA10':   { type:'percent', value:10, min:999,  desc:'10% off on ₹999+' },
+  'FIRST15':  { type:'percent', value:15, min:1499, desc:'15% off — first order' },
+  'FESTIVE200': { type:'flat', value:200, min:1999, desc:'₹200 off on ₹1999+' },
+  'REFER100': { type:'flat', value:100, min:999, desc:'₹100 off — referral' }
+};
+
+let cart = JSON.parse(localStorage.getItem('zarafiya_cart') || '[]');
+let wishlist = JSON.parse(localStorage.getItem('zarafiya_wish') || '[]');
+let recentlyViewed = JSON.parse(localStorage.getItem('zarafiya_recent') || '[]');
+let allProducts = [];
+let currentCategory = 'All';
+let isAdminLoggedIn = false;
+let editingProductId = null;
+let appliedCoupon = null;
+
+const $ = id => document.getElementById(id);
+const escapeHTML = s => !s ? '' : String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+
+function saveState() {
+  localStorage.setItem('zarafiya_cart', JSON.stringify(cart));
+  localStorage.setItem('zarafiya_wish', JSON.stringify(wishlist));
+  localStorage.setItem('zarafiya_recent', JSON.stringify(recentlyViewed));
+  updateBadges();
+}
+function updateBadges() {
+  $('cartCount').textContent = cart.length;
+  $('wishCount').textContent = wishlist.length;
+  const cnb = $('cartNavBadge'), wnb = $('wishNavBadge');
+  if (cart.length) { cnb.style.display='flex'; cnb.textContent=cart.length; } else cnb.style.display='none';
+  if (wishlist.length) { wnb.style.display='flex'; wnb.textContent=wishlist.length; } else wnb.style.display='none';
+}
+
+// ===== COUNTDOWN =====
+function startCountdown() {
+  const end = new Date(); end.setHours(23,59,59,999);
+  setInterval(() => {
+    const now = new Date();
+    let diff = Math.max(0, end - now);
+    const h = String(Math.floor(diff/3600000)).padStart(2,'0');
+    const m = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+    const s = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+    const el = $('countdown'); if(el) el.textContent = `${h}:${m}:${s}`;
+  }, 1000);
+}
+
+// ===== OPT-IN =====
+function showOptinIfNeeded() {
+  if (!localStorage.getItem('zarafiya_optin_done') && !localStorage.getItem('zarafiya_optin_skip')) {
+    setTimeout(() => $('optinModal').style.display = 'flex', 6000);
+  }
+}
+window.closeOptin = () => { localStorage.setItem('zarafiya_optin_skip','1'); $('optinModal').style.display='none'; };
+window.saveOptin = () => {
+  const phone = $('optinPhone').value.trim();
+  if (phone.length < 10) return alert('Sahi WhatsApp number daalein');
+  // Yahan aap apna backend/Google Sheet/Firebase mein save kar sakte ho
+  try {
+    addDoc(collection(db, "optins"), { phone, at: new Date() });
+  } catch(e){}
+  localStorage.setItem('zarafiya_optin_done','1');
+  alert('Shukriya! Aapko offers milenge. 🎉\nUse code FIRST15 for 15% off on first order.');
+  $('optinModal').style.display = 'none';
+};
+
+// ===== MODALS =====
+window.closeModal = id => $(id).style.display = 'none';
+
+// ===== SHARE =====
+window.openShareModal = () => {
+  const appLink = "https://www.appcreator24.com/app4187228-hpd1mq";
+  const shareText = "✨ Zarafiya Fashion — Premium Banarasi Silk Sarees. Use my code REFER100 for ₹100 off: " + appLink;
+  $('shareWa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
+  $('shareFb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(appLink)}`;
+  $('shareTele').href = `https://telegram.me/share/url?url=${encodeURIComponent(appLink)}&text=${encodeURIComponent("Zarafiya Fashion App")}`;
+  $('shareEmail').href = `mailto:?subject=Zarafiya Fashion&body=${encodeURIComponent(shareText)}`;
+  $('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+  $('shareModal').style.display = 'flex';
+};
+window.copyAppLinkId = () => {
+  navigator.clipboard.writeText("https://www.appcreator24.com/app4187228-hpd1mq");
+  alert("Link copied! Share karo aur REFER100 se ₹100 off pao.");
+  closeModal('shareModal');
+};
+window.shareProductWhatsApp = (name, price, image) => {
+  const text = `✨ *Zarafiya Fashion* ✨%0A%0A*${name}*%0A💰 ₹${price}%0A🖼️ ${image}%0A%0AOrder: https://www.appcreator24.com/app4187228-hpd1mq`;
+  window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
+};
+
+// ===== IMAGE =====
+window.compressAndConvertImage = (input) => {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      let w = img.width, h = img.height;
+      const MAX = 600;
+      if (w > h) { if (w > MAX) { h *= MAX/w; w = MAX; } } else { if (h > MAX) { w *= MAX/h; h = MAX; } }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      const url = canvas.toDataURL('image/jpeg', 0.7);
+      $('pImage').value = url;
+      $('imgPreviewTag').src = url;
+      $('imagePreviewContainer').style.display = 'block';
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+window.checkCustomColor = val => {
+  const c = $('pCustomColor');
+  if (val === 'other') { c.style.display='block'; c.focus(); }
+  else { c.style.display='none'; c.value=''; }
+};
+
+// ===== AI =====
+const AI_BACKEND_URL = "https://zarafiya-ai.ashifmd400.workers.dev/";
+let aiHistory = [];
+window.toggleAiChat = () => {
+  const box = $('aiChatBox');
+  box.style.display = box.style.display === 'block' ? 'none' : 'block';
+  if (box.style.display === 'block') setTimeout(() => $('aiUserInput').focus(), 100);
+};
+window.handleAiEnter = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendAiMessage(); } };
+function getAiProductContext() {
+  if (!allProducts.length) return "No products loaded.";
+  return allProducts.slice(0,80).map((p,i) =>
+    `${i+1}. ${p.name||'Unnamed'} | Cat:${p.category||'N/A'} | Color:${p.color||'N/A'} | Type:${p.makeType||'Handloom'} | SKU:${p.sku||'N/A'} | MRP:₹${p.price||'N/A'} | Offer:₹${p.discountPrice||'N/A'} | ${p.description||''}`
+  ).join('\n');
+}
+function addAiMessage(text, type) {
+  const body = $('aiChatBody');
+  const div = document.createElement('div');
+  div.className = `ai-msg ${type}`;
+  div.innerHTML = escapeHTML(String(text)).replace(/\n/g,'<br>');
+  body.appendChild(div); body.scrollTop = body.scrollHeight;
+  return div;
+}
+window.sendAiMessage = async () => {
+  const input = $('aiUserInput'), body = $('aiChatBody');
+  const msg = input.value.trim(); if (!msg) return;
+  addAiMessage(msg, 'user'); input.value = ''; input.disabled = true;
+  const typing = document.createElement('div');
+  typing.className = 'ai-msg bot'; typing.textContent = 'Zarafiya AI soch raha hai...';
+  body.appendChild(typing); body.scrollTop = body.scrollHeight;
+  try {
+    const res = await fetch(AI_BACKEND_URL, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ message: msg, history: aiHistory.slice(-8), productContext: getAiProductContext() })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'FAILED');
+    const reply = String(data.reply || '').trim();
+    if (!reply) throw new Error('EMPTY');
+    typing.remove(); addAiMessage(reply, 'bot');
+    aiHistory.push({ role:'user', text: msg }, { role:'assistant', text: reply });
+    if (aiHistory.length > 16) aiHistory = aiHistory.slice(-16);
+  } catch (e) {
+    typing.remove();
+    addAiMessage('AI service abhi available nahi hai. Thodi der baad try karein. 🙏', 'bot');
+  } finally { input.disabled = false; input.focus(); }
+};
+
+// ===== NAV =====
+window.goHome = () => window.scrollTo({ top:0, behavior:'smooth' });
+window.scrollToCollection = () => $('collectionSection').scrollIntoView({ behavior:'smooth' });
+window.toggleSearchBox = () => {
+  const b = $('searchBox');
+  b.style.display = b.style.display === 'block' ? 'none' : 'block';
+  if (b.style.display === 'block') $('searchInput').focus();
+};
+window.openLoginModal = () => { if (isAdminLoggedIn) alert('Already logged in as Admin'); else $('loginModal').style.display='flex'; };
+window.openAddProductModal = () => { resetForm(); $('productFormModal').style.display='flex'; };
+window.openCartModal = () => { renderCartItems(); $('cartModal').style.display='flex'; };
+window.openWishlist = () => { renderWishlist(); $('wishlistModal').style.display='flex'; };
+
+// ===== CART =====
+window.addToCart = (id, name, price, image) => {
+  cart.push({ id, name, price, image });
+  saveState(); renderCartItems();
+  // Halka feedback
+  const c = $('cartCount'); c.style.transform='scale(1.3)';
+  setTimeout(()=>c.style.transform='scale(1)', 200);
+};
+window.removeFromCart = i => { cart.splice(i,1); saveState(); renderCartItems(); };
+function renderCartItems() {
+  const list = $('cartItemsList'), totalBox = $('cartTotalPrice');
+  const subBox = $('cartSubtotal'), discRow = $('discountRow'), discBox = $('cartDiscount');
+  if (!cart.length) {
+    list.innerHTML = "<p style='text-align:center;font-size:12px;color:#8a8a8a;padding:20px 0;'>Your bag is empty.</p>";
+    totalBox.textContent = "₹0"; subBox.textContent = "₹0"; discRow.style.display = 'none';
+    return;
+  }
+  let subtotal = 0;
+  list.innerHTML = cart.map((it, i) => {
+    subtotal += Number(it.price);
+    return `<div class="cart-item">
+      <img src="${it.image}" onerror="this.src='https://via.placeholder.com/50'">
+      <div style="flex:1;margin-left:14px;">
+        <strong style="font-weight:500;font-family:'Playfair Display',serif;">${escapeHTML(it.name)}</strong>
+        <br><span style="color:var(--brand);font-size:11px;">₹${it.price}</span>
+      </div>
+      <i class="fas fa-times" style="color:#8a8a8a;cursor:pointer;font-size:12px;" onclick="removeFromCart(${i})"></i>
+    </div>`;
+  }).join('');
+  let discount = 0;
+  if (appliedCoupon) {
+    const cp = COUPONS[appliedCoupon];
+    if (subtotal >= cp.min) {
+      discount = cp.type === 'percent' ? Math.round(subtotal * cp.value / 100) : cp.value;
+      discRow.style.display = 'flex';
+      discBox.textContent = `-₹${discount}`;
+    } else {
+      appliedCoupon = null; discRow.style.display = 'none';
+    }
+  } else discRow.style.display = 'none';
+  subBox.textContent = `₹${subtotal}`;
+  totalBox.textContent = `₹${subtotal - discount}`;
+}
+
+window.applyCoupon = () => {
+  const code = $('couponInput').value.trim().toUpperCase();
+  const msg = $('couponMsg'); msg.style.display = 'block';
+  if (!code) { msg.className = 'coupon-msg err'; msg.textContent = 'Coupon code daalein'; return; }
+  const cp = COUPONS[code];
+  if (!cp) { msg.className = 'coupon-msg err'; msg.textContent = '❌ Invalid coupon code'; return; }
+  let subtotal = cart.reduce((s,i)=>s+Number(i.price), 0);
+  if (subtotal < cp.min) { msg.className = 'coupon-msg err'; msg.textContent = `Minimum ₹${cp.min} ka order chahiye`; return; }
+  appliedCoupon = code;
+  msg.className = 'coupon-msg ok'; msg.textContent = `✅ ${cp.desc} applied!`;
+  renderCartItems();
+};
+
+window.checkoutWhatsApp = () => {
+  if (!cart.length) { alert('Bag empty hai!'); return; }
+  let subtotal = cart.reduce((s,i)=>s+Number(i.price), 0);
+  let discount = 0;
+  if (appliedCoupon) {
+    const cp = COUPONS[appliedCoupon];
+    discount = cp.type === 'percent' ? Math.round(subtotal*cp.value/100) : cp.value;
+  }
+  const total = subtotal - discount;
+  let msg = `Hello Zarafiya Fashion, I want to place a COD order:%0A%0A*--- Items ---*%0A`;
+  cart.forEach((it,i) => msg += `${i+1}. ${it.name} - ₹${it.price}%0A`);
+  msg += `%0A*Subtotal:* ₹${subtotal}%0A`;
+  if (discount) msg += `*Discount (${appliedCoupon}):* -₹${discount}%0A`;
+  msg += `*Total:* ₹${total}%0A%0A*--- Delivery Details ---*%0A*Name:* %0A*Address:* %0A*Pincode:* %0A*Phone:* %0A%0APlease confirm.`;
+  window.open(`https://wa.me/${whatsappNumber}?text=${msg}`, '_blank');
+};
+
+// ===== WISHLIST =====
+window.toggleWishlist = (id) => {
+  const idx = wishlist.findIndex(w => w.id === id);
+  if (idx >= 0) wishlist.splice(idx,1);
+  else {
+    const p = allProducts.find(x => x.id === id);
+    if (p) wishlist.push({ id: p.id, name: p.name, image: p.image, price: p.discountPrice });
+  }
+  saveState(); renderProducts(allProducts);
+};
+function renderWishlist() {
+  const box = $('wishlistContent');
+  if (!wishlist.length) { box.innerHTML = "<p style='text-align:center;font-size:12px;color:#8a8a8a;padding:20px 0;'>Wishlist khali hai.</p>"; return; }
+  box.innerHTML = wishlist.map(w => `
+    <div class="cart-item">
+      <img src="${w.image}" onerror="this.src='https://via.placeholder.com/50'">
+      <div style="flex:1;margin-left:14px;">
+        <strong style="font-family:'Playfair Display',serif;font-weight:500;">${escapeHTML(w.name)}</strong>
+        <br><span style="color:var(--brand);font-size:11px;">₹${w.price}</span>
+      </div>
+      <button class="btn cart-btn" style="width:auto;padding:8px 12px;font-size:9px;" onclick="addToCart('${w.id}','${escapeHTML(w.name)}',${w.price},'${w.image}'); closeModal('wishlistModal');">Add</button>
     </div>
+  `).join('');
+}
 
-    <!-- Add/Edit Product Modal (For Admin) -->
-    <div id="productFormModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="document.getElementById('productFormModal').style.display='none'">&times;</span>
-            <h3 id="formTitle" style="margin-top:0; color: var(--primary); font-size: 16px; font-family:'Playfair Display',serif;">Add New Product</h3>
-            <form id="addProductForm">
-                <input type="text" id="pName" class="form-control" placeholder="Product Name" required>
-                
-                <!-- Direct Gallery Image File Picker with Auto Compression -->
-                <div style="margin-bottom: 12px; text-align: left;">
-                    <label style="font-size: 11px; color: #555; font-weight: 500; display: block; margin-bottom: 4px;">Select Product Image from Gallery:</label>
-                    <input type="file" id="pImageFile" class="form-control" accept="image/*" onchange="compressAndConvertImage(this)" style="padding: 6px;">
-                    <input type="hidden" id="pImage" required>
-                    <div id="imagePreviewContainer" style="margin-top: 6px; display: none;">
-                        <img id="imgPreviewTag" src="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #ddd;">
-                    </div>
-                </div>
+// ===== AUTH =====
+onAuthStateChanged(auth, user => {
+  isAdminLoggedIn = !!(user && user.email);
+  $('adminBar').style.display = isAdminLoggedIn ? 'flex' : 'none';
+  renderProducts(allProducts);
+});
+$('loginBtn').onclick = async () => {
+  const email = $('adminEmail').value.trim(), pass = $('adminPassword').value.trim();
+  if (!email || !pass) return alert('Enter email and password');
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    alert('Admin login successful!');
+    closeModal('loginModal');
+    $('adminEmail').value = ''; $('adminPassword').value = '';
+  } catch (e) { alert('Login failed: ' + e.message); }
+};
+window.logoutAdminBtn = async () => { await signOut(auth); alert('Logged out'); };
 
-                <input type="number" id="pPrice" class="form-control" placeholder="Regular Price" required>
-                <input type="number" id="pDiscount" class="form-control" placeholder="Discount Price" required>
-                
-                <select id="pCategory" class="form-control" required>
-                    <option value="">Select Category</option>
-                    <option value="Sarees">Sarees</option>
-                    <option value="Suit">Suit</option>
-                    <option value="Dupatta">Dupatta</option>
-                    <option value="Gharara">Gharara</option>
-                </select>
+// ===== PRODUCTS =====
+onSnapshot(collection(db, "products"), snap => {
+  allProducts = [];
+  snap.forEach(d => allProducts.push({ id: d.id, ...d.data() }));
+  renderProducts(allProducts);
+  renderRecentlyViewed();
+});
 
-                <select id="pMakeType" class="form-control" required>
-                    <option value="">Select Weaving Type</option>
-                    <option value="Handloom">Handloom</option>
-                    <option value="Power Loom">Power Loom</option>
-                    <option value="Repair Machine">Repair Machine</option>
-                </select>
+window.filterCategory = cat => {
+  currentCategory = cat;
+  $('activeCatTitle').textContent = cat === 'All' ? 'All Collection' : cat;
+  renderProducts(cat === 'All' ? allProducts : allProducts.filter(p => p.category === cat));
+  scrollToCollection();
+};
+window.filterColor = color => {
+  if (color === 'all') { renderProducts(allProducts); $('activeCatTitle').textContent='All Collection'; }
+  else if (color === 'other') {
+    const std = ['pink','blue','red','maroon','green','yellow'];
+    renderProducts(allProducts.filter(p => p.color && !std.includes(p.color)));
+    $('activeCatTitle').textContent = 'Other Colors';
+  } else {
+    renderProducts(allProducts.filter(p => p.color === color || (p.name||'').toLowerCase().includes(color) || (p.description||'').toLowerCase().includes(color)));
+    $('activeCatTitle').textContent = color.charAt(0).toUpperCase() + color.slice(1);
+  }
+  scrollToCollection();
+};
+window.searchProducts = () => {
+  const q = $('searchInput').value.toLowerCase();
+  renderProducts(allProducts.filter(p => (p.name||'').toLowerCase().includes(q) || (p.sku||'').toLowerCase().includes(q)));
+};
 
-                <select id="pColor" class="form-control" onchange="checkCustomColor(this.value)">
-                    <option value="">Select Color (Optional)</option>
-                    <option value="pink">Pink</option>
-                    <option value="blue">Blue</option>
-                    <option value="red">Red</option>
-                    <option value="maroon">Maroon</option>
-                    <option value="green">Green</option>
-                    <option value="yellow">Yellow</option>
-                    <option value="other">Other / Custom Color</option>
-                </select>
+function renderProducts(arr) {
+  const grid = $('productGrid');
+  if (!arr.length) {
+    grid.innerHTML = "<p style='text-align:center;grid-column:1/-1;color:#8a8a8a;font-size:12px;padding:60px 20px;letter-spacing:1px;background:white;'>No products found</p>";
+    return;
+  }
+  grid.innerHTML = arr.map(p => {
+    const safeName = escapeHTML(p.name);
+    const rawImg = (p.image||'').trim();
+    const safeId = escapeHTML(p.id);
+    const safeMake = escapeHTML(p.makeType || 'Handloom');
+    const inWish = wishlist.some(w => w.id === p.id);
+    // Deterministic fake rating based on product id
+    const rating = (4 + (p.id.charCodeAt(0) % 10) / 10).toFixed(1);
+    const stars = '★'.repeat(Math.round(rating)) + '☆'.repeat(5 - Math.round(rating));
+    const adminBtns = isAdminLoggedIn ? `
+      <div class="admin-action-bar">
+        <button class="btn info" onclick="editProduct('${safeId}')"><i class="fas fa-edit"></i> Edit</button>
+        <button class="btn danger" onclick="deleteProduct('${safeId}')"><i class="fas fa-trash"></i> Del</button>
+      </div>` : '';
+    return `<div class="card">
+      <span class="badge-type">${safeMake}</span>
+      <button class="wishlist-btn ${inWish?'active':''}" onclick="toggleWishlist('${safeId}')">
+        <i class="fa${inWish?'s':'r'} fa-heart"></i>
+      </button>
+      <button class="share-mini-btn" onclick="event.stopPropagation();shareProductWhatsApp('${safeName}', ${p.discountPrice}, '${rawImg}')">
+        <i class="fab fa-whatsapp"></i>
+      </button>
+      <div class="card-img-wrapper">
+        <img src="${rawImg}" alt="${safeName}" onclick="openProduct('${safeId}')" onerror="this.onerror=null;this.src='https://via.placeholder.com/200?text=No+Image';">
+      </div>
+      <h3 onclick="openProduct('${safeId}')">${safeName}</h3>
+      <div class="rating-row"><span class="stars">${stars}</span> ${rating} <span style="color:#ccc;">|</span> Verified</div>
+      <div class="price-box" onclick="openProduct('${safeId}')">
+        <span class="discount">₹${p.discountPrice}</span>
+        <span class="regular">₹${p.price}</span>
+      </div>
+      <div class="btn-group">
+        <button class="btn" onclick="openProduct('${safeId}')">View Details</button>
+        <button class="btn cart-btn" onclick="addToCart('${safeId}','${safeName}',${p.discountPrice},'${rawImg}')"><i class="fas fa-shopping-bag"></i> Add to Bag</button>
+        ${adminBtns}
+      </div>
+    </div>`;
+  }).join('');
+}
 
-                <input type="text" id="pCustomColor" class="form-control" placeholder="Type Custom Color Name" style="display: none;">
+function renderRecentlyViewed() {
+  if (!recentlyViewed.length) return;
+  $('recentStrip').style.display = 'block';
+  $('recentScroll').innerHTML = recentlyViewed.map(r => `
+    <div class="recent-item" onclick="openProduct('${r.id}')">
+      <img src="${r.image}" onerror="this.src='https://via.placeholder.com/90'">
+      <span>${escapeHTML(r.name)}</span>
+    </div>`).join('');
+}
 
-                <input type="text" id="pSku" class="form-control" placeholder="Product Code / SKU" required>
-                <textarea id="pDesc" class="form-control" placeholder="Description & Fabric Details" rows="3" required></textarea>
-                
-                <button type="submit" id="submitProductBtn" class="btn success" style="width: 100%; padding: 10px;">Add Product to Database</button>
-            </form>
+// ===== PRODUCT DETAIL =====
+window.openProduct = async id => {
+  $('productModal').style.display = 'flex';
+  $('productDetailContent').innerHTML = "<p style='text-align:center;padding:30px;color:#8a8a8a;font-size:12px;'>Loading...</p>";
+  try {
+    const snap = await getDoc(doc(db, "products", id));
+    if (!snap.exists()) return;
+    const p = snap.data();
+    const safeName = escapeHTML(p.name);
+    const rawImg = (p.image||'').trim();
+    const safeMake = escapeHTML(p.makeType || 'Handloom');
+    // Add to recently viewed
+    recentlyViewed = recentlyViewed.filter(r => r.id !== id);
+    recentlyViewed.unshift({ id, name: p.name, image: rawImg, price: p.discountPrice });
+    recentlyViewed = recentlyViewed.slice(0,8);
+    saveState(); renderRecentlyViewed();
+    // Live viewers
+    const viewers = 5 + Math.floor(Math.random() * 20);
+    // Recommendations - same category or same color
+    const recs = allProducts.filter(x => x.id !== id && (x.category === p.category || x.color === p.color)).slice(0,4);
+    const recHtml = recs.length ? `
+      <div class="rec-section">
+        <h4>You may also like</h4>
+        <div class="rec-grid">
+          ${recs.map(r => `
+            <div class="rec-card" onclick="closeModal('productModal'); setTimeout(()=>openProduct('${r.id}'),150);">
+              <img src="${(r.image||'').trim()}" onerror="this.src='https://via.placeholder.com/120'">
+              <span>${escapeHTML(r.name)}</span>
+              <div class="p">₹${r.discountPrice}</div>
+            </div>`).join('')}
         </div>
-    </div>
-
-    <!-- Cart Modal -->
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="document.getElementById('cartModal').style.display='none'">&times;</span>
-            <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Your Shopping Bag</h3>
-            <div id="cartItemsList" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;">
-                <p style="text-align: center; font-size: 12px; color: #777;">Your cart is empty.</p>
-            </div>
-            <div style="border-top: 1px solid #ddd; padding-top: 10px; margin-bottom: 15px; display: flex; justify-content: space-between; font-weight: 600;">
-                <span>Total:</span>
-                <span id="cartTotalPrice">₹0</span>
-            </div>
-            <button onclick="checkoutWhatsApp()" class="btn success" style="width: 100%; padding: 10px; font-size: 14px;">
-                <i class="fab fa-whatsapp"></i> Order Cart via WhatsApp (COD)
-            </button>
-        </div>
-    </div>
-
-    <!-- Admin Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeLoginModal">&times;</span>
-            <h2 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-top:0;">Admin Access</h2>
-            <p style="font-size: 12px; color: #666;">Enter admin credentials to unlock management controls.</p>
-            <input type="email" id="adminEmail" class="form-control" placeholder="Admin Email">
-            <input type="password" id="adminPassword" class="form-control" placeholder="Password">
-            <button id="loginBtn" class="btn" style="width: 100%; padding: 10px;">Login as Admin</button>
-        </div>
-    </div>
-
-    <!-- Bottom Navigation Bar -->
-    <nav class="bottom-nav">
-        <button class="nav-item active" onclick="goHome()">
-            <i class="fas fa-home"></i> Home
-        </button>
-        <button class="nav-item" onclick="scrollToCollection()">
-            <i class="fas fa-th-large"></i> Categories
-        </button>
-        <button class="nav-item" onclick="openCartModal()">
-            <i class="fas fa-shopping-bag"></i> Cart
-        </button>
-        <button class="nav-item" onclick="openLoginModal()">
-            <i class="fas fa-user-shield"></i> Account
-        </button>
-    </nav>
-
-    <footer>
-        <p><strong>Zarafiya Fashion</strong></p>
-        <p>Grace in Every Thread | Varanasi, UP</p>
-        <p style="font-size: 10px; color: #ccc; margin-top: 10px;">&copy; 2026 All rights reserved.</p>
-    </footer>
-
-    <!-- Firebase & App Logic -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc, getDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, browserLocalPersistence, setPersistence } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-
-        const firebaseConfig = {
-          apiKey: "AIzaSyBL8tiQZOGPNsOxVGMB5Hbs_YhpSmqwFJQ",
-          authDomain: "zarafiya-fashion.firebaseapp.com",
-          projectId: "zarafiya-fashion",
-          storageBucket: "zarafiya-fashion.firebasestorage.app",
-          messagingSenderId: "1022372302059",
-          appId: "1:1022372302059:web:846bd4aa38baf866fdc2ae",
-          measurementId: "G-0JVFNYZSF6"
-        };
-        
-        const whatsappNumber = "918887802046";
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const auth = getAuth(app);
-
-        setPersistence(auth, browserLocalPersistence).catch((error) => console.log(error));
-
-        const productGrid = document.getElementById('productGrid');
-        const loginModal = document.getElementById('loginModal');
-        const productModal = document.getElementById('productModal');
-        const cartModal = document.getElementById('cartModal');
-        const productFormModal = document.getElementById('productFormModal');
-        const shareModal = document.getElementById('shareModal');
-        const aiChatBox = document.getElementById('aiChatBox');
-        const adminBar = document.getElementById('adminBar');
-
-        let cart = [];
-        let isAdminLoggedIn = false;
-
-        function escapeHTML(str) {
-            if(!str) return '';
-            return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-        }
-
-        window.goHome = () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        window.scrollToCollection = () => {
-            document.getElementById('collectionSection').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Automatic Image Compression & Resizing to prevent Firebase 1MB limit error
-        window.compressAndConvertImage = (input) => {
-            const file = input.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.onload = function() {
-                    const canvas = document.createElement('canvas');
-                    let width = img.width;
-                    let height = img.height;
-
-                    // Max dimension limit for high quality yet small size
-                    const MAX_WIDTH = 600;
-                    const MAX_HEIGHT = 600;
-
-                    if (width > height) {
-                        if (width > MAX_WIDTH) {
-                            height *= MAX_WIDTH / width;
-                            width = MAX_WIDTH;
-                        }
-                    } else {
-                        if (height > MAX_HEIGHT) {
-                            width *= MAX_HEIGHT / height;
-                            height = MAX_HEIGHT;
-                        }
-                    }
-
-                    canvas.width = width;
-                    canvas.height = height;
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(img, 0, 0, width, height);
-
-                    // Compress to JPEG with 0.7 quality to keep size well under 1MB
-                    const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
-                    
-                    document.getElementById('pImage').value = dataUrl;
-                    document.getElementById('imgPreviewTag').src = dataUrl;
-                    document.getElementById('imagePreviewContainer').style.display = 'block';
-                };
-                img.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        };
-
-        window.checkCustomColor = (val) => {
-            const customInput = document.getElementById('pCustomColor');
-            if (val === 'other') {
-                customInput.style.display = 'block';
-                customInput.focus();
-            } else {
-                customInput.style.display = 'none';
-                customInput.value = '';
-            }
-        };
-
-        // =========================
-        // ZARAFIYA AI - CLOUDFLARE WORKER
-        // =========================
-        // Gemini API key is kept securely inside the Cloudflare Worker.
-        const AI_BACKEND_URL = "https://zarafiya-ai.ashifmd400.workers.dev/";
-        let aiHistory = [];
-
-        window.toggleAiChat = () => {
-            const box = document.getElementById('aiChatBox');
-            if (!box) return;
-
-            box.style.display = box.style.display === 'block' ? 'none' : 'block';
-            if (box.style.display === 'block') {
-                setTimeout(() => {
-                    const input = document.getElementById('aiUserInput');
-                    if (input) input.focus();
-                }, 100);
-            }
-        };
-
-        window.handleAiEnter = (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                window.sendAiMessage();
-            }
-        };
-
-        function getAiProductContext() {
-            if (!Array.isArray(allProducts) || allProducts.length === 0) {
-                return "No products are currently loaded from the store database.";
-            }
-
-            return allProducts.slice(0, 80).map((p, i) => {
-                return `${i + 1}. Name: ${p.name || 'Unnamed'} | Category: ${p.category || 'N/A'} | ` +
-                       `Color: ${p.color || 'N/A'} | Type: ${p.makeType || 'Handloom'} | ` +
-                       `SKU: ${p.sku || 'N/A'} | Price: ₹${p.price ?? 'N/A'} | ` +
-                       `Offer Price: ₹${p.discountPrice ?? 'N/A'} | Description: ${p.description || 'N/A'}`;
-            }).join('\n');
-        }
-
-        function addAiMessage(text, type) {
-            const chatBody = document.getElementById('aiChatBody');
-            if (!chatBody) return null;
-
-            const div = document.createElement('div');
-            div.className = `ai-msg ${type}`;
-            div.innerHTML = escapeHTML(String(text)).replace(/\n/g, '<br>');
-            chatBody.appendChild(div);
-            chatBody.scrollTop = chatBody.scrollHeight;
-            return div;
-        }
-
-        window.sendAiMessage = async () => {
-            const input = document.getElementById('aiUserInput');
-            const chatBody = document.getElementById('aiChatBody');
-            if (!input || !chatBody) return;
-
-            const message = input.value.trim();
-            if (!message) return;
-
-            addAiMessage(message, 'user');
-            input.value = '';
-            input.disabled = true;
-
-            const typing = document.createElement('div');
-            typing.className = 'ai-msg bot';
-            typing.textContent = 'Zarafiya AI soch raha hai...';
-            chatBody.appendChild(typing);
-            chatBody.scrollTop = chatBody.scrollHeight;
-
-            try {
-                const response = await fetch(AI_BACKEND_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        history: aiHistory.slice(-8),
-                        productContext: getAiProductContext()
-                    })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    console.error('Zarafiya AI server error:', data);
-                    throw new Error(data.error || 'AI_REQUEST_FAILED');
-                }
-
-                const reply = String(data.reply || '').trim();
-                if (!reply) throw new Error('AI_EMPTY');
-
-                typing.remove();
-                addAiMessage(reply, 'bot');
-
-                aiHistory.push({ role: 'user', text: message });
-                aiHistory.push({ role: 'assistant', text: reply });
-                if (aiHistory.length > 16) aiHistory = aiHistory.slice(-16);
-
-            } catch (error) {
-                console.error('Zarafiya AI error:', error);
-                typing.remove();
-
-                let errorText = 'AI service abhi available nahi hai. Please thodi der baad dobara try karein. 🙏';
-                if (error.message && error.message.includes('API key')) {
-                    errorText = 'AI server ki API key/access mein problem hai. Cloudflare Worker secret check karein.';
-                } else if (error.message === 'AI_EMPTY') {
-                    errorText = 'AI ne abhi koi jawab nahi diya. Dobara try karein.';
-                }
-
-                addAiMessage(errorText, 'bot');
-            } finally {
-                input.disabled = false;
-                input.focus();
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }
-        };
-
-        window.openShareModal = () => {
-            const appLink = "https://www.appcreator24.com/app4187228-hpd1mq";
-            const shareText = "✨ Explore Zarafiya Fashion for exclusive Banarasi Silk Sarees & Suits! Download our official app here: " + appLink;
-            
-            document.getElementById('shareWa').href = `https://api.whatsapp.com/send?text=${encodeURIComponent(shareText)}`;
-            document.getElementById('shareFb').href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(appLink)}`;
-            document.getElementById('shareTele').href = `https://telegram.me/share/url?url=${encodeURIComponent(appLink)}&text=${encodeURIComponent("Explore Zarafiya Fashion App!")}`;
-            document.getElementById('shareEmail').href = `mailto:?subject=Download%20Zarafiya%20Fashion%20App&body=${encodeURIComponent(shareText)}`;
-            document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-
-            shareModal.style.display = 'flex';
-        };
-
-        window.shareProductWhatsApp = (name, price, image) => {
-            const text = `✨ *Zarafiya Fashion Exclusive Product*%0A%0A*Name:* ${name}%0A*Price:* ₹${price}%0A*Image:* ${image}%0A%0AOrder now via our app!`;
-            window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
-        };
-
-        window.copyAppLinkId = () => {
-            const appLink = "https://www.appcreator24.com/app4187228-hpd1mq";
-            navigator.clipboard.writeText(appLink);
-            alert("App download link copied to clipboard!");
-            shareModal.style.display = 'none';
-        };
-
-        window.openLoginModal = () => {
-            if(isAdminLoggedIn) {
-                alert("You are already logged in as Admin!");
-            } else {
-                loginModal.style.display = 'flex';
-            }
-        }
-
-        window.openAddProductModal = () => {
-            resetForm();
-            productFormModal.style.display = 'flex';
-        }
-
-        window.toggleSearchBox = () => {
-            const box = document.getElementById('searchBox');
-            box.style.display = box.style.display === 'block' ? 'none' : 'block';
-            if(box.style.display === 'block') document.getElementById('searchInput').focus();
-        }
-
-        window.openCartModal = () => {
-            renderCartItems();
-            cartModal.style.display = 'flex';
-        }
-
-        window.addToCart = (id, name, price, image) => {
-            cart.push({ id, name, price, image });
-            document.getElementById('cartCount').innerText = cart.length;
-        }
-
-        function renderCartItems() {
-            const list = document.getElementById('cartItemsList');
-            const totalBox = document.getElementById('cartTotalPrice');
-            list.innerHTML = "";
-            
-            if(cart.length === 0) {
-                list.innerHTML = "<p style='text-align: center; font-size: 12px; color: #777;'>Your cart is empty.</p>";
-                totalBox.innerText = "₹0";
-                return;
-            }
-
-            let total = 0;
-            cart.forEach((item, index) => {
-                total += Number(item.price);
-                list.innerHTML += `
-                    <div class="cart-item">
-                        <img src="${item.image}" onerror="this.src='https://via.placeholder.com/50?text=Error'">
-                        <div style="flex:1; margin-left:10px;">
-                            <strong>${escapeHTML(item.name)}</strong><br>₹${item.price}
-                        </div>
-                        <i class="fas fa-trash" style="color:red; cursor:pointer;" onclick="removeFromCart(${index})"></i>
-                    </div>
-                `;
-            });
-            totalBox.innerText = "₹" + total;
-        }
-
-        window.removeFromCart = (index) => {
-            cart.splice(index, 1);
-            document.getElementById('cartCount').innerText = cart.length;
-            renderCartItems();
-        }
-
-        window.checkoutWhatsApp = () => {
-            if(cart.length === 0) {
-                document.getElementById('cartItemsList').innerHTML = "<p style='text-align: center; font-size: 12px; color: #ff4444; font-weight: 500;'>Your cart is empty! Please add products before ordering.</p>";
-                return;
-            }
-            let msg = "Hello Zarafiya Fashion, I want to place a *Cash on Delivery (COD)* order:%0A%0A*--- Order Items ---*%0A";
-            let total = 0;
-            cart.forEach((item, i) => {
-                msg += `${i+1}. *${item.name}* - ₹${item.price}%0A`;
-                total += Number(item.price);
-            });
-            msg += `%0A*Total Amount: ₹${total}*%0A%0A*--- Delivery Details (Please Fill) ---*%0A*Full Name:* %0A*Complete Address:* %0A*Pincode:* %0A*Alternate Phone Number:* %0A*Please confirm my order!`;
-            window.open(`https://wa.me/${whatsappNumber}?text=${msg}`, '_blank');
-        }
-
-        let allProducts = [];
-        let currentCategory = 'All';
-
-        onAuthStateChanged(auth, (user) => {
-            if(user && user.email) {
-                isAdminLoggedIn = true;
-                adminBar.style.display = 'flex';
-            } else {
-                isAdminLoggedIn = false;
-                adminBar.style.display = 'none';
-            }
-            renderProducts(allProducts);
-        });
-
-        document.getElementById('loginBtn').onclick = async () => {
-            const email = document.getElementById('adminEmail').value.trim();
-            const pass = document.getElementById('adminPassword').value.trim();
-            if(!email || !pass) {
-                alert("Please enter both email and password!");
-                return;
-            }
-            try {
-                await signInWithEmailAndPassword(auth, email, pass);
-                alert("Admin Login Successful!");
-                loginModal.style.display = 'none';
-                document.getElementById('adminEmail').value = "";
-                document.getElementById('adminPassword').value = "";
-            } catch (error) {
-                alert("Login Failed: " + error.message);
-            }
-        };
-
-        window.logoutAdminBtn = async () => {
-            try {
-                await signOut(auth);
-                alert("Logged out successfully!");
-            } catch (error) {
-                alert("Error logging out: " + error.message);
-            }
-        };
-
-        onSnapshot(collection(db, "products"), (snapshot) => {
-            allProducts = [];
-            snapshot.forEach((docSnap) => {
-                allProducts.push({ id: docSnap.id, ...docSnap.data() });
-            });
-            renderProducts(allProducts);
-        });
-
-        window.filterCategory = (cat) => {
-            currentCategory = cat;
-            document.getElementById('activeCatTitle').innerText = cat === 'All' ? 'All Collection' : cat + ' Collection';
-            let filtered = cat === 'All' ? allProducts : allProducts.filter(p => p.category === cat);
-            renderProducts(filtered);
-            scrollToCollection();
-        };
-
-        window.filterColor = (color) => {
-            if (color === 'all') {
-                renderProducts(allProducts);
-                document.getElementById('activeCatTitle').innerText = 'All Collection';
-            } else if (color === 'other') {
-                let filtered = allProducts.filter(p => p.color && p.color !== 'pink' && p.color !== 'blue' && p.color !== 'red' && p.color !== 'maroon' && p.color !== 'green' && p.color !== 'yellow');
-                renderProducts(filtered);
-                document.getElementById('activeCatTitle').innerText = 'Other Colors Collection';
-            } else {
-                let filtered = allProducts.filter(p => p.color === color || (p.name && p.name.toLowerCase().includes(color)) || (p.description && p.description.toLowerCase().includes(color)));
-                renderProducts(filtered);
-                document.getElementById('activeCatTitle').innerText = color.toUpperCase() + ' Collection';
-            }
-            scrollToCollection();
-        };
-
-        window.searchProducts = () => {
-            let query = document.getElementById('searchInput').value.toLowerCase();
-            let filtered = allProducts.filter(p => p.name.toLowerCase().includes(query) || (p.sku && p.sku.toLowerCase().includes(query)));
-            renderProducts(filtered);
-        };
-
-        function renderProducts(productsArray) {
-            productGrid.innerHTML = "";
-            if(productsArray.length === 0) {
-                productGrid.innerHTML = "<p style='text-align:center; grid-column: 1/-1; color:#777; font-size:12px; padding:20px;'>No products found.</p>";
-                return;
-            }
-
-            productsArray.forEach((product) => {
-                const card = document.createElement('div');
-                card.className = "card";
-                
-                let safeName = escapeHTML(product.name);
-                let rawImg = product.image ? product.image.trim() : '';
-                let safeId = escapeHTML(product.id);
-                let safeMake = escapeHTML(product.makeType || 'Handloom');
-                
-                let adminActionHtml = '';
-                if(isAdminLoggedIn) {
-                    adminActionHtml = `
-                        <div class="admin-action-bar">
-                            <button class="btn info" onclick="editProduct('${safeId}')" style="padding: 4px 6px; font-size: 10px;"><i class="fas fa-edit"></i> Edit</button>
-                            <button class="btn danger" onclick="deleteProduct('${safeId}')" style="padding: 4px 6px; font-size: 10px;"><i class="fas fa-trash"></i> Del</button>
-                        </div>
-                    `;
-                }
-
-                card.innerHTML = `
-                    <span class="badge-type">${safeMake}</span>
-                    <div class="card-img-wrapper">
-                        <img src="${rawImg}" alt="${safeName}" onclick="openProduct('${safeId}')" onerror="this.onerror=null; this.src='https://via.placeholder.com/200?text=Image+Error';">
-                    </div>
-                    <h3 onclick="openProduct('${safeId}')">${safeName}</h3>
-                    <div class="price-box" onclick="openProduct('${safeId}')">
-                        <span class="discount">₹${product.discountPrice}</span>
-                        <span class="regular">₹${product.price}</span>
-                    </div>
-                    <div class="btn-group">
-                        <button class="btn" onclick="openProduct('${safeId}')">View Details</button>
-                        <button class="btn cart-btn" onclick="addToCart('${safeId}', '${safeName}', ${product.discountPrice}, '${rawImg}')"><i class="fas fa-cart-plus"></i> Add to Cart</button>
-                        ${adminActionHtml}
-                    </div>
-                `;
-                productGrid.appendChild(card);
-            });
-        }
-
-        let editingProductId = null;
-        const submitProductBtn = document.getElementById('submitProductBtn');
-        const formTitle = document.getElementById('formTitle');
-
-        document.getElementById('addProductForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if(!auth.currentUser) return alert("Please login first!");
-
-            const imgVal = document.getElementById('pImage').value;
-            if(!imgVal) {
-                alert("Please select a product image!");
-                return;
-            }
-
-            submitProductBtn.innerText = "Saving...";
-            submitProductBtn.disabled = true;
-
-            const selectedColor = document.getElementById('pColor').value;
-            const customColor = document.getElementById('pCustomColor').value.trim();
-            const finalColor = (selectedColor === 'other' && customColor) ? customColor.toLowerCase() : selectedColor;
-
-            const productData = {
-                name: document.getElementById('pName').value,
-                image: imgVal,
-                price: Number(document.getElementById('pPrice').value),
-                discountPrice: Number(document.getElementById('pDiscount').value),
-                category: document.getElementById('pCategory').value,
-                makeType: document.getElementById('pMakeType').value,
-                color: finalColor,
-                sku: document.getElementById('pSku').value,
-                description: document.getElementById('pDesc').value
-            };
-
-            try {
-                if (editingProductId) {
-                    await updateDoc(doc(db, "products", editingProductId), productData);
-                    alert("Product Updated Successfully!");
-                    resetForm();
-                } else {
-                    productData.createdAt = new Date();
-                    await addDoc(collection(db, "products"), productData);
-                    alert("Product Added Successfully!");
-                    document.getElementById('addProductForm').reset();
-                    document.getElementById('imagePreviewContainer').style.display = 'none';
-                }
-                productFormModal.style.display = 'none';
-            } catch (error) {
-                alert("Error saving: " + error.message);
-            } finally {
-                submitProductBtn.innerText = editingProductId ? "Update Product" : "Add Product to Database";
-                submitProductBtn.disabled = false;
-            }
-        });
-
-        window.editProduct = async (id) => {
-            try {
-                const docSnap = await getDoc(doc(db, "products", id));
-                if (docSnap.exists()) {
-                    const p = docSnap.data();
-                    document.getElementById('pName').value = p.name;
-                    document.getElementById('pImage').value = p.image;
-                    document.getElementById('imgPreviewTag').src = p.image;
-                    document.getElementById('imagePreviewContainer').style.display = 'block';
-
-                    document.getElementById('pPrice').value = p.price;
-                    document.getElementById('pDiscount').value = p.discountPrice;
-                    document.getElementById('pCategory').value = p.category;
-                    document.getElementById('pMakeType').value = p.makeType || 'Handloom';
-                    
-                    const col = p.color || '';
-                    const standardColors = ['pink', 'blue', 'red', 'maroon', 'green', 'yellow'];
-                    if (standardColors.includes(col)) {
-                        document.getElementById('pColor').value = col;
-                        document.getElementById('pCustomColor').style.display = 'none';
-                        document.getElementById('pCustomColor').value = '';
-                    } else if (col) {
-                        document.getElementById('pColor').value = 'other';
-                        document.getElementById('pCustomColor').style.display = 'block';
-                        document.getElementById('pCustomColor').value = col;
-                    } else {
-                        document.getElementById('pColor').value = '';
-                        document.getElementById('pCustomColor').style.display = 'none';
-                        document.getElementById('pCustomColor').value = '';
-                    }
-
-                    document.getElementById('pSku').value = p.sku;
-                    document.getElementById('pDesc').value = p.description;
-                    
-                    editingProductId = id;
-                    formTitle.innerText = "Edit Product";
-                    submitProductBtn.innerText = "Update Product";
-                    submitProductBtn.className = "btn info";
-                    productFormModal.style.display = 'flex';
-                }
-            } catch(error) {
-                alert("Error loading product: " + error.message);
-            }
-        };
-
-        function resetForm() {
-            editingProductId = null;
-            document.getElementById('addProductForm').reset();
-            document.getElementById('imagePreviewContainer').style.display = 'none';
-            document.getElementById('pCustomColor').style.display = 'none';
-            formTitle.innerText = "Add New Product";
-            submitProductBtn.innerText = "Add Product to Database";
-            submitProductBtn.className = "btn success";
-        }
-
-        window.deleteProduct = async (id) => {
-            if(confirm("Are you sure you want to delete this product?")) {
-                try {
-                    await deleteDoc(doc(db, "products", id));
-                } catch(error) {
-                    alert("Error: " + error.message);
-                }
-            }
-        };
-
-        window.openProduct = async (id) => {
-            productModal.style.display = 'flex';
-            document.getElementById('productDetailContent').innerHTML = "<p style='text-align:center;'>Loading details...</p>";
-            try {
-                const docSnap = await getDoc(doc(db, "products", id));
-                if (docSnap.exists()) {
-                    const p = docSnap.data();
-                    let safeName = escapeHTML(p.name);
-                    let rawImg = p.image ? p.image.trim() : '';
-                    let safeMake = escapeHTML(p.makeType || 'Handloom');
-
-                    const msg = `Hello Zarafiya Fashion, I want to order (COD):%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category} (${p.makeType || 'Handloom'})%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}%0A%0A*Name:* %0A*Address:* %0A*Phone:*`;
-                    const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
-
-                    document.getElementById('productDetailContent').innerHTML = `
-                        <img src="${rawImg}" style="width:100%; max-height:280px; object-fit:cover; border-radius:8px; margin-bottom:10px;" onerror="this.src='https://via.placeholder.com/300?text=Image+Error'">
-                        <h2 style="margin: 10px 0 4px 0; font-size:16px; color:var(--primary); font-family:'Playfair Display',serif;">${safeName}</h2>
-                        <p style="margin: 0 0 6px 0; color: #666; font-size: 11px;"><strong>Category:</strong> ${p.category} | <strong>Type:</strong> ${safeMake} | <strong>SKU:</strong> ${p.sku}</p>
-                        <div class="price-box" style="justify-content: flex-start; font-size: 18px; margin-bottom: 10px;">
-                            <span class="discount" style="color: #5c1824; font-weight: 600;">₹${p.discountPrice}</span>
-                            <span class="regular" style="text-decoration: line-through; color: #888; margin-left: 8px; font-size:13px;">₹${p.price}</span>
-                        </div>
-                        <p style="margin-bottom: 12px; line-height: 1.4; font-size: 12px; color:#444;">${escapeHTML(p.description)}</p>
-                        <button class="btn cart-btn" onclick="addToCart('${id}', '${safeName}', ${p.discountPrice}, '${rawImg}')" style="width:100%; margin-bottom:6px; padding:10px;"><i class="fas fa-cart-plus"></i> Add to Cart</button>
-                        <button class="btn share-btn" onclick="shareProductWhatsApp('${safeName}', ${p.discountPrice}, '${rawImg}')" style="width:100%; margin-bottom:6px; padding:10px;"><i class="fab fa-whatsapp"></i> Share Product</button>
-                        <a href="${waLink}" target="_blank" class="btn success" style="display:block; text-align:center; padding:10px; font-size: 14px; text-decoration:none;">
-                            <i class="fab fa-whatsapp"></i> Order on WhatsApp (COD)
-                        </a>
-                    `;
-                }
-            } catch(error) {
-                document.getElementById('productModal').style.display = 'none';
-            }
-        };
-
-        document.getElementById('closeLoginModal').onclick = () => loginModal.style.display = 'none';
-        document.getElementById('closeProductModal').onclick = () => productModal.style.display = 'none';
-    </script>
+      </div>` : '';
+    const msg = `Hello Zarafiya Fashion, I want to order (COD):%0A%0A*Product:* ${p.name}%0A*Category:* ${p.category} (${p.makeType||'Handloom'})%0A*SKU:* ${p.sku}%0A*Price:* ₹${p.discountPrice}%0A%0A*Name:* %0A*Address:* %0A*Phone:*`;
+    const waLink = `https://wa.me/${whatsappNumber}?text=${msg}`;
+    $('productDetailContent').innerHTML = `
+      <img src="${rawImg}" style="width:100%;max-height:320px;object-fit:cover;margin-bottom:14px;" onerror="this.src='https://via.placeholder.com/300'">
+      <div class="live-viewers"><span class="pulse"></span> ${viewers} log abhi yeh dekh rahe hain</div>
+      <p style="font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin:0 0 6px;">${p.category} — ${safeMake}</p>
+      <h2 style="margin:0 0 8px;font-size:22px;color:var(--primary);font-family:'Playfair Display',serif;font-weight:400;line-height:1.2;">${safeName}</h2>
+      <p style="margin:0 0 14px;color:var(--muted);font-size:11px;letter-spacing:1px;">SKU ${p.sku} · ⭐ Verified Purchase</p>
+      <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px;">
+        <span style="color:var(--brand);font-weight:500;font-size:20px;">₹${p.discountPrice}</span>
+        <span style="text-decoration:line-through;color:var(--muted);font-size:13px;">₹${p.price}</span>
+        <span style="background:#e8f5e9;color:#2e7d32;font-size:10px;padding:3px 8px;font-weight:500;">${Math.round((1 - p.discountPrice/p.price)*100)}% OFF</span>
+      </div>
+      <p style="margin-bottom:16px;line-height:1.7;font-size:12.5px;color:#555;">${escapeHTML(p.description)}</p>
+      <button class="btn cart-btn" onclick="addToCart('${id}','${safeName}',${p.discountPrice},'${rawImg}')" style="width:100%;margin-bottom:8px;padding:14px;"><i class="fas fa-shopping-bag"></i> Add to Bag</button>
+      <button class="btn" onclick="toggleWishlist('${id}');closeModal('productModal');" style="width:100%;margin-bottom:8px;padding:14px;"><i class="fas fa-heart"></i> ${wishlist.some(w=>w.id===id)?'Remove from Wishlist':'Add to Wishlist'}</button>
+      <button class="btn" onclick="shareProductWhatsApp('${safeName}',${p.discountPrice},'${rawImg}')" style="width:100%;margin-bottom:8px;padding:14px;"><i class="fab fa-whatsapp"></i> Share</button>
+      <a href="${waLink}" target="_blank" class="btn success" style="display:block;text-align:center;padding:14px;text-decoration:none;"><i class="fab fa-whatsapp"></i> Order via WhatsApp (COD)</a>
+      ${recHtml}
+    `;
+  } catch (e) { closeModal('productModal'); }
+};
+
+// ===== ADMIN FORM =====
+$('addProductForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!auth.currentUser) return alert('Login first!');
+  const imgVal = $('pImage').value;
+  if (!imgVal) return alert('Select product image');
+  $('submitProductBtn').textContent = 'Saving...';
+  $('submitProductBtn').disabled = true;
+  const selCol = $('pColor').value;
+  const cusCol = $('pCustomColor').value.trim();
+  const finalColor = (selCol === 'other' && cusCol) ? cusCol.toLowerCase() : selCol;
+  const data = {
+    name: $('pName').value, image: imgVal,
+    price: Number($('pPrice').value), discountPrice: Number($('pDiscount').value),
+    category: $('pCategory').value, makeType: $('pMakeType').value,
+    color: finalColor, sku: $('pSku').value, description: $('pDesc').value
+  };
+  try {
+    if (editingProductId) {
+      await updateDoc(doc(db, "products", editingProductId), data);
+      alert('Product updated!');
+      resetForm();
+    } else {
+      data.createdAt = new Date();
+      await addDoc(collection(db, "products"), data);
+      alert('Product added!');
+      $('addProductForm').reset();
+      $('imagePreviewContainer').style.display = 'none';
+    }
+    closeModal('productFormModal');
+  } catch (e) { alert('Error: ' + e.message); }
+  finally {
+    $('submitProductBtn').textContent = editingProductId ? 'Update Product' : 'Add Product';
+    $('submitProductBtn').disabled = false;
+  }
+});
+
+window.editProduct = async id => {
+  try {
+    const snap = await getDoc(doc(db, "products", id));
+    if (!snap.exists()) return;
+    const p = snap.data();
+    $('pName').value = p.name;
+    $('pImage').value = p.image;
+    $('imgPreviewTag').src = p.image;
+    $('imagePreviewContainer').style.display = 'block';
+    $('pPrice').value = p.price;
+    $('pDiscount').value = p.discountPrice;
+    $('pCategory').value = p.category;
+    $('pMakeType').value = p.makeType || 'Handloom';
+    const col = p.color || '';
+    const std = ['pink','blue','red','maroon','green','yellow'];
+    if (std.includes(col)) { $('pColor').value = col; $('pCustomColor').style.display='none'; $('pCustomColor').value=''; }
+    else if (col) { $('pColor').value = 'other'; $('pCustomColor').style.display='block'; $('pCustomColor').value = col; }
+    else { $('pColor').value = ''; $('pCustomColor').style.display='none'; $('pCustomColor').value=''; }
+    $('pSku').value = p.sku;
+    $('pDesc').value = p.description;
+    editingProductId = id;
+    $('formTitle').textContent = 'Edit Product';
+    $('submitProductBtn').textContent = 'Update Product';
+    $('submitProductBtn').className = 'btn cart-btn';
+    $('productFormModal').style.display = 'flex';
+  } catch (e) { alert(e.message); }
+};
+
+function resetForm() {
+  editingProductId = null;
+  $('addProductForm').reset();
+  $('imagePreviewContainer').style.display = 'none';
+  $('pCustomColor').style.display = 'none';
+  $('formTitle').textContent = 'Add New Product';
+  $('submitProductBtn').textContent = 'Add Product';
+  $('submitProductBtn').className = 'btn success';
+}
+
+window.deleteProduct = async id => {
+  if (!confirm('Delete this product?')) return;
+  try { await deleteDoc(doc(db, "products", id)); } catch (e) { alert(e.message); }
+};
+
+// ===== INIT =====
+updateBadges();
+startCountdown();
+showOptinIfNeeded();
+</script>
 </body>
     </html>
