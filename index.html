@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Zarafiya Fashion</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
@@ -21,17 +21,13 @@ body.dark{
 --text:#F5EDE8;--muted:#8B7B7B;
 --sh:0 2px 8px rgba(0,0,0,.3);
 }
-body.dark .hero{background:linear-gradient(135deg,#2A1620 0%,#1F1520 50%,#2A2216 100%)}
-body.dark .hero-t{background:rgba(240,98,146,.12);border-color:rgba(240,98,146,.2)}
-body.dark header{background:rgba(15,10,13,.92)}
-body.dark .cbar{background:rgba(15,10,13,.92)}
-body.dark .bn{background:rgba(26,18,22,.96)}
-body.dark .bc.g{background:rgba(37,211,102,.15)}
-body.dark .chip{background:var(--surface)}
-body.dark .cat-c{background:var(--surface)}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding-bottom:70px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0;
+-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;
+-webkit-touch-callout:none;}
+input,textarea,select{-webkit-user-select:text!important;-moz-user-select:text!important;-ms-user-select:text!important;user-select:text!important}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding-bottom:70px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;overscroll-behavior-y:none}
 button,input,select,textarea{font-family:inherit;color:inherit}
+img{-webkit-user-drag:none;user-drag:none;pointer-events:auto}
 
 /* TICKER */
 .ticker{background:linear-gradient(90deg,var(--rose-dark),var(--rose),#E91E63);color:#fff;padding:6px 12px;font-size:10px;text-align:center;display:flex;justify-content:center;align-items:center;gap:6px;position:sticky;top:0;z-index:110;white-space:nowrap;overflow:hidden}
@@ -42,7 +38,8 @@ button,input,select,textarea{font-family:inherit;color:inherit}
 
 /* HEADER */
 header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 10px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:28px;z-index:100;border-bottom:1px solid var(--line);transition:background .3s}
-.logo{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+body.dark header{background:rgba(15,10,13,.92)}
+.logo{display:flex;align-items:center;gap:8px;cursor:pointer}
 .logo-m{width:32px;height:32px;background:linear-gradient(135deg,var(--rose),var(--rose-dark));border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Playfair Display',serif;font-weight:700;font-size:17px;box-shadow:0 3px 10px rgba(194,24,91,.25)}
 .logo-t{font-family:'Playfair Display',serif;font-size:16px;color:var(--rose);font-weight:600;line-height:1}
 .logo-s{font-size:7px;color:var(--muted);letter-spacing:3px;margin-top:2px}
@@ -59,11 +56,12 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 #sb{display:none;background:var(--bg);padding:8px 12px;border-bottom:1px solid var(--line)}
 .sw{position:relative}
 .sw i{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px}
-.sw input{width:100%;padding:9px 12px 9px 34px;border:1px solid var(--line);border-radius:10px;font-size:12.5px;background:var(--surface);outline:none}
+.sw input{width:100%;padding:9px 12px 9px 34px;border:1px solid var(--line);border-radius:10px;font-size:12.5px;background:var(--surface);outline:none;color:var(--text)}
 .sw input:focus{border-color:var(--rose)}
 
 /* COLOR BAR */
 .cbar{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:7px 12px;display:flex;gap:6px;overflow-x:auto;position:sticky;top:88px;z-index:98;border-bottom:1px solid var(--line);scrollbar-width:none;transition:background .3s}
+body.dark .cbar{background:rgba(15,10,13,.92)}
 .cbar::-webkit-scrollbar{display:none}
 .chip{border:1px solid var(--line);padding:5px 11px;border-radius:16px;font-size:10px;font-weight:500;cursor:pointer;color:var(--text);background:var(--surface);flex-shrink:0;display:inline-flex;align-items:center;gap:5px;transition:.2s}
 .chip.active{background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff;border-color:var(--rose);font-weight:600}
@@ -75,8 +73,10 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 
 /* HERO */
 .hero{margin:10px 12px 0;border-radius:14px;background:linear-gradient(135deg,#FDF0F5 0%,#FFF5EE 50%,#FFF9E8 100%);padding:14px 16px;border:1px solid var(--line);position:relative;overflow:hidden;box-shadow:var(--sh);transition:background .3s}
+body.dark .hero{background:linear-gradient(135deg,#2A1620 0%,#1F1520 50%,#2A2216 100%)}
 .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:140px;height:140px;background:radial-gradient(circle,rgba(194,24,91,.1),transparent 70%);border-radius:50%}
 .hero-t{display:inline-block;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--rose);background:rgba(194,24,91,.08);padding:3px 8px;border-radius:20px;font-weight:600;margin-bottom:6px;border:1px solid rgba(194,24,91,.12)}
+body.dark .hero-t{background:rgba(240,98,146,.12);border-color:rgba(240,98,146,.2)}
 .hero h1{font-family:'Playfair Display',serif;font-size:17px;color:var(--rose-dark);font-weight:600;line-height:1.15;margin-bottom:8px;letter-spacing:-.2px}
 body.dark .hero h1{color:var(--text)}
 .hero h1 em{font-style:italic;color:var(--gold)}
@@ -100,7 +100,7 @@ body.dark .sh h2{color:var(--text)}
 .sh p{font-size:9px;color:var(--muted);margin-top:2px;letter-spacing:.5px;text-transform:uppercase;font-weight:500}
 .sh .cnt{font-size:10px;color:var(--rose);background:rgba(194,24,91,.08);padding:3px 9px;border-radius:14px;font-weight:600;white-space:nowrap;border:1px solid rgba(194,24,91,.12)}
 
-/* PRODUCTS - 3 COL */
+/* PRODUCTS */
 .ct{padding:0 12px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .card{background:var(--surface);border-radius:11px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line);transition:.2s;position:relative;box-shadow:var(--sh)}
@@ -126,6 +126,7 @@ body.dark .ci{background:#241A1F}
 .bc.p{background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff}
 .bc.p:active{transform:scale(.95)}
 .bc.g{background:rgba(37,211,102,.12);color:#128C7E;border:1px solid rgba(37,211,102,.25);flex:0 0 auto;padding:6px 8px}
+body.dark .bc.g{background:rgba(37,211,102,.15)}
 .abadm{display:flex;gap:4px;margin-top:5px}
 .badm{flex:1;padding:4px 5px;border-radius:5px;font-size:8.5px;font-weight:700;cursor:pointer;border:1px solid;text-transform:uppercase;background:transparent}
 .badm.e{background:rgba(33,150,243,.08);color:#1976D2;border-color:rgba(33,150,243,.25)}
@@ -159,6 +160,7 @@ body.dark .ti .ic{color:var(--rose)}
 
 /* NAV */
 .bn{position:fixed;bottom:0;left:0;width:100%;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);display:flex;justify-content:space-around;padding:6px 4px 8px;z-index:150;border-top:1px solid var(--line);box-shadow:0 -4px 20px rgba(0,0,0,.05);transition:background .3s}
+body.dark .bn{background:rgba(26,18,22,.96)}
 .ni{text-align:center;background:none;border:none;color:var(--muted);font-size:9px;cursor:pointer;text-transform:uppercase;font-weight:600;letter-spacing:.3px;position:relative;padding:5px 8px;border-radius:9px;flex:1}
 .ni i{font-size:17px;display:block;margin-bottom:2px}
 .ni.active{color:var(--rose)}
@@ -185,12 +187,10 @@ body.dark .mt{color:var(--text)}
 .btn.suc{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;box-shadow:0 6px 16px rgba(37,211,102,.25)}
 .btn.shr{background:rgba(37,211,102,.1);color:#128C7E;border-color:rgba(37,211,102,.25)}
 
-/* ACCOUNT TABS */
 .tabs{display:flex;background:var(--bg);border-radius:11px;padding:4px;margin-bottom:18px}
 .tab{flex:1;padding:10px;border:none;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--muted);transition:.2s}
 .tab.active{background:var(--surface);color:var(--rose);box-shadow:var(--sh)}
 
-/* ACCOUNT */
 .ah{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:18px}
 .av{width:64px;height:64px;border-radius:20px;background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:10px;box-shadow:0 8px 20px rgba(194,24,91,.3)}
 .an{font-family:'Playfair Display',serif;font-size:18px;color:var(--rose-dark);font-weight:600;margin-bottom:3px}
@@ -212,7 +212,6 @@ body.dark .an{color:var(--text)}
 .mit span{font-size:10.5px;color:var(--muted)}
 .ami i.fa-chevron-right{color:#ccc;font-size:11px}
 
-/* FEATURES */
 .fi{display:flex;align-items:center;gap:12px;padding:13px 4px;border-bottom:1px solid var(--line)}
 .fi:last-child{border-bottom:none}
 .fii{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;background:var(--bg);color:var(--muted);transition:.25s}
@@ -228,13 +227,11 @@ body.dark .an{color:var(--text)}
 .tsw input:checked + .ts::before{transform:translateX(18px)}
 .fnote{background:rgba(184,134,11,.06);border:1px solid rgba(184,134,11,.2);color:var(--gold);padding:10px 12px;border-radius:10px;font-size:10.5px;line-height:1.4;margin-bottom:12px;display:flex;gap:7px}
 
-/* SHARE */
 .shr-o{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
 .shr-b{background:var(--bg);border:1px solid var(--line);padding:14px 6px;border-radius:12px;text-align:center;cursor:pointer;text-decoration:none;color:var(--text);font-size:10px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:7px;transition:.2s}
 .shr-b:active{transform:scale(.96);background:var(--surface);border-color:var(--rose-light)}
 .shr-b i{font-size:20px}
 
-/* CART */
 .cti{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);align-items:center}
 .cti img{width:58px;height:58px;object-fit:cover;border-radius:11px;border:1px solid var(--line)}
 .ctinf{flex:1;min-width:0}
@@ -247,7 +244,6 @@ body.dark .an{color:var(--text)}
 .crm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:5px;border-radius:7px}
 .crm:active{background:rgba(244,67,54,.1);color:#D32F2F}
 
-/* COUPON */
 .cp-r{display:flex;gap:7px;margin:12px 0 8px}
 .cp-r input{flex:1;padding:11px 13px;border:1.5px dashed rgba(194,24,91,.3);border-radius:11px;font-size:12px;background:rgba(194,24,91,.03);outline:none;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;color:var(--rose)}
 .cp-r input::placeholder{color:rgba(194,24,91,.4);letter-spacing:.3px;font-weight:500;text-transform:none}
@@ -261,7 +257,6 @@ body.dark .an{color:var(--text)}
 body.dark .sr.tot{color:var(--text)}
 .sr.disc{color:#128C7E;font-weight:600}
 
-/* PRODUCT DETAIL */
 .pd-img{width:100%;max-height:340px;object-fit:cover;border-radius:14px;margin-bottom:14px;background:#f7f0ec;border:1px solid var(--line)}
 .pd-cat{font-size:9.5px;color:var(--rose);letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:5px}
 .pd-t{font-family:'Playfair Display',serif;font-size:20px;color:var(--rose-dark);font-weight:600;line-height:1.25;margin-bottom:7px}
@@ -278,7 +273,6 @@ body.dark .pd-t{color:var(--text)}
 body.dark .pd-d{color:#A89999}
 .pd-a{display:flex;flex-direction:column;gap:9px}
 
-/* RECOMMEND */
 .rec{margin-top:20px;padding-top:16px;border-top:1.5px dashed var(--line)}
 .rec h4{font-family:'Playfair Display',serif;font-size:15px;color:var(--rose-dark);font-weight:600;margin-bottom:12px}
 body.dark .rec h4{color:var(--text)}
@@ -289,7 +283,6 @@ body.dark .rec h4{color:var(--text)}
 .rc-i span{font-size:10.5px;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.3;margin-bottom:3px;min-height:27px}
 .rc-i .p{font-size:11.5px;color:var(--rose);font-weight:700}
 
-/* RECENT */
 .rs{background:var(--surface);padding:12px 0 14px;margin:12px 0 0;border-top:1px solid var(--line)}
 .rs h3{font-family:'Playfair Display',serif;font-size:14px;color:var(--rose-dark);font-weight:600;padding:0 14px;margin-bottom:10px}
 body.dark .rs h3{color:var(--text)}
@@ -299,7 +292,6 @@ body.dark .rs h3{color:var(--text)}
 .rs-i img{width:68px;height:82px;object-fit:cover;border-radius:10px;display:block;border:1px solid var(--line)}
 .rs-i span{display:block;font-size:9.5px;color:var(--muted);margin-top:5px;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
 
-/* FOOTER */
 footer{background:linear-gradient(135deg,var(--rose-dark),var(--rose));color:#fff;padding:30px 20px 22px;text-align:center;margin-top:34px}
 footer .fl{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:3px;font-weight:600;margin-bottom:6px}
 footer p{font-size:10.5px;color:rgba(255,255,255,.75);line-height:1.7}
@@ -307,7 +299,7 @@ footer .ln{width:36px;height:2px;background:var(--gold-light);margin:12px auto}
 footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margin-top:16px}
 </style>
 </head>
-<body>
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
 
 <div class="ticker"><i class="fas fa-bolt"></i> <span data-i18n="sale">FESTIVE SALE · Extra 10% off · </span><b>ZARA10</b> · <span data-i18n="ends">Ends</span> <span class="cd" id="cd">--:--:--</span></div>
 
@@ -379,7 +371,6 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
   <div class="acf"><input id="aii" placeholder="Ask me anything..." onkeypress="aiEnter(event)"><button class="asb" onclick="sendAI()"><i class="fas fa-paper-plane"></i></button></div>
 </div>
 
-<!-- SHARE -->
 <div id="shareM" class="modal"><div class="mc" style="text-align:center">
   <button class="cb" onclick="closeM('shareM')"><i class="fas fa-times"></i></button>
   <h3 class="mt" data-i18n="shareTitle">Share Zarafiya</h3><p class="ms" data-i18n="shareSub">Friends ko share karein — ₹100 off dono ko</p>
@@ -393,20 +384,17 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
   </div>
 </div></div>
 
-<!-- PRODUCT DETAIL -->
 <div id="prodM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('prodM')"><i class="fas fa-times"></i></button>
   <div id="prodC"></div>
 </div></div>
 
-<!-- WISHLIST -->
 <div id="wishM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('wishM')"><i class="fas fa-times"></i></button>
   <h3 class="mt" data-i18n="wishTitle">Your Wishlist</h3><p class="ms" data-i18n="wishSub">Saved sarees</p>
   <div id="wishC"></div>
 </div></div>
 
-<!-- ACCOUNT -->
 <div id="accM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('accM')"><i class="fas fa-times"></i></button>
   
@@ -461,7 +449,6 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
   </div>
 </div></div>
 
-<!-- FEATURES -->
 <div id="featM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('featM')"><i class="fas fa-times"></i></button>
   <h3 class="mt" data-i18n="appSettings">App Settings</h3><p class="ms" data-i18n="settingsSub2">Features on/off karein</p>
@@ -469,7 +456,6 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
   <div id="featL"></div>
 </div></div>
 
-<!-- ADD PRODUCT -->
 <div id="formM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('formM')"><i class="fas fa-times"></i></button>
   <h3 id="fTitle" class="mt" data-i18n="addProduct">Add New Product</h3><p class="ms" data-i18n="addProductSub2">Product details bharein</p>
@@ -496,7 +482,6 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
   </form>
 </div></div>
 
-<!-- CART -->
 <div id="cartM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('cartM')"><i class="fas fa-times"></i></button>
   <h3 class="mt" data-i18n="yourBag">Your Bag</h3><p class="ms" id="cartSub" data-i18n="bagSub">Fresh picks, waiting for you</p>
@@ -514,7 +499,6 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
   <button onclick="checkout()" class="btn suc" style="padding:15px"><i class="fab fa-whatsapp"></i> <span data-i18n="orderWA">Order via WhatsApp (COD)</span></button>
 </div></div>
 
-<!-- OPTIN -->
 <div id="optM" class="modal"><div class="mc" style="text-align:center">
   <button class="cb" onclick="closeOpt()"><i class="fas fa-times"></i></button>
   <div style="width:64px;height:64px;border-radius:18px;background:rgba(37,211,102,.12);color:#25D366;display:flex;align-items:center;justify-content:center;font-size:28px;margin:6px auto 14px;border:1px solid rgba(37,211,102,.25)"><i class="fab fa-whatsapp"></i></div>
@@ -609,11 +593,25 @@ FTS.forEach(f=>{if(fState[f.id]===undefined)fState[f.id]=false});
 
 function t(k){return (T[lang]&&T[lang][k])||(T.en[k])||k}
 
-// APPLY THEME
+// ===== BLOCK TEXT SELECTION / LONG PRESS MENU =====
+document.addEventListener('contextmenu',e=>{if(!e.target.matches('input,textarea'))e.preventDefault()});
+document.addEventListener('selectstart',e=>{if(!e.target.matches('input,textarea'))e.preventDefault()});
+document.addEventListener('dragstart',e=>e.preventDefault());
+document.addEventListener('gesturestart',e=>e.preventDefault());
+document.addEventListener('gesturechange',e=>e.preventDefault());
+// Double-tap zoom block
+let lastTouchEnd=0;
+document.addEventListener('touchend',e=>{
+  const now=Date.now();
+  if(now-lastTouchEnd<=300 && !e.target.matches('input,textarea,button,.ib,.aib,.asb,.qbt,.chip,.cat,.bc,.ni')){e.preventDefault()}
+  lastTouchEnd=now;
+},{passive:false});
+
+// THEME
 function applyTheme(){document.body.classList.toggle('dark',theme==='dark');$('themeBtn').innerHTML=theme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>'}
 window.toggleTheme=()=>{theme=theme==='dark'?'light':'dark';localStorage.setItem('ztheme',theme);applyTheme()};
 
-// APPLY LANG
+// LANG
 function applyLang(){
   document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');el.textContent=t(k)});
   render(all);renderCart();renderWish();
@@ -637,14 +635,25 @@ window.closeM=id=>$(id).style.display='none';
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.style.display='none'}));
 window.nav=b=>{document.querySelectorAll('.ni').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active')};
 
-// ADMIN LONG PRESS
-let lp=null;
+// ===== ADMIN: LONG-PRESS + 5-TAP =====
+let lp=null,tapCount=0,tapTimer=null;
 (function(){
   const l=$('logoBtn');
   const start=()=>{lp=setTimeout(promptAdmin,1500)};
-  const stop=()=>{if(lp)clearTimeout(lp)};
-  l.addEventListener('touchstart',start,{passive:true});l.addEventListener('touchend',stop);
-  l.addEventListener('mousedown',start);l.addEventListener('mouseup',stop);l.addEventListener('mouseleave',stop);
+  const stop=()=>{if(lp){clearTimeout(lp);lp=null}};
+  l.addEventListener('touchstart',start,{passive:true});
+  l.addEventListener('touchend',stop);
+  l.addEventListener('touchcancel',stop);
+  l.addEventListener('mousedown',start);
+  l.addEventListener('mouseup',stop);
+  l.addEventListener('mouseleave',stop);
+  // 5-tap backup
+  l.addEventListener('click',()=>{
+    tapCount++;
+    if(tapTimer)clearTimeout(tapTimer);
+    tapTimer=setTimeout(()=>{tapCount=0},1500);
+    if(tapCount>=5){tapCount=0;clearTimeout(lp);lp=null;promptAdmin()}
+  });
 })();
 function promptAdmin(){
   if(isAdminMode){openAcc();return}
@@ -890,4 +899,4 @@ badges();startCd();showOpt();
 if(isAdminMode){$('adm').style.display='flex'}
 </script>
 </body>
-</html>
+  </html>
