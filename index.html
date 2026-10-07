@@ -14,8 +14,23 @@
 --text:#1A1A1A;--muted:#8B7B7B;--success:#25D366;
 --sh:0 2px 8px rgba(194,24,91,.06);
 }
+body.dark{
+--rose:#F06292;--rose-dark:#C2185B;--rose-light:#3D1B27;
+--gold:#D4AF37;--gold-light:#4A3A1A;
+--bg:#0F0A0D;--surface:#1A1216;--line:#2A1F25;
+--text:#F5EDE8;--muted:#8B7B7B;
+--sh:0 2px 8px rgba(0,0,0,.3);
+}
+body.dark .hero{background:linear-gradient(135deg,#2A1620 0%,#1F1520 50%,#2A2216 100%)}
+body.dark .hero-t{background:rgba(240,98,146,.12);border-color:rgba(240,98,146,.2)}
+body.dark header{background:rgba(15,10,13,.92)}
+body.dark .cbar{background:rgba(15,10,13,.92)}
+body.dark .bn{background:rgba(26,18,22,.96)}
+body.dark .bc.g{background:rgba(37,211,102,.15)}
+body.dark .chip{background:var(--surface)}
+body.dark .cat-c{background:var(--surface)}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding-bottom:70px;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);padding-bottom:70px;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
 button,input,select,textarea{font-family:inherit;color:inherit}
 
 /* TICKER */
@@ -26,13 +41,13 @@ button,input,select,textarea{font-family:inherit;color:inherit}
 @keyframes fl{50%{opacity:.4}}
 
 /* HEADER */
-header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:28px;z-index:100;border-bottom:1px solid var(--line)}
-.logo{display:flex;align-items:center;gap:8px;cursor:pointer}
+header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 10px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:28px;z-index:100;border-bottom:1px solid var(--line);transition:background .3s}
+.logo{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
 .logo-m{width:32px;height:32px;background:linear-gradient(135deg,var(--rose),var(--rose-dark));border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Playfair Display',serif;font-weight:700;font-size:17px;box-shadow:0 3px 10px rgba(194,24,91,.25)}
 .logo-t{font-family:'Playfair Display',serif;font-size:16px;color:var(--rose);font-weight:600;line-height:1}
 .logo-s{font-size:7px;color:var(--muted);letter-spacing:3px;margin-top:2px}
 .hi{display:flex;gap:0}
-.ib{width:36px;height:36px;border-radius:10px;background:transparent;border:none;color:var(--rose);font-size:15px;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;transition:.2s}
+.ib{width:34px;height:34px;border-radius:10px;background:transparent;border:none;color:var(--rose);font-size:14px;cursor:pointer;position:relative;display:flex;align-items:center;justify-content:center;transition:.2s}
 .ib:active{background:var(--rose-light);transform:scale(.94)}
 .bdg{position:absolute;top:1px;right:1px;background:var(--rose);color:#fff;font-size:8px;min-width:15px;height:15px;padding:0 3px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid var(--bg)}
 
@@ -48,7 +63,7 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 .sw input:focus{border-color:var(--rose)}
 
 /* COLOR BAR */
-.cbar{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:7px 12px;display:flex;gap:6px;overflow-x:auto;position:sticky;top:88px;z-index:98;border-bottom:1px solid var(--line);scrollbar-width:none}
+.cbar{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:7px 12px;display:flex;gap:6px;overflow-x:auto;position:sticky;top:88px;z-index:98;border-bottom:1px solid var(--line);scrollbar-width:none;transition:background .3s}
 .cbar::-webkit-scrollbar{display:none}
 .chip{border:1px solid var(--line);padding:5px 11px;border-radius:16px;font-size:10px;font-weight:500;cursor:pointer;color:var(--text);background:var(--surface);flex-shrink:0;display:inline-flex;align-items:center;gap:5px;transition:.2s}
 .chip.active{background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff;border-color:var(--rose);font-weight:600}
@@ -58,16 +73,17 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 .c-pink .d{background:#EC407A}.c-blue .d{background:#2196F3}.c-red .d{background:#F44336}
 .c-maroon .d{background:#7B1E3A}.c-green .d{background:#4CAF50}.c-yellow .d{background:#FFB300}.c-other .d{background:#8D6E63}
 
-/* HERO - COMPACT */
-.hero{margin:10px 12px 0;border-radius:14px;background:linear-gradient(135deg,#FDF0F5 0%,#FFF5EE 50%,#FFF9E8 100%);padding:14px 16px;border:1px solid var(--line);position:relative;overflow:hidden;box-shadow:var(--sh)}
+/* HERO */
+.hero{margin:10px 12px 0;border-radius:14px;background:linear-gradient(135deg,#FDF0F5 0%,#FFF5EE 50%,#FFF9E8 100%);padding:14px 16px;border:1px solid var(--line);position:relative;overflow:hidden;box-shadow:var(--sh);transition:background .3s}
 .hero::before{content:'';position:absolute;top:-60px;right:-60px;width:140px;height:140px;background:radial-gradient(circle,rgba(194,24,91,.1),transparent 70%);border-radius:50%}
 .hero-t{display:inline-block;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--rose);background:rgba(194,24,91,.08);padding:3px 8px;border-radius:20px;font-weight:600;margin-bottom:6px;border:1px solid rgba(194,24,91,.12)}
 .hero h1{font-family:'Playfair Display',serif;font-size:17px;color:var(--rose-dark);font-weight:600;line-height:1.15;margin-bottom:8px;letter-spacing:-.2px}
+body.dark .hero h1{color:var(--text)}
 .hero h1 em{font-style:italic;color:var(--gold)}
 .hero button{background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff;border:none;padding:7px 14px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;box-shadow:0 4px 12px rgba(194,24,91,.25);display:inline-flex;align-items:center;gap:5px}
 .hero button:active{transform:scale(.96)}
 
-/* CATEGORIES - COMPACT */
+/* CATEGORIES */
 .cats{display:flex;gap:14px;overflow-x:auto;padding:12px 14px 4px;scrollbar-width:none}
 .cats::-webkit-scrollbar{display:none}
 .cat{flex-shrink:0;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;padding:0}
@@ -80,18 +96,20 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 /* SECTION */
 .sh{padding:14px 14px 8px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
 .sh h2{font-family:'Playfair Display',serif;font-size:17px;color:var(--rose-dark);font-weight:600;line-height:1.2}
+body.dark .sh h2{color:var(--text)}
 .sh p{font-size:9px;color:var(--muted);margin-top:2px;letter-spacing:.5px;text-transform:uppercase;font-weight:500}
 .sh .cnt{font-size:10px;color:var(--rose);background:rgba(194,24,91,.08);padding:3px 9px;border-radius:14px;font-weight:600;white-space:nowrap;border:1px solid rgba(194,24,91,.12)}
 
-/* PRODUCTS - 3 COLUMN */
+/* PRODUCTS - 3 COL */
 .ct{padding:0 12px}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .card{background:var(--surface);border-radius:11px;overflow:hidden;display:flex;flex-direction:column;border:1px solid var(--line);transition:.2s;position:relative;box-shadow:var(--sh)}
-.card:active{transform:scale(.98);border-color:var(--rose-light)}
+.card:active{transform:scale(.98)}
 .ci{width:100%;height:120px;background:#f7f0ec;overflow:hidden;position:relative}
+body.dark .ci{background:#241A1F}
 .ci img{width:100%;height:100%;object-fit:cover;display:block;cursor:pointer}
 .tbadge{position:absolute;top:5px;left:5px;background:rgba(255,255,255,.95);color:var(--rose);font-size:7px;padding:2px 5px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;z-index:2}
-.dbadge{position:absolute;top:5px;right:5px;background:linear-gradient(135deg,#E53935,#C62828);color:#fff;font-size:8.5px;padding:2px 5px;border-radius:4px;font-weight:700;z-index:2;box-shadow:0 2px 5px rgba(229,57,53,.3)}
+.dbadge{position:absolute;top:5px;right:5px;background:linear-gradient(135deg,#E53935,#C62828);color:#fff;font-size:8.5px;padding:2px 5px;border-radius:4px;font-weight:700;z-index:2}
 .wb{position:absolute;bottom:5px;right:5px;background:rgba(255,255,255,.95);width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;color:var(--muted);font-size:10px;box-shadow:0 2px 6px rgba(0,0,0,.12);transition:.2s}
 .wb.active{color:#E91E63}
 .wb:active{transform:scale(.85)}
@@ -99,7 +117,7 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 .cbody{padding:7px 8px 9px;display:flex;flex-direction:column;flex:1}
 .card h3{font-size:10.5px;color:var(--text);font-weight:500;line-height:1.3;cursor:pointer;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:27px}
 .rate{display:flex;align-items:center;gap:3px;margin-bottom:5px;font-size:8.5px;color:var(--muted)}
-.rate .s{color:#FFB300;font-size:9px;letter-spacing:.3px}
+.rate .s{color:#FFB300;font-size:9px}
 .pr{display:flex;align-items:baseline;gap:4px;margin-bottom:7px;flex-wrap:wrap}
 .pr .f{color:var(--rose);font-weight:700;font-size:13px}
 .pr .m{text-decoration:line-through;color:var(--muted);font-size:9px}
@@ -117,6 +135,7 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:16px 12px 12px}
 .ti{background:var(--surface);border-radius:11px;padding:10px 4px;text-align:center;border:1px solid var(--line);box-shadow:var(--sh)}
 .ti .ic{width:26px;height:26px;border-radius:8px;margin:0 auto 5px;display:flex;align-items:center;justify-content:center;font-size:11px;background:var(--rose-light);color:var(--rose-dark)}
+body.dark .ti .ic{color:var(--rose)}
 .ti h4{font-size:8.5px;color:var(--text);font-weight:600;margin-bottom:1px}
 .ti p{font-size:7.5px;color:var(--muted)}
 
@@ -134,17 +153,17 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 .am.bot{background:var(--surface);color:var(--text);align-self:flex-start;border-bottom-left-radius:3px;box-shadow:var(--sh)}
 .am.user{background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
 .acf{display:flex;padding:8px;background:var(--surface);border-top:1px solid var(--line);gap:6px}
-.acf input{flex:1;padding:9px 12px;border:1px solid var(--line);border-radius:20px;font-size:11.5px;background:var(--bg);outline:none}
+.acf input{flex:1;padding:9px 12px;border:1px solid var(--line);border-radius:20px;font-size:11.5px;background:var(--bg);outline:none;color:var(--text)}
 .acf input:focus{border-color:var(--rose)}
 .asb{background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff;border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
 
 /* NAV */
-.bn{position:fixed;bottom:0;left:0;width:100%;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);display:flex;justify-content:space-around;padding:6px 4px 8px;z-index:150;border-top:1px solid var(--line);box-shadow:0 -4px 20px rgba(0,0,0,.05)}
+.bn{position:fixed;bottom:0;left:0;width:100%;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);display:flex;justify-content:space-around;padding:6px 4px 8px;z-index:150;border-top:1px solid var(--line);box-shadow:0 -4px 20px rgba(0,0,0,.05);transition:background .3s}
 .ni{text-align:center;background:none;border:none;color:var(--muted);font-size:9px;cursor:pointer;text-transform:uppercase;font-weight:600;letter-spacing:.3px;position:relative;padding:5px 8px;border-radius:9px;flex:1}
 .ni i{font-size:17px;display:block;margin-bottom:2px}
 .ni.active{color:var(--rose)}
 .ni.active::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:20px;height:2.5px;background:var(--rose);border-radius:0 0 3px 3px}
-.nb{position:absolute;top:1px;right:10px;background:var(--rose);color:#fff;font-size:8px;min-width:15px;height:15px;padding:0 3px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff}
+.nb{position:absolute;top:1px;right:10px;background:var(--rose);color:#fff;font-size:8px;min-width:15px;height:15px;padding:0 3px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid var(--bg)}
 
 /* MODALS */
 .modal{display:none;position:fixed;inset:0;background:rgba(26,10,15,.5);backdrop-filter:blur(4px);z-index:300;align-items:flex-end;justify-content:center;animation:fi .2s}
@@ -155,22 +174,27 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 .cb{position:absolute;right:14px;top:18px;width:30px;height:30px;border-radius:50%;background:var(--bg);border:none;font-size:14px;cursor:pointer;color:var(--muted);display:flex;align-items:center;justify-content:center}
 .cb:active{background:var(--line);transform:scale(.9)}
 .mt{font-family:'Playfair Display',serif;font-size:20px;color:var(--rose-dark);font-weight:600;margin-bottom:5px}
+body.dark .mt{color:var(--text)}
 .ms{font-size:11.5px;color:var(--muted);margin-bottom:16px;line-height:1.5}
-.fc{width:100%;padding:12px 14px;margin-bottom:10px;border:1px solid var(--line);border-radius:11px;font-size:12.5px;background:var(--bg);outline:none;transition:.2s}
-.fc:focus{border-color:var(--rose);background:#fff;box-shadow:0 0 0 3px rgba(194,24,91,.08)}
+.fc{width:100%;padding:12px 14px;margin-bottom:10px;border:1px solid var(--line);border-radius:11px;font-size:12.5px;background:var(--bg);outline:none;transition:.2s;color:var(--text)}
+.fc:focus{border-color:var(--rose);box-shadow:0 0 0 3px rgba(194,24,91,.08)}
 .fl{font-size:10px;color:var(--muted);letter-spacing:1.1px;text-transform:uppercase;display:block;margin-bottom:5px;font-weight:600}
 .btn{padding:12px 18px;border:1px solid var(--line);border-radius:11px;cursor:pointer;background:transparent;color:var(--text);font-weight:700;width:100%;font-size:11px;letter-spacing:.9px;text-transform:uppercase;transition:.2s;text-align:center;text-decoration:none;display:inline-block}
 .btn:active{transform:scale(.97)}
 .btn.pri{background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff;border:none;box-shadow:0 6px 16px rgba(194,24,91,.25)}
 .btn.suc{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;border:none;box-shadow:0 6px 16px rgba(37,211,102,.25)}
 .btn.shr{background:rgba(37,211,102,.1);color:#128C7E;border-color:rgba(37,211,102,.25)}
-.btn.dng{background:rgba(244,67,54,.1);color:#D32F2F;border-color:rgba(244,67,54,.25);width:auto;padding:7px 12px;font-size:10px}
-.btn.inf{background:rgba(33,150,243,.1);color:#1976D2;border-color:rgba(33,150,243,.25);width:auto;padding:7px 12px;font-size:10px}
+
+/* ACCOUNT TABS */
+.tabs{display:flex;background:var(--bg);border-radius:11px;padding:4px;margin-bottom:18px}
+.tab{flex:1;padding:10px;border:none;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--muted);transition:.2s}
+.tab.active{background:var(--surface);color:var(--rose);box-shadow:var(--sh)}
 
 /* ACCOUNT */
 .ah{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:18px}
 .av{width:64px;height:64px;border-radius:20px;background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:10px;box-shadow:0 8px 20px rgba(194,24,91,.3)}
 .an{font-family:'Playfair Display',serif;font-size:18px;color:var(--rose-dark);font-weight:600;margin-bottom:3px}
+body.dark .an{color:var(--text)}
 .ae{font-size:11px;color:var(--muted)}
 .ab{display:inline-flex;align-items:center;gap:5px;background:rgba(184,134,11,.1);color:var(--gold);padding:4px 10px;border-radius:20px;font-size:10px;font-weight:700;text-transform:uppercase;margin-top:8px;border:1px solid rgba(184,134,11,.2)}
 .amu{margin-top:6px}
@@ -203,12 +227,11 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 .tsw input:checked + .ts{background:linear-gradient(135deg,var(--rose),var(--rose-dark))}
 .tsw input:checked + .ts::before{transform:translateX(18px)}
 .fnote{background:rgba(184,134,11,.06);border:1px solid rgba(184,134,11,.2);color:var(--gold);padding:10px 12px;border-radius:10px;font-size:10.5px;line-height:1.4;margin-bottom:12px;display:flex;gap:7px}
-.fnote i{margin-top:2px;flex-shrink:0}
 
 /* SHARE */
 .shr-o{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
 .shr-b{background:var(--bg);border:1px solid var(--line);padding:14px 6px;border-radius:12px;text-align:center;cursor:pointer;text-decoration:none;color:var(--text);font-size:10px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:7px;transition:.2s}
-.shr-b:active{transform:scale(.96);background:#fff;border-color:var(--rose-light)}
+.shr-b:active{transform:scale(.96);background:var(--surface);border-color:var(--rose-light)}
 .shr-b i{font-size:20px}
 
 /* CART */
@@ -218,7 +241,7 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 .ctinf strong{font-size:12px;font-weight:600;display:block;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .ctinf .cp{color:var(--rose);font-weight:700;font-size:12.5px}
 .qb{display:flex;align-items:center;gap:7px;margin-top:6px}
-.qbt{width:24px;height:24px;border-radius:7px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center}
+.qbt{width:24px;height:24px;border-radius:7px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;color:var(--text)}
 .qbt:active{background:var(--rose);color:#fff;border-color:var(--rose)}
 .qn{font-size:11.5px;font-weight:700;min-width:14px;text-align:center}
 .crm{background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;padding:5px;border-radius:7px}
@@ -235,12 +258,14 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 .cs{background:var(--bg);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid var(--line)}
 .sr{display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px}
 .sr.tot{font-weight:700;font-size:14px;color:var(--rose-dark);padding-top:9px;border-top:1.5px dashed var(--line);margin-top:9px;margin-bottom:0}
+body.dark .sr.tot{color:var(--text)}
 .sr.disc{color:#128C7E;font-weight:600}
 
 /* PRODUCT DETAIL */
 .pd-img{width:100%;max-height:340px;object-fit:cover;border-radius:14px;margin-bottom:14px;background:#f7f0ec;border:1px solid var(--line)}
 .pd-cat{font-size:9.5px;color:var(--rose);letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:5px}
 .pd-t{font-family:'Playfair Display',serif;font-size:20px;color:var(--rose-dark);font-weight:600;line-height:1.25;margin-bottom:7px}
+body.dark .pd-t{color:var(--text)}
 .pd-sku{font-size:10.5px;color:var(--muted);margin-bottom:10px}
 .pd-pr{display:flex;align-items:baseline;gap:9px;margin-bottom:8px;flex-wrap:wrap}
 .pd-pr .f{font-size:22px;font-weight:700;color:var(--rose)}
@@ -249,12 +274,14 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 .lv{display:inline-flex;align-items:center;gap:5px;background:rgba(255,145,0,.1);color:#E65100;font-size:10.5px;padding:5px 10px;border-radius:16px;font-weight:600;margin-bottom:12px;border:1px solid rgba(255,145,0,.2)}
 .lv .p{width:6px;height:6px;background:#E65100;border-radius:50%;animation:pd 1.4s infinite}
 @keyframes pd{50%{opacity:.3}}
-.pd-d{font-size:12.5px;line-height:1.65;color:#555;margin-bottom:16px}
+.pd-d{font-size:12.5px;line-height:1.65;color:var(--muted);margin-bottom:16px}
+body.dark .pd-d{color:#A89999}
 .pd-a{display:flex;flex-direction:column;gap:9px}
 
 /* RECOMMEND */
 .rec{margin-top:20px;padding-top:16px;border-top:1.5px dashed var(--line)}
 .rec h4{font-family:'Playfair Display',serif;font-size:15px;color:var(--rose-dark);font-weight:600;margin-bottom:12px}
+body.dark .rec h4{color:var(--text)}
 .rec-g{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
 .rc{cursor:pointer;background:var(--bg);border-radius:11px;overflow:hidden;border:1px solid var(--line)}
 .rc img{width:100%;height:110px;object-fit:cover;display:block}
@@ -265,6 +292,7 @@ header{background:rgba(253,248,245,.95);backdrop-filter:blur(12px);padding:9px 1
 /* RECENT */
 .rs{background:var(--surface);padding:12px 0 14px;margin:12px 0 0;border-top:1px solid var(--line)}
 .rs h3{font-family:'Playfair Display',serif;font-size:14px;color:var(--rose-dark);font-weight:600;padding:0 14px;margin-bottom:10px}
+body.dark .rs h3{color:var(--text)}
 .rs-s{display:flex;gap:9px;overflow-x:auto;padding:0 14px;scrollbar-width:none}
 .rs-s::-webkit-scrollbar{display:none}
 .rs-i{flex-shrink:0;width:68px;cursor:pointer}
@@ -281,27 +309,28 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
 </head>
 <body>
 
-<div class="ticker"><i class="fas fa-bolt"></i> FESTIVE SALE · Extra 10% off · <b>ZARA10</b> · Ends <span class="cd" id="cd">--:--:--</span></div>
+<div class="ticker"><i class="fas fa-bolt"></i> <span data-i18n="sale">FESTIVE SALE · Extra 10% off · </span><b>ZARA10</b> · <span data-i18n="ends">Ends</span> <span class="cd" id="cd">--:--:--</span></div>
 
 <header>
-  <div class="logo" onclick="goHome()">
+  <div class="logo" id="logoBtn">
     <div class="logo-m">Z</div>
     <div><div class="logo-t">Zarafiya</div><div class="logo-s">FASHION</div></div>
   </div>
   <div class="hi">
-    <button class="ib" onclick="openShare()"><i class="fas fa-share-alt"></i></button>
     <button class="ib" onclick="toggleSearch()"><i class="fas fa-search"></i></button>
+    <button class="ib" id="themeBtn" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+    <button class="ib" id="langBtn" onclick="toggleLang()"><i class="fas fa-globe"></i></button>
     <button class="ib" onclick="openWish()"><i class="fas fa-heart"></i><span class="bdg" id="wc" style="display:none">0</span></button>
     <button class="ib" onclick="openCart()"><i class="fas fa-shopping-bag"></i><span class="bdg" id="cc" style="display:none">0</span></button>
   </div>
 </header>
 
-<div id="adm"><span><i class="fas fa-crown"></i> Admin Mode</span><div><button onclick="openAdd()"><i class="fas fa-plus"></i> Add</button><button onclick="logout()">Logout</button></div></div>
+<div id="adm"><span><i class="fas fa-crown"></i> <span data-i18n="adminMode">Admin Mode</span></span><div><button onclick="openAdd()"><i class="fas fa-plus"></i> <span data-i18n="add">Add</span></button><button onclick="adminLogout()">Logout</button></div></div>
 
 <div id="sb"><div class="sw"><i class="fas fa-search"></i><input id="si" placeholder="Search sarees, suits..." onkeyup="search()"></div></div>
 
 <div class="cbar">
-  <button class="chip c-all active" onclick="fColor('all',this)"><span class="d"></span>All</button>
+  <button class="chip c-all active" onclick="fColor('all',this)"><span class="d"></span><span data-i18n="all">All</span></button>
   <button class="chip c-pink" onclick="fColor('pink',this)"><span class="d"></span>Pink</button>
   <button class="chip c-blue" onclick="fColor('blue',this)"><span class="d"></span>Blue</button>
   <button class="chip c-red" onclick="fColor('red',this)"><span class="d"></span>Red</button>
@@ -313,47 +342,47 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
 
 <main>
   <section class="hero">
-    <div class="hero-t">● Handcrafted in Varanasi</div>
+    <div class="hero-t"><span data-i18n="handcrafted">● Handcrafted in Varanasi</span></div>
     <h1>Premium <em>Banarasi</em> Silk Sarees</h1>
-    <button onclick="scrollTo()">Explore <i class="fas fa-arrow-right"></i></button>
+    <button onclick="scrollTo()"><span data-i18n="explore">Explore</span> <i class="fas fa-arrow-right"></i></button>
   </section>
 
   <div class="cats">
-    <button class="cat active" onclick="fCat('Sarees',this)"><div class="cat-c"><i class="fas fa-female"></i></div><span>Sarees</span></button>
-    <button class="cat" onclick="fCat('Suit',this)"><div class="cat-c"><i class="fas fa-tshirt"></i></div><span>Suits</span></button>
-    <button class="cat" onclick="fCat('Dupatta',this)"><div class="cat-c"><i class="fas fa-scroll"></i></div><span>Dupatta</span></button>
-    <button class="cat" onclick="fCat('Gharara',this)"><div class="cat-c"><i class="fas fa-star"></i></div><span>Gharara</span></button>
-    <button class="cat" onclick="fCat('All',this)"><div class="cat-c"><i class="fas fa-th-large"></i></div><span>All</span></button>
+    <button class="cat active" onclick="fCat('Sarees',this)"><div class="cat-c"><i class="fas fa-female"></i></div><span data-i18n="sarees">Sarees</span></button>
+    <button class="cat" onclick="fCat('Suit',this)"><div class="cat-c"><i class="fas fa-tshirt"></i></div><span data-i18n="suits">Suits</span></button>
+    <button class="cat" onclick="fCat('Dupatta',this)"><div class="cat-c"><i class="fas fa-scroll"></i></div><span data-i18n="dupatta">Dupatta</span></button>
+    <button class="cat" onclick="fCat('Gharara',this)"><div class="cat-c"><i class="fas fa-star"></i></div><span data-i18n="gharara">Gharara</span></button>
+    <button class="cat" onclick="fCat('All',this)"><div class="cat-c"><i class="fas fa-th-large"></i></div><span data-i18n="all">All</span></button>
   </div>
 
-  <div class="rs" id="rs" style="display:none"><h3>Recently Viewed</h3><div class="rs-s" id="rss"></div></div>
+  <div class="rs" id="rs" style="display:none"><h3 data-i18n="recent">Recently Viewed</h3><div class="rs-s" id="rss"></div></div>
 
   <div class="sh" id="colSec">
-    <div><h2 id="catTitle">All Collection</h2><p>Curated Selection</p></div>
+    <div><h2 id="catTitle" data-i18n="allColl">All Collection</h2><p data-i18n="curated">Curated Selection</p></div>
     <span class="cnt" id="pCount">0</span>
   </div>
 
-  <div class="ct"><div id="grid" class="grid"><p style="text-align:center;grid-column:1/-1;color:var(--muted);padding:40px;font-size:12px">Loading...</p></div></div>
+  <div class="ct"><div id="grid" class="grid"><p style="text-align:center;grid-column:1/-1;color:var(--muted);padding:40px;font-size:12px" data-i18n="loading">Loading...</p></div></div>
 
   <div class="trust">
-    <div class="ti"><div class="ic"><i class="fas fa-shipping-fast"></i></div><h4>Free Ship</h4><p>All Orders</p></div>
-    <div class="ti"><div class="ic"><i class="fas fa-shield-alt"></i></div><h4>Secure</h4><p>100% Safe</p></div>
-    <div class="ti"><div class="ic"><i class="fas fa-award"></i></div><h4>Premium</h4><p>Handpicked</p></div>
-    <div class="ti"><div class="ic"><i class="fas fa-headset"></i></div><h4>Support</h4><p>24/7</p></div>
+    <div class="ti"><div class="ic"><i class="fas fa-shipping-fast"></i></div><h4 data-i18n="freeShip">Free Ship</h4><p data-i18n="allOrders">All Orders</p></div>
+    <div class="ti"><div class="ic"><i class="fas fa-shield-alt"></i></div><h4 data-i18n="secure">Secure</h4><p data-i18n="safe">100% Safe</p></div>
+    <div class="ti"><div class="ic"><i class="fas fa-award"></i></div><h4 data-i18n="premium">Premium</h4><p data-i18n="handpicked">Handpicked</p></div>
+    <div class="ti"><div class="ic"><i class="fas fa-headset"></i></div><h4 data-i18n="support">Support</h4><p data-i18n="hour24">24/7</p></div>
   </div>
 </main>
 
 <button class="aib" onclick="toggleAI()"><i class="fas fa-robot"></i></button>
 <div id="aib" class="acb">
   <div class="ach"><span><i class="fas fa-robot"></i> Zarafiya Assistant</span><i class="fas fa-times" style="cursor:pointer" onclick="toggleAI()"></i></div>
-  <div id="achd" class="achd"><div class="am bot">👋 Welcome to Zarafiya Fashion! Sarees, prices ya orders ke baare mein kuch bhi poochein.</div></div>
+  <div id="achd" class="achd"><div class="am bot" data-i18n="aiWelcome">👋 Welcome to Zarafiya Fashion! Sarees, prices ya orders ke baare mein kuch bhi poochein.</div></div>
   <div class="acf"><input id="aii" placeholder="Ask me anything..." onkeypress="aiEnter(event)"><button class="asb" onclick="sendAI()"><i class="fas fa-paper-plane"></i></button></div>
 </div>
 
 <!-- SHARE -->
 <div id="shareM" class="modal"><div class="mc" style="text-align:center">
   <button class="cb" onclick="closeM('shareM')"><i class="fas fa-times"></i></button>
-  <h3 class="mt">Share Zarafiya</h3><p class="ms">Friends ko share karein — ₹100 off dono ko</p>
+  <h3 class="mt" data-i18n="shareTitle">Share Zarafiya</h3><p class="ms" data-i18n="shareSub">Friends ko share karein — ₹100 off dono ko</p>
   <div class="shr-o">
     <a id="shrWa" class="shr-b" target="_blank"><i class="fab fa-whatsapp" style="color:#25D366"></i>WhatsApp</a>
     <a id="shrFb" class="shr-b" target="_blank"><i class="fab fa-facebook" style="color:#1877F2"></i>Facebook</a>
@@ -373,33 +402,61 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
 <!-- WISHLIST -->
 <div id="wishM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('wishM')"><i class="fas fa-times"></i></button>
-  <h3 class="mt">Your Wishlist</h3><p class="ms">Saved sarees</p>
+  <h3 class="mt" data-i18n="wishTitle">Your Wishlist</h3><p class="ms" data-i18n="wishSub">Saved sarees</p>
   <div id="wishC"></div>
 </div></div>
 
 <!-- ACCOUNT -->
 <div id="accM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('accM')"><i class="fas fa-times"></i></button>
-  <div id="accL">
-    <h3 class="mt">Welcome Back</h3><p class="ms">Admin login karein</p>
-    <label class="fl">Email</label><input type="email" id="aEm" class="fc" placeholder="you@example.com">
-    <label class="fl">Password</label><input type="password" id="aPw" class="fc" placeholder="••••••••">
-    <button id="loginBtn" class="btn pri" style="padding:15px;margin-top:6px">Login</button>
-    <p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:14px">Customer? No login needed — WhatsApp pe order karein 😊</p>
+  
+  <div id="custView">
+    <div class="tabs">
+      <button id="tabLogin" class="tab active" onclick="custTab('login')" data-i18n="login">Login</button>
+      <button id="tabSignup" class="tab" onclick="custTab('signup')" data-i18n="signup">Sign Up</button>
+    </div>
+    <div id="loginForm">
+      <h3 class="mt" data-i18n="welcomeBack">Welcome Back</h3><p class="ms" data-i18n="loginSub">Apne account mein login karein</p>
+      <label class="fl" data-i18n="email">Email</label><input type="email" id="cLogEmail" class="fc" placeholder="you@example.com">
+      <label class="fl" data-i18n="password">Password</label><input type="password" id="cLogPass" class="fc" placeholder="••••••••">
+      <button onclick="custLogin()" class="btn pri" style="padding:15px;margin-top:6px" data-i18n="login">Login</button>
+    </div>
+    <div id="signupForm" style="display:none">
+      <h3 class="mt" data-i18n="createAccount">Create Account</h3><p class="ms" data-i18n="signupSub">Naya account banayein</p>
+      <label class="fl" data-i18n="fullName">Full Name</label><input type="text" id="cSupName" class="fc" placeholder="Your name">
+      <label class="fl" data-i18n="email">Email</label><input type="email" id="cSupEmail" class="fc" placeholder="you@example.com">
+      <label class="fl" data-i18n="phone">Phone</label><input type="tel" id="cSupPhone" class="fc" placeholder="10-digit mobile">
+      <label class="fl" data-i18n="password">Password</label><input type="password" id="cSupPass" class="fc" placeholder="Min 6 characters">
+      <button onclick="custSignup()" class="btn pri" style="padding:15px;margin-top:6px" data-i18n="signupBtn">Create Account</button>
+    </div>
   </div>
-  <div id="accP" style="display:none">
+  
+  <div id="custProfile" style="display:none">
     <div class="ah">
-      <div class="av"><i class="fas fa-crown"></i></div>
-      <div class="an" id="accN">Admin</div>
-      <div class="ae" id="accE">admin@zarafiya.com</div>
-      <div class="ab"><i class="fas fa-check-circle"></i> Verified Admin</div>
+      <div class="av" style="background:linear-gradient(135deg,#E91E63,#C2185B)"><i class="fas fa-user"></i></div>
+      <div class="an" id="custName">Customer</div>
+      <div class="ae" id="custEmail">email@example.com</div>
     </div>
     <div class="amu">
-      <button class="ami" onclick="closeM('accM');openFeat()"><div class="mii gold"><i class="fas fa-sliders-h"></i></div><div class="mit"><strong>App Settings</strong><span>10 features on/off</span></div><i class="fas fa-chevron-right"></i></button>
-      <button class="ami" onclick="closeM('accM');openAdd()"><div class="mii green"><i class="fas fa-plus"></i></div><div class="mit"><strong>Add Product</strong><span>Naya product list karein</span></div><i class="fas fa-chevron-right"></i></button>
-      <button class="ami" onclick="closeM('accM');openShare()"><div class="mii blue"><i class="fas fa-share-alt"></i></div><div class="mit"><strong>Share App</strong><span>Friends ko bhejein</span></div><i class="fas fa-chevron-right"></i></button>
-      <button class="ami" onclick="closeM('accM');openCart()"><div class="mii gold"><i class="fas fa-shopping-bag"></i></div><div class="mit"><strong>My Bag</strong><span>Cart items</span></div><i class="fas fa-chevron-right"></i></button>
-      <button class="ami" onclick="logout()"><div class="mii red"><i class="fas fa-sign-out-alt"></i></div><div class="mit"><strong>Logout</strong><span>Account se bahar</span></div><i class="fas fa-chevron-right"></i></button>
+      <button class="ami" onclick="closeM('accM');openCart()"><div class="mii gold"><i class="fas fa-shopping-bag"></i></div><div class="mit"><strong data-i18n="myBag">My Bag</strong><span data-i18n="cartItems">Cart items</span></div><i class="fas fa-chevron-right"></i></button>
+      <button class="ami" onclick="closeM('accM');openWish()"><div class="mii rose"><i class="fas fa-heart"></i></div><div class="mit"><strong data-i18n="wishlist">Wishlist</strong><span data-i18n="savedItems">Saved sarees</span></div><i class="fas fa-chevron-right"></i></button>
+      <button class="ami" onclick="closeM('accM');openShare()"><div class="mii blue"><i class="fas fa-share-alt"></i></div><div class="mit"><strong data-i18n="shareApp">Share App</strong><span data-i18n="shareFriends">Friends ko bhejein</span></div><i class="fas fa-chevron-right"></i></button>
+      <button class="ami" onclick="custLogout()"><div class="mii red"><i class="fas fa-sign-out-alt"></i></div><div class="mit"><strong data-i18n="logout">Logout</strong><span data-i18n="logoutSub">Account se bahar</span></div><i class="fas fa-chevron-right"></i></button>
+    </div>
+  </div>
+  
+  <div id="adminProfile" style="display:none">
+    <div class="ah">
+      <div class="av"><i class="fas fa-crown"></i></div>
+      <div class="an">Admin</div>
+      <div class="ae">Zarafiya Management</div>
+      <div class="ab"><i class="fas fa-check-circle"></i> Admin Mode</div>
+    </div>
+    <div class="amu">
+      <button class="ami" onclick="closeM('accM');openFeat()"><div class="mii gold"><i class="fas fa-sliders-h"></i></div><div class="mit"><strong data-i18n="appSettings">App Settings</strong><span data-i18n="settingsSub">10 features on/off</span></div><i class="fas fa-chevron-right"></i></button>
+      <button class="ami" onclick="closeM('accM');openAdd()"><div class="mii green"><i class="fas fa-plus"></i></div><div class="mit"><strong data-i18n="addProduct">Add Product</strong><span data-i18n="addProductSub">Naya product list karein</span></div><i class="fas fa-chevron-right"></i></button>
+      <button class="ami" onclick="closeM('accM');openShare()"><div class="mii blue"><i class="fas fa-share-alt"></i></div><div class="mit"><strong data-i18n="shareApp">Share App</strong><span data-i18n="shareFriends">Friends ko bhejein</span></div><i class="fas fa-chevron-right"></i></button>
+      <button class="ami" onclick="adminLogout()"><div class="mii red"><i class="fas fa-sign-out-alt"></i></div><div class="mit"><strong data-i18n="logoutAdmin">Logout Admin</strong><span data-i18n="logoutAdminSub">Admin mode off</span></div><i class="fas fa-chevron-right"></i></button>
     </div>
   </div>
 </div></div>
@@ -407,77 +464,77 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
 <!-- FEATURES -->
 <div id="featM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('featM')"><i class="fas fa-times"></i></button>
-  <h3 class="mt">App Settings</h3><p class="ms">Features on/off karein</p>
-  <div class="fnote"><i class="fas fa-info-circle"></i><span>Sirf preference save hoti hai. Feature ON karne pe implement hoga.</span></div>
+  <h3 class="mt" data-i18n="appSettings">App Settings</h3><p class="ms" data-i18n="settingsSub2">Features on/off karein</p>
+  <div class="fnote"><i class="fas fa-info-circle"></i><span data-i18n="settingsNote">Sirf preference save hoti hai. Feature ON karne pe implement hoga.</span></div>
   <div id="featL"></div>
 </div></div>
 
 <!-- ADD PRODUCT -->
 <div id="formM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('formM')"><i class="fas fa-times"></i></button>
-  <h3 id="fTitle" class="mt">Add New Product</h3><p class="ms">Product details bharein</p>
+  <h3 id="fTitle" class="mt" data-i18n="addProduct">Add New Product</h3><p class="ms" data-i18n="addProductSub2">Product details bharein</p>
   <form id="pForm">
-    <label class="fl">Product Name</label><input id="pN" class="fc" placeholder="Banarasi Silk Saree" required>
-    <label class="fl">Product Image</label>
+    <label class="fl" data-i18n="productName">Product Name</label><input id="pN" class="fc" placeholder="Banarasi Silk Saree" required>
+    <label class="fl" data-i18n="productImage">Product Image</label>
     <input type="file" id="pFile" class="fc" accept="image/*" onchange="compressImg(this)" style="padding:10px">
     <input type="hidden" id="pI" required>
     <div id="pv" style="margin-top:6px;display:none"><img id="pvi" style="width:70px;height:70px;object-fit:cover;border-radius:9px;border:1px solid var(--line)"></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
       <div><label class="fl">MRP ₹</label><input type="number" id="pP" class="fc" placeholder="2999" required></div>
-      <div><label class="fl">Offer ₹</label><input type="number" id="pD" class="fc" placeholder="1499" required></div>
+      <div><label class="fl" data-i18n="offerPrice">Offer ₹</label><input type="number" id="pD" class="fc" placeholder="1499" required></div>
     </div>
-    <label class="fl">Category</label>
+    <label class="fl" data-i18n="category">Category</label>
     <select id="pC" class="fc" required><option value="">Select</option><option>Sarees</option><option>Suit</option><option>Dupatta</option><option>Gharara</option></select>
-    <label class="fl">Weaving Type</label>
+    <label class="fl" data-i18n="weaveType">Weaving Type</label>
     <select id="pM" class="fc" required><option value="">Select</option><option>Handloom</option><option>Power Loom</option><option>Repair Machine</option></select>
-    <label class="fl">Color</label>
+    <label class="fl" data-i18n="color">Color</label>
     <select id="pCol" class="fc" onchange="checkCol(this.value)"><option value="">Optional</option><option value="pink">Pink</option><option value="blue">Blue</option><option value="red">Red</option><option value="maroon">Maroon</option><option value="green">Green</option><option value="yellow">Yellow</option><option value="other">Other</option></select>
     <input id="pCus" class="fc" placeholder="Custom color" style="display:none">
-    <label class="fl">SKU</label><input id="pS" class="fc" placeholder="ZR-SR-001" required>
-    <label class="fl">Description</label><textarea id="pDs" class="fc" rows="3" placeholder="Fabric, length..." required></textarea>
-    <button type="submit" id="pSub" class="btn pri" style="margin-top:6px">Add Product</button>
+    <label class="fl" data-i18n="sku">SKU</label><input id="pS" class="fc" placeholder="ZR-SR-001" required>
+    <label class="fl" data-i18n="description">Description</label><textarea id="pDs" class="fc" rows="3" placeholder="Fabric, length..." required></textarea>
+    <button type="submit" id="pSub" class="btn pri" style="margin-top:6px" data-i18n="addProductBtn">Add Product</button>
   </form>
 </div></div>
 
 <!-- CART -->
 <div id="cartM" class="modal"><div class="mc">
   <button class="cb" onclick="closeM('cartM')"><i class="fas fa-times"></i></button>
-  <h3 class="mt">Your Bag</h3><p class="ms" id="cartSub">Fresh picks, waiting for you</p>
+  <h3 class="mt" data-i18n="yourBag">Your Bag</h3><p class="ms" id="cartSub" data-i18n="bagSub">Fresh picks, waiting for you</p>
   <div id="cartL"></div>
   <div id="cpSec" style="display:none">
-    <div class="cp-r"><input id="cpIn" placeholder="Coupon code"><button onclick="applyCp()">Apply</button></div>
+    <div class="cp-r"><input id="cpIn" placeholder="Coupon code"><button onclick="applyCp()" data-i18n="apply">Apply</button></div>
     <div id="cpMsg" class="cp-m"></div>
   </div>
   <div class="cs" id="cartS" style="display:none">
-    <div class="sr"><span>Subtotal</span><span id="cSub">₹0</span></div>
-    <div class="sr disc" id="dRow" style="display:none"><span>Discount</span><span id="cDisc">-₹0</span></div>
-    <div class="sr"><span>Delivery</span><span style="color:#128C7E;font-weight:600">FREE</span></div>
-    <div class="sr tot"><span>Total</span><span id="cTot">₹0</span></div>
+    <div class="sr"><span data-i18n="subtotal">Subtotal</span><span id="cSub">₹0</span></div>
+    <div class="sr disc" id="dRow" style="display:none"><span data-i18n="discount">Discount</span><span id="cDisc">-₹0</span></div>
+    <div class="sr"><span data-i18n="delivery">Delivery</span><span style="color:#128C7E;font-weight:600" data-i18n="free">FREE</span></div>
+    <div class="sr tot"><span data-i18n="total">Total</span><span id="cTot">₹0</span></div>
   </div>
-  <button onclick="checkout()" class="btn suc" style="padding:15px"><i class="fab fa-whatsapp"></i> Order via WhatsApp (COD)</button>
+  <button onclick="checkout()" class="btn suc" style="padding:15px"><i class="fab fa-whatsapp"></i> <span data-i18n="orderWA">Order via WhatsApp (COD)</span></button>
 </div></div>
 
 <!-- OPTIN -->
 <div id="optM" class="modal"><div class="mc" style="text-align:center">
   <button class="cb" onclick="closeOpt()"><i class="fas fa-times"></i></button>
   <div style="width:64px;height:64px;border-radius:18px;background:rgba(37,211,102,.12);color:#25D366;display:flex;align-items:center;justify-content:center;font-size:28px;margin:6px auto 14px;border:1px solid rgba(37,211,102,.25)"><i class="fab fa-whatsapp"></i></div>
-  <h3 class="mt">Get Exclusive Offers</h3>
-  <p class="ms">Naye saree, festive sale aur <b style="color:var(--rose)">₹100 off</b> coupon WhatsApp pe</p>
+  <h3 class="mt" data-i18n="offersTitle">Get Exclusive Offers</h3>
+  <p class="ms" data-i18n="offersSub">Naye saree, festive sale aur ₹100 off coupon WhatsApp pe</p>
   <input type="tel" id="optP" class="fc" placeholder="Your WhatsApp number" style="text-align:center">
-  <button onclick="saveOpt()" class="btn pri" style="padding:15px">Send Me Offers</button>
-  <p onclick="closeOpt()" style="font-size:12px;color:var(--muted);margin-top:12px;cursor:pointer;padding:8px">Maybe later</p>
+  <button onclick="saveOpt()" class="btn pri" style="padding:15px" data-i18n="sendOffers">Send Me Offers</button>
+  <p onclick="closeOpt()" style="font-size:12px;color:var(--muted);margin-top:12px;cursor:pointer;padding:8px" data-i18n="maybeLater">Maybe later</p>
 </div></div>
 
 <nav class="bn">
-  <button class="ni active" onclick="nav(this);goHome()"><i class="fas fa-home"></i>Home</button>
-  <button class="ni" onclick="nav(this);scrollTo()"><i class="fas fa-th-large"></i>Shop</button>
-  <button class="ni" onclick="nav(this);openWish()"><i class="fas fa-heart"></i>Wishlist<span class="nb" id="wnb" style="display:none">0</span></button>
-  <button class="ni" onclick="nav(this);openCart()"><i class="fas fa-shopping-bag"></i>Bag<span class="nb" id="cnb" style="display:none">0</span></button>
-  <button class="ni" onclick="nav(this);openAcc()"><i class="fas fa-user"></i>Account</button>
+  <button class="ni active" onclick="nav(this);goHome()"><i class="fas fa-home"></i><span data-i18n="home">Home</span></button>
+  <button class="ni" onclick="nav(this);scrollTo()"><i class="fas fa-th-large"></i><span data-i18n="shop">Shop</span></button>
+  <button class="ni" onclick="nav(this);openWish()"><i class="fas fa-heart"></i><span data-i18n="wishlistNav">Wishlist</span><span class="nb" id="wnb" style="display:none">0</span></button>
+  <button class="ni" onclick="nav(this);openCart()"><i class="fas fa-shopping-bag"></i><span data-i18n="bagNav">Bag</span><span class="nb" id="cnb" style="display:none">0</span></button>
+  <button class="ni" onclick="nav(this);openAcc()"><i class="fas fa-user"></i><span data-i18n="account">Account</span></button>
 </nav>
 
 <footer>
-  <div class="fl">ZARAFIYA</div><p>Grace in Every Thread</p>
+  <div class="fl">ZARAFIYA</div><p data-i18n="grace">Grace in Every Thread</p>
   <div class="ln"></div><p>Varanasi, Uttar Pradesh</p>
   <p class="cp">© 2026 · ALL RIGHTS RESERVED</p>
 </footer>
@@ -485,22 +542,83 @@ footer .cp{font-size:9.5px;color:rgba(255,255,255,.4);letter-spacing:1.3px;margi
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import{getFirestore,collection,onSnapshot,addDoc,deleteDoc,doc,getDoc,updateDoc}from"https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-import{getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut,browserLocalPersistence,setPersistence}from"https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import{getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword,onAuthStateChanged,signOut,browserLocalPersistence,setPersistence}from"https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
 
 const cfg={apiKey:"AIzaSyBL8tiQZOGPNsOxVGMB5Hbs_YhpSmqwFJQ",authDomain:"zarafiya-fashion.firebaseapp.com",projectId:"zarafiya-fashion",storageBucket:"zarafiya-fashion.firebasestorage.app",messagingSenderId:"1022372302059",appId:"1:1022372302059:web:846bd4aa38baf866fdc2ae"};
 const WA="918887802046";
+const ADMIN_USER="zarafiya",ADMIN_PASS="zarafiya2026";
 const app=initializeApp(cfg),db=getFirestore(app),auth=getAuth(app);
 setPersistence(auth,browserLocalPersistence).catch(e=>console.log(e));
 
-const CPS={'ZARA10':{t:'p',v:10,min:999,d:'10% off on ₹999+'},'FIRST15':{t:'p',v:15,min:1499,d:'15% off — first order'},'FESTIVE200':{t:'f',v:200,min:1999,d:'₹200 off on ₹1999+'},'REFER100':{t:'f',v:100,min:999,d:'₹100 off — referral'}};
+const CPS={'ZARA10':{t:'p',v:10,min:999,d:'10% off on ₹999+'},'FIRST15':{t:'p',v:15,min:1499,d:'15% off'},'FESTIVE200':{t:'f',v:200,min:1999,d:'₹200 off on ₹1999+'},'REFER100':{t:'f',v:100,min:999,d:'₹100 off'}};
 const FTS=[{id:'multiImage',n:'Multi-Image Product',d:'4-5 photos per product',i:'fa-images'},{id:'reviews',n:'Customer Reviews',d:'Real rating & reviews',i:'fa-star'},{id:'pincodeCheck',n:'Pincode Check',d:'Delivery availability',i:'fa-map-marker-alt'},{id:'orderHistory',n:'Order History',d:'Customer orders',i:'fa-history'},{id:'pushNotif',n:'Push Notifications',d:'New product alerts',i:'fa-bell'},{id:'langToggle',n:'Hindi/Urdu',d:'Language switch',i:'fa-language'},{id:'stockTrack',n:'Stock/Inventory',d:'Track remaining',i:'fa-boxes'},{id:'orderForm',n:'In-App Order Form',d:'Address in app',i:'fa-clipboard-list'},{id:'bulkUpload',n:'Bulk Upload',d:'CSV 50 products',i:'fa-file-upload'},{id:'referral',n:'Referral Tracking',d:'Who referred whom',i:'fa-user-friends'}];
+
+const T={
+  en:{
+    sale:"FESTIVE SALE · Extra 10% off ·",ends:"Ends",adminMode:"Admin Mode",add:"Add",all:"All",handcrafted:"● Handcrafted in Varanasi",explore:"Explore",
+    sarees:"Sarees",suits:"Suits",dupatta:"Dupatta",gharara:"Gharara",recent:"Recently Viewed",allColl:"All Collection",curated:"Curated Selection",loading:"Loading...",
+    freeShip:"Free Ship",allOrders:"All Orders",secure:"Secure",safe:"100% Safe",premium:"Premium",handpicked:"Handpicked",support:"Support",hour24:"24/7",
+    aiWelcome:"👋 Welcome to Zarafiya Fashion! Sarees, prices ya orders ke baare mein kuch bhi poochein.",
+    shareTitle:"Share Zarafiya",shareSub:"Friends ko share karein — ₹100 off dono ko",
+    wishTitle:"Your Wishlist",wishSub:"Saved sarees",
+    login:"Login",signup:"Sign Up",welcomeBack:"Welcome Back",loginSub:"Apne account mein login karein",
+    createAccount:"Create Account",signupSub:"Naya account banayein",email:"Email",password:"Password",fullName:"Full Name",phone:"Phone",signupBtn:"Create Account",
+    myBag:"My Bag",cartItems:"Cart items",wishlist:"Wishlist",savedItems:"Saved sarees",shareApp:"Share App",shareFriends:"Friends ko bhejein",
+    logout:"Logout",logoutSub:"Account se bahar",logoutAdmin:"Logout Admin",logoutAdminSub:"Admin mode off",
+    appSettings:"App Settings",settingsSub:"10 features on/off",settingsSub2:"Features on/off karein",settingsNote:"Sirf preference save hoti hai. Feature ON karne pe implement hoga.",
+    addProduct:"Add Product",addProductSub:"Naya product list karein",addProductSub2:"Product details bharein",addProductBtn:"Add Product",
+    productName:"Product Name",productImage:"Product Image",offerPrice:"Offer ₹",category:"Category",weaveType:"Weaving Type",color:"Color",sku:"SKU",description:"Description",
+    yourBag:"Your Bag",bagSub:"Fresh picks, waiting for you",apply:"Apply",subtotal:"Subtotal",discount:"Discount",delivery:"Delivery",free:"FREE",total:"Total",
+    orderWA:"Order via WhatsApp (COD)",offersTitle:"Get Exclusive Offers",offersSub:"Naye saree, festive sale aur ₹100 off coupon WhatsApp pe",sendOffers:"Send Me Offers",maybeLater:"Maybe later",
+    home:"Home",shop:"Shop",wishlistNav:"Wishlist",bagNav:"Bag",account:"Account",grace:"Grace in Every Thread",
+    addToBag:"Add",addCart:"Add to Bag",viewDetails:"View Details",orderViaWA:"Order via WhatsApp",addWish:"Add to Wishlist",rmWish:"Remove from Wishlist",shareWA:"Share on WhatsApp",
+    hot:"Hot",verified:"Verified",noProducts:"No products",tryFilter:"Try different filter",emptyBag:"Bag khali hai",emptyWish:"Wishlist khali hai",orderNow:"Order now",items:"items"
+  },
+  hi:{
+    sale:"त्योहार सेल · अतिरिक्त 10% छूट ·",ends:"समाप्त",adminMode:"एडमिन मोड",add:"जोड़ें",all:"सभी",handcrafted:"● वाराणसी में हस्तनिर्मित",explore:"देखें",
+    sarees:"साड़ियां",suits:"सूट",dupatta:"दुपट्टा",gharara:"गरारा",recent:"हाल ही में देखा",allColl:"सभी कलेक्शन",curated:"चुना हुआ",loading:"लोड हो रहा है...",
+    freeShip:"फ्री शिपिंग",allOrders:"सभी ऑर्डर",secure:"सुरक्षित",safe:"100% सुरक्षित",premium:"प्रीमियम",handpicked:"हैंडपिक",support:"सहायता",hour24:"24/7",
+    aiWelcome:"👋 ज़राफ़िया फ़ैशन में आपका स्वागत है! साड़ियों, कीमतों या ऑर्डर के बारे में कुछ भी पूछें।",
+    shareTitle:"ज़राफ़िया शेयर करें",shareSub:"दोस्तों को भेजें — ₹100 छूट दोनों को",
+    wishTitle:"आपकी विशलिस्ट",wishSub:"सेव की गई साड़ियां",
+    login:"लॉगिन",signup:"साइन अप",welcomeBack:"वापस स्वागत है",loginSub:"अपने अकाउंट में लॉगिन करें",
+    createAccount:"अकाउंट बनाएं",signupSub:"नया अकाउंट बनाएं",email:"ईमेल",password:"पासवर्ड",fullName:"पूरा नाम",phone:"फ़ोन",signupBtn:"अकाउंट बनाएं",
+    myBag:"मेरा बैग",cartItems:"कार्ट आइटम",wishlist:"विशलिस्ट",savedItems:"सेव की गई साड़ियां",shareApp:"ऐप शेयर करें",shareFriends:"दोस्तों को भेजें",
+    logout:"लॉगआउट",logoutSub:"अकाउंट से बाहर",logoutAdmin:"एडमिन लॉगआउट",logoutAdminSub:"एडमिन मोड बंद",
+    appSettings:"ऐप सेटिंग्स",settingsSub:"10 फीचर्स चालू/बंद",settingsSub2:"फीचर्स चालू/बंद करें",settingsNote:"सिर्फ़ प्रेफरेंस सेव होती है। फीचर चालू करने पर लागू होगा।",
+    addProduct:"प्रोडक्ट जोड़ें",addProductSub:"नया प्रोडक्ट लिस्ट करें",addProductSub2:"प्रोडक्ट डिटेल भरें",addProductBtn:"प्रोडक्ट जोड़ें",
+    productName:"प्रोडक्ट का नाम",productImage:"प्रोडक्ट इमेज",offerPrice:"ऑफ़र ₹",category:"श्रेणी",weaveType:"बुनाई का प्रकार",color:"रंग",sku:"SKU",description:"विवरण",
+    yourBag:"आपका बैग",bagSub:"नई पसंद, आपके इंतज़ार में",apply:"लगाएं",subtotal:"सबटोटल",discount:"छूट",delivery:"डिलीवरी",free:"फ्री",total:"कुल",
+    orderWA:"WhatsApp पर ऑर्डर करें (COD)",offersTitle:"ख़ास ऑफ़र पाएं",offersSub:"नई साड़ी, त्योहार सेल और ₹100 छूट कूपन WhatsApp पर",sendOffers:"ऑफ़र भेजें",maybeLater:"बाद में",
+    home:"होम",shop:"शॉप",wishlistNav:"विशलिस्ट",bagNav:"बैग",account:"अकाउंट",grace:"हर धागे में शालीनता",
+    addToBag:"जोड़ें",addCart:"बैग में जोड़ें",viewDetails:"विवरण देखें",orderViaWA:"WhatsApp पर ऑर्डर",addWish:"विशलिस्ट में जोड़ें",rmWish:"विशलिस्ट से हटाएं",shareWA:"WhatsApp पर शेयर",
+    hot:"हॉट",verified:"वेरिफाइड",noProducts:"कोई प्रोडक्ट नहीं",tryFilter:"दूसरा फ़िल्टर आज़माएं",emptyBag:"बैग खाली है",emptyWish:"विशलिस्ट खाली है",orderNow:"अभी ऑर्डर करें",items:"आइटम"
+  }
+};
 
 const $=id=>document.getElementById(id);
 const esc=s=>!s?'':String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 let cart=JSON.parse(localStorage.getItem('zc')||'[]'),wish=JSON.parse(localStorage.getItem('zw')||'[]'),recent=JSON.parse(localStorage.getItem('zr')||'[]');
-let all=[],isAdm=false,editId=null,cp=null;
+let all=[],editId=null,cp=null;
+let isAdminMode=localStorage.getItem('zadm')==='1';
+let currentCustomer=null;
+let lang=localStorage.getItem('zlang')||'en';
+let theme=localStorage.getItem('ztheme')||'light';
 let fState=JSON.parse(localStorage.getItem('zf')||'{}');
 FTS.forEach(f=>{if(fState[f.id]===undefined)fState[f.id]=false});
+
+function t(k){return (T[lang]&&T[lang][k])||(T.en[k])||k}
+
+// APPLY THEME
+function applyTheme(){document.body.classList.toggle('dark',theme==='dark');$('themeBtn').innerHTML=theme==='dark'?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>'}
+window.toggleTheme=()=>{theme=theme==='dark'?'light':'dark';localStorage.setItem('ztheme',theme);applyTheme()};
+
+// APPLY LANG
+function applyLang(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');el.textContent=t(k)});
+  render(all);renderCart();renderWish();
+}
+window.toggleLang=()=>{lang=lang==='en'?'hi':'en';localStorage.setItem('zlang',lang);applyLang()};
 
 function save(){localStorage.setItem('zc',JSON.stringify(cart));localStorage.setItem('zw',JSON.stringify(wish));localStorage.setItem('zr',JSON.stringify(recent));badges()}
 function badges(){
@@ -509,36 +627,89 @@ function badges(){
   if(wish.length){wc.style.display='flex';wc.textContent=wish.length;wnb.style.display='flex';wnb.textContent=wish.length}else{wc.style.display='none';wnb.style.display='none'}
 }
 
-function startCd(){const e=new Date();e.setHours(23,59,59,999);const t=()=>{const d=Math.max(0,e-new Date());const h=String(Math.floor(d/36e5)).padStart(2,'0'),m=String(Math.floor(d%36e5/6e4)).padStart(2,'0'),s=String(Math.floor(d%6e4/1e3)).padStart(2,'0');$('cd').textContent=`${h}:${m}:${s}`};t();setInterval(t,1000)}
+function startCd(){const e=new Date();e.setHours(23,59,59,999);const tick=()=>{const d=Math.max(0,e-new Date());const h=String(Math.floor(d/36e5)).padStart(2,'0'),m=String(Math.floor(d%36e5/6e4)).padStart(2,'0'),s=String(Math.floor(d%6e4/1e3)).padStart(2,'0');$('cd').textContent=`${h}:${m}:${s}`};tick();setInterval(tick,1000)}
 
 function showOpt(){if(!localStorage.getItem('zo')&&!localStorage.getItem('zsk'))setTimeout(()=>$('optM').style.display='flex',8000)}
 window.closeOpt=()=>{localStorage.setItem('zsk','1');closeM('optM')};
-window.saveOpt=()=>{const p=$('optP').value.trim();if(p.length<10)return alert('Sahi number daalein');try{addDoc(collection(db,'optins'),{phone:p,at:new Date()})}catch(e){}localStorage.setItem('zo','1');alert('Shukriya! 🎉\nUse FIRST15 for 15% off.');closeM('optM')};
+window.saveOpt=()=>{const p=$('optP').value.trim();if(p.length<10)return alert('Sahi number daalein');try{addDoc(collection(db,'optins'),{phone:p,at:new Date()})}catch(e){}localStorage.setItem('zo','1');alert('Shukriya! 🎉');closeM('optM')};
 
 window.closeM=id=>$(id).style.display='none';
 document.querySelectorAll('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.style.display='none'}));
 window.nav=b=>{document.querySelectorAll('.ni').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active')};
 
-// FEATURES
+// ADMIN LONG PRESS
+let lp=null;
+(function(){
+  const l=$('logoBtn');
+  const start=()=>{lp=setTimeout(promptAdmin,1500)};
+  const stop=()=>{if(lp)clearTimeout(lp)};
+  l.addEventListener('touchstart',start,{passive:true});l.addEventListener('touchend',stop);
+  l.addEventListener('mousedown',start);l.addEventListener('mouseup',stop);l.addEventListener('mouseleave',stop);
+})();
+function promptAdmin(){
+  if(isAdminMode){openAcc();return}
+  const u=prompt("Admin Username:");if(u!==ADMIN_USER)return alert('❌ Wrong username');
+  const p=prompt("Admin Password:");if(p!==ADMIN_PASS)return alert('❌ Wrong password');
+  isAdminMode=true;localStorage.setItem('zadm','1');
+  $('adm').style.display='flex';render(all);openAcc();
+  alert('✅ Admin mode ON');
+}
+window.adminLogout=()=>{if(!confirm('Admin mode off?'))return;isAdminMode=false;localStorage.removeItem('zadm');$('adm').style.display='none';render(all);closeM('accM');alert('Admin OFF')};
+
+// CUSTOMER AUTH
+onAuthStateChanged(auth,u=>{currentCustomer=(u&&u.email)?u:null;render(all)});
+
+window.custTab=tab=>{
+  const tl=$('tabLogin'),ts=$('tabSignup'),lf=$('loginForm'),sf=$('signupForm');
+  if(tab==='login'){tl.classList.add('active');ts.classList.remove('active');lf.style.display='block';sf.style.display='none'}
+  else{ts.classList.add('active');tl.classList.remove('active');lf.style.display='none';sf.style.display='block'}
+};
+
+window.custSignup=async()=>{
+  const n=$('cSupName').value.trim(),e=$('cSupEmail').value.trim(),p=$('cSupPhone').value.trim(),pw=$('cSupPass').value;
+  if(!n||!e||!pw)return alert('Name, email, password zaroori');
+  if(pw.length<6)return alert('Password minimum 6 characters');
+  try{
+    const cr=await createUserWithEmailAndPassword(auth,e,pw);
+    await addDoc(collection(db,'customers'),{uid:cr.user.uid,name:n,email:e,phone:p,at:new Date()});
+    alert('✅ Account ban gaya! Welcome to Zarafiya.');
+    openAcc();
+  }catch(x){alert('Signup failed: '+x.message)}
+};
+
+window.custLogin=async()=>{
+  const e=$('cLogEmail').value.trim(),pw=$('cLogPass').value;
+  if(!e||!pw)return alert('Email aur password daalein');
+  try{await signInWithEmailAndPassword(auth,e,pw);alert('✅ Login successful!');openAcc()}
+  catch(x){alert('Login failed: '+x.message)}
+};
+
+window.custLogout=async()=>{if(!confirm('Logout?'))return;await signOut(auth);closeM('accM');alert('Logged out')};
+
+window.openAcc=()=>{
+  const cv=$('custView'),cpf=$('custProfile'),ap=$('adminProfile');
+  if(isAdminMode){cv.style.display='none';cpf.style.display='none';ap.style.display='block'}
+  else if(currentCustomer){
+    cv.style.display='none';cpf.style.display='block';ap.style.display='none';
+    $('custName').textContent=currentCustomer.displayName||currentCustomer.email.split('@')[0];
+    $('custEmail').textContent=currentCustomer.email;
+  }else{cv.style.display='block';cpf.style.display='none';ap.style.display='none';custTab('login')}
+  $('accM').style.display='flex';
+};
+
 window.openFeat=()=>{
   $('featL').innerHTML=FTS.map(f=>{const on=fState[f.id]?'checked':'';const ic=fState[f.id]?'on':'';return`<div class="fi"><div class="fii ${ic}"><i class="fas ${f.i}"></i></div><div class="fit"><strong>${f.n}</strong><span>${f.d}</span></div><label class="tsw"><input type="checkbox" ${on} onchange="togF('${f.id}',this.checked)"><span class="ts"></span></label></div>`}).join('');
   $('featM').style.display='flex';
 };
 window.togF=(id,v)=>{fState[id]=v;localStorage.setItem('zf',JSON.stringify(fState));openFeat()};
 
-window.openAcc=()=>{
-  if(isAdm){const u=auth.currentUser;$('accN').textContent='Admin';$('accE').textContent=u?.email||'admin@zarafiya.com';$('accL').style.display='none';$('accP').style.display='block'}
-  else{$('accL').style.display='block';$('accP').style.display='none'}
-  $('accM').style.display='flex';
-};
-
 window.openShare=()=>{
-  const L="https://www.appcreator24.com/app4187228-hpd1mq",T="✨ Zarafiya Fashion — Premium Banarasi Sarees. Code REFER100 for ₹100 off: "+L;
-  $('shrWa').href=`https://api.whatsapp.com/send?text=${encodeURIComponent(T)}`;
+  const L="https://www.appcreator24.com/app4187228-hpd1mq",Tx="✨ Zarafiya Fashion — Premium Banarasi Sarees. Code REFER100 for ₹100 off: "+L;
+  $('shrWa').href=`https://api.whatsapp.com/send?text=${encodeURIComponent(Tx)}`;
   $('shrFb').href=`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(L)}`;
   $('shrTg').href=`https://telegram.me/share/url?url=${encodeURIComponent(L)}`;
-  $('shrEm').href=`mailto:?subject=Zarafiya&body=${encodeURIComponent(T)}`;
-  $('shrTw').href=`https://twitter.com/intent/tweet?text=${encodeURIComponent(T)}`;
+  $('shrEm').href=`mailto:?subject=Zarafiya&body=${encodeURIComponent(Tx)}`;
+  $('shrTw').href=`https://twitter.com/intent/tweet?text=${encodeURIComponent(Tx)}`;
   $('shareM').style.display='flex';
 };
 window.copyLink=()=>{navigator.clipboard.writeText("https://www.appcreator24.com/app4187228-hpd1mq");alert("Link copied!");closeM('shareM')};
@@ -547,21 +718,20 @@ window.shareProd=(n,p,i)=>{window.open(`https://api.whatsapp.com/send?text=${enc
 window.compressImg=inp=>{const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');let w=im.width,h=im.height,M=700;if(w>h){if(w>M){h*=M/w;w=M}}else{if(h>M){w*=M/h;h=M}}c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);const u=c.toDataURL('image/jpeg',.72);$('pI').value=u;$('pvi').src=u;$('pv').style.display='block'};im.src=e.target.result};r.readAsDataURL(f)};
 window.checkCol=v=>{const c=$('pCus');if(v==='other'){c.style.display='block';c.focus()}else{c.style.display='none';c.value=''}};
 
-// AI
 const AI="https://zarafiya-ai.ashifmd400.workers.dev/";let hist=[];
 window.toggleAI=()=>{const b=$('aib');b.style.display=b.style.display==='block'?'none':'block';if(b.style.display==='block')setTimeout(()=>$('aii').focus(),100)};
 window.aiEnter=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendAI()}};
 function ctx(){if(!all.length)return"No products.";return all.slice(0,80).map((p,i)=>`${i+1}. ${p.name||''} | ${p.category||''} | ${p.color||''} | SKU:${p.sku||''} | ₹${p.discountPrice||''} | ${p.description||''}`).join('\n')}
-function addAI(t,ty){const b=$('achd');const d=document.createElement('div');d.className=`am ${ty}`;d.innerHTML=esc(String(t)).replace(/\n/g,'<br>');b.appendChild(d);b.scrollTop=b.scrollHeight;return d}
+function addAI(tx,ty){const b=$('achd');const d=document.createElement('div');d.className=`am ${ty}`;d.innerHTML=esc(String(tx)).replace(/\n/g,'<br>');b.appendChild(d);b.scrollTop=b.scrollHeight;return d}
 window.sendAI=async()=>{
   const i=$('aii'),b=$('achd'),m=i.value.trim();if(!m)return;
   addAI(m,'user');i.value='';i.disabled=true;
-  const ty=document.createElement('div');ty.className='am bot';ty.textContent='Zarafiya AI soch raha hai...';b.appendChild(ty);b.scrollTop=b.scrollHeight;
+  const ty=document.createElement('div');ty.className='am bot';ty.textContent='...';b.appendChild(ty);b.scrollTop=b.scrollHeight;
   try{
     const r=await fetch(AI,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:m,history:hist.slice(-8),productContext:ctx()})});
     const d=await r.json();if(!r.ok)throw new Error(d.error||'F');const rp=String(d.reply||'').trim();if(!rp)throw new Error('E');
     ty.remove();addAI(rp,'bot');hist.push({role:'user',text:m},{role:'assistant',text:rp});if(hist.length>16)hist=hist.slice(-16);
-  }catch(e){ty.remove();addAI('AI service unavailable. Thodi der baad try karein. 🙏','bot')}
+  }catch(e){ty.remove();addAI('AI unavailable. Try later. 🙏','bot')}
   finally{i.disabled=false;i.focus()}
 };
 
@@ -578,8 +748,8 @@ window.chQty=(i,d)=>{cart[i].qty=(cart[i].qty||1)+d;if(cart[i].qty<=0)cart.splic
 
 function renderCart(){
   const L=$('cartL'),S=$('cartS'),CS=$('cpSec');
-  if(!cart.length){L.innerHTML='<div style="text-align:center;padding:35px 15px"><div style="font-size:40px;color:#E8D5D0;margin-bottom:12px"><i class="fas fa-shopping-bag"></i></div><p style="font-size:12.5px;color:var(--muted)">Bag khali hai</p></div>';S.style.display='none';CS.style.display='none';$('cartSub').textContent='Fresh picks, waiting for you';return}
-  $('cartSub').textContent=`${cart.length} item${cart.length>1?'s':''} in your bag`;
+  if(!cart.length){L.innerHTML=`<div style="text-align:center;padding:35px 15px"><div style="font-size:40px;color:var(--rose-light);margin-bottom:12px"><i class="fas fa-shopping-bag"></i></div><p style="font-size:12.5px;color:var(--muted)">${t('emptyBag')}</p></div>`;S.style.display='none';CS.style.display='none';$('cartSub').textContent=t('bagSub');return}
+  $('cartSub').textContent=`${cart.length} ${t('items')}`;
   S.style.display='block';CS.style.display='block';
   let sub=0;L.innerHTML=cart.map((it,i)=>{const q=it.qty||1;sub+=Number(it.price)*q;return`<div class="cti"><img src="${it.image}" onerror="this.src='https://via.placeholder.com/58'"><div class="ctinf"><strong>${esc(it.name)}</strong><span class="cp">₹${it.price}</span><div class="qb"><button class="qbt" onclick="chQty(${i},-1)"><i class="fas fa-minus"></i></button><span class="qn">${q}</span><button class="qbt" onclick="chQty(${i},1)"><i class="fas fa-plus"></i></button></div></div><button class="crm" onclick="rmCart(${i})"><i class="fas fa-trash-alt"></i></button></div>`}).join('');
   let d=0;if(cp){const c=CPS[cp];if(sub>=c.min){d=c.t==='p'?Math.round(sub*c.v/100):c.v;$('dRow').style.display='flex';$('cDisc').textContent=`-₹${d}`}else{cp=null;$('dRow').style.display='none'}}else $('dRow').style.display='none';
@@ -608,28 +778,19 @@ window.checkout=()=>{
 window.togWish=id=>{const i=wish.findIndex(w=>w.id===id);if(i>=0)wish.splice(i,1);else{const p=all.find(x=>x.id===id);if(p)wish.push({id:p.id,name:p.name,image:p.image,price:p.discountPrice})}save();render(all);if($('wishM').style.display==='flex')renderWish()};
 function renderWish(){
   const b=$('wishC');
-  if(!wish.length){b.innerHTML='<div style="text-align:center;padding:35px 15px"><div style="font-size:40px;color:#E8D5D0;margin-bottom:12px"><i class="fas fa-heart"></i></div><p style="font-size:12.5px;color:var(--muted)">Wishlist khali hai</p></div>';return}
-  b.innerHTML=wish.map(w=>`<div class="cti"><img src="${w.image}" onerror="this.src='https://via.placeholder.com/58'"><div class="ctinf"><strong>${esc(w.name)}</strong><span class="cp">₹${w.price}</span></div><button class="qbt" style="width:auto;padding:8px 12px;background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff;border:none;font-size:9.5px;font-weight:700;text-transform:uppercase;border-radius:8px" onclick="addCart('${w.id}','${esc(w.name)}',${w.price},'${w.image}');closeM('wishM')">Add</button></div>`).join('');
+  if(!wish.length){b.innerHTML=`<div style="text-align:center;padding:35px 15px"><div style="font-size:40px;color:var(--rose-light);margin-bottom:12px"><i class="fas fa-heart"></i></div><p style="font-size:12.5px;color:var(--muted)">${t('emptyWish')}</p></div>`;return}
+  b.innerHTML=wish.map(w=>`<div class="cti"><img src="${w.image}" onerror="this.src='https://via.placeholder.com/58'"><div class="ctinf"><strong>${esc(w.name)}</strong><span class="cp">₹${w.price}</span></div><button class="qbt" style="width:auto;padding:8px 12px;background:linear-gradient(135deg,var(--rose),var(--rose-dark));color:#fff;border:none;font-size:9.5px;font-weight:700;text-transform:uppercase;border-radius:8px" onclick="addCart('${w.id}','${esc(w.name)}',${w.price},'${w.image}');closeM('wishM')">${t('addToBag')}</button></div>`).join('');
 }
-
-onAuthStateChanged(auth,u=>{isAdm=!!(u&&u.email);$('adm').style.display=isAdm?'flex':'none';render(all);if($('accM').style.display==='flex')openAcc()});
-$('loginBtn').onclick=async()=>{
-  const e=$('aEm').value.trim(),p=$('aPw').value.trim();
-  if(!e||!p)return alert('Email aur password daalein');
-  try{await signInWithEmailAndPassword(auth,e,p);alert('✅ Login successful!');closeM('accM');$('aEm').value='';$('aPw').value=''}
-  catch(x){alert('Login failed: '+x.message)}
-};
-window.logout=async()=>{if(!confirm('Logout?'))return;await signOut(auth);closeM('accM');alert('Logged out')};
 
 onSnapshot(collection(db,'products'),s=>{all=[];s.forEach(d=>all.push({id:d.id,...d.data()}));render(all);renderRecent()});
 
-window.fCat=(c,b)=>{document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');$('catTitle').textContent=c==='All'?'All Collection':c;render(c==='All'?all:all.filter(p=>p.category===c));scrollTo()};
-window.fColor=(c,b)=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');if(c==='all'){render(all);$('catTitle').textContent='All Collection'}else if(c==='other'){const s=['pink','blue','red','maroon','green','yellow'];render(all.filter(p=>p.color&&!s.includes(p.color)));$('catTitle').textContent='Other Colors'}else{render(all.filter(p=>p.color===c||(p.name||'').toLowerCase().includes(c)||(p.description||'').toLowerCase().includes(c)));$('catTitle').textContent=c.charAt(0).toUpperCase()+c.slice(1)}scrollTo()};
+window.fCat=(c,b)=>{document.querySelectorAll('.cat').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');$('catTitle').textContent=c==='All'?t('allColl'):c;render(c==='All'?all:all.filter(p=>p.category===c));scrollTo()};
+window.fColor=(c,b)=>{document.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active');if(c==='all'){render(all);$('catTitle').textContent=t('allColl')}else if(c==='other'){const s=['pink','blue','red','maroon','green','yellow'];render(all.filter(p=>p.color&&!s.includes(p.color)));$('catTitle').textContent='Other'}else{render(all.filter(p=>p.color===c||(p.name||'').toLowerCase().includes(c)||(p.description||'').toLowerCase().includes(c)));$('catTitle').textContent=c.charAt(0).toUpperCase()+c.slice(1)}scrollTo()};
 window.search=()=>{const q=$('si').value.toLowerCase();render(all.filter(p=>(p.name||'').toLowerCase().includes(q)||(p.sku||'').toLowerCase().includes(q)))};
 
 function render(a){
-  const g=$('grid');$('pCount').textContent=a.length+' items';
-  if(!a.length){g.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:50px 20px;background:var(--surface);border-radius:14px;border:1px solid var(--line)"><div style="font-size:42px;color:#E8D5D0;margin-bottom:12px"><i class="fas fa-search"></i></div><p style="font-size:13px;font-weight:600">No products</p><p style="font-size:11px;color:var(--muted);margin-top:4px">Try different filter</p></div>';return}
+  const g=$('grid');$('pCount').textContent=a.length+' '+t('items');
+  if(!a.length){g.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:50px 20px;background:var(--surface);border-radius:14px;border:1px solid var(--line)"><div style="font-size:42px;color:var(--rose-light);margin-bottom:12px"><i class="fas fa-search"></i></div><p style="font-size:13px;font-weight:600">${t('noProducts')}</p><p style="font-size:11px;color:var(--muted);margin-top:4px">${t('tryFilter')}</p></div>`;return}
   g.innerHTML=a.map(p=>{
     const n=esc(p.name),img=(p.image||'').trim(),id=esc(p.id),mk=esc(p.makeType||'Handloom');
     const iw=wish.some(w=>w.id===p.id);
@@ -637,17 +798,17 @@ function render(a){
     const rt=(4+(p.id.charCodeAt(0)%10)/10).toFixed(1);
     const st='★'.repeat(Math.round(rt))+'☆'.repeat(5-Math.round(rt));
     const tr=(p.id.charCodeAt(0)%3)===0;
-    const ab=isAdm?`<div class="abadm"><button class="badm e" onclick="editProd('${id}')"><i class="fas fa-edit"></i> Edit</button><button class="badm d" onclick="delProd('${id}')"><i class="fas fa-trash"></i> Del</button></div>`:'';
+    const ab=isAdminMode?`<div class="abadm"><button class="badm e" onclick="editProd('${id}')"><i class="fas fa-edit"></i></button><button class="badm d" onclick="delProd('${id}')"><i class="fas fa-trash"></i></button></div>`:'';
     return`<div class="card">
       <span class="tbadge">${mk}</span>
       ${off>0?`<span class="dbadge">${off}%</span>`:''}
-      ${tr?`<span class="trend"><i class="fas fa-fire"></i> Hot</span>`:''}
+      ${tr?`<span class="trend"><i class="fas fa-fire"></i> ${t('hot')}</span>`:''}
       <div class="ci"><img src="${img}" onclick="openProd('${id}')" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/200/FDF8F5/C2185B?text=Z'"><button class="wb ${iw?'active':''}" onclick="event.stopPropagation();togWish('${id}')"><i class="fa${iw?'s':'r'} fa-heart"></i></button></div>
       <div class="cbody">
         <h3 onclick="openProd('${id}')">${n}</h3>
         <div class="rate"><span class="s">${st}</span> ${rt}</div>
         <div class="pr" onclick="openProd('${id}')"><span class="f">₹${p.discountPrice}</span><span class="m">₹${p.price}</span></div>
-        <div class="cact"><button class="bc p" onclick="addCart('${id}','${n}',${p.discountPrice},'${img}')"><i class="fas fa-shopping-bag"></i></button><button class="bc g" onclick="shareProd('${n}',${p.discountPrice},'${img}')"><i class="fab fa-whatsapp"></i></button></div>
+        <div class="cact"><button class="bc p" onclick="addCart('${id}','${n}',${p.discountPrice},'${img}')"><i class="fas fa-shopping-bag"></i> ${t('addToBag')}</button><button class="bc g" onclick="shareProd('${n}',${p.discountPrice},'${img}')"><i class="fab fa-whatsapp"></i></button></div>
         ${ab}
       </div>
     </div>`;
@@ -655,12 +816,13 @@ function render(a){
 }
 
 function renderRecent(){
-  if(!recent.length)return;$('rs').style.display='block';
+  if(!recent.length){$('rs').style.display='none';return}
+  $('rs').style.display='block';
   $('rss').innerHTML=recent.map(r=>`<div class="rs-i" onclick="openProd('${r.id}')"><img src="${r.image}" onerror="this.src='https://via.placeholder.com/68'"><span>${esc(r.name)}</span></div>`).join('');
 }
 
 window.openProd=async id=>{
-  $('prodM').style.display='flex';$('prodC').innerHTML='<p style="text-align:center;padding:40px;color:var(--muted);font-size:12px">Loading...</p>';
+  $('prodM').style.display='flex';$('prodC').innerHTML=`<p style="text-align:center;padding:40px;color:var(--muted);font-size:12px">${t('loading')}</p>`;
   try{
     const s=await getDoc(doc(db,'products',id));if(!s.exists())return;
     const p=s.data(),n=esc(p.name),img=(p.image||'').trim(),mk=esc(p.makeType||'Handloom');
@@ -673,24 +835,23 @@ window.openProd=async id=>{
     const iw=wish.some(w=>w.id===id);
     $('prodC').innerHTML=`
       <img src="${img}" class="pd-img" onerror="this.src='https://via.placeholder.com/400/FDF8F5/C2185B?text=Zarafiya'">
-      <div class="lv"><span class="p"></span> ${v} log abhi dekh rahe hain</div>
+      <div class="lv"><span class="p"></span> ${v} ${lang==='hi'?'लोग देख रहे हैं':'people viewing now'}</div>
       <div class="pd-cat">${p.category} · ${mk}</div>
       <h2 class="pd-t">${n}</h2>
-      <p class="pd-sku">SKU: ${p.sku} · ⭐ Verified</p>
+      <p class="pd-sku">SKU: ${p.sku} · ⭐ ${t('verified')}</p>
       <div class="pd-pr"><span class="f">₹${p.discountPrice}</span><span class="m">₹${p.price}</span>${off>0?`<span class="o">${off}% OFF</span>`:''}</div>
       <p class="pd-d">${esc(p.description)}</p>
       <div class="pd-a">
-        <button class="btn pri" onclick="addCart('${id}','${n}',${p.discountPrice},'${img}')" style="padding:15px"><i class="fas fa-shopping-bag"></i> Add to Bag</button>
-        <button class="btn" onclick="togWish('${id}');closeM('prodM')" style="padding:14px"><i class="fa${iw?'s':'r'} fa-heart" style="color:${iw?'#E91E63':'inherit'}"></i> ${iw?'Remove from Wishlist':'Add to Wishlist'}</button>
-        <button class="btn shr" onclick="shareProd('${n}',${p.discountPrice},'${img}')" style="padding:14px"><i class="fab fa-whatsapp"></i> Share on WhatsApp</button>
-        <a href="https://wa.me/${WA}?text=${msg}" target="_blank" class="btn suc" style="padding:15px"><i class="fab fa-whatsapp"></i> Order via WhatsApp (COD)</a>
+        <button class="btn pri" onclick="addCart('${id}','${n}',${p.discountPrice},'${img}')" style="padding:15px"><i class="fas fa-shopping-bag"></i> ${t('addCart')}</button>
+        <button class="btn" onclick="togWish('${id}');closeM('prodM')" style="padding:14px"><i class="fa${iw?'s':'r'} fa-heart" style="color:${iw?'#E91E63':'inherit'}"></i> ${iw?t('rmWish'):t('addWish')}</button>
+        <button class="btn shr" onclick="shareProd('${n}',${p.discountPrice},'${img}')" style="padding:14px"><i class="fab fa-whatsapp"></i> ${t('shareWA')}</button>
+        <a href="https://wa.me/${WA}?text=${msg}" target="_blank" class="btn suc" style="padding:15px"><i class="fab fa-whatsapp"></i> ${t('orderViaWA')}</a>
       </div>${rh}`;
   }catch(e){closeM('prodM')}
 };
 
 $('pForm').addEventListener('submit',async e=>{
   e.preventDefault();
-  if(!auth.currentUser)return alert('Login first!');
   const iv=$('pI').value;if(!iv)return alert('Select image');
   $('pSub').textContent='Saving...';$('pSub').disabled=true;
   const sc=$('pCol').value,cc=$('pCus').value.trim(),fc=(sc==='other'&&cc)?cc.toLowerCase():sc;
@@ -700,7 +861,7 @@ $('pForm').addEventListener('submit',async e=>{
     else{d.createdAt=new Date();await addDoc(collection(db,'products'),d);alert('✅ Added!');$('pForm').reset();$('pv').style.display='none'}
     closeM('formM');
   }catch(x){alert('Error: '+x.message)}
-  finally{$('pSub').textContent=editId?'Update Product':'Add Product';$('pSub').disabled=false}
+  finally{$('pSub').textContent=t('addProductBtn');$('pSub').disabled=false}
 });
 
 window.editProd=async id=>{
@@ -718,11 +879,15 @@ window.editProd=async id=>{
   }catch(e){alert(e.message)}
 };
 
-function resetForm(){editId=null;$('pForm').reset();$('pv').style.display='none';$('pCus').style.display='none';$('fTitle').textContent='Add New Product';$('pSub').textContent='Add Product'}
+function resetForm(){editId=null;$('pForm').reset();$('pv').style.display='none';$('pCus').style.display='none';$('fTitle').textContent=t('addProduct');$('pSub').textContent=t('addProductBtn')}
 
-window.delProd=async id=>{if(!confirm('Delete this product?'))return;try{await deleteDoc(doc(db,'products',id))}catch(e){alert(e.message)}};
+window.delProd=async id=>{if(!confirm('Delete?'))return;try{await deleteDoc(doc(db,'products',id))}catch(e){alert(e.message)}};
 
+// INIT
+applyTheme();
+applyLang();
 badges();startCd();showOpt();
+if(isAdminMode){$('adm').style.display='flex'}
 </script>
 </body>
-  </html>
+</html>
